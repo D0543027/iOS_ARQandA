@@ -6,7 +6,7 @@ class YOLO {
   // YOLO2 input is 608x608
   public static let inputWidth = 608
   public static let inputHeight = 608
-  public static let maxBoundingBoxes = 3
+  public static let maxBoundingBoxes = 2
 
   // Tweak these values to get more or fewer predictions.
   let confidenceThreshold: Float = 0.5

@@ -34,6 +34,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var pre_MoveZ: Float = 0.0
     var pre_RotateY: Float = 0.0
     
+    var point = CGPoint()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -78,6 +80,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
+    
     
     // MARK: - ARSCNViewDelegate
     
@@ -263,6 +266,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let color = colors[prediction.classIndex]
                 //print(label)
                 boundingBoxes[i].show(frame: rect, label: label, color: color)
+                
             } else {
                 boundingBoxes[i].hide()
             }
@@ -284,9 +288,9 @@ extension ViewController: ARSessionDelegate{
         
         let rotation = frame.camera.eulerAngles
         new_RotateY = rotation.y
-        print("rotation: \(new_RotateY)")
+        //print("rotation: \(new_RotateY)")
         
-        print("-----------------")
+        //print("-----------------")
         
     }
 }
