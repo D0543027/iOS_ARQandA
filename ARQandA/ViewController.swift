@@ -12,17 +12,18 @@ import ARKit
 import Vision
 import VideoToolbox
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
     
     let yolo = YOLO()
     var request: VNCoreMLRequest!
-    var boundingBoxes = [BoundingBox]()
+    
     var colors: [UIColor] = []
     
+    var boundingBoxes = [BoundingBox]()
     
-    let queue = DispatchQueue(label: "queue", qos: .default, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
+    let visionQueue = DispatchQueue(label: "visionQueue")
     
     var new_MoveX: Float = 0.0
     var new_MoveY: Float = 0.0
@@ -34,7 +35,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var pre_MoveZ: Float = 0.0
     var pre_RotateY: Float = 0.0
     
-    var point = CGPoint()
+    var currentBuffer: CVPixelBuffer?
+    var button: UIButton!
     
     override func viewDidLoad() {
         
@@ -45,7 +47,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         
         // Create a new scene
         // let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -60,8 +62,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             box.addToLayer(self.sceneView.layer)
         }
         
+        print(UIScreen.main.bounds.size.width)
+        print(UIScreen.main.bounds.size.height)
         
-        loopCoreMLUpdate()
+        //loopCoreMLUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +96,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
      return node
      }
      */
+    func session(_ session: ARSession, didUpdate frame: ARFrame){
+        let currentTransform = frame.camera.transform
+        new_MoveX = currentTransform.columns.3.x
+        new_MoveY = currentTransform.columns.3.y
+        new_MoveZ = currentTransform.columns.3.z
+        
+        
+        //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
+        
+        let rotation = frame.camera.eulerAngles
+        new_RotateY = rotation.y
+        //print("rotation: \(new_RotateY)")
+        
+        
+        guard currentBuffer == nil else{ return }
+        
+        visionQueue.async {
+            if self.DeviceMoving() == true {
+                self.updatePosition()
+                self.currentBuffer = frame.capturedImage
+                self.predictUsingVision(pixelBuffer: self.currentBuffer!)
+            }
+        }
+        
+        //print("-----------------")
+        
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -147,11 +178,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Currently they assume the full input image is used.
         request.imageCropAndScaleOption = .scaleFill
     }
-    
+    /*
     func loopCoreMLUpdate() {
         // Continuously run CoreML whenever it's ready. (Preventing 'hiccups' in Frame Rate)
         
-        queue.async {
+        visionQueue.async {
             // 1. Run Update.
             //self.semaphore.wait()
             
@@ -168,26 +199,22 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func updateCoreML() {
         
-        if checkDeviceMoving() == false{
-            
-            //Stop predicting
-            
-        }
-        else{
+        if DeviceMoving() {
             updatePosition()
             
             //print("predicting...")
-            let pixbuff : CVPixelBuffer? = sceneView.snapshot().toCVPixelBuffer()
+            
+            let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
             if pixbuff == nil { return }
             
             //myImage = pixbuff
             //let rotateImage = (UIImage(pixelBuffer: pixbuff!))!.image(withRotation: (.pi/2)*3)
             predictUsingVision(pixelBuffer: pixbuff!)
-            
         }
     }
+    */
     
-    func checkDeviceMoving() -> Bool{
+    func DeviceMoving() -> Bool{
         if abs(self.pre_MoveX - self.new_MoveX) > 0.03{
             return true;
         }
@@ -211,14 +238,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func predictUsingVision(pixelBuffer: CVPixelBuffer) {
-        // Measure how long it takes to predict a single video frame. Note that
-        // predict() can be called on the next frame while the previous one is
-        // still being processed. Hence the need to queue up the start times.
-        //let rotateImage = (UIImage(pixelBuffer: pixelBuffer))!.image(withRotation: (.pi/2)*3)
+        /*
+         let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+         
+         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,orientation: orientation)
+         
+         try? handler.perform([request])
+         */
         
-        // Vision will automatically resize the input image.
-        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
-        try? handler.perform([request])
+        let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+        
+        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
+        visionQueue.async {
+            do {
+                // Release the pixel buffer when done, allowing the next buffer to be processed.
+                defer { self.currentBuffer = nil }
+                try requestHandler.perform([self.request])
+            } catch {
+                print("Error: Vision request failed with error \"\(error)\"")
+            }
+        }
     }
     
     func visionRequestDidComplete(request: VNRequest, error: Error?) {
@@ -232,132 +271,178 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func showOnMainThread(_ boundingBoxes: [YOLO.Prediction]) {
         DispatchQueue.main.async {
+            self.clear()
             self.show(predictions: boundingBoxes)
             
         }
     }
     
+    func clear(){
+        for view in self.sceneView.subviews{
+            view.removeFromSuperview()
+        }
+        
+        for i in 0..<boundingBoxes.count{
+            boundingBoxes[i].hide()
+        }
+    }
+    
     func show(predictions: [YOLO.Prediction]) {
         for i in 0..<boundingBoxes.count {
+            //boundingBoxes[i].hide()
             if i < predictions.count {
                 let prediction = predictions[i]
                 
-                // The predicted bounding box is in the coordinate space of the input
-                // image, which is a square image of 416x416 pixels. We want to show it
-                // on the video preview, which is as wide as the screen and has a 4:3
-                // aspect ratio. The video preview also may be letterboxed at the top
-                // and bottom.
-                let width = view.bounds.width
-                let height = width * 4 / 3
-                let scaleX = width / CGFloat(YOLO.inputWidth)
-                let scaleY = height / CGFloat(YOLO.inputHeight)
-                let top = (view.bounds.height - height) / 2
-                
-                // Translate and scale the rectangle to our own coordinate system.
-                var rect = prediction.rect
-                rect.origin.x *= scaleX
-                rect.origin.y *= scaleY
-                rect.origin.y += top
-                rect.size.width *= scaleX
-                rect.size.height *= scaleY
+                let rect = scaledRect(rect: prediction.rect)
                 
                 // Show the bounding box.
-                let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
+                let label = labels[prediction.classIndex]
+                let confidence = prediction.score * 100
                 let color = colors[prediction.classIndex]
-                //print(label)
-                boundingBoxes[i].show(frame: rect, label: label, color: color)
-                
-            } else {
-                boundingBoxes[i].hide()
+
+                if(rect.size.width > 100 && rect.size.width > 100){
+                    addButton(frame: CGRect(x:rect.origin.x + rect.size.width - 55, y: rect.origin.y + rect.size.height - 55, width: 50, height: 50))
+                    boundingBoxes[i].show(frame: rect, label: label, confidence: confidence, color: color)
+                }
             }
         }
     }
     
+    func scaledRect(rect: CGRect) -> CGRect{
+        
+        // The predicted bounding box is in the coordinate space of the input
+        // image, which is a square image of 416x416 pixels. We want to show it
+        // on the video preview, which is as wide as the screen and has a 4:3
+        // aspect ratio. The video preview also may be letterboxed at the top
+        // and bottom.
+        let width = view.bounds.width
+        let height = width * 4 / 3
+        let scaleX = width / CGFloat(YOLO.inputWidth)
+        let scaleY = height / CGFloat(YOLO.inputHeight)
+        let top = (view.bounds.height - height) / 2
+        
+        // Translate and scale the rectangle to our own coordinate system.
+        var newRect = rect
+        newRect.origin.x *= scaleX
+        newRect.origin.y *= scaleY
+        newRect.origin.y += top
+        newRect.size.width *= scaleX
+        newRect.size.height *= scaleY
+        
+        if newRect.origin.x < 0.0 {
+            newRect.origin.x = 0.0
+        }
+        if newRect.origin.y < 0.0{
+            newRect.origin.y = 0.0
+        }
+        if newRect.origin.x + newRect.size.width > UIScreen.main.bounds.width{
+            newRect.size.width = UIScreen.main.bounds.width - newRect.origin.x
+        }
+        if newRect.origin.y + newRect.size.height > UIScreen.main.bounds.height{
+            newRect.size.height = UIScreen.main.bounds.height - newRect.origin.y
+        }
+        
+        return newRect
+    }
+    
+    func addButton(frame:CGRect){
+        
+        button = UIButton(frame:frame )
+        button.backgroundColor = .green
+        button.setTitle("Go", for: .normal)
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 0.0
+        button.layer.masksToBounds = false
+        button.layer.cornerRadius = 4.0
+        
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.sceneView.addSubview(button)
+    }
+    
+    @objc func buttonAction(sender: UIButton!){
+        print("Button tapped")
+        
+    }
+    
 }
 
 
-extension ViewController: ARSessionDelegate{
-    func session(_ session: ARSession, didUpdate frame: ARFrame){
-        let currentTransform = frame.camera.transform
-        new_MoveX = currentTransform.columns.3.x
-        new_MoveY = currentTransform.columns.3.y
-        new_MoveZ = currentTransform.columns.3.z
-        
-        
-        //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
-        
-        let rotation = frame.camera.eulerAngles
-        new_RotateY = rotation.y
-        //print("rotation: \(new_RotateY)")
-        
-        //print("-----------------")
-        
-    }
-}
-
-
-extension UIImage {
-    public convenience init?(pixelBuffer: CVPixelBuffer) {
-        var cgImage: CGImage?
-        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
-        
-        if let cgImage = cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            return nil
+/*
+ extension UIImage {
+ public convenience init?(pixelBuffer: CVPixelBuffer) {
+ var cgImage: CGImage?
+ VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
+ 
+ if let cgImage = cgImage {
+ self.init(cgImage: cgImage)
+ } else {
+ return nil
+ }
+ }
+ 
+ func image(withRotation radians: CGFloat) -> UIImage {
+ let cgImage = self.cgImage!
+ let LARGEST_SIZE = CGFloat(max(self.size.width, self.size.height))
+ let context = CGContext.init(data: nil, width:Int(LARGEST_SIZE), height:Int(LARGEST_SIZE), bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0, space: cgImage.colorSpace!, bitmapInfo: cgImage.bitmapInfo.rawValue)!
+ 
+ var drawRect = CGRect.zero
+ drawRect.size = self.size
+ let drawOrigin = CGPoint(x: (LARGEST_SIZE - self.size.width) * 0.5,y: (LARGEST_SIZE - self.size.height) * 0.5)
+ drawRect.origin = drawOrigin
+ var tf = CGAffineTransform.identity
+ tf = tf.translatedBy(x: LARGEST_SIZE * 0.5, y: LARGEST_SIZE * 0.5)
+ tf = tf.rotated(by: CGFloat(radians))
+ tf = tf.translatedBy(x: LARGEST_SIZE * -0.5, y: LARGEST_SIZE * -0.5)
+ context.concatenate(tf)
+ context.draw(cgImage, in: drawRect)
+ var rotatedImage = context.makeImage()!
+ 
+ drawRect = drawRect.applying(tf)
+ 
+ rotatedImage = rotatedImage.cropping(to: drawRect)!
+ let resultImage = UIImage(cgImage: rotatedImage)
+ return resultImage
+ }
+ 
+ func toCVPixelBuffer() -> CVPixelBuffer? {
+ let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+ var pixelBuffer : CVPixelBuffer?
+ let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(self.size.width), Int(self.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
+ guard status == kCVReturnSuccess else {
+ return nil
+ }
+ 
+ if let pixelBuffer = pixelBuffer {
+ CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
+ let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer)
+ 
+ let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+ let context = CGContext(data: pixelData, width: Int(self.size.width), height: Int(self.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+ 
+ context?.translateBy(x: 0, y: self.size.height)
+ context?.scaleBy(x: 1.0, y: -1.0)
+ 
+ UIGraphicsPushContext(context!)
+ self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+ UIGraphicsPopContext()
+ CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
+ 
+ return pixelBuffer
+ }
+ 
+ return nil
+ }
+ }
+ */
+extension CGImagePropertyOrientation {
+    init(_ deviceOrientation: UIDeviceOrientation) {
+        switch deviceOrientation {
+        case .portraitUpsideDown: self = .left
+        case .landscapeLeft: self = .up
+        case .landscapeRight: self = .down
+        default: self = .right
         }
-    }
-    
-    func image(withRotation radians: CGFloat) -> UIImage {
-        let cgImage = self.cgImage!
-        let LARGEST_SIZE = CGFloat(max(self.size.width, self.size.height))
-        let context = CGContext.init(data: nil, width:Int(LARGEST_SIZE), height:Int(LARGEST_SIZE), bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0, space: cgImage.colorSpace!, bitmapInfo: cgImage.bitmapInfo.rawValue)!
-        
-        var drawRect = CGRect.zero
-        drawRect.size = self.size
-        let drawOrigin = CGPoint(x: (LARGEST_SIZE - self.size.width) * 0.5,y: (LARGEST_SIZE - self.size.height) * 0.5)
-        drawRect.origin = drawOrigin
-        var tf = CGAffineTransform.identity
-        tf = tf.translatedBy(x: LARGEST_SIZE * 0.5, y: LARGEST_SIZE * 0.5)
-        tf = tf.rotated(by: CGFloat(radians))
-        tf = tf.translatedBy(x: LARGEST_SIZE * -0.5, y: LARGEST_SIZE * -0.5)
-        context.concatenate(tf)
-        context.draw(cgImage, in: drawRect)
-        var rotatedImage = context.makeImage()!
-        
-        drawRect = drawRect.applying(tf)
-        
-        rotatedImage = rotatedImage.cropping(to: drawRect)!
-        let resultImage = UIImage(cgImage: rotatedImage)
-        return resultImage
-    }
-    
-    func toCVPixelBuffer() -> CVPixelBuffer? {
-        let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
-        var pixelBuffer : CVPixelBuffer?
-        let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(self.size.width), Int(self.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
-        guard status == kCVReturnSuccess else {
-            return nil
-        }
-        
-        if let pixelBuffer = pixelBuffer {
-            CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
-            let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer)
-            
-            let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-            let context = CGContext(data: pixelData, width: Int(self.size.width), height: Int(self.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
-            
-            context?.translateBy(x: 0, y: self.size.height)
-            context?.scaleBy(x: 1.0, y: -1.0)
-            
-            UIGraphicsPushContext(context!)
-            self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
-            UIGraphicsPopContext()
-            CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
-            
-            return pixelBuffer
-        }
-        
-        return nil
     }
 }
