@@ -2,17 +2,20 @@ import Foundation
 import UIKit
 
 class BoundingBox{
-    let shapeLayer: CAShapeLayer
+   // let shapeLayer: CAShapeLayer
     //let textLayer: CATextLayer
     let infoLayer: CAShapeLayer
     let infoTextLayer: CATextLayer
     
     
     init() {
+        
+        /*
         shapeLayer = CAShapeLayer()
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 4
         shapeLayer.isHidden = true
+         */
         /*
         textLayer = CATextLayer()
         textLayer.foregroundColor = UIColor.black.cgColor
@@ -23,7 +26,6 @@ class BoundingBox{
         textLayer.alignmentMode = CATextLayerAlignmentMode.center
         */
         infoLayer = CAShapeLayer()
-        infoLayer.fillColor = UIColor.white.cgColor
         infoLayer.lineWidth = 4
         infoLayer.isHidden = true
         
@@ -39,7 +41,7 @@ class BoundingBox{
     
     
     func addToLayer(_ parent: CALayer) {
-        parent.addSublayer(shapeLayer)
+       // parent.addSublayer(shapeLayer)
         //parent.addSublayer(textLayer)
         parent.addSublayer(infoLayer)
         parent.addSublayer(infoTextLayer)
@@ -53,9 +55,11 @@ class BoundingBox{
         let path = UIBezierPath(rect: frame)
         let infoPath = UIBezierPath(rect: infoRect)
         
+        /*
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = color.cgColor
         shapeLayer.isHidden = false
+ */
         /*
         textLayer.string = label
         textLayer.backgroundColor = color.cgColor
@@ -63,6 +67,7 @@ class BoundingBox{
         */
         infoLayer.path = infoPath.cgPath
         infoLayer.isHidden = false
+        infoLayer.fillColor = UIColor.yellow.cgColor
         
         let infoText = "Name: " + label + "\nConfidence: " + String(format: "%.1f", confidence)
             + "\nDifficulty: Easy\nNumber: 5 "
@@ -96,7 +101,7 @@ class BoundingBox{
     }
     
     func hide() {
-        shapeLayer.isHidden = true
+       // shapeLayer.isHidden = true
        // textLayer.isHidden = true
         infoLayer.isHidden = true
         infoTextLayer.isHidden = true

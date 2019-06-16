@@ -62,11 +62,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             box.addToLayer(self.sceneView.layer)
         }
         
-        print(UIScreen.main.bounds.size.width)
-        print(UIScreen.main.bounds.size.height)
-        
         //loopCoreMLUpdate()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -138,15 +136,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
-    
-    /*
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     let DestViewController: ViewTwo = segue.destination as! ViewTwo
-     //let rotateImage = (UIImage(pixelBuffer: myImage))?.image(withRotation: (.pi/2)*3)
-     //let sendImage = rotateImage?.toCVPixelBuffer()
-     DestViewController.image = sceneView.snapshot()
+
+
      
-     }*/
+    
     
     func setUpBoundingBoxes() {
         for _ in 0..<YOLO.maxBoundingBoxes {
@@ -170,7 +163,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             print("Error: could not create Vision model")
             return
         }
-        
         request = VNCoreMLRequest(model: visionModel, completionHandler: visionRequestDidComplete)
         
         // NOTE: If you choose another crop/scale option, then you must also
@@ -215,16 +207,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     */
     
     func DeviceMoving() -> Bool{
-        if abs(self.pre_MoveX - self.new_MoveX) > 0.03{
+        if abs(self.pre_MoveX - self.new_MoveX) > 0.01{
             return true;
         }
-        if abs(self.pre_MoveY - self.new_MoveY) > 0.03{
+        if abs(self.pre_MoveY - self.new_MoveY) > 0.01{
             return true;
         }
-        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.05{
+        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.01{
             return true;
         }
-        if abs(self.pre_RotateY - self.new_RotateY) > 0.2{
+        if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
             return true;
         }
         return false;
@@ -246,7 +238,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
          try? handler.perform([request])
          */
         
-        let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+        let orientation = exifOrientationFromDeviceOrientation()
         
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
         visionQueue.async {
@@ -258,6 +250,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 print("Error: Vision request failed with error \"\(error)\"")
             }
         }
+    }
+    
+    func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
+        let curDeviceOrientation = UIDevice.current.orientation
+        let exifOrientation: CGImagePropertyOrientation
+        
+        switch curDeviceOrientation {
+        case UIDeviceOrientation.portraitUpsideDown:  // Device oriented vertically, home button on the top
+            exifOrientation = .left
+        case UIDeviceOrientation.landscapeLeft:       // Device oriented horizontally, home button on the right
+            exifOrientation = .down
+        case UIDeviceOrientation.landscapeRight:      // Device oriented horizontally, home button on the left
+            exifOrientation = .up
+        case UIDeviceOrientation.portrait:            // Device oriented vertically, home button on the bottom
+            exifOrientation = .right
+        default:
+            exifOrientation = .up
+        }
+        return exifOrientation
     }
     
     func visionRequestDidComplete(request: VNRequest, error: Error?) {
@@ -299,11 +310,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 let label = labels[prediction.classIndex]
                 let confidence = prediction.score * 100
                 let color = colors[prediction.classIndex]
-
-                if(rect.size.width > 100 && rect.size.width > 100){
-                    addButton(frame: CGRect(x:rect.origin.x + rect.size.width - 55, y: rect.origin.y + rect.size.height - 55, width: 50, height: 50))
-                    boundingBoxes[i].show(frame: rect, label: label, confidence: confidence, color: color)
-                }
+                addButton(frame: CGRect(x:rect.origin.x + 5 + 100, y: rect.origin.y + 5 + 100 - 50, width: 50, height: 50))
+                //addButton(frame: CGRect(x:rect.origin.x + rect.size.width - 55, y: rect.origin.y + rect.size.height - 55, width: 50, height: 50))
+                boundingBoxes[i].show(frame: rect, label: label, confidence: confidence, color: color)
             }
         }
     }
@@ -341,7 +350,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if newRect.origin.y + newRect.size.height > UIScreen.main.bounds.height{
             newRect.size.height = UIScreen.main.bounds.height - newRect.origin.y
         }
-        
+        if newRect.size.width < 150{
+            newRect.size.width = 150
+        }
+        if newRect.size.height < 150{
+            newRect.size.height = 150
+        }
         return newRect
     }
     
@@ -363,7 +377,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @objc func buttonAction(sender: UIButton!){
         print("Button tapped")
-        
+        self.performSegue(withIdentifier: "switchScene", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? View2{
+            dest.text = "success!!"
+        }
     }
     
 }
@@ -381,7 +401,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
  return nil
  }
  }
- 
+}
+
  func image(withRotation radians: CGFloat) -> UIImage {
  let cgImage = self.cgImage!
  let LARGEST_SIZE = CGFloat(max(self.size.width, self.size.height))
@@ -436,13 +457,3 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
  }
  }
  */
-extension CGImagePropertyOrientation {
-    init(_ deviceOrientation: UIDeviceOrientation) {
-        switch deviceOrientation {
-        case .portraitUpsideDown: self = .left
-        case .landscapeLeft: self = .up
-        case .landscapeRight: self = .down
-        default: self = .right
-        }
-    }
-}
