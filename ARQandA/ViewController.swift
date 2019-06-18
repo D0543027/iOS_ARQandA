@@ -18,6 +18,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     let yolo = YOLO()
     var request: VNCoreMLRequest!
+    var label = ""
     
     var colors: [UIColor] = []
     
@@ -307,7 +308,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 let rect = scaledRect(rect: prediction.rect)
                 
                 // Show the bounding box.
-                let label = labels[prediction.classIndex]
+                label = labels[prediction.classIndex]
                 let confidence = prediction.score * 100
                 let color = colors[prediction.classIndex]
                 addButton(frame: CGRect(x:rect.origin.x + 5 + 100, y: rect.origin.y + 5 + 100 - 50, width: 50, height: 50))
@@ -382,7 +383,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? View2{
-            dest.text = "success!!"
+            dest.label = self.label
         }
     }
     

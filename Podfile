@@ -6,7 +6,7 @@ target 'ARQandA' do
   use_frameworks!
 
   # Pods for ARQandA
-  pod 'Alamofire' '~> 4.4'
+  pod 'Alamofire','~> 4.4'
   pod 'SwiftyJSON'
 
   target 'ARQandATests' do
