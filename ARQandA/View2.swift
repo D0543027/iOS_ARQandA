@@ -15,6 +15,9 @@ import SwiftyJSON
 class View2: UIViewController {
     
     var label = ""
+    var number = ""
+    
+    
     var n = 0
     var data: JSON?
     var RightAnswer: String? = ""
@@ -35,6 +38,8 @@ class View2: UIViewController {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
+        print(label)
+        print(number)
         getData()
     }
     
@@ -43,6 +48,7 @@ class View2: UIViewController {
         
         while data == nil{}
         
+ 
         activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
         
@@ -63,9 +69,11 @@ class View2: UIViewController {
         
     }
     
+    
     func getData(){
         let queue = DispatchQueue(label: "queue")
-        Alamofire.request("https://9d26bbea.ngrok.io/query.php").responseJSON(queue:queue, completionHandler:{ response in
+        let param = ["label":self.label, "num":self.number]
+        Alamofire.request("https://74b8dd21.ngrok.io/query.php", method: .post, parameters: param).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -84,9 +92,10 @@ class View2: UIViewController {
         ChoiseBtnLabel3.setTitle(self.data![n]["choose3"].string, for: .normal)
         ChoiseBtnLabel4.setTitle(self.data![n]["choose4"].string, for: .normal)
         
+        
         n = n + 1
         
-        if n == data!.count{
+        if n == data!.count + 1{
             dismiss(animated: true, completion: nil)
         }
     }

@@ -10,7 +10,6 @@ import UIKit
 import SceneKit
 import ARKit
 import Vision
-import VideoToolbox
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
@@ -18,7 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     let yolo = YOLO()
     var request: VNCoreMLRequest!
-    var label = ""
+
     
     var colors: [UIColor] = []
     
@@ -26,18 +25,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     let visionQueue = DispatchQueue(label: "visionQueue")
     
-    var new_MoveX: Float = 0.0
-    var new_MoveY: Float = 0.0
-    var new_MoveZ: Float = 0.0
-    var new_RotateY: Float = 0.0
-    
-    var pre_MoveX: Float = 0.0
-    var pre_MoveY: Float = 0.0
-    var pre_MoveZ: Float = 0.0
-    var pre_RotateY: Float = 0.0
     
     var currentBuffer: CVPixelBuffer?
-    var button: UIButton!
+    
     
     override func viewDidLoad() {
         
@@ -46,7 +36,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         sceneView.session.delegate = self
-        
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
         
@@ -63,7 +52,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             box.addToLayer(self.sceneView.layer)
         }
         
-        //loopCoreMLUpdate()
     }
     
     
@@ -75,6 +63,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Run the view's session
         sceneView.session.run(configuration)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,33 +84,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
      return node
      }
      */
-    func session(_ session: ARSession, didUpdate frame: ARFrame){
-        let currentTransform = frame.camera.transform
-        new_MoveX = currentTransform.columns.3.x
-        new_MoveY = currentTransform.columns.3.y
-        new_MoveZ = currentTransform.columns.3.z
-        
-        
-        //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
-        
-        let rotation = frame.camera.eulerAngles
-        new_RotateY = rotation.y
-        //print("rotation: \(new_RotateY)")
-        
-        
-        guard currentBuffer == nil else{ return }
-        
-        visionQueue.async {
-            if self.DeviceMoving() == true {
-                self.updatePosition()
-                self.currentBuffer = frame.capturedImage
-                self.predictUsingVision(pixelBuffer: self.currentBuffer!)
-            }
-        }
-        
-        //print("-----------------")
-        
-    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -137,10 +99,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
-
-
-     
-    
     
     func setUpBoundingBoxes() {
         for _ in 0..<YOLO.maxBoundingBoxes {
@@ -171,41 +129,44 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Currently they assume the full input image is used.
         request.imageCropAndScaleOption = .scaleFill
     }
-    /*
-    func loopCoreMLUpdate() {
-        // Continuously run CoreML whenever it's ready. (Preventing 'hiccups' in Frame Rate)
+    
+    var new_MoveX: Float = 0.0
+    var new_MoveY: Float = 0.0
+    var new_MoveZ: Float = 0.0
+    var new_RotateY: Float = 0.0
+    
+    var pre_MoveX: Float = 0.0
+    var pre_MoveY: Float = 0.0
+    var pre_MoveZ: Float = 0.0
+    var pre_RotateY: Float = 0.0
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame){
+        let currentTransform = frame.camera.transform
+        new_MoveX = currentTransform.columns.3.x
+        new_MoveY = currentTransform.columns.3.y
+        new_MoveZ = currentTransform.columns.3.z
+        
+        
+        //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
+        
+        let rotation = frame.camera.eulerAngles
+        new_RotateY = rotation.y
+        //print("rotation: \(new_RotateY)")
+        
+        
+        guard currentBuffer == nil else{ return }
         
         visionQueue.async {
-            // 1. Run Update.
-            //self.semaphore.wait()
-            
-            
-            self.updateCoreML()
-            
-            // 2. Loop this function.
-            //self.semaphore.signal()
-            
-            self.loopCoreMLUpdate()
+            if self.DeviceMoving() == true {
+                self.updatePosition()
+                self.currentBuffer = frame.capturedImage
+                self.predictUsingVision(pixelBuffer: self.currentBuffer!)
+            }
         }
         
-    }
-    
-    func updateCoreML() {
+        //print("-----------------")
         
-        if DeviceMoving() {
-            updatePosition()
-            
-            //print("predicting...")
-            
-            let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
-            if pixbuff == nil { return }
-            
-            //myImage = pixbuff
-            //let rotateImage = (UIImage(pixelBuffer: pixbuff!))!.image(withRotation: (.pi/2)*3)
-            predictUsingVision(pixelBuffer: pixbuff!)
-        }
     }
-    */
     
     func DeviceMoving() -> Bool{
         if abs(self.pre_MoveX - self.new_MoveX) > 0.01{
@@ -229,7 +190,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.pre_MoveZ = self.new_MoveZ
         self.pre_RotateY = self.new_RotateY
     }
-    
+ 
     func predictUsingVision(pixelBuffer: CVPixelBuffer) {
         /*
          let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
@@ -239,7 +200,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
          try? handler.perform([request])
          */
         
-        let orientation = exifOrientationFromDeviceOrientation()
+        let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+
         
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
         visionQueue.async {
@@ -252,25 +214,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
         }
     }
-    
-    func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
-        let curDeviceOrientation = UIDevice.current.orientation
-        let exifOrientation: CGImagePropertyOrientation
-        
-        switch curDeviceOrientation {
-        case UIDeviceOrientation.portraitUpsideDown:  // Device oriented vertically, home button on the top
-            exifOrientation = .left
-        case UIDeviceOrientation.landscapeLeft:       // Device oriented horizontally, home button on the right
-            exifOrientation = .down
-        case UIDeviceOrientation.landscapeRight:      // Device oriented horizontally, home button on the left
-            exifOrientation = .up
-        case UIDeviceOrientation.portrait:            // Device oriented vertically, home button on the bottom
-            exifOrientation = .right
-        default:
-            exifOrientation = .up
-        }
-        return exifOrientation
-    }
+
     
     func visionRequestDidComplete(request: VNRequest, error: Error?) {
         if let observations = request.results as? [VNCoreMLFeatureValueObservation],
@@ -289,6 +233,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
+    // clear all items before showing the new result
     func clear(){
         for view in self.sceneView.subviews{
             view.removeFromSuperview()
@@ -298,6 +243,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             boundingBoxes[i].hide()
         }
     }
+    
+    var label = ""
+    var numberDict  = ["Easy" : "3",
+                       "Normal": "5",
+                       "Hard": "7"]
+    var number = ""
     
     func show(predictions: [YOLO.Prediction]) {
         for i in 0..<boundingBoxes.count {
@@ -309,11 +260,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 
                 // Show the bounding box.
                 label = labels[prediction.classIndex]
+                let d = difficulty[label]!
+                number = numberDict[d]!
                 let confidence = prediction.score * 100
                 let color = colors[prediction.classIndex]
-                addButton(frame: CGRect(x:rect.origin.x + 5 + 100, y: rect.origin.y + 5 + 100 - 50, width: 50, height: 50))
+                addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: 45, height: 45),
+                          label:label,
+                          number:number)
                 //addButton(frame: CGRect(x:rect.origin.x + rect.size.width - 55, y: rect.origin.y + rect.size.height - 55, width: 50, height: 50))
-                boundingBoxes[i].show(frame: rect, label: label, confidence: confidence, color: color)
+                boundingBoxes[i].show(frame: rect, label: label, confidence: confidence, color: color, difficulty: d, number: number)
             }
         }
     }
@@ -360,9 +315,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         return newRect
     }
     
-    func addButton(frame:CGRect){
+    var button: MyButton!
+    
+    // Create button programmtically
+    func addButton(frame:CGRect,label: String, number:String){
         
-        button = UIButton(frame:frame )
+        button = MyButton(frame: frame, label: label, number: number)
         button.backgroundColor = .green
         button.setTitle("Go", for: .normal)
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
@@ -376,85 +334,47 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.sceneView.addSubview(button)
     }
     
-    @objc func buttonAction(sender: UIButton!){
-        print("Button tapped")
+    @objc func buttonAction(sender: MyButton!){
+        label = sender.label
+        number = sender.number
         self.performSegue(withIdentifier: "switchScene", sender: self)
+
     }
     
+    // Send the selected object name and the number of question to start Q&A
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? View2{
             dest.label = self.label
+            dest.number = self.number
         }
     }
     
 }
 
-
-/*
- extension UIImage {
- public convenience init?(pixelBuffer: CVPixelBuffer) {
- var cgImage: CGImage?
- VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
- 
- if let cgImage = cgImage {
- self.init(cgImage: cgImage)
- } else {
- return nil
- }
- }
+class MyButton: UIButton{
+    var label: String!
+    var number: String!
+    
+    init(frame: CGRect, label: String, number: String) {
+        super.init(frame: frame)
+        self.label = label
+        self.number = number
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
- func image(withRotation radians: CGFloat) -> UIImage {
- let cgImage = self.cgImage!
- let LARGEST_SIZE = CGFloat(max(self.size.width, self.size.height))
- let context = CGContext.init(data: nil, width:Int(LARGEST_SIZE), height:Int(LARGEST_SIZE), bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0, space: cgImage.colorSpace!, bitmapInfo: cgImage.bitmapInfo.rawValue)!
- 
- var drawRect = CGRect.zero
- drawRect.size = self.size
- let drawOrigin = CGPoint(x: (LARGEST_SIZE - self.size.width) * 0.5,y: (LARGEST_SIZE - self.size.height) * 0.5)
- drawRect.origin = drawOrigin
- var tf = CGAffineTransform.identity
- tf = tf.translatedBy(x: LARGEST_SIZE * 0.5, y: LARGEST_SIZE * 0.5)
- tf = tf.rotated(by: CGFloat(radians))
- tf = tf.translatedBy(x: LARGEST_SIZE * -0.5, y: LARGEST_SIZE * -0.5)
- context.concatenate(tf)
- context.draw(cgImage, in: drawRect)
- var rotatedImage = context.makeImage()!
- 
- drawRect = drawRect.applying(tf)
- 
- rotatedImage = rotatedImage.cropping(to: drawRect)!
- let resultImage = UIImage(cgImage: rotatedImage)
- return resultImage
- }
- 
- func toCVPixelBuffer() -> CVPixelBuffer? {
- let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
- var pixelBuffer : CVPixelBuffer?
- let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(self.size.width), Int(self.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
- guard status == kCVReturnSuccess else {
- return nil
- }
- 
- if let pixelBuffer = pixelBuffer {
- CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
- let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer)
- 
- let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
- let context = CGContext(data: pixelData, width: Int(self.size.width), height: Int(self.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
- 
- context?.translateBy(x: 0, y: self.size.height)
- context?.scaleBy(x: 1.0, y: -1.0)
- 
- UIGraphicsPushContext(context!)
- self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
- UIGraphicsPopContext()
- CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
- 
- return pixelBuffer
- }
- 
- return nil
- }
- }
- */
+extension CGImagePropertyOrientation {
+    init(_ deviceOrientation: UIDeviceOrientation) {
+        switch deviceOrientation {
+        case .portraitUpsideDown: self = .left
+        case .landscapeLeft: self = .up
+        case .landscapeRight: self = .down
+        default: self = .right
+        }
+    }
+}
+

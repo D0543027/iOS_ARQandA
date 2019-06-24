@@ -17,6 +17,7 @@
 		8A4937C422B5D6A3008EA659 /* VictorySound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937C222B5D6A3008EA659 /* VictorySound.mp3 */; };
 		8A4937C522B5D6A3008EA659 /* FailedSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937C322B5D6A3008EA659 /* FailedSound.mp3 */; };
 		8A67012422B338A200C7A09E /* View2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67012322B338A200C7A09E /* View2.swift */; };
+		8A69797022B9DD16000FD70F /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A69796F22B9DD16000FD70F /* LaunchView.swift */; };
 		8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE68228A6111002E6F08 /* AppDelegate.swift */; };
 		8A94FE6B228A6111002E6F08 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE6A228A6111002E6F08 /* art.scnassets */; };
 		8A94FE6D228A6111002E6F08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE6C228A6111002E6F08 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 		8A94FE80228A6112002E6F08 /* ARQandATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE7F228A6112002E6F08 /* ARQandATests.swift */; };
 		8A94FE8B228A6112002E6F08 /* ARQandAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */; };
 		8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE99228A6133002E6F08 /* yolo.mlmodel */; };
+		8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,7 @@
 		8A4937C222B5D6A3008EA659 /* VictorySound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = VictorySound.mp3; sourceTree = "<group>"; };
 		8A4937C322B5D6A3008EA659 /* FailedSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FailedSound.mp3; sourceTree = "<group>"; };
 		8A67012322B338A200C7A09E /* View2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View2.swift; sourceTree = "<group>"; };
+		8A69796F22B9DD16000FD70F /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		8A94FE65228A6111002E6F08 /* ARQandA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARQandA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A94FE68228A6111002E6F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A94FE6A228A6111002E6F08 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -173,12 +176,13 @@
 		8A94FE67228A6111002E6F08 /* ARQandA */ = {
 			isa = PBXGroup;
 			children = (
-				8A4937BB22B5D022008EA659 /* QAHelper */,
-				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
 				8A94FE6C228A6111002E6F08 /* ViewController.swift */,
 				8A67012322B338A200C7A09E /* View2.swift */,
-				8A94FE6A228A6111002E6F08 /* art.scnassets */,
+				8A69796F22B9DD16000FD70F /* LaunchView.swift */,
 				8A4937BA22B5CF3B008EA659 /* ARHelpers */,
+				8A4937BB22B5D022008EA659 /* QAHelper */,
+				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
+				8A94FE6A228A6111002E6F08 /* art.scnassets */,
 				8A94FE6E228A6111002E6F08 /* Main.storyboard */,
 				8A94FE71228A6112002E6F08 /* Assets.xcassets */,
 				8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */,
@@ -444,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A94FE6D228A6111002E6F08 /* ViewController.swift in Sources */,
+				8A69797022B9DD16000FD70F /* LaunchView.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
@@ -458,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A94FE80228A6112002E6F08 /* ARQandATests.swift in Sources */,
+				8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
