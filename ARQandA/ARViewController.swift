@@ -244,11 +244,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    var label = ""
-    var numberDict  = ["Easy" : "3",
-                       "Normal": "5",
-                       "Hard": "7"]
-    var number = ""
+    private var label = ""
+    private var numberDict  = ["Easy" : "3",
+                               "Normal": "5",
+                               "Hard": "7"]
+    
+    private var numberOfQuestion = ""
     
     func show(predictions: [YOLO.Prediction]) {
         for i in 0..<boundingBoxes.count {
@@ -258,18 +259,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 
                 let rect = scaledRect(rect: prediction.rect)
         
-                // Show the bounding box.
+                // Perdicted result
                 label = labels[prediction.classIndex]
                 let d = difficulty[label]!
-                number = numberDict[d]!
+                numberOfQuestion = numberDict[d]!
+                
                 //let confidence = prediction.score * 100
                 //let color = colors[prediction.classIndex]
+                
                 addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: 45, height: 45),
                           label:label,
-                          number:number)
-                //addButton(frame: CGRect(x:rect.origin.x + rect.size.width - 55, y: rect.origin.y + rect.size.height - 55, width: 50, height: 50))
+                          numberOfQuestion: numberOfQuestion)
+                
                 if rect.origin.x + rect.size.width / 2 <= UIScreen.main.bounds.width {
-                    boundingBoxes[i].show(frame: rect, label: label,difficulty: d)
+                    boundingBoxes[i].show(frame: rect, label: label, difficulty: d)
                   }
             }
         }
@@ -320,9 +323,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var button: MyButton!
     
     // Create button programmtically
-    func addButton(frame:CGRect,label: String, number:String){
+    func addButton(frame:CGRect,label: String, numberOfQuestion:String){
         
-        button = MyButton(frame: frame, label: label, number: number)
+        button = MyButton(frame: frame, label: label, numberOfQuestion: numberOfQuestion)
         button.backgroundColor = .green
         button.setTitle("Go", for: .normal)
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
@@ -338,7 +341,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @objc func buttonAction(sender: MyButton!){
         label = sender.label
-        number = sender.number
+        numberOfQuestion = sender.numberOfQuestion
         self.performSegue(withIdentifier: "switchScene", sender: self)
 
     }
@@ -347,7 +350,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? QAViewController{
             dest.label = self.label
-            dest.number = self.number
+            dest.numberOfQuestion = self.numberOfQuestion
         }
     }
     
@@ -355,12 +358,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
 class MyButton: UIButton{
     var label: String!
-    var number: String!
+    var numberOfQuestion: String!
     
-    init(frame: CGRect, label: String, number: String) {
+    init(frame: CGRect, label: String, numberOfQuestion: String) {
         super.init(frame: frame)
         self.label = label
-        self.number = number
+        self.numberOfQuestion = numberOfQuestion
     }
     
     required init?(coder aDecoder: NSCoder) {

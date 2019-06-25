@@ -14,13 +14,11 @@ import SwiftyJSON
 
 class QAViewController: UIViewController {
     
-    var label = ""
-    var number = ""
+    var label = ""              //object name
+    var numberOfQuestion = ""   //numberOfQuestion
     
-    
-    var n = 0
     var data: JSON?
-    var RightAnswer: String? = ""
+    
     var audioPlayerF = AVAudioPlayer();
     var audioPlayerV = AVAudioPlayer();
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -37,9 +35,7 @@ class QAViewController: UIViewController {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
-        
-        print(label)
-        print(number)
+
         getData()
     }
     
@@ -72,8 +68,9 @@ class QAViewController: UIViewController {
     
     func getData(){
         let queue = DispatchQueue(label: "queue")
-        let param = ["label":self.label, "num":self.number]
-        Alamofire.request("https://8752d019.ngrok.io/query.php", method: .post, parameters: param).responseJSON(queue:queue, completionHandler:{ response in
+        let parameters = ["label": self.label, "num": self.numberOfQuestion] //send parameters to server (query.php)
+        
+        Alamofire.request("https://8752d019.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -83,20 +80,29 @@ class QAViewController: UIViewController {
         })
     }
     
+    private var index = 0
+    private var RightAnswer: String? = ""
     func updateQuestion(){
-        lb.text = self.data![n]["Question"].string
+        lb.text = self.data![index]["Question"].string
         
-        RightAnswer = self.data![n]["Ans"].string
-        ChoiseBtnLabel1.setTitle(self.data![n]["choose1"].string, for: .normal)
-        ChoiseBtnLabel2.setTitle(self.data![n]["Ans"].string, for: .normal)
-        ChoiseBtnLabel3.setTitle(self.data![n]["choose3"].string, for: .normal)
-        ChoiseBtnLabel4.setTitle(self.data![n]["choose4"].string, for: .normal)
+        RightAnswer = self.data![index]["Ans"].string
+        
+        // Default : Second button is the answer
+        ChoiseBtnLabel1.setTitle(self.data![index]["choose1"].string, for: .normal)
+        ChoiseBtnLabel2.setTitle(self.data![index]["Ans"].string, for: .normal)
+        ChoiseBtnLabel3.setTitle(self.data![index]["choose3"].string, for: .normal)
+        ChoiseBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
         
         
-        n = n + 1
+        index = index + 1
         
-        if n == data!.count + 1{
-            dismiss(animated: true, completion: nil)
+        // End of QA
+        if index == data!.count + 1{
+            // TODO: add another action
+            
+            //
+            
+            dismiss(animated: true, completion: nil) // back to AR
         }
     }
     
