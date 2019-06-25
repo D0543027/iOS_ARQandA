@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Launch View Controller-->
         <scene sceneID="vel-io-LzF">
             <objects>
-                <viewController id="cNd-bV-ZPi" sceneMemberID="viewController">
+                <viewController id="cNd-bV-ZPi" customClass="LaunchViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Pf-iO-kAX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,10 +36,10 @@
             </objects>
             <point key="canvasLocation" x="-249" y="14"/>
         </scene>
-        <!--View Controller-->
+        <!--AR View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" userLabel="AR View Controller" customClass="ARViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -66,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="553" y="27"/>
         </scene>
-        <!--View2-->
+        <!--QA View Controller-->
         <scene sceneID="mgQ-RN-bPz">
             <objects>
-                <viewController id="yIf-aG-0wL" customClass="View2" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yIf-aG-0wL" userLabel="QA View Controller" customClass="QAViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ieq-Zg-lz8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -200,6 +200,6 @@
         <image name="giphy.png" width="1803" height="1800"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ctj-zm-Pk7"/>
+        <segue reference="mDc-cM-YHl"/>
     </inferredMetricsTieBreakers>
 </document>

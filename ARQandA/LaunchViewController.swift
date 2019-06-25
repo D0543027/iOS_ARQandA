@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LaunchView: UIViewController {
+class LaunchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

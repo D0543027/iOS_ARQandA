@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 import Vision
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
     
@@ -252,23 +252,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     func show(predictions: [YOLO.Prediction]) {
         for i in 0..<boundingBoxes.count {
-            //boundingBoxes[i].hide()
+            //boundingBoxes[i].hide(
             if i < predictions.count {
                 let prediction = predictions[i]
                 
                 let rect = scaledRect(rect: prediction.rect)
-                
+        
                 // Show the bounding box.
                 label = labels[prediction.classIndex]
                 let d = difficulty[label]!
                 number = numberDict[d]!
-                let confidence = prediction.score * 100
-                let color = colors[prediction.classIndex]
+                //let confidence = prediction.score * 100
+                //let color = colors[prediction.classIndex]
                 addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: 45, height: 45),
                           label:label,
                           number:number)
                 //addButton(frame: CGRect(x:rect.origin.x + rect.size.width - 55, y: rect.origin.y + rect.size.height - 55, width: 50, height: 50))
-                boundingBoxes[i].show(frame: rect, label: label, confidence: confidence, color: color, difficulty: d, number: number)
+                if rect.origin.x + rect.size.width / 2 <= UIScreen.main.bounds.width {
+                    boundingBoxes[i].show(frame: rect, label: label,difficulty: d)
+                  }
             }
         }
     }
@@ -291,8 +293,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         newRect.origin.x *= scaleX
         newRect.origin.y *= scaleY
         newRect.origin.y += top
-        newRect.size.width *= scaleX
-        newRect.size.height *= scaleY
+        //newRect.size.width *= scaleX
+        //newRect.size.height *= scaleY
+        newRect.size.width = 220
+        newRect.size.height = 70
+        
         
         if newRect.origin.x < 0.0 {
             newRect.origin.x = 0.0
@@ -300,18 +305,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if newRect.origin.y < 0.0{
             newRect.origin.y = 0.0
         }
+        
+        /*
         if newRect.origin.x + newRect.size.width > UIScreen.main.bounds.width{
             newRect.size.width = UIScreen.main.bounds.width - newRect.origin.x
         }
         if newRect.origin.y + newRect.size.height > UIScreen.main.bounds.height{
             newRect.size.height = UIScreen.main.bounds.height - newRect.origin.y
         }
-        if newRect.size.width < 150{
-            newRect.size.width = 150
-        }
-        if newRect.size.height < 150{
-            newRect.size.height = 150
-        }
+ */
         return newRect
     }
     
@@ -343,7 +345,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     // Send the selected object name and the number of question to start Q&A
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? View2{
+        if let dest = segue.destination as? QAViewController{
             dest.label = self.label
             dest.number = self.number
         }

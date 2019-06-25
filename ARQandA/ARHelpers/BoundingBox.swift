@@ -51,12 +51,11 @@ class BoundingBox{
         
     }
     
-    func show(frame: CGRect, label: String, confidence: Float, color: UIColor,difficulty: String, number: String) {
+    func show(frame: CGRect, label: String,difficulty: String) {
         CATransaction.setDisableActions(true)
         
         let infoRect = CGRect(x: frame.origin.x + 50 + 10, y: frame.origin.y + 5, width: 150, height: 100)
-        let rect = CGRect(x:frame.origin.x, y:frame.origin.y, width: 220, height: 70)
-        let path = UIBezierPath(rect: rect)
+        let path = UIBezierPath(rect: frame)
         //let infoPath = UIBezierPath(rect: infoRect)
         
         

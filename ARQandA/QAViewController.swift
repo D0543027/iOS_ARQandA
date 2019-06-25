@@ -12,7 +12,7 @@ import AVFoundation
 import Alamofire
 import SwiftyJSON
 
-class View2: UIViewController {
+class QAViewController: UIViewController {
     
     var label = ""
     var number = ""
@@ -73,7 +73,7 @@ class View2: UIViewController {
     func getData(){
         let queue = DispatchQueue(label: "queue")
         let param = ["label":self.label, "num":self.number]
-        Alamofire.request("https://74b8dd21.ngrok.io/query.php", method: .post, parameters: param).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://8752d019.ngrok.io/query.php", method: .post, parameters: param).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)

@@ -16,11 +16,11 @@
 		8A4937C122B5D072008EA659 /* BlackBoard.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937BE22B5D071008EA659 /* BlackBoard.jpg */; };
 		8A4937C422B5D6A3008EA659 /* VictorySound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937C222B5D6A3008EA659 /* VictorySound.mp3 */; };
 		8A4937C522B5D6A3008EA659 /* FailedSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937C322B5D6A3008EA659 /* FailedSound.mp3 */; };
-		8A67012422B338A200C7A09E /* View2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67012322B338A200C7A09E /* View2.swift */; };
-		8A69797022B9DD16000FD70F /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A69796F22B9DD16000FD70F /* LaunchView.swift */; };
+		8A67012422B338A200C7A09E /* QAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67012322B338A200C7A09E /* QAViewController.swift */; };
+		8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A69796F22B9DD16000FD70F /* LaunchViewController.swift */; };
 		8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE68228A6111002E6F08 /* AppDelegate.swift */; };
 		8A94FE6B228A6111002E6F08 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE6A228A6111002E6F08 /* art.scnassets */; };
-		8A94FE6D228A6111002E6F08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE6C228A6111002E6F08 /* ViewController.swift */; };
+		8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE6C228A6111002E6F08 /* ARViewController.swift */; };
 		8A94FE70228A6111002E6F08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE6E228A6111002E6F08 /* Main.storyboard */; };
 		8A94FE72228A6112002E6F08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE71228A6112002E6F08 /* Assets.xcassets */; };
 		8A94FE75228A6112002E6F08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */; };
@@ -62,12 +62,12 @@
 		8A4937BE22B5D071008EA659 /* BlackBoard.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackBoard.jpg; sourceTree = "<group>"; };
 		8A4937C222B5D6A3008EA659 /* VictorySound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = VictorySound.mp3; sourceTree = "<group>"; };
 		8A4937C322B5D6A3008EA659 /* FailedSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FailedSound.mp3; sourceTree = "<group>"; };
-		8A67012322B338A200C7A09E /* View2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View2.swift; sourceTree = "<group>"; };
-		8A69796F22B9DD16000FD70F /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		8A67012322B338A200C7A09E /* QAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAViewController.swift; sourceTree = "<group>"; };
+		8A69796F22B9DD16000FD70F /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		8A94FE65228A6111002E6F08 /* ARQandA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARQandA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A94FE68228A6111002E6F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A94FE6A228A6111002E6F08 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		8A94FE6C228A6111002E6F08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8A94FE6C228A6111002E6F08 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		8A94FE6F228A6111002E6F08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A94FE71228A6112002E6F08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A94FE74228A6112002E6F08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -176,9 +176,9 @@
 		8A94FE67228A6111002E6F08 /* ARQandA */ = {
 			isa = PBXGroup;
 			children = (
-				8A94FE6C228A6111002E6F08 /* ViewController.swift */,
-				8A67012322B338A200C7A09E /* View2.swift */,
-				8A69796F22B9DD16000FD70F /* LaunchView.swift */,
+				8A94FE6C228A6111002E6F08 /* ARViewController.swift */,
+				8A67012322B338A200C7A09E /* QAViewController.swift */,
+				8A69796F22B9DD16000FD70F /* LaunchViewController.swift */,
 				8A4937BA22B5CF3B008EA659 /* ARHelpers */,
 				8A4937BB22B5D022008EA659 /* QAHelper */,
 				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
@@ -447,14 +447,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A94FE6D228A6111002E6F08 /* ViewController.swift in Sources */,
-				8A69797022B9DD16000FD70F /* LaunchView.swift in Sources */,
+				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
+				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
 				8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */,
 				8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */,
-				8A67012422B338A200C7A09E /* View2.swift in Sources */,
+				8A67012422B338A200C7A09E /* QAViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
