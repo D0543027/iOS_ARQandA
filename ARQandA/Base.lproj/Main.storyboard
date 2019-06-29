@@ -88,7 +88,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UfQ-9F-Fgq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UfQ-9F-Fgq" userLabel="Choice Btn Label1">
                                 <rect key="frame" x="25" y="386" width="364" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="325" id="XUQ-I6-0ZA"/>
@@ -98,10 +98,10 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="ChoiseBtn1:" destination="yIf-aG-0wL" eventType="touchUpInside" id="D28-dN-vsH"/>
+                                    <action selector="ChoiceBtn1:" destination="yIf-aG-0wL" eventType="touchUpInside" id="3EE-Lb-5Km"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfW-w1-6Hf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfW-w1-6Hf" userLabel="Choice Btn Label2">
                                 <rect key="frame" x="25" y="466" width="364" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="325" id="8Yn-gz-QE2"/>
@@ -113,10 +113,10 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="ChoiseBtn2:" destination="yIf-aG-0wL" eventType="touchUpInside" id="YO6-Kb-em4"/>
+                                    <action selector="ChoiceBtn2:" destination="yIf-aG-0wL" eventType="touchUpInside" id="hD6-aF-mVX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nob-Sb-9De" userLabel="Choise Btn Label3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nob-Sb-9De" userLabel="Choice Btn Label3">
                                 <rect key="frame" x="25" y="546" width="364" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="325" id="FU5-VP-t1p"/>
@@ -126,10 +126,10 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="ChoiseBtn3:" destination="yIf-aG-0wL" eventType="touchUpInside" id="u01-n9-vD1"/>
+                                    <action selector="ChoiceBtn3:" destination="yIf-aG-0wL" eventType="touchUpInside" id="GSH-dN-ems"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejo-Da-aDC" userLabel="Choise Btn Label4">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejo-Da-aDC" userLabel="Choice Btn Label4">
                                 <rect key="frame" x="25" y="626" width="364" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="325" id="Sfv-KF-qzA"/>
@@ -139,7 +139,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="ChoiseBtn4:" destination="yIf-aG-0wL" eventType="touchUpInside" id="kRl-0f-in7"/>
+                                    <action selector="ChoiceBtn4:" destination="yIf-aG-0wL" eventType="touchUpInside" id="Pu7-nq-fLP"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUN-2o-RwK" userLabel="Victory">
@@ -181,10 +181,10 @@
                         <viewLayoutGuide key="safeArea" id="sW5-xd-tfL"/>
                     </view>
                     <connections>
-                        <outlet property="ChoiseBtnLabel1" destination="UfQ-9F-Fgq" id="fxB-zc-WA6"/>
-                        <outlet property="ChoiseBtnLabel2" destination="HfW-w1-6Hf" id="4gE-Ce-snX"/>
-                        <outlet property="ChoiseBtnLabel3" destination="nob-Sb-9De" id="HxU-Vs-v6r"/>
-                        <outlet property="ChoiseBtnLabel4" destination="ejo-Da-aDC" id="MKt-uT-Wlh"/>
+                        <outlet property="ChoiceBtnLabel1" destination="UfQ-9F-Fgq" id="GLG-nR-P81"/>
+                        <outlet property="ChoiceBtnLabel2" destination="HfW-w1-6Hf" id="diZ-e7-Wot"/>
+                        <outlet property="ChoiceBtnLabel3" destination="nob-Sb-9De" id="WWu-KN-EeR"/>
+                        <outlet property="ChoiceBtnLabel4" destination="ejo-Da-aDC" id="UNf-O4-koB"/>
                         <outlet property="lb" destination="shH-hX-oto" id="qIW-Eo-HvU"/>
                         <outlet property="victory" destination="hUN-2o-RwK" id="I8N-rn-jxd"/>
                         <segue destination="BV1-FR-VrT" kind="presentation" identifier="finish_qa" id="mDc-cM-YHl"/>

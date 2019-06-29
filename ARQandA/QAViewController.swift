@@ -14,8 +14,8 @@ import SwiftyJSON
 
 class QAViewController: UIViewController {
     
-    var label = ""              //object name
-    var numberOfQuestion = ""   //numberOfQuestion
+    var label = ""              // 物件名稱
+    var numberOfQuestion = ""   // 題數
     
     var data: JSON?
     
@@ -35,7 +35,7 @@ class QAViewController: UIViewController {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
-
+        
         getData()
     }
     
@@ -44,7 +44,7 @@ class QAViewController: UIViewController {
         
         while data == nil{}
         
- 
+        
         activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
         
@@ -68,9 +68,11 @@ class QAViewController: UIViewController {
     
     func getData(){
         let queue = DispatchQueue(label: "queue")
-        let parameters = ["label": self.label, "num": self.numberOfQuestion] //send parameters to server (query.php)
+        // parameters： 參數對應 query.php 的 _POST
+        let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
-        Alamofire.request("https://8752d019.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        
+        Alamofire.request("https://9ccbf2d3.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -80,29 +82,44 @@ class QAViewController: UIViewController {
         })
     }
     
+    
     private var index = 0
     private var RightAnswer: String? = ""
     func updateQuestion(){
-        lb.text = self.data![index]["Question"].string
         
-        RightAnswer = self.data![index]["Ans"].string
-        
-        // Default : Second button is the answer
-        ChoiseBtnLabel1.setTitle(self.data![index]["choose1"].string, for: .normal)
-        ChoiseBtnLabel2.setTitle(self.data![index]["Ans"].string, for: .normal)
-        ChoiseBtnLabel3.setTitle(self.data![index]["choose3"].string, for: .normal)
-        ChoiseBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
-        
-        
-        index = index + 1
-        
-        // End of QA
-        if index == data!.count + 1{
-            // TODO: add another action
+        // 答完題目
+        if index == data!.count{
+            print("Finish")
+            // 答題結束畫面
+            lb.text = "Finish"
+            ChoiceBtnLabel1.setTitle("Finish", for: .normal)
+            ChoiceBtnLabel2.setTitle("Finish", for: .normal)
+            ChoiceBtnLabel3.setTitle("Finish", for: .normal)
+            ChoiceBtnLabel4.setTitle("Finish", for: .normal)
             
-            //
+            // 答完題 不得觸發選項(點選項不動作）
+            ChoiceBtnLabel1.isEnabled = false
+            ChoiceBtnLabel2.isEnabled = false
+            ChoiceBtnLabel3.isEnabled = false
+            ChoiceBtnLabel4.isEnabled = false
+            // 設延遲(2 sec)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2) , execute: {
+                self.dismiss(animated: true, completion: nil)
+            })
             
-            dismiss(animated: true, completion: nil) // back to AR
+        }
+        else {
+            
+            lb.text = self.data![index]["Question"].string
+            
+            RightAnswer = self.data![index]["Ans"].string
+            
+            // 預設：第二個選項是解答
+            ChoiceBtnLabel1.setTitle(self.data![index]["choose1"].string, for: .normal)
+            ChoiceBtnLabel2.setTitle(self.data![index]["Ans"].string, for: .normal)
+            ChoiceBtnLabel3.setTitle(self.data![index]["choose3"].string, for: .normal)
+            ChoiceBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
+            index = index + 1
         }
     }
     
@@ -138,31 +155,27 @@ class QAViewController: UIViewController {
     @IBOutlet weak var victory: UILabel!
     
     
-    @IBOutlet weak var ChoiseBtnLabel1: UIButton!
-    @IBAction func ChoiseBtn1(_ sender: Any) {
-        validAnswer(button: ChoiseBtnLabel1)
+    @IBOutlet weak var ChoiceBtnLabel1: UIButton!
+    @IBAction func ChoiceBtn1(_ sender: Any) {
+        validAnswer(button: ChoiceBtnLabel1)
         updateQuestion()
     }
     
-    
-    @IBOutlet weak var ChoiseBtnLabel2: UIButton!
-    @IBAction func ChoiseBtn2(_ sender: Any) {
-        validAnswer(button: ChoiseBtnLabel2)
+    @IBOutlet weak var ChoiceBtnLabel2: UIButton!
+    @IBAction func ChoiceBtn2(_ sender: Any) {
+        validAnswer(button: ChoiceBtnLabel2)
         updateQuestion()
     }
     
-
-    @IBOutlet weak var ChoiseBtnLabel3: UIButton!
-    @IBAction func ChoiseBtn3(_ sender: Any) {
-        validAnswer(button: ChoiseBtnLabel3)
+    @IBOutlet weak var ChoiceBtnLabel3: UIButton!
+    @IBAction func ChoiceBtn3(_ sender: Any) {
+        validAnswer(button: ChoiceBtnLabel3)
         updateQuestion()
     }
     
-    
-    
-    @IBOutlet weak var ChoiseBtnLabel4: UIButton!
-    @IBAction func ChoiseBtn4(_ sender: Any) {
-        validAnswer(button: ChoiseBtnLabel4)
+    @IBOutlet weak var ChoiceBtnLabel4: UIButton!
+    @IBAction func ChoiceBtn4(_ sender: Any) {
+        validAnswer(button: ChoiceBtnLabel4)
         updateQuestion()
     }
     
