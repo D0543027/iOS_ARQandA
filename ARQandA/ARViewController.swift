@@ -31,7 +31,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        scoreText.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        scoreText.textAlignment = .center
         // Set the view's delegate
         sceneView.delegate = self
         sceneView.session.delegate = self
