@@ -14,6 +14,7 @@ import Vision
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var scoreText: UITextView!
     
     let yolo = YOLO()
     var request: VNCoreMLRequest!
@@ -52,10 +53,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        scoreText.text = "\(getScore())"
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         
@@ -96,6 +97,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+    
+    func getScore() -> Int{
+        return UserDefaults.standard.integer(forKey: "score")
     }
     
     func setUpBoundingBoxes() {

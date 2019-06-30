@@ -14,8 +14,16 @@ class LaunchViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        FirstLaunch()
     }
     
+    // 第一次開啟APP，創建一個儲存空間用來儲存分數，Key為score，值為0
+    func FirstLaunch(){
+        if UserDefaults.standard.object(forKey: "score") == nil{
+            UserDefaults.standard.set(0, forKey: "score")
+            UserDefaults.standard.synchronize()
+        }
+    }
 
     /*
     // MARK: - Navigation

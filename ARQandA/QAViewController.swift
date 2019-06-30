@@ -29,12 +29,13 @@ class QAViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
         
+        // 讀取中，轉圈
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .whiteLarge
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents() //不觸發任何元件
         
         getData()
     }
@@ -42,11 +43,12 @@ class QAViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        //還在抓資料，迴圈卡在這
         while data == nil{}
         
-        
+        //抓完資料，轉圈停止
         activityIndicator.stopAnimating()
-        UIApplication.shared.endIgnoringInteractionEvents()
+        UIApplication.shared.endIgnoringInteractionEvents() //可觸發任何元件(按鈕......等)
         
         //print(data!)
         
@@ -72,7 +74,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://9ccbf2d3.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://9e914f2a.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -127,6 +129,11 @@ class QAViewController: UIViewController {
         
         if RightAnswer == button.currentTitle{
             BtnVictory()
+            
+            //答對分數++
+            let score = UserDefaults.standard.integer(forKey: "score")
+            UserDefaults.standard.set(score + 1, forKey: "score")
+            UserDefaults.standard.synchronize() //這行一定要加，不然不會存回去
         } else {
             BtnFailed()
         }
