@@ -30,6 +30,10 @@
 		8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
+		E9B084E622CB785600FDF797 /* LOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084E522CB785600FDF797 /* LOGO.png */; };
+		E9B084E822CB787E00FDF797 /* START.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084E722CB787E00FDF797 /* START.png */; };
+		E9B084EC22CB7BB000FDF797 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084EB22CB7BB000FDF797 /* About.png */; };
+		E9B084F022CB82C800FDF797 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084EF22CB82C700FDF797 /* background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,10 @@
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9B084E522CB785600FDF797 /* LOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOGO.png; sourceTree = "<group>"; };
+		E9B084E722CB787E00FDF797 /* START.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = START.png; sourceTree = "<group>"; };
+		E9B084EB22CB7BB000FDF797 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
+		E9B084EF22CB82C700FDF797 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		F34CF678C9DA0DE417577C36 /* Pods-ARQandAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandAUITests.debug.xcconfig"; path = "Target Support Files/Pods-ARQandAUITests/Pods-ARQandAUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +149,10 @@
 		8A4937BB22B5D022008EA659 /* QAHelper */ = {
 			isa = PBXGroup;
 			children = (
+				E9B084EF22CB82C700FDF797 /* background.png */,
+				E9B084EB22CB7BB000FDF797 /* About.png */,
+				E9B084E722CB787E00FDF797 /* START.png */,
+				E9B084E522CB785600FDF797 /* LOGO.png */,
 				8A4937C322B5D6A3008EA659 /* FailedSound.mp3 */,
 				8A4937C222B5D6A3008EA659 /* VictorySound.mp3 */,
 				8A4937BE22B5D071008EA659 /* BlackBoard.jpg */,
@@ -330,7 +342,11 @@
 			files = (
 				8A4937C122B5D072008EA659 /* BlackBoard.jpg in Resources */,
 				8A94FE6B228A6111002E6F08 /* art.scnassets in Resources */,
+				E9B084F022CB82C800FDF797 /* background.png in Resources */,
+				E9B084E622CB785600FDF797 /* LOGO.png in Resources */,
+				E9B084EC22CB7BB000FDF797 /* About.png in Resources */,
 				8A4937BF22B5D072008EA659 /* giphy.png in Resources */,
+				E9B084E822CB787E00FDF797 /* START.png in Resources */,
 				8A94FE75228A6112002E6F08 /* LaunchScreen.storyboard in Resources */,
 				8A94FE72228A6112002E6F08 /* Assets.xcassets in Resources */,
 				8A4937C022B5D072008EA659 /* giphy.gif in Resources */,

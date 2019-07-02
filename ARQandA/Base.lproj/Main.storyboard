@@ -18,31 +18,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-4h-L18">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZv-Sj-pHy">
-                                <rect key="frame" x="162" y="538" width="92" height="49"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-4h-L18">
+                                <rect key="frame" x="-1397" y="0.0" width="1811" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                <state key="normal" title="START">
-                                    <color key="titleColor" red="0.94288174290000004" green="0.9400929026" blue="0.12717425360000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="0gQ-E5-ADZ">
+                                <rect key="frame" x="32" y="154" width="350" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cei-JA-gLD">
+                                <rect key="frame" x="12" y="12" width="100" height="35"/>
+                                <state key="normal" image="About.png"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZv-Sj-pHy">
+                                <rect key="frame" x="107" y="512" width="200" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="START.png"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="presentation" id="Ctj-zm-Pk7"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0gQ-E5-ADZ">
-                                <rect key="frame" x="57" y="167" width="300" height="300"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Utz-4h-L18" firstAttribute="top" secondItem="6Pf-iO-kAX" secondAttribute="top" id="GJM-Hl-25v"/>
-                            <constraint firstItem="Utz-4h-L18" firstAttribute="trailing" secondItem="nzi-hF-uqp" secondAttribute="trailing" id="HBC-gE-v2U"/>
-                            <constraint firstItem="Utz-4h-L18" firstAttribute="leading" secondItem="nzi-hF-uqp" secondAttribute="leading" id="MJv-tW-cQ0"/>
-                            <constraint firstItem="Utz-4h-L18" firstAttribute="bottom" secondItem="nzi-hF-uqp" secondAttribute="bottom" id="iws-9y-Q28"/>
+                            <constraint firstItem="Cei-JA-gLD" firstAttribute="leading" secondItem="nzi-hF-uqp" secondAttribute="leading" constant="12" id="RaH-II-1PK"/>
+                            <constraint firstItem="Cei-JA-gLD" firstAttribute="top" secondItem="6Pf-iO-kAX" secondAttribute="top" constant="12" id="cOd-Qi-hJt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nzi-hF-uqp"/>
                     </view>
@@ -219,7 +219,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="About.png" width="163" height="69"/>
         <image name="BlackBoard.jpg" width="1000" height="609"/>
+        <image name="LOGO.png" width="1000" height="1000"/>
+        <image name="START.png" width="239" height="121"/>
+        <image name="background.png" width="1920" height="600"/>
         <image name="giphy.png" width="1803" height="1800"/>
     </resources>
     <inferredMetricsTieBreakers>
