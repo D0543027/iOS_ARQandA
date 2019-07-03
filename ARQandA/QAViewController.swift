@@ -148,19 +148,18 @@ class QAViewController: UIViewController {
     
     func BtnVictory() {
         audioPlayerV.play()
-        victory.textColor = UIColor.yellow
-        victory.text = "Victory"
+        victory.isUserInteractionEnabled = true
     }
     func BtnFailed() {
         audioPlayerF.play();
-        victory.textColor = UIColor.red
-        victory.text = "Failed"
+        failed.isUserInteractionEnabled = true
+
     }
     
     
     @IBOutlet weak var lb: UILabel!
-    @IBOutlet weak var victory: UILabel!
-    
+    @IBOutlet weak var victory: UIImageView!
+    @IBOutlet weak var failed: UIImageView!
     
     @IBOutlet weak var ChoiceBtnLabel1: UIButton!
     @IBAction func ChoiceBtn1(_ sender: Any) {

@@ -35,6 +35,8 @@
 		E9B084EC22CB7BB000FDF797 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084EB22CB7BB000FDF797 /* About.png */; };
 		E9B084F022CB82C800FDF797 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084EF22CB82C700FDF797 /* background.png */; };
 		E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B084F322CC847800FDF797 /* MenuViewController.swift */; };
+		E9B084F722CC9AE700FDF797 /* Victory.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084F522CC9AE500FDF797 /* Victory.png */; };
+		E9B084F822CC9AE700FDF797 /* Failed.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084F622CC9AE600FDF797 /* Failed.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		E9B084EB22CB7BB000FDF797 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
 		E9B084EF22CB82C700FDF797 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		E9B084F322CC847800FDF797 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		E9B084F522CC9AE500FDF797 /* Victory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Victory.png; sourceTree = "<group>"; };
+		E9B084F622CC9AE600FDF797 /* Failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Failed.png; sourceTree = "<group>"; };
 		F34CF678C9DA0DE417577C36 /* Pods-ARQandAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandAUITests.debug.xcconfig"; path = "Target Support Files/Pods-ARQandAUITests/Pods-ARQandAUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +155,8 @@
 		8A4937BB22B5D022008EA659 /* QAHelper */ = {
 			isa = PBXGroup;
 			children = (
+				E9B084F522CC9AE500FDF797 /* Victory.png */,
+				E9B084F622CC9AE600FDF797 /* Failed.png */,
 				E9B084EF22CB82C700FDF797 /* background.png */,
 				E9B084EB22CB7BB000FDF797 /* About.png */,
 				E9B084E722CB787E00FDF797 /* START.png */,
@@ -347,6 +353,7 @@
 				8A94FE6B228A6111002E6F08 /* art.scnassets in Resources */,
 				E9B084F022CB82C800FDF797 /* background.png in Resources */,
 				E9B084E622CB785600FDF797 /* LOGO.png in Resources */,
+				E9B084F722CC9AE700FDF797 /* Victory.png in Resources */,
 				E9B084EC22CB7BB000FDF797 /* About.png in Resources */,
 				8A4937BF22B5D072008EA659 /* giphy.png in Resources */,
 				E9B084E822CB787E00FDF797 /* START.png in Resources */,
@@ -354,6 +361,7 @@
 				8A94FE72228A6112002E6F08 /* Assets.xcassets in Resources */,
 				8A4937C022B5D072008EA659 /* giphy.gif in Resources */,
 				8A4937C522B5D6A3008EA659 /* FailedSound.mp3 in Resources */,
+				E9B084F822CC9AE700FDF797 /* Failed.png in Resources */,
 				8A94FE70228A6111002E6F08 /* Main.storyboard in Resources */,
 				8A4937C422B5D6A3008EA659 /* VictorySound.mp3 in Resources */,
 			);
