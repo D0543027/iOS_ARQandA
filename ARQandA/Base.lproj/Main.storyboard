@@ -76,6 +76,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BjI-pJ-163"/>
                     </view>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="presentation" id="CQS-5b-n6K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyA-1v-JqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -266,6 +269,6 @@
         <image name="giphy.png" width="1803" height="1800"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mDc-cM-YHl"/>
+        <segue reference="CQS-5b-n6K"/>
     </inferredMetricsTieBreakers>
 </document>
