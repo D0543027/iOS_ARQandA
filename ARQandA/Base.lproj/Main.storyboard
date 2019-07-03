@@ -71,14 +71,14 @@
                                 <rect key="frame" x="178" y="397" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="presentation" id="alU-ZC-5hF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BjI-pJ-163"/>
                     </view>
-                    <connections>
-                        <segue destination="BV1-FR-VrT" kind="presentation" id="CQS-5b-n6K"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyA-1v-JqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -265,6 +265,6 @@
         <image name="giphy.png" width="1803" height="1800"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CQS-5b-n6K"/>
+        <segue reference="mDc-cM-YHl"/>
     </inferredMetricsTieBreakers>
 </document>
