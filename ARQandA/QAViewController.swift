@@ -28,6 +28,9 @@ class QAViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
+        //隱藏victory和failed圖示
+        victory.isHidden = true
+        failed.isHidden = true
         
         // 讀取中，轉圈
         activityIndicator.center = self.view.center
@@ -148,11 +151,11 @@ class QAViewController: UIViewController {
     
     func BtnVictory() {
         audioPlayerV.play()
-        victory.isUserInteractionEnabled = true
+        victory.isHidden = false
     }
     func BtnFailed() {
         audioPlayerF.play();
-        failed.isUserInteractionEnabled = true
+        failed.isHidden = false
 
     }
     
@@ -160,7 +163,6 @@ class QAViewController: UIViewController {
     @IBOutlet weak var lb: UILabel!
     @IBOutlet weak var victory: UIImageView!
     @IBOutlet weak var failed: UIImageView!
-    
     @IBOutlet weak var ChoiceBtnLabel1: UIButton!
     @IBAction func ChoiceBtn1(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel1)
