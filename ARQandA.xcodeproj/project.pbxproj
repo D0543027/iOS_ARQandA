@@ -34,6 +34,7 @@
 		E9B084E822CB787E00FDF797 /* START.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084E722CB787E00FDF797 /* START.png */; };
 		E9B084EC22CB7BB000FDF797 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084EB22CB7BB000FDF797 /* About.png */; };
 		E9B084F022CB82C800FDF797 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084EF22CB82C700FDF797 /* background.png */; };
+		E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B084F322CC847800FDF797 /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		E9B084E722CB787E00FDF797 /* START.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = START.png; sourceTree = "<group>"; };
 		E9B084EB22CB7BB000FDF797 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
 		E9B084EF22CB82C700FDF797 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		E9B084F322CC847800FDF797 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		F34CF678C9DA0DE417577C36 /* Pods-ARQandAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandAUITests.debug.xcconfig"; path = "Target Support Files/Pods-ARQandAUITests/Pods-ARQandAUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,6 +193,7 @@
 				8A94FE6C228A6111002E6F08 /* ARViewController.swift */,
 				8A67012322B338A200C7A09E /* QAViewController.swift */,
 				8A69796F22B9DD16000FD70F /* LaunchViewController.swift */,
+				E9B084F322CC847800FDF797 /* MenuViewController.swift */,
 				8A4937BA22B5CF3B008EA659 /* ARHelpers */,
 				8A4937BB22B5D022008EA659 /* QAHelper */,
 				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
@@ -467,6 +470,7 @@
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */,
+				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
 				8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */,
 				8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */,

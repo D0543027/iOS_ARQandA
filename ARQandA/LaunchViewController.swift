@@ -34,5 +34,13 @@ class LaunchViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBOutlet weak var aboutBtn: UIButton!
+    @IBAction func about(_ sender: Any) {
+        
+    }
+    
+    @IBOutlet weak var startBtn: UIButton!
+    @IBAction func start(_ sender: Any) {
+        performSegue(withIdentifier: "ToMenu", sender: sender)
+    }
 }

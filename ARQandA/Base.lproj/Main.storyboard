@@ -26,16 +26,19 @@
                                 <rect key="frame" x="32" y="154" width="350" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cei-JA-gLD">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cei-JA-gLD">
                                 <rect key="frame" x="12" y="12" width="100" height="35"/>
                                 <state key="normal" image="About.png"/>
+                                <connections>
+                                    <action selector="about:" destination="cNd-bV-ZPi" eventType="touchUpInside" id="ovT-IF-ETR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZv-Sj-pHy">
                                 <rect key="frame" x="107" y="512" width="200" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="START.png"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="presentation" id="Ctj-zm-Pk7"/>
+                                    <action selector="start:" destination="cNd-bV-ZPi" eventType="touchUpInside" id="FkQ-8V-u7K"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -46,10 +49,37 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nzi-hF-uqp"/>
                     </view>
+                    <connections>
+                        <outlet property="aboutBtn" destination="Cei-JA-gLD" id="zXf-1e-yLS"/>
+                        <outlet property="startBtn" destination="ZZv-Sj-pHy" id="Isq-bC-SHV"/>
+                        <segue destination="yS4-0g-95t" kind="show" identifier="ToMenu" id="1Lv-SZ-BhM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3T-i5-gPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-249.27536231884059" y="13.858695652173914"/>
+            <point key="canvasLocation" x="-1104" y="-24"/>
+        </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="nww-Lb-QpL">
+            <objects>
+                <viewController id="yS4-0g-95t" userLabel="Menu View Controller" customClass="MenuViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PlQ-qB-4eE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9i-hb-AF3">
+                                <rect key="frame" x="178" y="397" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="BjI-pJ-163"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CyA-1v-JqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-306" y="-24"/>
         </scene>
         <!--AR View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -227,6 +257,6 @@
         <image name="giphy.png" width="1803" height="1800"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ctj-zm-Pk7"/>
+        <segue reference="RAa-CB-wSx"/>
     </inferredMetricsTieBreakers>
 </document>
