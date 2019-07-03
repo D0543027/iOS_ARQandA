@@ -77,7 +77,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://23f5b1b5.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://527a590e.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -153,10 +153,11 @@ class QAViewController: UIViewController {
         audioPlayerV.play()
         victory.isHidden = false
     }
+    
     func BtnFailed() {
         audioPlayerF.play();
         failed.isHidden = false
-
+ 
     }
     
     
@@ -166,25 +167,50 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel1: UIButton!
     @IBAction func ChoiceBtn1(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel1)
-        updateQuestion()
+        
+        //延遲1秒
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
+            self.victory.isHidden = true
+            self.failed.isHidden = true
+            
+            self.updateQuestion()
+        })
     }
     
     @IBOutlet weak var ChoiceBtnLabel2: UIButton!
     @IBAction func ChoiceBtn2(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel2)
-        updateQuestion()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
+            self.victory.isHidden = true
+            self.failed.isHidden = true
+            
+            self.updateQuestion()
+        })
     }
     
     @IBOutlet weak var ChoiceBtnLabel3: UIButton!
     @IBAction func ChoiceBtn3(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel3)
-        updateQuestion()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
+            self.victory.isHidden = true
+            self.failed.isHidden = true
+            
+            self.updateQuestion()
+        })
     }
     
     @IBOutlet weak var ChoiceBtnLabel4: UIButton!
     @IBAction func ChoiceBtn4(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel4)
-        updateQuestion()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
+            self.victory.isHidden = true
+            self.failed.isHidden = true
+            
+            self.updateQuestion()
+        })
     }
     
     
