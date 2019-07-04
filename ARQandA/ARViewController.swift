@@ -14,7 +14,6 @@ import Vision
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var scoreText: UITextView!
     
     let yolo = YOLO()
     var request: VNCoreMLRequest!
@@ -27,17 +26,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var currentBuffer: CVPixelBuffer?
     
+    let score = UILabel(frame: CGRect(x: UIScreen.main.bounds.width - 90 , y: 30, width: 70, height: 70))
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        scoreText.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        scoreText.textAlignment = .center
+        
+        score.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        score.textColor = UIColor(white: 1, alpha: 1)
+        score.font = UIFont(name: "AthensClassic", size: 40)
+        score.textAlignment = .center
+        score.layer.masksToBounds = true
+        score.layer.cornerRadius = score.bounds.width / 2
+        view.addSubview(score)
         // Set the view's delegate
         sceneView.delegate = self
         sceneView.session.delegate = self
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = false
+        sceneView.showsStatistics = true
         
         // Create a new scene
         // let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -57,7 +63,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        scoreText.text = "\(getScore())"
+        score.text = "\(getScore())"
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         
@@ -263,12 +269,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 //let confidence = prediction.score * 100
                 //let color = colors[prediction.classIndex]
                 
-                addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: 45, height: 45),
-                          label:label,
-                          numberOfQuestion: n, indexOfObject: i)
                 
                 if rect.origin.x + rect.size.width / 2 <= UIScreen.main.bounds.width {
                     boundingBoxes[i].show(frame: rect, label: label, difficulty: d)
+                    addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: 45, height: 45),
+                              label:label,
+                              numberOfQuestion: n, indexOfObject: i)
+
                   }
             }
         }

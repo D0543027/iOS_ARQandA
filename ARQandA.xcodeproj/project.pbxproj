@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0748AAEC1AB1CE726A79A895 /* Pods_ARQandATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */; };
+		8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A48005A22CE2B910063B35F /* AthensClassic.ttf */; };
 		8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B022B5CDCC008EA659 /* YOLO.swift */; };
 		8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B122B5CDCC008EA659 /* Helpers.swift */; };
 		8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
@@ -70,6 +71,7 @@
 		0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7D9B81C523293D3D28E760 /* Pods-ARQandATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.debug.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.debug.xcconfig"; sourceTree = "<group>"; };
 		811E9209D473AE7DE4C43CAB /* Pods-ARQandAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandAUITests.release.xcconfig"; path = "Target Support Files/Pods-ARQandAUITests/Pods-ARQandAUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8A48005A22CE2B910063B35F /* AthensClassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthensClassic.ttf; sourceTree = "<group>"; };
 		8A4937B022B5CDCC008EA659 /* YOLO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLO.swift; sourceTree = "<group>"; };
 		8A4937B122B5CDCC008EA659 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		8A4937B222B5CDCC008EA659 /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		8A4937BA22B5CF3B008EA659 /* ARHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				8A48005A22CE2B910063B35F /* AthensClassic.ttf */,
 				8A4937B222B5CDCC008EA659 /* BoundingBox.swift */,
 				8A4937B122B5CDCC008EA659 /* Helpers.swift */,
 				8A4937B022B5CDCC008EA659 /* YOLO.swift */,
@@ -400,6 +403,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */,
 				8A4937C122B5D072008EA659 /* BlackBoard.jpg in Resources */,
 				E9B0853322CE171200FDF797 /* arrowBack.png in Resources */,
 				E9B0852C22CE006400FDF797 /* MenuBackground01.png in Resources */,
