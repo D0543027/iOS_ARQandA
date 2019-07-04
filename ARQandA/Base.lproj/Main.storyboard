@@ -67,48 +67,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xb1-eo-hcx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MenuBackground01.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xb1-eo-hcx">
+                                <rect key="frame" x="-97" y="-71" width="609" height="879"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9i-hb-AF3">
-                                <rect key="frame" x="105" y="143" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9i-hb-AF3">
+                                <rect key="frame" x="52" y="67" width="158" height="251"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="MenuButtonN01.png"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="presentation" id="alU-ZC-5hF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kyj-cJ-9NS">
-                                <rect key="frame" x="252" y="143" width="46" height="30"/>
+                                <rect key="frame" x="171" y="104" width="223" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="MenuButtonN02.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUp-9X-ytg">
-                                <rect key="frame" x="105" y="282" width="46" height="30"/>
+                                <rect key="frame" x="23" y="275" width="218" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="MenuButton03.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-4U-kRY">
-                                <rect key="frame" x="252" y="282" width="46" height="30"/>
+                                <rect key="frame" x="201" y="249" width="162" height="209"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uV-gE-lHy">
-                                <rect key="frame" x="105" y="412" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="MenuButton04.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUu-pb-sB8">
-                                <rect key="frame" x="252" y="412" width="46" height="30"/>
+                                <rect key="frame" x="28" y="450" width="182" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="MenuButton05.png"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bya-Ez-qoD">
-                                <rect key="frame" x="348" y="28" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uV-gE-lHy">
+                                <rect key="frame" x="175" y="421" width="188" height="247"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="MenuButtonN06.png"/>
                             </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VKx-ZR-PRP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem leftItemsSupplementBackButton="YES" id="B2g-wZ-wGF">
+                                        <barButtonItem key="leftBarButtonItem" image="arrowBack.png" id="ZKt-77-TzA">
+                                            <inset key="imageInsets" minX="-60" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <connections>
+                                                <segue destination="cNd-bV-ZPi" kind="presentation" id="7WA-HE-llu"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="info.png" id="5c0-s4-X9x">
+                                            <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="-5"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BjI-pJ-163"/>
@@ -293,10 +305,19 @@
         <image name="BlackBoard.jpg" width="1000" height="609"/>
         <image name="Failed.png" width="252" height="123"/>
         <image name="LOGO.png" width="1000" height="1000"/>
+        <image name="MenuBackground01.png" width="445" height="569"/>
+        <image name="MenuButton03.png" width="159" height="140"/>
+        <image name="MenuButton04.png" width="116" height="137"/>
+        <image name="MenuButton05.png" width="134" height="118"/>
+        <image name="MenuButtonN01.png" width="116" height="163"/>
+        <image name="MenuButtonN02.png" width="160" height="118"/>
+        <image name="MenuButtonN06.png" width="136" height="161"/>
         <image name="START.png" width="239" height="121"/>
         <image name="Victory.png" width="485" height="200"/>
+        <image name="arrowBack.png" width="128" height="128"/>
         <image name="background.png" width="1920" height="600"/>
         <image name="giphy.png" width="1803" height="1800"/>
+        <image name="info.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="alU-ZC-5hF"/>
