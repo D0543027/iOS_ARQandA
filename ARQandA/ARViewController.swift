@@ -17,7 +17,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     let yolo = YOLO()
     var request: VNCoreMLRequest!
-
+    
     
     var boundingBoxes = [BoundingBox]()
     
@@ -39,13 +39,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var backButtonWidth = 70
     var backButtonHeight = 70
     
-
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-   
+        
         // Set the view's delegate
         sceneView.delegate = self
         sceneView.session.delegate = self
@@ -78,7 +78,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Run the view's session
         sceneView.session.run(configuration)
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -219,7 +219,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.pre_MoveZ = self.new_MoveZ
         self.pre_RotateY = self.new_RotateY
     }
- 
+    
     func predictUsingVision(pixelBuffer: CVPixelBuffer) {
         /*
          let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
@@ -230,7 +230,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
          */
         
         let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
-
+        
         
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
         visionQueue.async {
@@ -243,7 +243,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
         }
     }
-
+    
     
     func visionRequestDidComplete(request: VNRequest, error: Error?) {
         if let observations = request.results as? [VNCoreMLFeatureValueObservation],
@@ -275,8 +275,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     private var label = ""
     private var Difficult_Number_Dict  = ["Easy" : "3",
-                               "Normal": "5",
-                               "Hard": "7"]
+                                          "Normal": "5",
+                                          "Hard": "7"]
     
     private var numberOfQuestionToSend = ""
     
@@ -287,7 +287,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 let prediction = predictions[i]
                 
                 let rect = scaledRect(rect: prediction.rect)
-        
+                
                 // Perdicted result
                 label = labels[prediction.classIndex]
                 let d = difficulty[label]!
@@ -302,8 +302,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: CGFloat(buttonWidth), height: CGFloat(buttonHeight)),
                               label:label,
                               numberOfQuestion: n, indexOfObject: i)
-
-                  }
+                    
+                }
             }
         }
     }
@@ -339,17 +339,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             newRect.origin.y = 0.0
         }
         
-        if newRect.origin.y >= 50 || newRect.origin.y <= 50 + backButton.bounds.height{
-            newRect.origin.y = 50 + backButton.bounds.height
+        if newRect.origin.y <= 50 + backButton.bounds.height{
+            if (newRect.origin.x <=  15 + backButton.bounds.width) || (newRect.origin.x >= UIScreen.main.bounds.width - CGFloat(scoreWidth) - 10)
+            {
+                newRect.origin.y = 50 + backButton.bounds.height
+            }
         }
         /*
-        if newRect.origin.x + newRect.size.width > UIScreen.main.bounds.width{
-            newRect.size.width = UIScreen.main.bounds.width - newRect.origin.x
-        }
-        if newRect.origin.y + newRect.size.height > UIScreen.main.bounds.height{
-            newRect.size.height = UIScreen.main.bounds.height - newRect.origin.y
-        }
- */
+         if newRect.origin.x + newRect.size.width > UIScreen.main.bounds.width{
+         newRect.size.width = UIScreen.main.bounds.width - newRect.origin.x
+         }
+         if newRect.origin.y + newRect.size.height > UIScreen.main.bounds.height{
+         newRect.size.height = UIScreen.main.bounds.height - newRect.origin.y
+         }
+         */
         return newRect
     }
     
