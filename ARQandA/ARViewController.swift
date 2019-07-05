@@ -34,29 +34,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var buttonHeight = 45
     var objectInfoWidth = 220
     var objectInfoHeight = 70
+    
+    let backButton = UIButton()
+    var backButtonWidth = 70
+    var backButtonHeight = 70
+    
+
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        // Set up score
-        // If device == iPad
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad{
-            scoreWidth = 120
-            scoreHeight = 120
-            buttonWidth = 70
-            buttonHeight = 70
-            objectInfoWidth = 300
-            objectInfoHeight = 100
-        }
-        
-        score = UILabel(frame: CGRect(x: Int(UIScreen.main.bounds.width) - scoreWidth - 10 , y: 50, width: scoreWidth , height: scoreHeight))
-        score.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
-        score.textColor = UIColor(white: 1, alpha: 1)
-        score.font = UIFont(name: "AthensClassic", size: 40)
-        score.textAlignment = .center
-        score.layer.masksToBounds = true
-        score.layer.cornerRadius = score.bounds.width / 2
-        view.addSubview(score)
+   
         // Set the view's delegate
         sceneView.delegate = self
         sceneView.session.delegate = self
@@ -68,9 +57,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Set the scene to the view
         //sceneView.scene = scene
-        
+        setUpScore()
+        setUpBackBtn()
         setUpBoundingBoxes()
         setUpVision()
+        
         
         for box in self.boundingBoxes {
             box.addToLayer(self.sceneView.layer)
@@ -97,36 +88,54 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.pause()
     }
     
-    
-    // MARK: - ARSCNViewDelegate
-    
-    /*
-     // Override to create and configure nodes for anchors added to the view's session.
-     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-     let node = SCNNode()
-     
-     return node
-     }
-     */
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
+    fileprivate func setUpScore() {
+        // Set up score
+        // If device == iPad
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad{
+            scoreWidth = 120
+            scoreHeight = 120
+            buttonWidth = 70
+            buttonHeight = 70
+            objectInfoWidth = 300
+            objectInfoHeight = 100
+            backButtonWidth = 120
+            backButtonHeight = 120
+        }
         
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
+        score = UILabel(frame: CGRect(x: Int(UIScreen.main.bounds.width) - scoreWidth - 10 , y: 50, width: scoreWidth , height: scoreHeight))
+        score.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        score.textColor = UIColor(white: 1, alpha: 1)
+        score.font = UIFont(name: "AthensClassic", size: CGFloat(scoreWidth / 2 + 10))
+        score.textAlignment = .center
+        score.layer.masksToBounds = true
+        score.layer.cornerRadius = score.bounds.width / 2
+        score.layer.zPosition = 1;
+        view.addSubview(score)
     }
     
     func getScore() -> Int{
         return UserDefaults.standard.integer(forKey: "score")
     }
+    
+    fileprivate func setUpBackBtn() {
+        backButton.frame = CGRect(x: 15, y: 50, width: backButtonWidth, height: backButtonHeight)
+        backButton.layer.cornerRadius = backButton.bounds.width / 2
+        backButton.setTitle("<", for: .normal)
+        backButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(backButtonWidth / 2 + 10))
+        backButton.contentHorizontalAlignment = .center
+        backButton.contentVerticalAlignment = .center
+        backButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        
+        backButton.addTarget(self, action: #selector(backToMenu), for: .touchUpInside)
+        backButton.layer.zPosition = 1;
+        view.addSubview(backButton)
+    }
+    
+    @objc func backToMenu(sender: UIButton){
+        dismiss(animated: true, completion: nil);
+    }
+    
     
     func setUpBoundingBoxes() {
         for _ in 0..<YOLO.maxBoundingBoxes {
@@ -330,6 +339,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             newRect.origin.y = 0.0
         }
         
+        if newRect.origin.y >= 50 || newRect.origin.y <= 50 + backButton.bounds.height{
+            newRect.origin.y = 50 + backButton.bounds.height
+        }
         /*
         if newRect.origin.x + newRect.size.width > UIScreen.main.bounds.width{
             newRect.size.width = UIScreen.main.bounds.width - newRect.origin.x
@@ -376,7 +388,34 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
+    // MARK: - ARSCNViewDelegate
+    
+    /*
+     // Override to create and configure nodes for anchors added to the view's session.
+     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+     let node = SCNNode()
+     
+     return node
+     }
+     */
+    
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        // Present an error message to the user
+        
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+        
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        
+    }
+    
 }
+
 
 class MyButton: UIButton{
     var label: String!
