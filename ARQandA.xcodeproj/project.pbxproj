@@ -17,8 +17,14 @@
 		8A4937C122B5D072008EA659 /* BlackBoard.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937BE22B5D071008EA659 /* BlackBoard.jpg */; };
 		8A4937C422B5D6A3008EA659 /* VictorySound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937C222B5D6A3008EA659 /* VictorySound.mp3 */; };
 		8A4937C522B5D6A3008EA659 /* FailedSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A4937C322B5D6A3008EA659 /* FailedSound.mp3 */; };
+		8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA022CF9974004F3774 /* TutorialViewController.swift */; };
+		8A514CA322CF9982004F3774 /* TutorialFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA222CF9982004F3774 /* TutorialFirstViewController.swift */; };
+		8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */; };
+		8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA622CF999D004F3774 /* TutorialThirdViewController.swift */; };
+		8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA822CF9A8C004F3774 /* TutorialPageViewController.swift */; };
 		8A67012422B338A200C7A09E /* QAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67012322B338A200C7A09E /* QAViewController.swift */; };
 		8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A69796F22B9DD16000FD70F /* LaunchViewController.swift */; };
+		8A74E5A622CF9BB200F77AD5 /* arrowBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A74E5A522CF9BB200F77AD5 /* arrowBack.png */; };
 		8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE68228A6111002E6F08 /* AppDelegate.swift */; };
 		8A94FE6B228A6111002E6F08 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE6A228A6111002E6F08 /* art.scnassets */; };
 		8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE6C228A6111002E6F08 /* ARViewController.swift */; };
@@ -79,7 +85,6 @@
 		E9B084F822CC9AE700FDF797 /* Failed.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084F622CC9AE600FDF797 /* Failed.png */; };
 		E9B0852A22CE006400FDF797 /* MenuButton04.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B0852322CE006000FDF797 /* MenuButton04.png */; };
 		E9B0853022CE006400FDF797 /* MenuButton03.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B0852922CE006300FDF797 /* MenuButton03.png */; };
-		E9D5E02A22CF6A4D00275D36 /* arrowBack.png in Resources */ = {isa = PBXBuildFile; fileRef = E9D5E02522CF6A4900275D36 /* arrowBack.png */; };
 		E9D5E02B22CF6A4D00275D36 /* MenuButtonEX02.png in Resources */ = {isa = PBXBuildFile; fileRef = E9D5E02622CF6A4A00275D36 /* MenuButtonEX02.png */; };
 		E9D5E02C22CF6A4D00275D36 /* MenuButtonEX05.png in Resources */ = {isa = PBXBuildFile; fileRef = E9D5E02722CF6A4B00275D36 /* MenuButtonEX05.png */; };
 		E9D5E02D22CF6A4D00275D36 /* MenuButtonEX01.png in Resources */ = {isa = PBXBuildFile; fileRef = E9D5E02822CF6A4C00275D36 /* MenuButtonEX01.png */; };
@@ -117,8 +122,14 @@
 		8A4937BE22B5D071008EA659 /* BlackBoard.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackBoard.jpg; sourceTree = "<group>"; };
 		8A4937C222B5D6A3008EA659 /* VictorySound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = VictorySound.mp3; sourceTree = "<group>"; };
 		8A4937C322B5D6A3008EA659 /* FailedSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FailedSound.mp3; sourceTree = "<group>"; };
+		8A514CA022CF9974004F3774 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		8A514CA222CF9982004F3774 /* TutorialFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFirstViewController.swift; sourceTree = "<group>"; };
+		8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSecondViewController.swift; sourceTree = "<group>"; };
+		8A514CA622CF999D004F3774 /* TutorialThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialThirdViewController.swift; sourceTree = "<group>"; };
+		8A514CA822CF9A8C004F3774 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		8A67012322B338A200C7A09E /* QAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAViewController.swift; sourceTree = "<group>"; };
 		8A69796F22B9DD16000FD70F /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		8A74E5A522CF9BB200F77AD5 /* arrowBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowBack.png; sourceTree = "<group>"; };
 		8A94FE65228A6111002E6F08 /* ARQandA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARQandA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A94FE68228A6111002E6F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A94FE6A228A6111002E6F08 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -186,7 +197,6 @@
 		E9B084F622CC9AE600FDF797 /* Failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Failed.png; sourceTree = "<group>"; };
 		E9B0852322CE006000FDF797 /* MenuButton04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButton04.png; sourceTree = "<group>"; };
 		E9B0852922CE006300FDF797 /* MenuButton03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButton03.png; sourceTree = "<group>"; };
-		E9D5E02522CF6A4900275D36 /* arrowBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowBack.png; path = "../../../../../Downloads/drive-download-20190705T111559Z-001/arrowBack.png"; sourceTree = "<group>"; };
 		E9D5E02622CF6A4A00275D36 /* MenuButtonEX02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButtonEX02.png; sourceTree = "<group>"; };
 		E9D5E02722CF6A4B00275D36 /* MenuButtonEX05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButtonEX05.png; sourceTree = "<group>"; };
 		E9D5E02822CF6A4C00275D36 /* MenuButtonEX01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButtonEX01.png; sourceTree = "<group>"; };
@@ -259,6 +269,18 @@
 			path = ARQandA/QAHelper;
 			sourceTree = SOURCE_ROOT;
 		};
+		8A514C9F22CF9922004F3774 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				8A514CA022CF9974004F3774 /* TutorialViewController.swift */,
+				8A514CA222CF9982004F3774 /* TutorialFirstViewController.swift */,
+				8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */,
+				8A514CA622CF999D004F3774 /* TutorialThirdViewController.swift */,
+				8A514CA822CF9A8C004F3774 /* TutorialPageViewController.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		8A94FE5C228A6111002E6F08 = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +312,7 @@
 				E9B084F322CC847800FDF797 /* MenuViewController.swift */,
 				8A4937BA22B5CF3B008EA659 /* ARHelpers */,
 				8A4937BB22B5D022008EA659 /* QAHelper */,
+				8A514C9F22CF9922004F3774 /* Tutorial */,
 				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
 				8A94FE6A228A6111002E6F08 /* art.scnassets */,
 				8A94FE6E228A6111002E6F08 /* Main.storyboard */,
@@ -357,7 +380,7 @@
 		E9B0852222CE003900FDF797 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				E9D5E02522CF6A4900275D36 /* arrowBack.png */,
+				8A74E5A522CF9BB200F77AD5 /* arrowBack.png */,
 				E9D5E02822CF6A4C00275D36 /* MenuButtonEX01.png */,
 				E9D5E02622CF6A4A00275D36 /* MenuButtonEX02.png */,
 				E9D5E02722CF6A4B00275D36 /* MenuButtonEX05.png */,
@@ -531,7 +554,6 @@
 				E9A79A8222CF36FE00295C53 /* background24.png in Resources */,
 				E9A79A8422CF36FE00295C53 /* background09.png in Resources */,
 				E9A79A9522CF36FE00295C53 /* background01.png in Resources */,
-				E9D5E02A22CF6A4D00275D36 /* arrowBack.png in Resources */,
 				8A4937C122B5D072008EA659 /* BlackBoard.jpg in Resources */,
 				E9A79A9622CF36FE00295C53 /* background08.png in Resources */,
 				E9A79AA222CF36FE00295C53 /* background38.png in Resources */,
@@ -561,6 +583,7 @@
 				E9A79A9B22CF36FE00295C53 /* background04.png in Resources */,
 				E9B0852A22CE006400FDF797 /* MenuButton04.png in Resources */,
 				E9A79A8922CF36FE00295C53 /* background19.png in Resources */,
+				8A74E5A622CF9BB200F77AD5 /* arrowBack.png in Resources */,
 				8A94FE75228A6112002E6F08 /* LaunchScreen.storyboard in Resources */,
 				8A94FE72228A6112002E6F08 /* Assets.xcassets in Resources */,
 				8A4937C022B5D072008EA659 /* giphy.gif in Resources */,
@@ -694,12 +717,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */,
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
+				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
+				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */,
+				8A514CA322CF9982004F3774 /* TutorialFirstViewController.swift in Sources */,
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
+				8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */,
 				8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */,
 				8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */,
 				8A67012422B338A200C7A09E /* QAViewController.swift in Sources */,
