@@ -22,9 +22,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="0gQ-E5-ADZ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="0gQ-E5-ADZ">
                                 <rect key="frame" x="32" y="154" width="350" height="350"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cei-JA-gLD">
                                 <rect key="frame" x="12" y="12" width="100" height="35"/>
@@ -33,9 +32,8 @@
                                     <action selector="about:" destination="cNd-bV-ZPi" eventType="touchUpInside" id="ovT-IF-ETR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZv-Sj-pHy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZv-Sj-pHy">
                                 <rect key="frame" x="107" y="512" width="200" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="START.png"/>
                                 <connections>
                                     <action selector="start:" destination="cNd-bV-ZPi" eventType="touchUpInside" id="FkQ-8V-u7K"/>
@@ -44,8 +42,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ZZv-Sj-pHy" firstAttribute="leading" secondItem="nzi-hF-uqp" secondAttribute="leading" constant="107" id="42Z-gJ-WYC"/>
+                            <constraint firstItem="nzi-hF-uqp" firstAttribute="bottom" secondItem="ZZv-Sj-pHy" secondAttribute="bottom" constant="124" id="BDA-zX-eDV"/>
+                            <constraint firstItem="nzi-hF-uqp" firstAttribute="trailing" secondItem="0gQ-E5-ADZ" secondAttribute="trailing" constant="32" id="Jnh-6t-qXq"/>
+                            <constraint firstItem="nzi-hF-uqp" firstAttribute="trailing" secondItem="ZZv-Sj-pHy" secondAttribute="trailing" constant="107" id="L1V-Id-5Jh"/>
+                            <constraint firstItem="ZZv-Sj-pHy" firstAttribute="top" secondItem="0gQ-E5-ADZ" secondAttribute="bottom" constant="8" id="Qhh-Wa-eGK"/>
                             <constraint firstItem="Cei-JA-gLD" firstAttribute="leading" secondItem="nzi-hF-uqp" secondAttribute="leading" constant="12" id="RaH-II-1PK"/>
+                            <constraint firstItem="nzi-hF-uqp" firstAttribute="bottom" secondItem="0gQ-E5-ADZ" secondAttribute="bottom" constant="232" id="Rq7-yg-ZI6"/>
+                            <constraint firstItem="0gQ-E5-ADZ" firstAttribute="top" secondItem="nzi-hF-uqp" secondAttribute="top" constant="134" id="TRU-48-19t"/>
                             <constraint firstItem="Cei-JA-gLD" firstAttribute="top" secondItem="6Pf-iO-kAX" secondAttribute="top" constant="12" id="cOd-Qi-hJt"/>
+                            <constraint firstItem="0gQ-E5-ADZ" firstAttribute="leading" secondItem="nzi-hF-uqp" secondAttribute="leading" constant="32" id="iaR-Wq-DFD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nzi-hF-uqp"/>
                     </view>

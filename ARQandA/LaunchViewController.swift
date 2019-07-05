@@ -58,6 +58,7 @@ class LaunchViewController: UIViewController {
         background.animationRepeatCount = 0
         background.startAnimating()
         self.view.addSubview(background)
+        self.view.sendSubviewToBack(background)
         // Do any additional setup after loading the view.
         FirstLaunch()
     }
