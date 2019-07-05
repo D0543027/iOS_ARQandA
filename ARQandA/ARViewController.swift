@@ -26,12 +26,30 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var currentBuffer: CVPixelBuffer?
     
-    let score = UILabel(frame: CGRect(x: UIScreen.main.bounds.width - 90 , y: 30, width: 70, height: 70))
-    
+    var score = UILabel()
+    // Default device == iPhone
+    var scoreWidth = 70
+    var scoreHeight = 70
+    var buttonWidth = 45
+    var buttonHeight = 45
+    var objectInfoWidth = 220
+    var objectInfoHeight = 70
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        // Set up score
+        // If device == iPad
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad{
+            scoreWidth = 120
+            scoreHeight = 120
+            buttonWidth = 70
+            buttonHeight = 70
+            objectInfoWidth = 300
+            objectInfoHeight = 100
+        }
+        
+        score = UILabel(frame: CGRect(x: Int(UIScreen.main.bounds.width) - scoreWidth - 10 , y: 50, width: scoreWidth , height: scoreHeight))
         score.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
         score.textColor = UIColor(white: 1, alpha: 1)
         score.font = UIFont(name: "AthensClassic", size: 40)
@@ -272,7 +290,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 
                 if rect.origin.x + rect.size.width / 2 <= UIScreen.main.bounds.width {
                     boundingBoxes[i].show(frame: rect, label: label, difficulty: d)
-                    addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: 45, height: 45),
+                    addButton(frame: CGRect(x:rect.origin.x + 5, y: rect.origin.y + 5, width: CGFloat(buttonWidth), height: CGFloat(buttonHeight)),
                               label:label,
                               numberOfQuestion: n, indexOfObject: i)
 
@@ -301,8 +319,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         newRect.origin.y += top
         //newRect.size.width *= scaleX
         //newRect.size.height *= scaleY
-        newRect.size.width = 220
-        newRect.size.height = 70
+        newRect.size.width = CGFloat(objectInfoWidth)
+        newRect.size.height = CGFloat(objectInfoHeight)
         
         
         if newRect.origin.x < 0.0 {
