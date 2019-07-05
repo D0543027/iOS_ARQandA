@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0748AAEC1AB1CE726A79A895 /* Pods_ARQandATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */; };
+		8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A00394922CFA306007E936D /* OptionTableViewController.swift */; };
 		8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A48005A22CE2B910063B35F /* AthensClassic.ttf */; };
 		8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B022B5CDCC008EA659 /* YOLO.swift */; };
 		8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B122B5CDCC008EA659 /* Helpers.swift */; };
@@ -113,6 +114,7 @@
 		0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7D9B81C523293D3D28E760 /* Pods-ARQandATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.debug.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.debug.xcconfig"; sourceTree = "<group>"; };
 		811E9209D473AE7DE4C43CAB /* Pods-ARQandAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandAUITests.release.xcconfig"; path = "Target Support Files/Pods-ARQandAUITests/Pods-ARQandAUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8A00394922CFA306007E936D /* OptionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
 		8A48005A22CE2B910063B35F /* AthensClassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthensClassic.ttf; sourceTree = "<group>"; };
 		8A4937B022B5CDCC008EA659 /* YOLO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLO.swift; sourceTree = "<group>"; };
 		8A4937B122B5CDCC008EA659 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -245,6 +247,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8A00394822CFA198007E936D /* Option */ = {
+			isa = PBXGroup;
+			children = (
+				8A00394922CFA306007E936D /* OptionTableViewController.swift */,
+				8A514C9F22CF9922004F3774 /* Tutorial */,
+			);
+			path = Option;
+			sourceTree = "<group>";
+		};
 		8A4937BA22B5CF3B008EA659 /* ARHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,7 +323,7 @@
 				E9B084F322CC847800FDF797 /* MenuViewController.swift */,
 				8A4937BA22B5CF3B008EA659 /* ARHelpers */,
 				8A4937BB22B5D022008EA659 /* QAHelper */,
-				8A514C9F22CF9922004F3774 /* Tutorial */,
+				8A00394822CFA198007E936D /* Option */,
 				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
 				8A94FE6A228A6111002E6F08 /* art.scnassets */,
 				8A94FE6E228A6111002E6F08 /* Main.storyboard */,
@@ -727,6 +738,7 @@
 				8A514CA322CF9982004F3774 /* TutorialFirstViewController.swift in Sources */,
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
+				8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */,
 				8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */,
 				8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */,
 				8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */,

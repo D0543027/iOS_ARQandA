@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cNd-bV-ZPi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yS4-0g-95t">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -65,6 +65,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3T-i5-gPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1104.3478260869565" y="-24.456521739130437"/>
+        </scene>
+        <!--Option Table View Controller-->
+        <scene sceneID="UcG-xB-l8z">
+            <objects>
+                <viewController id="qcs-DB-xq2" customClass="OptionTableViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uMO-A6-aup">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Am-B1-1yJ">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Xbc-dH-Cxv">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xbc-dH-Cxv" id="Vw7-tZ-RIk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="qcs-DB-xq2" id="EIf-35-p3b"/>
+                                    <outlet property="delegate" destination="qcs-DB-xq2" id="43k-nj-iY5"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JGs-Ap-8Zm" firstAttribute="bottom" secondItem="7Am-B1-1yJ" secondAttribute="bottom" id="6mk-WW-uiv"/>
+                            <constraint firstItem="7Am-B1-1yJ" firstAttribute="top" secondItem="JGs-Ap-8Zm" secondAttribute="top" id="Ezz-27-Ns5"/>
+                            <constraint firstItem="JGs-Ap-8Zm" firstAttribute="trailing" secondItem="7Am-B1-1yJ" secondAttribute="trailing" id="V1N-e1-acg"/>
+                            <constraint firstItem="7Am-B1-1yJ" firstAttribute="leading" secondItem="JGs-Ap-8Zm" secondAttribute="leading" id="tr2-iG-EKr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JGs-Ap-8Zm"/>
+                    </view>
+                    <connections>
+                        <segue destination="HIq-Xw-OvW" kind="presentation" identifier="Tutorial" id="wPc-YC-6Rf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cNn-iT-Gee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-881" y="730"/>
         </scene>
         <!--Tutorial View Controller-->
         <scene sceneID="0S3-m9-dgh">
@@ -141,6 +185,9 @@
                                 <rect key="frame" x="212" y="462" width="182" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MenuButtonEX06.png"/>
+                                <connections>
+                                    <segue destination="qcs-DB-xq2" kind="presentation" id="bvd-9S-36Y"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUp-9X-ytg">
                                 <rect key="frame" x="28" y="272" width="182" height="182"/>
@@ -449,7 +496,6 @@
         <image name="giphy.png" width="1803" height="1800"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Lv-SZ-BhM"/>
         <segue reference="alU-ZC-5hF"/>
     </inferredMetricsTieBreakers>
 </document>
