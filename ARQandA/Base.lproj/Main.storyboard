@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-4h-L18">
-                                <rect key="frame" x="-1397" y="0.0" width="1811" height="736"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-4h-L18">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="0gQ-E5-ADZ">
@@ -51,13 +51,14 @@
                     </view>
                     <connections>
                         <outlet property="aboutBtn" destination="Cei-JA-gLD" id="zXf-1e-yLS"/>
+                        <outlet property="background" destination="Utz-4h-L18" id="Acj-TD-Zy2"/>
                         <outlet property="startBtn" destination="ZZv-Sj-pHy" id="Isq-bC-SHV"/>
                         <segue destination="yS4-0g-95t" kind="show" identifier="ToMenu" id="1Lv-SZ-BhM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3T-i5-gPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1104" y="-24"/>
+            <point key="canvasLocation" x="-1104.3478260869565" y="-24.456521739130437"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="nww-Lb-QpL">
@@ -67,8 +68,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MenuBackground01.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xb1-eo-hcx">
-                                <rect key="frame" x="-97" y="-71" width="609" height="879"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1jV-tM-FOY">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9i-hb-AF3">
@@ -115,9 +116,6 @@
                                                 <segue destination="cNd-bV-ZPi" kind="presentation" id="7WA-HE-llu"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="info.png" id="5c0-s4-X9x">
-                                            <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="-5"/>
-                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -125,6 +123,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BjI-pJ-163"/>
                     </view>
+                    <connections>
+                        <outlet property="background" destination="1jV-tM-FOY" id="qDh-i1-ADX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyA-1v-JqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -297,7 +298,6 @@
         <image name="BlackBoard.jpg" width="1000" height="609"/>
         <image name="Failed.png" width="252" height="123"/>
         <image name="LOGO.png" width="1000" height="1000"/>
-        <image name="MenuBackground01.png" width="445" height="569"/>
         <image name="MenuButton03.png" width="159" height="140"/>
         <image name="MenuButton04.png" width="116" height="137"/>
         <image name="MenuButton05.png" width="134" height="118"/>
@@ -307,9 +307,7 @@
         <image name="START.png" width="239" height="121"/>
         <image name="Victory.png" width="485" height="200"/>
         <image name="arrowBack.png" width="128" height="128"/>
-        <image name="background.png" width="1920" height="600"/>
         <image name="giphy.png" width="1803" height="1800"/>
-        <image name="info.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="alU-ZC-5hF"/>
