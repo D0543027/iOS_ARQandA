@@ -32,7 +32,7 @@ class TutorialPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // 依 storyboard ID 生成 viewController 並加到要用來顯示 pageViewController 畫面的陣列裡
         self.viewControllerList.append(self.getViewController(withStoryboardID: "TutorialFirstViewController"))
         self.viewControllerList.append(self.getViewController(withStoryboardID: "TutorialSecondViewController"))

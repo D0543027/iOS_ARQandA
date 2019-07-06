@@ -121,7 +121,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jc9-jg-8cf">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <connections>
-                                    <segue destination="RGD-41-bGJ" kind="embed" id="OcW-Hs-2yn"/>
+                                    <segue destination="RGD-41-bGJ" kind="embed" id="t1t-0j-QhV"/>
                                 </connections>
                             </containerView>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qV3-HV-Kx3">
@@ -129,12 +129,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCT-rn-9Hf" userLabel="BtnToNextPage">
-                                <rect key="frame" x="175" y="648" width="62" height="48"/>
+                                <rect key="frame" x="191" y="648" width="30" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Start"/>
                                 <connections>
-                                    <action selector="switchToNextPage:" destination="HIq-Xw-OvW" eventType="touchUpInside" id="ACq-qu-8wd"/>
+                                    <action selector="switchPage:" destination="ZUa-Ib-HTm" eventType="touchUpInside" id="QKO-2M-MXw"/>
+                                    <action selector="switchPage:" destination="HIq-Xw-OvW" eventType="touchUpInside" id="em0-Hi-MvY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -153,6 +153,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1sh-j2-jvv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ZUa-Ib-HTm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="92.753623188405811" y="722.28260869565224"/>
         </scene>

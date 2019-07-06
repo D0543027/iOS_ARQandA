@@ -10,9 +10,7 @@ import UIKit
 
 class TutorialFirstViewController: UIViewController {
 
-    @IBAction func Start(_ sender: Any) {
-        
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

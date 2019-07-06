@@ -12,17 +12,15 @@ class TutorialViewController: UIViewController {
     
     @IBOutlet weak var btnToNextPage: UIButton!
     
-    @IBAction func switchToNextPage(_ sender: Any) {
-        if btnToNextPage.currentTitle == "End"{
-            dismiss(animated: true, completion: nil)
-        }
-        
-        
+    @IBAction func switchPage(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
+    
     @IBOutlet weak var pageControl: UIPageControl!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        btnToNextPage.isHidden = true
+        btnToNextPage.isEnabled = false
         // Do any additional setup after loading the view.
     }
     
@@ -59,18 +57,16 @@ extension TutorialViewController: PageViewControllerDelegate {
     ///   - pageIndex: _
     func pageViewController(_ pageViewController: TutorialPageViewController, didUpdatePageIndex pageIndex: Int) {
         self.pageControl.currentPage = pageIndex
-        
-        if pageIndex == 0 {
-            btnToNextPage.setTitle("Start", for: .normal)
-        }
-        else if pageIndex == self.pageControl.numberOfPages - 1{
+
+        if pageIndex == self.pageControl.numberOfPages - 1{
             btnToNextPage.setTitle("End", for: .normal)
+            btnToNextPage.isHidden = false
+            btnToNextPage.isEnabled = true
         }
         else{
-            btnToNextPage.setTitle("Next", for: .normal)
+            btnToNextPage.isHidden = true
+            btnToNextPage.isEnabled = false
         }
-
+    
     }
-    
-    
 }
