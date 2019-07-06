@@ -38,6 +38,9 @@
 		8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
+		E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */; };
+		E93D6C6222D0C65000CF15C4 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D6C6122D0C65000CF15C4 /* ProfileTableViewCell.swift */; };
+		E93D6C6522D0CBA400CF15C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */; };
 		E9A79A7D22CF36FE00295C53 /* background30.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5622CF36EC00295C53 /* background30.png */; };
 		E9A79A7E22CF36FE00295C53 /* background35.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5722CF36EC00295C53 /* background35.png */; };
 		E9A79A7F22CF36FE00295C53 /* background18.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5822CF36ED00295C53 /* background18.png */; };
@@ -151,6 +154,9 @@
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileBackground.jpg; sourceTree = "<group>"; };
+		E93D6C6122D0C65000CF15C4 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E9A79A5622CF36EC00295C53 /* background30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background30.png; path = backgroundGroup/background30.png; sourceTree = "<group>"; };
 		E9A79A5722CF36EC00295C53 /* background35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background35.png; path = backgroundGroup/background35.png; sourceTree = "<group>"; };
 		E9A79A5822CF36ED00295C53 /* background18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background18.png; path = backgroundGroup/background18.png; sourceTree = "<group>"; };
@@ -323,6 +329,7 @@
 				E9B084F322CC847800FDF797 /* MenuViewController.swift */,
 				8A4937BA22B5CF3B008EA659 /* ARHelpers */,
 				8A4937BB22B5D022008EA659 /* QAHelper */,
+				E93D6C6322D0C8CE00CF15C4 /* Profile */,
 				8A00394822CFA198007E936D /* Option */,
 				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
 				8A94FE6A228A6111002E6F08 /* art.scnassets */,
@@ -363,6 +370,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E93D6C6322D0C8CE00CF15C4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E93D6C6122D0C65000CF15C4 /* ProfileTableViewCell.swift */,
+				E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		E9B0852022CDFFB600FDF797 /* QA */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +407,7 @@
 		E9B0852222CE003900FDF797 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */,
 				8A74E5A522CF9BB200F77AD5 /* arrowBack.png */,
 				E9D5E02822CF6A4C00275D36 /* MenuButtonEX01.png */,
 				E9D5E02622CF6A4A00275D36 /* MenuButtonEX02.png */,
@@ -569,6 +586,7 @@
 				E9A79A9622CF36FE00295C53 /* background08.png in Resources */,
 				E9A79AA222CF36FE00295C53 /* background38.png in Resources */,
 				E9A79A7D22CF36FE00295C53 /* background30.png in Resources */,
+				E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */,
 				E9A79A8E22CF36FE00295C53 /* background22.png in Resources */,
 				E9A79A9122CF36FE00295C53 /* background13.png in Resources */,
 				E9A79A8022CF36FE00295C53 /* background02.png in Resources */,
@@ -735,8 +753,10 @@
 				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */,
+				E93D6C6522D0CBA400CF15C4 /* ProfileViewController.swift in Sources */,
 				8A514CA322CF9982004F3774 /* TutorialFirstViewController.swift in Sources */,
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
+				E93D6C6222D0C65000CF15C4 /* ProfileTableViewCell.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
 				8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */,
 				8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */,
