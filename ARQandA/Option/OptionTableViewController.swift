@@ -9,7 +9,7 @@
 import UIKit
 
 class OptionTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    let list = ["我","不","知","教學導覽","道"]
+    let list = ["我","不","知","教學導覽","分享給好友"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
@@ -25,8 +25,21 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 3{
-            performSegue(withIdentifier: "Tutorial", sender: self)
+        switch indexPath.row{
+        case 3:
+            if let tutorialController = storyboard?.instantiateViewController(withIdentifier: String(describing: TutorialViewController.self)) as? TutorialViewController{
+                present(tutorialController, animated: true, completion: nil)
+            }
+            break
+        case 4:
+            let text = "J個很好玩"
+            let image = UIImage(named: "LOGO.png")
+            let sharedAll = [text,image!] as[ Any]
+            let activityController = UIActivityViewController(activityItems: sharedAll, applicationActivities: nil)
+            activityController.popoverPresentationController?.sourceView = self.view
+            present(activityController, animated: true, completion: nil)
+        default:
+            break
         }
     }
     

@@ -43,6 +43,7 @@ class TutorialPageViewController: UIPageViewController {
         
         // 設定 pageViewControoler 的首頁
         self.setViewControllers([self.viewControllerList.first!], direction: .forward, animated: true, completion: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
