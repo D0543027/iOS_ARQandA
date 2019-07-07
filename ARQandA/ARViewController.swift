@@ -114,7 +114,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func getScore() -> Int{
-        return UserDefaults.standard.integer(forKey: "score")
+        return UserDefaults.standard.integer(forKey: "right")
     }
     
     fileprivate func setUpBackBtn() {

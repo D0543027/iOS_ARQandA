@@ -69,6 +69,7 @@ class ProfileViewController: UIViewController {
         cell.onceHScoreLb.text = String(statusList[5])
         return cell
     }
+ 
     /*
     // MARK: - Navigation
 

@@ -9,6 +9,9 @@
 import UIKit
 
 class OptionTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+   
+    @IBOutlet weak var btnBackToMenu: UIButton!
+    
     let list = [["我"],
                 ["不"],
                 ["知"],
@@ -17,6 +20,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnBackToMenu.bounds.size.width = 44
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
