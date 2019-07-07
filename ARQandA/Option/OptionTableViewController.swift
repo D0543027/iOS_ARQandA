@@ -9,7 +9,10 @@
 import UIKit
 
 class OptionTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    let list = ["我","不","知","教學導覽","分享給好友"]
+    let list = [["我"],
+                ["不"],
+                ["知"],
+                ["教學導覽","分享給好友"]]
     
     
     override func viewDidLoad() {
@@ -17,40 +20,52 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return list[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        let t = list[indexPath.row]
-        cell.textLabel?.text = "\(t) Section: \(indexPath.section) row: \(indexPath.row)"
+        cell.textLabel?.text = list[indexPath.section][indexPath.row]
+        
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return list.count
+        
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = "Header"
-        return label
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "123"
     }
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row{
-        case 3:
-            if let tutorialController = storyboard?.instantiateViewController(withIdentifier: String(describing: TutorialViewController.self)) as? TutorialViewController{
-                present(tutorialController, animated: true, completion: nil)
-            }
+        switch indexPath.section{
+        case 0: 
             break
-        case 4:
-            let text = "J個很好玩"
-            let image = UIImage(named: "LOGO.png")
-            let sharedAll = [text,image!] as[ Any]
-            let activityController = UIActivityViewController(activityItems: sharedAll, applicationActivities: nil)
-            activityController.popoverPresentationController?.sourceView = self.view
-            present(activityController, animated: true, completion: nil)
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            switch indexPath.row{
+            case 0:
+                if let tutorialController = storyboard?.instantiateViewController(withIdentifier: String(describing: TutorialViewController.self)) as? TutorialViewController{
+                    present(tutorialController, animated: true, completion: nil)
+                }
+                break
+            case 1:
+                let text = "J個很好玩"
+                let image = UIImage(named: "LOGO.png")
+                let sharedAll = [text,image!] as[ Any]
+                let activityController = UIActivityViewController(activityItems: sharedAll, applicationActivities: nil)
+                activityController.popoverPresentationController?.sourceView = self.view
+                present(activityController, animated: true, completion: nil)
+                break
+            default:
+                break
+            }
         default:
             break
         }
