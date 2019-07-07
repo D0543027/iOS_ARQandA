@@ -13,7 +13,7 @@ import Alamofire
 import SwiftyJSON
 
 class QAViewController: UIViewController {
-    let score = UserDefaults.standard.integer(forKey: "score") // 單次分數
+    var score = 0               // 單次分數
     var label = ""              // 物件名稱
     var numberOfQuestion = ""   // 題數
     
@@ -113,9 +113,6 @@ class QAViewController: UIViewController {
                 UserDefaults.standard.set(highScore = score, forKey: "highScore")
                 UserDefaults.standard.synchronize()
             }
-            //結算後歸零分數
-            UserDefaults.standard.set(score * 0, forKey: "score")
-            UserDefaults.standard.synchronize()
             // 設延遲(2 sec)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2) , execute: {
                 self.dismiss(animated: true, completion: nil)
@@ -142,8 +139,7 @@ class QAViewController: UIViewController {
         if RightAnswer == button.currentTitle{
             BtnVictory()
             //答對分數++
-            UserDefaults.standard.set(score + 1, forKey: "score")
-            UserDefaults.standard.synchronize()
+            score = score + 1
             //總答對數++
             let rightCount = UserDefaults.standard.integer(forKey: "right")
             UserDefaults.standard.set(rightCount + 1, forKey: "right")

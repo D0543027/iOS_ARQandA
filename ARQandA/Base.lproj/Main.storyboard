@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-4h-L18">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="0gQ-E5-ADZ">
                                 <rect key="frame" x="32" y="154" width="350" height="350"/>
                             </imageView>
@@ -35,10 +39,6 @@
                                     <action selector="start:" destination="cNd-bV-ZPi" eventType="touchUpInside" id="FkQ-8V-u7K"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-4h-L18">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -530,8 +530,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="0dB-wy-epn" id="5TY-kh-qgE"/>
-                                    <outlet property="delegate" destination="0dB-wy-epn" id="YoX-8k-c0y"/>
+                                    <outlet property="dataSource" destination="0dB-wy-epn" id="kIY-M9-ZBr"/>
+                                    <outlet property="delegate" destination="0dB-wy-epn" id="VN1-pO-dcy"/>
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6i-AX-Akn">
@@ -840,6 +840,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="alU-ZC-5hF"/>
-        <segue reference="M9J-3j-TJO"/>
+        <segue reference="1Lv-SZ-BhM"/>
     </inferredMetricsTieBreakers>
 </document>

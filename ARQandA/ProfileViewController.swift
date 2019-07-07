@@ -8,25 +8,42 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-    var statusName = ""
-    var statusDate = ""
-    var statusList = [0,0,0,0,0,0]
+class ProfileViewController: UIViewController ,UITableViewDataSource{
     let right = UserDefaults.standard.integer(forKey: "right")
     let wrong = UserDefaults.standard.integer(forKey: "wrong")
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        statusName = ""
-        statusDate = ""
-        statusList[0] = 0
-        statusList[1] = right + wrong
-        statusList[2] = right
-        statusList[3] = wrong
-        statusList[4] = Int(statusList[3]/statusList[2])
-        statusList[5] = UserDefaults.standard.integer(forKey: "highScore")
-        // Do any additional setup after loading the view.
+    var list = ["",
+                "",
+                String(0),
+                String(right + wrong),
+                String(right),
+                String(wrong),
+                String(Int(right/(right + wrong))),
+                String(UserDefaults.standard.integer(forKey: "highScore"))]
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return list.count
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "name", for: indexPath) as? ProfileTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.nameLb.text = list[0]
+        cell.beginDateLb.text = list[1]
+        cell.dayCountLb.text = list[2]
+        cell.totalLb.text = list[3]
+        cell.rightLb.text = list[4]
+        cell.wrongLb.text = list[5]
+        cell.accuracyLb.text = list[6]
+        cell.onceHScoreLb.text = list[7]
+        return cell
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+/*
     func tableView1(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
         let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "name")
         cell.nameLb.text = statusName
@@ -69,7 +86,7 @@ class ProfileViewController: UIViewController {
         cell.onceHScoreLb.text = String(statusList[5])
         return cell
     }
- 
+ */
     /*
     // MARK: - Navigation
 
