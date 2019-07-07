@@ -63,10 +63,26 @@ class LaunchViewController: UIViewController {
         FirstLaunch()
     }
     
-    // 第一次開啟APP，創建一個儲存空間用來儲存分數，Key為score，值為0
+    // 第一次開啟APP，創建儲存空間，值為0
     func FirstLaunch(){
+        //記錄單次分數（答對數）
         if UserDefaults.standard.object(forKey: "score") == nil{
             UserDefaults.standard.set(0, forKey: "score")
+            UserDefaults.standard.synchronize()
+        }
+        //記錄最高分數
+        if UserDefaults.standard.object(forKey: "highScore") == nil{
+            UserDefaults.standard.set(0, forKey: "highScore")
+            UserDefaults.standard.synchronize()
+        }
+        //記錄總答錯數
+        if UserDefaults.standard.object(forKey: "wrong") == nil{
+            UserDefaults.standard.set(0, forKey: "wrong")
+            UserDefaults.standard.synchronize()
+        }
+        //記錄總答對數
+        if UserDefaults.standard.object(forKey: "right") == nil{
+            UserDefaults.standard.set(0, forKey: "right")
             UserDefaults.standard.synchronize()
         }
     }

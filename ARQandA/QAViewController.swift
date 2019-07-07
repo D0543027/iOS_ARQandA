@@ -13,7 +13,7 @@ import Alamofire
 import SwiftyJSON
 
 class QAViewController: UIViewController {
-    
+    let score = UserDefaults.standard.integer(forKey: "score") // 單次分數
     var label = ""              // 物件名稱
     var numberOfQuestion = ""   // 題數
     
@@ -107,6 +107,15 @@ class QAViewController: UIViewController {
             ChoiceBtnLabel2.isEnabled = false
             ChoiceBtnLabel3.isEnabled = false
             ChoiceBtnLabel4.isEnabled = false
+            //更新最高分數
+            var highScore = UserDefaults.standard.integer(forKey: "highScore")
+            if highScore < score {
+                UserDefaults.standard.set(highScore = score, forKey: "highScore")
+                UserDefaults.standard.synchronize()
+            }
+            //結算後歸零分數
+            UserDefaults.standard.set(score * 0, forKey: "score")
+            UserDefaults.standard.synchronize()
             // 設延遲(2 sec)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2) , execute: {
                 self.dismiss(animated: true, completion: nil)
@@ -132,13 +141,20 @@ class QAViewController: UIViewController {
         
         if RightAnswer == button.currentTitle{
             BtnVictory()
-            
             //答對分數++
-            let score = UserDefaults.standard.integer(forKey: "score")
             UserDefaults.standard.set(score + 1, forKey: "score")
-            UserDefaults.standard.synchronize() //這行一定要加，不然不會存回去
+            UserDefaults.standard.synchronize()
+            //總答對數++
+            let rightCount = UserDefaults.standard.integer(forKey: "right")
+            UserDefaults.standard.set(rightCount + 1, forKey: "right")
+            UserDefaults.standard.synchronize()
         } else {
             BtnFailed()
+            
+            //總答錯數++
+            let countWrong = UserDefaults.standard.integer(forKey: "wrong")
+            UserDefaults.standard.set(countWrong + 1, forKey: "wrong")
+            UserDefaults.standard.synchronize()
         }
     }
     
