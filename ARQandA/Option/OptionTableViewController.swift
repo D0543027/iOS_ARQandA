@@ -11,17 +11,30 @@ import UIKit
 class OptionTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     let list = ["我","不","知","教學導覽","分享給好友"]
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = list[indexPath.row]
-        return cell
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return list.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let t = list[indexPath.row]
+        cell.textLabel?.text = "\(t) Section: \(indexPath.section) row: \(indexPath.row)"
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Header"
+        return label
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -41,7 +54,6 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         default:
             break
         }
-    }
-    
+    }    
     
 }
