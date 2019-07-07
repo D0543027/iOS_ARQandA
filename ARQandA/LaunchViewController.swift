@@ -101,6 +101,17 @@ class LaunchViewController: UIViewController {
             UserDefaults.standard.set(1, forKey: "playDate")
             UserDefaults.standard.synchronize()
         }
+        
+        if UserDefaults.standard.object(forKey: "currentDate") == nil{
+            let currentDate = Date()
+            let dataFormatter = DateFormatter()
+            dataFormatter.locale = Locale(identifier: "zh_Hant_TW")
+            dataFormatter.dateFormat = "YYYY-MM-dd"
+            let stringDate = dataFormatter.string(from: currentDate)
+            UserDefaults.standard.set(stringDate, forKey: "currentDate")
+            UserDefaults.standard.synchronize()
+        }
+        
         if UserDefaults.standard.object(forKey: "total") == nil{
             UserDefaults.standard.set(0, forKey: "total")
             UserDefaults.standard.synchronize()
@@ -113,18 +124,20 @@ class LaunchViewController: UIViewController {
     }
     
     func updatePlayDate(){
-        let currentDate = Date()
+        let today = Date()
         let dataFormatter = DateFormatter()
         dataFormatter.locale = Locale(identifier: "zh_Hant_TW")
         dataFormatter.dateFormat = "YYYY-MM-dd"
-        let strCurrentDate = dataFormatter.string(from: currentDate)
+        let currentDate = dataFormatter.string(from: today)
         
-        let startDate = UserDefaults.standard.string(forKey: "startDate")
+        let savedCurrentDate = UserDefaults.standard.string(forKey: "currentDate")
         var playDate = UserDefaults.standard.integer(forKey: "playDate")
+ 
         
-        if strCurrentDate != startDate{
+        if currentDate != savedCurrentDate{
             playDate = playDate + 1
             UserDefaults.standard.set(playDate,forKey: "playDate")
+            UserDefaults.standard.set(currentDate,forKey: "currentDate")
             UserDefaults.standard.synchronize()
         }
     }
