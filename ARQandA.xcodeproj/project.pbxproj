@@ -38,7 +38,6 @@
 		8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
-		E90419D222D1B6AB00AF90D6 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90419D122D1B6AB00AF90D6 /* ProfileTableViewCell.swift */; };
 		E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */; };
 		E93D6C6522D0CBA400CF15C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */; };
 		E9A79A7D22CF36FE00295C53 /* background30.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5622CF36EC00295C53 /* background30.png */; };
@@ -154,7 +153,6 @@
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E90419D122D1B6AB00AF90D6 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileBackground.jpg; sourceTree = "<group>"; };
 		E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E9A79A5622CF36EC00295C53 /* background30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background30.png; path = backgroundGroup/background30.png; sourceTree = "<group>"; };
@@ -373,7 +371,6 @@
 		E93D6C6322D0C8CE00CF15C4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E90419D122D1B6AB00AF90D6 /* ProfileTableViewCell.swift */,
 				E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */,
 			);
 			name = Profile;
@@ -748,7 +745,6 @@
 			files = (
 				8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */,
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
-				E90419D222D1B6AB00AF90D6 /* ProfileTableViewCell.swift in Sources */,
 				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
 				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,

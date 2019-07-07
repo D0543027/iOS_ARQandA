@@ -61,10 +61,16 @@ class LaunchViewController: UIViewController {
         self.view.sendSubviewToBack(background)
         // Do any additional setup after loading the view.
         FirstLaunch()
+        updatePlayDate()
+        
     }
     
     // 第一次開啟APP，創建儲存空間，值為0
     func FirstLaunch(){
+        if UserDefaults.standard.object(forKey: "name") == nil{
+            UserDefaults.standard.set("NULL", forKey: "name")
+            UserDefaults.standard.synchronize()
+        }
         //記錄最高分數
         if UserDefaults.standard.object(forKey: "highScore") == nil{
             UserDefaults.standard.set(0, forKey: "highScore")
@@ -80,8 +86,48 @@ class LaunchViewController: UIViewController {
             UserDefaults.standard.set(0, forKey: "right")
             UserDefaults.standard.synchronize()
         }
-    }
+        
+        if UserDefaults.standard.object(forKey: "startDate") == nil{
+            let currentDate = Date()
+            let dataFormatter = DateFormatter()
+            dataFormatter.locale = Locale(identifier: "zh_Hant_TW")
+            dataFormatter.dateFormat = "YYYY-MM-dd"
+            let stringDate = dataFormatter.string(from: currentDate)
+            UserDefaults.standard.set(stringDate, forKey: "startDate")
+            UserDefaults.standard.synchronize()
+        }
+        
+        if UserDefaults.standard.object(forKey: "playDate") == nil{
+            UserDefaults.standard.set(1, forKey: "playDate")
+            UserDefaults.standard.synchronize()
+        }
+        if UserDefaults.standard.object(forKey: "total") == nil{
+            UserDefaults.standard.set(0, forKey: "total")
+            UserDefaults.standard.synchronize()
+        }
 
+        if UserDefaults.standard.object(forKey: "correctPercentage") == nil{
+            UserDefaults.standard.set(0, forKey: "correctPercentage")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    func updatePlayDate(){
+        let currentDate = Date()
+        let dataFormatter = DateFormatter()
+        dataFormatter.locale = Locale(identifier: "zh_Hant_TW")
+        dataFormatter.dateFormat = "YYYY-MM-dd"
+        let strCurrentDate = dataFormatter.string(from: currentDate)
+        
+        let startDate = UserDefaults.standard.string(forKey: "startDate")
+        var playDate = UserDefaults.standard.integer(forKey: "playDate")
+        
+        if strCurrentDate != startDate{
+            playDate = playDate + 1
+            UserDefaults.standard.set(playDate,forKey: "playDate")
+            UserDefaults.standard.synchronize()
+        }
+    }
     /*
     // MARK: - Navigation
 

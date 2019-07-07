@@ -77,7 +77,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://527a590e.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://5c5696c2.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -90,6 +90,7 @@ class QAViewController: UIViewController {
     
     private var index = 0
     private var RightAnswer: String? = ""
+    
     func updateQuestion(){
         
         // 答完題目
@@ -109,10 +110,14 @@ class QAViewController: UIViewController {
             ChoiceBtnLabel4.isEnabled = false
             //更新最高分數
             var highScore = UserDefaults.standard.integer(forKey: "highScore")
+            
             if highScore < score {
-                UserDefaults.standard.set(highScore = score, forKey: "highScore")
+                highScore = score
+                UserDefaults.standard.set(highScore, forKey: "highScore")
                 UserDefaults.standard.synchronize()
             }
+            
+            calculatePercentage()
             // 設延遲(2 sec)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2) , execute: {
                 self.dismiss(animated: true, completion: nil)
@@ -136,6 +141,8 @@ class QAViewController: UIViewController {
     
     func validAnswer(button: UIButton){
         
+        let total = UserDefaults.standard.integer(forKey: "total")
+        
         if RightAnswer == button.currentTitle{
             BtnVictory()
             //答對分數++
@@ -152,6 +159,21 @@ class QAViewController: UIViewController {
             UserDefaults.standard.set(countWrong + 1, forKey: "wrong")
             UserDefaults.standard.synchronize()
         }
+        
+        UserDefaults.standard.set(total + 1, forKey: "total")
+        UserDefaults.standard.synchronize()
+
+    }
+    
+    func calculatePercentage(){
+        let rightCount = UserDefaults.standard.integer(forKey: "right")
+        let total = UserDefaults.standard.integer(forKey: "total")
+        
+        let percentage = (Double(rightCount) / Double(total) ) * 100
+        let strPercentage = "\(String(format: "%.2f", percentage)) %"
+        UserDefaults.standard.set(strPercentage, forKey: "correctPercentage")
+        UserDefaults.standard.synchronize()
+
     }
     
     override func didReceiveMemoryWarning() {

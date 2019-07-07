@@ -8,93 +8,49 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController ,UITableViewDataSource{
-    let right = UserDefaults.standard.integer(forKey: "right")
-    let wrong = UserDefaults.standard.integer(forKey: "wrong")
-    var list = ["",
-                "",
-                String(0),
-                String(right + wrong),
-                String(right),
-                String(wrong),
-                String(Int(right/(right + wrong))),
-                String(UserDefaults.standard.integer(forKey: "highScore"))]
+class ProfileViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
-    }
+    let profileTitle = ["名字：",
+                   "開始遊玩日期：",
+                   "遊玩天數：",
+                   "回答總題數：",
+                   "答對數：",
+                   "答錯數：",
+                   "準確率：",
+                   "單次遊玩最高分： "]
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "name", for: indexPath) as? ProfileTableViewCell else {
-            return UITableViewCell()
-        }
-        cell.nameLb.text = list[0]
-        cell.beginDateLb.text = list[1]
-        cell.dayCountLb.text = list[2]
-        cell.totalLb.text = list[3]
-        cell.rightLb.text = list[4]
-        cell.wrongLb.text = list[5]
-        cell.accuracyLb.text = list[6]
-        cell.onceHScoreLb.text = list[7]
-        return cell
-    }
+    let profileData = [UserDefaults.standard.string(forKey: "name"),
+                       UserDefaults.standard.string(forKey: "startDate"),
+                       UserDefaults.standard.string(forKey: "playDate"),
+                       UserDefaults.standard.string(forKey: "total"),
+                       UserDefaults.standard.string(forKey: "right"),
+                       UserDefaults.standard.string(forKey: "wrong"),
+                       UserDefaults.standard.string(forKey: "correctPercentage"),
+                       UserDefaults.standard.string(forKey: "highScore")]
+    @IBOutlet weak var profile: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-/*
-    func tableView1(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "name")
-        cell.nameLb.text = statusName
-        return cell
-    }
-    func tableView2(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "beginDate")
-        cell.beginDateLb.text = statusDate
-        return cell
-    }
-    func tableView3(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "dayCount")
-        cell.dayCountLb.text = String(statusList[0])
-        return cell
-    }
-    func tableView4(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "total")
-        cell.totalLb.text = String(statusList[1])
-        return cell
-    }
-    func tableView5(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "right")
-        cell.rightLb.text = String(statusList[2])
-        return cell
-    }
-    func tableView6(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "wrong")
-        cell.wrongLb.text = String(statusList[3])
-        return cell
+        
+        profile.delegate = self
+        profile.dataSource = self
     }
     
-    func tableView7(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "accuracy")
-        cell.accuracyLb.text = String(statusList[4])
-        return cell
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return profileData.count
     }
     
-    func tableView8(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ProfileTableViewCell {
-        let cell = ProfileTableViewCell(style: .default, reuseIdentifier: "onceHScore")
-        cell.onceHScoreLb.text = String(statusList[5])
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        
+        cell.textLabel?.text = profileTitle[indexPath.row]
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+        
+        cell.detailTextLabel?.text = profileData[indexPath.row]
+        cell.detailTextLabel?.textColor = UIColor.blue
+        cell.detailTextLabel?.textAlignment = .right
+        cell.detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        
         return cell
     }
- */
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
