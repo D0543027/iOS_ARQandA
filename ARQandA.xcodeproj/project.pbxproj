@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0748AAEC1AB1CE726A79A895 /* Pods_ARQandATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */; };
 		8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A00394922CFA306007E936D /* OptionTableViewController.swift */; };
+		8A29A22B22D237570086A33E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A29A22A22D237570086A33E /* ProfileViewController.swift */; };
 		8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A48005A22CE2B910063B35F /* AthensClassic.ttf */; };
 		8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B022B5CDCC008EA659 /* YOLO.swift */; };
 		8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B122B5CDCC008EA659 /* Helpers.swift */; };
@@ -39,7 +40,6 @@
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 		E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */; };
-		E93D6C6522D0CBA400CF15C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */; };
 		E9A79A7D22CF36FE00295C53 /* background30.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5622CF36EC00295C53 /* background30.png */; };
 		E9A79A7E22CF36FE00295C53 /* background35.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5722CF36EC00295C53 /* background35.png */; };
 		E9A79A7F22CF36FE00295C53 /* background18.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5822CF36ED00295C53 /* background18.png */; };
@@ -117,6 +117,7 @@
 		4B7D9B81C523293D3D28E760 /* Pods-ARQandATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.debug.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.debug.xcconfig"; sourceTree = "<group>"; };
 		811E9209D473AE7DE4C43CAB /* Pods-ARQandAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandAUITests.release.xcconfig"; path = "Target Support Files/Pods-ARQandAUITests/Pods-ARQandAUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8A00394922CFA306007E936D /* OptionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
+		8A29A22A22D237570086A33E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Profile/ProfileViewController.swift; sourceTree = "<group>"; };
 		8A48005A22CE2B910063B35F /* AthensClassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthensClassic.ttf; sourceTree = "<group>"; };
 		8A4937B022B5CDCC008EA659 /* YOLO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLO.swift; sourceTree = "<group>"; };
 		8A4937B122B5CDCC008EA659 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -154,7 +155,6 @@
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileBackground.jpg; sourceTree = "<group>"; };
-		E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E9A79A5622CF36EC00295C53 /* background30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background30.png; path = backgroundGroup/background30.png; sourceTree = "<group>"; };
 		E9A79A5722CF36EC00295C53 /* background35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background35.png; path = backgroundGroup/background35.png; sourceTree = "<group>"; };
 		E9A79A5822CF36ED00295C53 /* background18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background18.png; path = backgroundGroup/background18.png; sourceTree = "<group>"; };
@@ -371,7 +371,7 @@
 		E93D6C6322D0C8CE00CF15C4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E93D6C6422D0CBA400CF15C4 /* ProfileViewController.swift */,
+				8A29A22A22D237570086A33E /* ProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -749,8 +749,8 @@
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
 				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
+				8A29A22B22D237570086A33E /* ProfileViewController.swift in Sources */,
 				8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */,
-				E93D6C6522D0CBA400CF15C4 /* ProfileViewController.swift in Sources */,
 				8A514CA322CF9982004F3774 /* TutorialFirstViewController.swift in Sources */,
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
