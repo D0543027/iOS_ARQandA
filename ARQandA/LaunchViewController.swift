@@ -137,6 +137,7 @@ class LaunchViewController: UIViewController {
         if currentDate != savedCurrentDate{
             playDate = playDate + 1
             UserDefaults.standard.set(playDate,forKey: "playDate")
+            UserDefaults.standard.synchronize()
             UserDefaults.standard.set(currentDate,forKey: "currentDate")
             UserDefaults.standard.synchronize()
         }
