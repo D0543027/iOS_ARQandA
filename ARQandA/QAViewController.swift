@@ -14,6 +14,8 @@ import SwiftyJSON
 
 class QAViewController: UIViewController {
     var score = 0               // 單次分數
+    var singleRight = 0         // 單次答對數
+    var singleWrong = 0         // 單次打錯數
     var label = ""              // 物件名稱
     var numberOfQuestion = ""   // 題數
     
@@ -28,6 +30,14 @@ class QAViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
+        //隱藏結算畫面物件
+        resultBackground.isHidden = true
+        resultBack.isHidden = true
+        back.isHidden = true
+        singleScoreLb.isHidden = true
+        singleRightLb.isHidden = true
+        singleWrongLb.isHidden = true
+        singleHighScoreLb.isHidden = true
         //隱藏victory和failed圖示
         victory.isHidden = true
         failed.isHidden = true
@@ -91,18 +101,41 @@ class QAViewController: UIViewController {
     private var index = 0
     private var RightAnswer: String? = ""
     
+    @IBOutlet weak var resultBackground: UIImageView!
+    @IBOutlet weak var resultBack: UIImageView!
+    @IBOutlet weak var back: UIButton!
+    @IBOutlet weak var singleScoreLb: UILabel!
+    @IBOutlet weak var singleRightLb: UILabel!
+    @IBOutlet weak var singleWrongLb: UILabel!
+    @IBOutlet weak var singleHighScoreLb: UILabel!
+    
     func updateQuestion(){
         
         // 答完題目
         if index == data!.count{
             print("Finish")
             // 答題結束畫面
-            lb.text = "Finish"
-            ChoiceBtnLabel1.setTitle("Finish", for: .normal)
-            ChoiceBtnLabel2.setTitle("Finish", for: .normal)
-            ChoiceBtnLabel3.setTitle("Finish", for: .normal)
-            ChoiceBtnLabel4.setTitle("Finish", for: .normal)
+            lb.text = ""
+            ChoiceBtnLabel1.setTitle("", for: .normal)
+            ChoiceBtnLabel2.setTitle("", for: .normal)
+            ChoiceBtnLabel3.setTitle("", for: .normal)
+            ChoiceBtnLabel4.setTitle("", for: .normal)
             
+            resultBackground.isHidden = false
+            resultBack.isHidden = false
+            back.isHidden = false
+            singleScoreLb.isHidden = false
+            singleRightLb.isHidden = false
+            singleWrongLb.isHidden = false
+            singleHighScoreLb.isHidden = false
+            
+            if score < 0{
+                score = 0
+            }
+            singleScoreLb.text = String(score)
+            singleRightLb.text = String(singleRight)
+            singleWrongLb.text = String(singleWrong)
+            singleHighScoreLb.text = UserDefaults.standard.string(forKey: "highScore")
             // 答完題 不得觸發選項(點選項不動作）
             ChoiceBtnLabel1.isEnabled = false
             ChoiceBtnLabel2.isEnabled = false
@@ -138,26 +171,31 @@ class QAViewController: UIViewController {
             index = index + 1
         }
     }
-    
+
     func validAnswer(button: UIButton){
         
         let total = UserDefaults.standard.integer(forKey: "total")
         
         if RightAnswer == button.currentTitle{
             BtnVictory()
-            //答對分數++
-            score = score + 1
+            //答對分數++（答對一題＋5分）
+            score = score + 5
             //總答對數++
             let rightCount = UserDefaults.standard.integer(forKey: "right")
             UserDefaults.standard.set(rightCount + 1, forKey: "right")
             UserDefaults.standard.synchronize()
+            
+            singleRight = singleRight + 1
         } else {
             BtnFailed()
-            
+            //答錯一題-3分
+            score = score - 3
             //總答錯數++
             let countWrong = UserDefaults.standard.integer(forKey: "wrong")
             UserDefaults.standard.set(countWrong + 1, forKey: "wrong")
             UserDefaults.standard.synchronize()
+            
+            singleWrong = singleWrong + 1
         }
         
         UserDefaults.standard.set(total + 1, forKey: "total")
