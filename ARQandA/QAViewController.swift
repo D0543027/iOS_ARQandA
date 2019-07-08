@@ -33,7 +33,6 @@ class QAViewController: UIViewController {
         //隱藏結算畫面物件
         resultBackground.isHidden = true
         resultBack.isHidden = true
-        back.isHidden = true
         singleScoreLb.isHidden = true
         singleRightLb.isHidden = true
         singleWrongLb.isHidden = true
@@ -123,7 +122,6 @@ class QAViewController: UIViewController {
             
             resultBackground.isHidden = false
             resultBack.isHidden = false
-            back.isHidden = false
             singleScoreLb.isHidden = false
             singleRightLb.isHidden = false
             singleWrongLb.isHidden = false
@@ -152,7 +150,7 @@ class QAViewController: UIViewController {
             
             calculatePercentage()
             // 設延遲(2 sec)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2) , execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5) , execute: {
                 self.dismiss(animated: true, completion: nil)
             })
             
