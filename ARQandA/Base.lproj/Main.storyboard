@@ -65,6 +65,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="逢甲大學資訊工程學系" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6x-4g-0R8">
+                                <rect key="frame" x="222" y="224" width="133" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="蔣聖訢,張介韋,李其准" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5X-f7-TAa">
                                 <rect key="frame" x="208" y="240" width="147" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -79,10 +86,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="逢甲大學資訊工程學系" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6x-4g-0R8">
-                                <rect key="frame" x="222" y="224" width="133" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="概述：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHc-20-TXD">
+                                <rect key="frame" x="60" y="266" width="62" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="        利用擴增實境(AR)辨認鏡頭即時拍攝的實體，產生當時與此實體相關的題目、互動地讓使用者選取有興趣的題目。隨著鏡頭的流轉與不同的啟動時間與座標，增加使用者與環境的互動性，革命性地改變手機問答類遊戲的遊玩方式。" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N8-I7-qJk">
+                                <rect key="frame" x="60" y="281" width="295" height="175"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -106,6 +120,13 @@
                         <outlet property="aboutBtn" destination="Cei-JA-gLD" id="zXf-1e-yLS"/>
                         <outlet property="background" destination="Utz-4h-L18" id="Acj-TD-Zy2"/>
                         <outlet property="closeBtn" destination="zZf-Cm-KRM" id="AUj-Jc-Ac1"/>
+                        <outlet property="info01" destination="Tok-p2-HD7" id="tOh-EG-GwU"/>
+                        <outlet property="info02" destination="4O5-K8-OUj" id="liT-Hx-9G9"/>
+                        <outlet property="info03" destination="GWH-ya-1o4" id="g9O-V7-Odr"/>
+                        <outlet property="info04" destination="e6x-4g-0R8" id="Cgf-ou-pkb"/>
+                        <outlet property="info05" destination="Z5X-f7-TAa" id="NIk-Pg-kca"/>
+                        <outlet property="info06" destination="qHc-20-TXD" id="obB-T5-wLA"/>
+                        <outlet property="info07" destination="2N8-I7-qJk" id="9ZR-3k-knI"/>
                         <outlet property="startBtn" destination="ZZv-Sj-pHy" id="Isq-bC-SHV"/>
                         <outlet property="textBox" destination="dcA-fj-op0" id="WJV-xf-S86"/>
                         <segue destination="yS4-0g-95t" kind="show" identifier="ToMenu" id="1Lv-SZ-BhM"/>

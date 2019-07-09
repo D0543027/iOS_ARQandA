@@ -63,6 +63,16 @@ class LaunchViewController: UIViewController {
         background.startAnimating()
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
+        
+        textBox.isHidden = false
+        info01.isHidden = false
+        info02.isHidden = false
+        info03.isHidden = false
+        info04.isHidden = false
+        info05.isHidden = false
+        info06.isHidden = false
+        info07.isHidden = false
+        closeBtn.isHidden = false
         // Do any additional setup after loading the view.
         FirstLaunch()
         updatePlayDate()
@@ -169,6 +179,14 @@ class LaunchViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBOutlet weak var info01: UILabel!
+    @IBOutlet weak var info02: UILabel!
+    @IBOutlet weak var info03: UILabel!
+    @IBOutlet weak var info04: UILabel!
+    @IBOutlet weak var info05: UILabel!
+    @IBOutlet weak var info06: UILabel!
+    @IBOutlet weak var info07: UILabel!
+    
     @IBOutlet weak var aboutBtn: UIButton!
     @IBAction func about(_ sender: Any) {
         audioPlayerEnter.play()
@@ -183,7 +201,15 @@ class LaunchViewController: UIViewController {
     @IBAction func close(_ sender: Any) {
         audioPlayerBack.play()
         textBox.isHidden = true
+        info01.isHidden = true
+        info02.isHidden = true
+        info03.isHidden = true
+        info04.isHidden = true
+        info05.isHidden = true
+        info06.isHidden = true
+        info07.isHidden = true
         closeBtn.isHidden = true
+        
         
     }
     @IBOutlet weak var textBox: UIImageView!
