@@ -189,6 +189,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MenuButtonEX01.png"/>
                                 <connections>
+                                    <action selector="single:" destination="yS4-0g-95t" eventType="touchUpInside" id="aRK-EU-VSv"/>
                                     <segue destination="BV1-FR-VrT" kind="presentation" id="alU-ZC-5hF"/>
                                 </connections>
                             </button>
@@ -196,17 +197,24 @@
                                 <rect key="frame" x="212" y="85" width="182" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MenuButtonEX02.png"/>
+                                <connections>
+                                    <action selector="multi:" destination="yS4-0g-95t" eventType="touchUpInside" id="BOk-gi-5Qx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-4U-kRY">
                                 <rect key="frame" x="212" y="272" width="182" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="button"/>
+                                <state key="normal" backgroundImage="MenuButtonEX04.png"/>
+                                <connections>
+                                    <action selector="friend:" destination="yS4-0g-95t" eventType="touchUpInside" id="cZ0-Qb-70l"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUu-pb-sB8">
                                 <rect key="frame" x="28" y="462" width="182" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MenuButtonEX05.png"/>
                                 <connections>
+                                    <action selector="profile:" destination="yS4-0g-95t" eventType="touchUpInside" id="w6m-3p-XM7"/>
                                     <segue destination="0dB-wy-epn" kind="presentation" id="I0V-4L-JtF"/>
                                 </connections>
                             </button>
@@ -215,6 +223,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MenuButtonEX06.png"/>
                                 <connections>
+                                    <action selector="option:" destination="yS4-0g-95t" eventType="touchUpInside" id="5XV-jj-Dnx"/>
                                     <segue destination="Wdn-r5-krr" kind="presentation" id="bvd-9S-36Y"/>
                                 </connections>
                             </button>
@@ -228,6 +237,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="arrowBack.png"/>
                                 <connections>
+                                    <action selector="back:" destination="yS4-0g-95t" eventType="touchUpInside" id="UhZ-4p-4sN"/>
                                     <segue destination="cNd-bV-ZPi" kind="presentation" id="OyQ-Zt-hR8"/>
                                 </connections>
                             </button>
@@ -262,6 +272,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="Item" image="arrowBack.png" id="8bj-Vd-gdT">
                                             <inset key="imageInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <connections>
+                                                <action selector="back:" destination="0dB-wy-epn" id="kWz-hE-T43"/>
                                                 <segue destination="yS4-0g-95t" kind="presentation" id="CS8-va-412"/>
                                             </connections>
                                         </barButtonItem>
@@ -662,6 +673,7 @@
         <image name="LOGO.png" width="1000" height="1000"/>
         <image name="MenuButtonEX01.png" width="211" height="206"/>
         <image name="MenuButtonEX02.png" width="211" height="206"/>
+        <image name="MenuButtonEX04.png" width="211" height="206"/>
         <image name="MenuButtonEX05.png" width="211" height="206"/>
         <image name="MenuButtonEX06.png" width="211" height="206"/>
         <image name="START.png" width="239" height="121"/>
@@ -672,8 +684,7 @@
         <image name="space.png" width="489" height="580"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bvd-9S-36Y"/>
-        <segue reference="mDc-cM-YHl"/>
-        <segue reference="M9J-3j-TJO"/>
+        <segue reference="alU-ZC-5hF"/>
+        <segue reference="1Lv-SZ-BhM"/>
     </inferredMetricsTieBreakers>
 </document>

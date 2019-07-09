@@ -40,6 +40,9 @@
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 		E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */; };
+		E945C2A422D4619F00157F64 /* MenuButtonEX04.png in Resources */ = {isa = PBXBuildFile; fileRef = E945C2A322D4619F00157F64 /* MenuButtonEX04.png */; };
+		E945C2A722D462C600157F64 /* enterSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E945C2A522D462C500157F64 /* enterSound.mp3 */; };
+		E945C2A822D462C600157F64 /* backSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E945C2A622D462C600157F64 /* backSound.mp3 */; };
 		E9A79A7D22CF36FE00295C53 /* background30.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5622CF36EC00295C53 /* background30.png */; };
 		E9A79A7E22CF36FE00295C53 /* background35.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5722CF36EC00295C53 /* background35.png */; };
 		E9A79A7F22CF36FE00295C53 /* background18.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A79A5822CF36ED00295C53 /* background18.png */; };
@@ -86,7 +89,6 @@
 		E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B084F322CC847800FDF797 /* MenuViewController.swift */; };
 		E9B084F722CC9AE700FDF797 /* Victory.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084F522CC9AE500FDF797 /* Victory.png */; };
 		E9B084F822CC9AE700FDF797 /* Failed.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B084F622CC9AE600FDF797 /* Failed.png */; };
-		E9B0852A22CE006400FDF797 /* MenuButton04.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B0852322CE006000FDF797 /* MenuButton04.png */; };
 		E9B0853022CE006400FDF797 /* MenuButton03.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B0852922CE006300FDF797 /* MenuButton03.png */; };
 		E9BF750A22D30B550013126D /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BF750922D30B540013126D /* back.png */; };
 		E9BF750D22D30B6D0013126D /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BF750B22D30B6C0013126D /* space.png */; };
@@ -158,6 +160,9 @@
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileBackground.jpg; sourceTree = "<group>"; };
+		E945C2A322D4619F00157F64 /* MenuButtonEX04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButtonEX04.png; sourceTree = "<group>"; };
+		E945C2A522D462C500157F64 /* enterSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = enterSound.mp3; sourceTree = "<group>"; };
+		E945C2A622D462C600157F64 /* backSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backSound.mp3; sourceTree = "<group>"; };
 		E9A79A5622CF36EC00295C53 /* background30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background30.png; path = backgroundGroup/background30.png; sourceTree = "<group>"; };
 		E9A79A5722CF36EC00295C53 /* background35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background35.png; path = backgroundGroup/background35.png; sourceTree = "<group>"; };
 		E9A79A5822CF36ED00295C53 /* background18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background18.png; path = backgroundGroup/background18.png; sourceTree = "<group>"; };
@@ -204,7 +209,6 @@
 		E9B084F322CC847800FDF797 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E9B084F522CC9AE500FDF797 /* Victory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Victory.png; sourceTree = "<group>"; };
 		E9B084F622CC9AE600FDF797 /* Failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Failed.png; sourceTree = "<group>"; };
-		E9B0852322CE006000FDF797 /* MenuButton04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButton04.png; sourceTree = "<group>"; };
 		E9B0852922CE006300FDF797 /* MenuButton03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButton03.png; sourceTree = "<group>"; };
 		E9BF750922D30B540013126D /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		E9BF750B22D30B6C0013126D /* space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = space.png; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 		8A94FE67228A6111002E6F08 /* ARQandA */ = {
 			isa = PBXGroup;
 			children = (
+				E945C2A622D462C600157F64 /* backSound.mp3 */,
+				E945C2A522D462C500157F64 /* enterSound.mp3 */,
 				8A94FE6C228A6111002E6F08 /* ARViewController.swift */,
 				8A67012322B338A200C7A09E /* QAViewController.swift */,
 				8A69796F22B9DD16000FD70F /* LaunchViewController.swift */,
@@ -413,6 +419,7 @@
 		E9B0852222CE003900FDF797 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				E945C2A322D4619F00157F64 /* MenuButtonEX04.png */,
 				E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */,
 				8A74E5A522CF9BB200F77AD5 /* arrowBack.png */,
 				E9D5E02822CF6A4C00275D36 /* MenuButtonEX01.png */,
@@ -420,7 +427,6 @@
 				E9D5E02722CF6A4B00275D36 /* MenuButtonEX05.png */,
 				E9D5E02922CF6A4C00275D36 /* MenuButtonEX06.png */,
 				E9B0852922CE006300FDF797 /* MenuButton03.png */,
-				E9B0852322CE006000FDF797 /* MenuButton04.png */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -584,6 +590,7 @@
 				E9A79A8F22CF36FE00295C53 /* background10.png in Resources */,
 				E9A79A9322CF36FE00295C53 /* background03.png in Resources */,
 				8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */,
+				E945C2A422D4619F00157F64 /* MenuButtonEX04.png in Resources */,
 				E9A79A9F22CF36FE00295C53 /* background28.png in Resources */,
 				E9A79A8B22CF36FE00295C53 /* background27.png in Resources */,
 				E9A79A8222CF36FE00295C53 /* background24.png in Resources */,
@@ -618,12 +625,12 @@
 				8A4937BF22B5D072008EA659 /* giphy.png in Resources */,
 				E9B084E822CB787E00FDF797 /* START.png in Resources */,
 				E9A79A9B22CF36FE00295C53 /* background04.png in Resources */,
-				E9B0852A22CE006400FDF797 /* MenuButton04.png in Resources */,
 				E9A79A8922CF36FE00295C53 /* background19.png in Resources */,
 				E9BF750E22D30B6D0013126D /* 5a17a0fd2f675.png in Resources */,
 				8A74E5A622CF9BB200F77AD5 /* arrowBack.png in Resources */,
 				8A94FE75228A6112002E6F08 /* LaunchScreen.storyboard in Resources */,
 				8A94FE72228A6112002E6F08 /* Assets.xcassets in Resources */,
+				E945C2A722D462C600157F64 /* enterSound.mp3 in Resources */,
 				8A4937C022B5D072008EA659 /* giphy.gif in Resources */,
 				E9A79A9022CF36FE00295C53 /* background39.png in Resources */,
 				E9A79AA022CF36FE00295C53 /* background05.png in Resources */,
@@ -639,6 +646,7 @@
 				E9B084F822CC9AE700FDF797 /* Failed.png in Resources */,
 				E9A79A9222CF36FE00295C53 /* background34.png in Resources */,
 				E9A79A9A22CF36FE00295C53 /* background31.png in Resources */,
+				E945C2A822D462C600157F64 /* backSound.mp3 in Resources */,
 				E9A79A8522CF36FE00295C53 /* background29.png in Resources */,
 				E9D5E02E22CF6A4D00275D36 /* MenuButtonEX06.png in Resources */,
 				E9A79A8322CF36FE00295C53 /* background32.png in Resources */,

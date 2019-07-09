@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ProfileViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate{
+    var audioPlayerBack = AVAudioPlayer()
     
     let profileTitle = ["名字：",
                    "開始遊玩日期：",
@@ -34,6 +36,21 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
         
         profile.delegate = self
         profile.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        do{
+            let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
+            audioPlayerBack = try AVAudioPlayer(contentsOf:BS)
+        }catch{
+            
+        }
+        audioPlayerBack.prepareToPlay()
+    }
+    
+    @IBAction func back(_ sender: Any){
+        audioPlayerBack.play()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

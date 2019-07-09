@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 
 class LaunchViewController: UIViewController {
+    var audioPlayerEnter = AVAudioPlayer();
+    
     @IBOutlet var background: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +66,17 @@ class LaunchViewController: UIViewController {
         FirstLaunch()
         updatePlayDate()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        do{
+            let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
+            audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
+        }catch{
+            
+        }
+        audioPlayerEnter.prepareToPlay()
     }
     
     // 第一次開啟APP，創建儲存空間，值為0
@@ -153,12 +167,12 @@ class LaunchViewController: UIViewController {
     */
     @IBOutlet weak var aboutBtn: UIButton!
     @IBAction func about(_ sender: Any) {
-        
+        audioPlayerEnter.play()
     }
     
     @IBOutlet weak var startBtn: UIButton!
     @IBAction func start(_ sender: Any) {
-        background.stopAnimating()
+        audioPlayerEnter.play()
         performSegue(withIdentifier: "ToMenu", sender: sender)
     }
 }

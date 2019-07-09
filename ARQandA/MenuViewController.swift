@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MenuViewController: UIViewController {
+    var audioPlayerEnter = AVAudioPlayer()
+    var audioPlayerBack = AVAudioPlayer()
+    
     @IBOutlet var background: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +65,41 @@ class MenuViewController: UIViewController {
         self.view.sendSubviewToBack(background)
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        do{
+            let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
+            audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
+            let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
+            audioPlayerBack = try AVAudioPlayer(contentsOf:BS)
+        }catch{
+            
+        }
+        audioPlayerEnter.prepareToPlay()
+        audioPlayerBack.prepareToPlay()
+    }
+    
+    @IBAction func single(_ sender: Any){
+        audioPlayerEnter.play()
+    }
+    @IBAction func multi(_ sender: Any){
+        audioPlayerEnter.play()
+    }
+    @IBAction func friend(_ sender: Any){
+        audioPlayerEnter.play()
+    }
+    @IBAction func profile(_ sender: Any){
+        audioPlayerEnter.play()
+    }
+    @IBAction func option(_ sender: Any){
+        audioPlayerEnter.play()
+    }
+    @IBAction func back(_ sender: Any){
+        audioPlayerBack.play()
+    }
+    
+    
     
 
     /*
