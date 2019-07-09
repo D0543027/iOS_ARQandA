@@ -13,7 +13,7 @@
         <!--Launch View Controller-->
         <scene sceneID="vel-io-LzF">
             <objects>
-                <viewController id="cNd-bV-ZPi" customClass="LaunchViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Title" id="cNd-bV-ZPi" customClass="LaunchViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Pf-iO-kAX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -301,15 +301,6 @@
                                 <rect key="frame" x="28" y="272" width="182" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jm4-nU-ETL">
-                                <rect key="frame" x="0.0" y="-13" width="59" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="arrowBack.png"/>
-                                <connections>
-                                    <action selector="back:" destination="yS4-0g-95t" eventType="touchUpInside" id="UhZ-4p-4sN"/>
-                                    <segue destination="cNd-bV-ZPi" kind="presentation" id="OyQ-Zt-hR8"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

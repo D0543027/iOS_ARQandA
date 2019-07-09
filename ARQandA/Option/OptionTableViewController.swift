@@ -12,7 +12,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
    
     @IBOutlet weak var btnBackToMenu: UIButton!
     
-    let list = [["我"],
+    let list = [["返回標題"],
                 ["不"],
                 ["知"],
                 ["教學導覽","分享給好友"]]
@@ -46,7 +46,10 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section{
-        case 0: 
+        case 0:
+            if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
+                present(backToTitle, animated: true, completion: nil)
+            }
             break
         case 1:
             break

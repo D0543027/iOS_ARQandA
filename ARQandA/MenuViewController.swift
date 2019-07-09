@@ -11,7 +11,6 @@ import AVFoundation
 
 class MenuViewController: UIViewController {
     var audioPlayerEnter = AVAudioPlayer()
-    var audioPlayerBack = AVAudioPlayer()
     
     @IBOutlet var background: UIImageView!
     override func viewDidLoad() {
@@ -71,13 +70,10 @@ class MenuViewController: UIViewController {
         do{
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
             audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
-            let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
-            audioPlayerBack = try AVAudioPlayer(contentsOf:BS)
         }catch{
             
         }
         audioPlayerEnter.prepareToPlay()
-        audioPlayerBack.prepareToPlay()
     }
     
     @IBAction func single(_ sender: Any){
@@ -94,9 +90,6 @@ class MenuViewController: UIViewController {
     }
     @IBAction func option(_ sender: Any){
         audioPlayerEnter.play()
-    }
-    @IBAction func back(_ sender: Any){
-        audioPlayerBack.play()
     }
     
     
