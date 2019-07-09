@@ -10,7 +10,8 @@ import UIKit
 import AVFoundation
 
 class LaunchViewController: UIViewController {
-    var audioPlayerEnter = AVAudioPlayer();
+    var audioPlayerEnter = AVAudioPlayer()
+    var audioPlayerBack = AVAudioPlayer()
     
     @IBOutlet var background: UIImageView!
     override func viewDidLoad() {
@@ -73,10 +74,13 @@ class LaunchViewController: UIViewController {
         do{
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
             audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
+            let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
+            audioPlayerBack = try AVAudioPlayer(contentsOf:BS)
         }catch{
             
         }
         audioPlayerEnter.prepareToPlay()
+        audioPlayerBack.prepareToPlay()
     }
     
     // 第一次開啟APP，創建儲存空間，值為0
@@ -175,4 +179,13 @@ class LaunchViewController: UIViewController {
         audioPlayerEnter.play()
         performSegue(withIdentifier: "ToMenu", sender: sender)
     }
+    @IBOutlet weak var closeBtn: UIButton!
+    @IBAction func close(_ sender: Any) {
+        audioPlayerBack.play()
+        textBox.isHidden = true
+        closeBtn.isHidden = true
+        
+    }
+    @IBOutlet weak var textBox: UIImageView!
+    
 }
