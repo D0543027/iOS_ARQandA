@@ -11,10 +11,10 @@ import UIKit
 class OptionTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
    
     @IBOutlet weak var btnBackToMenu: UIButton!
-    
+    var nameTextField: UITextField?
+
     let list = [["返回標題"],
-                ["不"],
-                ["知"],
+                ["修改個人資料","清除資料"],
                 ["教學導覽","分享給好友"]]
     
     
@@ -52,10 +52,33 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
             break
         case 1:
+            switch indexPath.row{
+            case 0:
+                let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
+                alertController.addTextField(configurationHandler: nameTextField)
+                
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: self.okHandler)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true)
+                break
+            case 1:
+                let alertController = UIAlertController(title: "確定要清除資料？", message: nil, preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: self.clearProfile)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true)
+                break
+            default:
+                break
+            }
             break
         case 2:
-            break
-        case 3:
             switch indexPath.row{
             case 0:
                 if let tutorialController = storyboard?.instantiateViewController(withIdentifier: String(describing: TutorialViewController.self)) as? TutorialViewController{
@@ -78,4 +101,42 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }    
     
+    func nameTextField(textField: UITextField){
+        nameTextField = textField
+        nameTextField?.placeholder = "Name不可為空白"
+    }
+    
+    func okHandler(alert: UIAlertAction){
+        let name = nameTextField?.text
+        UserDefaults.standard.set(name!,forKey: "name")
+        UserDefaults.standard.synchronize()
+    }
+    
+    
+    func clearProfile(alert: UIAlertAction){
+        UserDefaults.standard.set(" ", forKey: "name")
+        UserDefaults.standard.set(0, forKey: "highScore")
+        UserDefaults.standard.set(0, forKey: "wrong")
+        UserDefaults.standard.set(0, forKey: "right")
+        
+        let currentDate = Date()
+        let dataFormatter = DateFormatter()
+        dataFormatter.locale = Locale(identifier: "zh_Hant_TW")
+        dataFormatter.dateFormat = "YYYY-MM-dd"
+        let stringDate = dataFormatter.string(from: currentDate)
+        UserDefaults.standard.set(stringDate, forKey: "startDate")
+        UserDefaults.standard.set(stringDate, forKey: "currentDate")
+        
+        UserDefaults.standard.set(0, forKey: "total")
+        UserDefaults.standard.set(0, forKey: "correctPercentage")
+        UserDefaults.standard.set(1, forKey: "playDate")
+        
+        
+        UserDefaults.standard.synchronize()
+        
+        if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
+            present(backToTitle, animated: true, completion: nil)
+        }
+        
+    }
 }
