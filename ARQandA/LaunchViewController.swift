@@ -96,7 +96,7 @@ class LaunchViewController: UIViewController {
     // 第一次開啟APP，創建儲存空間，值為0
     func FirstLaunch(){
         if UserDefaults.standard.object(forKey: "name") == nil{
-            UserDefaults.standard.set("NULL", forKey: "name")
+            UserDefaults.standard.set(" ", forKey: "name")
             UserDefaults.standard.synchronize()
         }
         //記錄最高分數
@@ -144,7 +144,7 @@ class LaunchViewController: UIViewController {
             UserDefaults.standard.set(0, forKey: "total")
             UserDefaults.standard.synchronize()
         }
-
+        
         if UserDefaults.standard.object(forKey: "correctPercentage") == nil{
             UserDefaults.standard.set(0, forKey: "correctPercentage")
             UserDefaults.standard.synchronize()
@@ -160,7 +160,7 @@ class LaunchViewController: UIViewController {
         
         let savedCurrentDate = UserDefaults.standard.string(forKey: "currentDate")
         var playDate = UserDefaults.standard.integer(forKey: "playDate")
- 
+        
         
         if currentDate != savedCurrentDate{
             playDate = playDate + 1
@@ -171,14 +171,14 @@ class LaunchViewController: UIViewController {
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     @IBOutlet weak var info01: UILabel!
     @IBOutlet weak var info02: UILabel!
     @IBOutlet weak var info03: UILabel!
@@ -192,11 +192,44 @@ class LaunchViewController: UIViewController {
         audioPlayerEnter.play()
     }
     
+    var nameTextField: UITextField?
     @IBOutlet weak var startBtn: UIButton!
     @IBAction func start(_ sender: Any) {
         audioPlayerEnter.play()
-        performSegue(withIdentifier: "ToMenu", sender: sender)
+        let name = UserDefaults.standard.string(forKey: "name")
+        
+        // if 還沒設名字，跳訊息輸入
+        if name! == " "{
+            let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: nameTextField)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: self.okHandler)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true)
+        }
+        else{
+            performSegue(withIdentifier: "ToMenu", sender: sender)
+        }
+        
     }
+    
+    // 填名字的 textField
+    func nameTextField(textField: UITextField){
+        nameTextField = textField
+        nameTextField?.placeholder = "Name不可為空白"
+    }
+    
+    func okHandler(alert: UIAlertAction){
+        let name = nameTextField?.text
+        UserDefaults.standard.set(name!,forKey: "name")
+        UserDefaults.standard.synchronize()
+        performSegue(withIdentifier: "ToMenu", sender: self)
+        
+    }
+    
     @IBOutlet weak var closeBtn: UIButton!
     @IBAction func close(_ sender: Any) {
         audioPlayerBack.play()
