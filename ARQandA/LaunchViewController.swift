@@ -210,32 +210,26 @@ class LaunchViewController: UIViewController {
         // if 還沒設名字，跳訊息輸入
         if name! == " "{
             let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
-            alertController.addTextField(configurationHandler: nameTextField)
+            alertController.addTextField(configurationHandler: {
+                $0.placeholder = "Name"
+                $0.addTarget(alertController, action: #selector(alertController.textDidChangeInLoginAlert), for: .editingChanged)
+            })
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: self.okHandler)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                guard let name = alertController.textFields?[0].text else{return}
+                UserDefaults.standard.set(name,forKey: "name")
+                UserDefaults.standard.synchronize()
+                self.performSegue(withIdentifier: "ToMenu", sender: self)
+            })
             
+            okAction.isEnabled = false
             alertController.addAction(okAction)
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true)
+            present(alertController, animated: true)
         }
         else{
             performSegue(withIdentifier: "ToMenu", sender: sender)
         }
-        
-    }
-    
-    // 填名字的 textField
-    func nameTextField(textField: UITextField){
-        nameTextField = textField
-        nameTextField?.placeholder = "Name不可為空白"
-    }
-    
-    func okHandler(alert: UIAlertAction){
-        let name = nameTextField?.text
-        UserDefaults.standard.set(name!,forKey: "name")
-        UserDefaults.standard.synchronize()
-        performSegue(withIdentifier: "ToMenu", sender: self)
         
     }
     
@@ -256,4 +250,21 @@ class LaunchViewController: UIViewController {
     }
     @IBOutlet weak var textBox: UIImageView!
     
+}
+
+extension UIAlertController {
+    
+    func isValidName(_ name: String) -> Bool {
+        print(NSPredicate(format: "self matches %@","^[a-zA-Z0-9].*").evaluate(with: name))
+        
+        return name.count > 0 && NSPredicate(format: "self matches %@","^[a-zA-Z0-9].*").evaluate(with: name)
+    }
+    
+    
+    @objc func textDidChangeInLoginAlert() {
+        if let name = textFields?[0].text,
+            let action = actions.last {
+            action.isEnabled = isValidName(name)
+        }
+    }
 }

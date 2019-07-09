@@ -55,14 +55,21 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
             switch indexPath.row{
             case 0:
                 let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
-                alertController.addTextField(configurationHandler: nameTextField)
+                alertController.addTextField(configurationHandler: {
+                    $0.placeholder = "Name"
+                    $0.addTarget(alertController, action: #selector(alertController.textDidChangeInLoginAlert), for: .editingChanged)
+                })
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                 
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: self.okHandler)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    guard let name = alertController.textFields?[0].text else{return}
+                    UserDefaults.standard.set(name,forKey: "name")
+                    UserDefaults.standard.synchronize()
+                })
                 
+                okAction.isEnabled = false
                 alertController.addAction(okAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true)
+                present(alertController, animated: true)
                 break
             case 1:
                 let alertController = UIAlertController(title: "確定要清除資料？", message: nil, preferredStyle: .alert)
@@ -99,19 +106,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         default:
             break
         }
-    }    
-    
-    func nameTextField(textField: UITextField){
-        nameTextField = textField
-        nameTextField?.placeholder = "Name不可為空白"
     }
-    
-    func okHandler(alert: UIAlertAction){
-        let name = nameTextField?.text
-        UserDefaults.standard.set(name!,forKey: "name")
-        UserDefaults.standard.synchronize()
-    }
-    
     
     func clearProfile(alert: UIAlertAction){
         UserDefaults.standard.set(" ", forKey: "name")
