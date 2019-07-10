@@ -18,10 +18,6 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !bgm.isPlaying{
-            bgm.play()
-        }
-        
         let fullScreenSize = UIScreen.main.bounds.size
         background = UIImageView(frame : CGRect(x:0, y:0, width: fullScreenSize.width, height: fullScreenSize.height))
         let imgArr = [UIImage(named:"background01")!,
@@ -99,6 +95,9 @@ class LaunchViewController: UIViewController {
         }
         bgm.numberOfLoops = -1
         bgm.prepareToPlay()
+        if !bgm.isPlaying{
+            bgm.play()
+        }
         audioPlayerEnter.prepareToPlay()
         audioPlayerBack.prepareToPlay()
     }
@@ -215,6 +214,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var startBtn: UIButton!
     @IBAction func start(_ sender: Any) {
         audioPlayerEnter.play()
+        
         let name = UserDefaults.standard.string(forKey: "name")
         
         // if 還沒設名字，跳訊息輸入
