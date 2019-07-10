@@ -679,9 +679,7 @@
                         <outlet property="failed" destination="l9u-VG-cte" id="G7v-3f-HPl"/>
                         <outlet property="lb" destination="shH-hX-oto" id="qIW-Eo-HvU"/>
                         <outlet property="resultBack" destination="LUX-6i-JN2" id="kap-Rq-tpR"/>
-                        <outlet property="resultBackground" destination="9YG-66-BoV" id="2Oy-QW-82b"/>
-                        <outlet property="resultback" destination="LUX-6i-JN2" id="43l-YC-VQC"/>
-                        <outlet property="resultbackground" destination="9YG-66-BoV" id="OfR-WY-Wrp"/>
+                        <outlet property="resultBackground" destination="9YG-66-BoV" id="KSf-st-mFb"/>
                         <outlet property="singleHighScoreLb" destination="tLD-Qo-O5a" id="8Gq-XF-hUM"/>
                         <outlet property="singleRightLb" destination="Vxx-Yk-ohH" id="7Mu-IH-D2W"/>
                         <outlet property="singleScoreLb" destination="jWE-0t-eJI" id="kaJ-fo-6og"/>

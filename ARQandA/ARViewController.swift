@@ -180,7 +180,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         let rotation = frame.camera.eulerAngles
         new_RotateY = rotation.y
-        print("\(rotation.z)")
         
         
         guard currentBuffer == nil else{ return }
