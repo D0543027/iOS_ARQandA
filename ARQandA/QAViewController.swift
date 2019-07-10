@@ -36,6 +36,10 @@ class QAViewController: UIViewController {
         singleRightLb.isHidden = true
         singleWrongLb.isHidden = true
         singleHighScoreLb.isHidden = true
+        singleScoreLbT.isHidden = true
+        singleRightLbT.isHidden = true
+        singleWrongLbT.isHidden = true
+        singleHighScoreLbT.isHidden = true
         //隱藏victory和failed圖示
         victory.isHidden = true
         failed.isHidden = true
@@ -105,6 +109,10 @@ class QAViewController: UIViewController {
     @IBOutlet weak var singleRightLb: UILabel!
     @IBOutlet weak var singleWrongLb: UILabel!
     @IBOutlet weak var singleHighScoreLb: UILabel!
+    @IBOutlet weak var singleScoreLbT: UILabel!
+    @IBOutlet weak var singleRightLbT: UILabel!
+    @IBOutlet weak var singleWrongLbT: UILabel!
+    @IBOutlet weak var singleHighScoreLbT: UILabel!
     
     func updateQuestion(){
         
@@ -124,6 +132,10 @@ class QAViewController: UIViewController {
             singleRightLb.isHidden = false
             singleWrongLb.isHidden = false
             singleHighScoreLb.isHidden = false
+            singleScoreLbT.isHidden = false
+            singleRightLbT.isHidden = false
+            singleWrongLbT.isHidden = false
+            singleHighScoreLbT.isHidden = false
             
             if score < 0{
                 score = 0
