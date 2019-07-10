@@ -10,6 +10,8 @@
 		0748AAEC1AB1CE726A79A895 /* Pods_ARQandATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */; };
 		8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A00394922CFA306007E936D /* OptionTableViewController.swift */; };
 		8A29A22B22D237570086A33E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A29A22A22D237570086A33E /* ProfileViewController.swift */; };
+		8A315E8C22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A315E8B22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift */; };
+		8A315E8E22D5BC8500097535 /* UIAlertController+ValidName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A315E8D22D5BC8500097535 /* UIAlertController+ValidName.swift */; };
 		8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A48005A22CE2B910063B35F /* AthensClassic.ttf */; };
 		8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B022B5CDCC008EA659 /* YOLO.swift */; };
 		8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B122B5CDCC008EA659 /* Helpers.swift */; };
@@ -125,6 +127,8 @@
 		811E9209D473AE7DE4C43CAB /* Pods-ARQandAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandAUITests.release.xcconfig"; path = "Target Support Files/Pods-ARQandAUITests/Pods-ARQandAUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8A00394922CFA306007E936D /* OptionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
 		8A29A22A22D237570086A33E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Profile/ProfileViewController.swift; sourceTree = "<group>"; };
+		8A315E8B22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceOrientation+CGImagePropertyOrientation.swift"; sourceTree = "<group>"; };
+		8A315E8D22D5BC8500097535 /* UIAlertController+ValidName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ValidName.swift"; sourceTree = "<group>"; };
 		8A48005A22CE2B910063B35F /* AthensClassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthensClassic.ttf; sourceTree = "<group>"; };
 		8A4937B022B5CDCC008EA659 /* YOLO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLO.swift; sourceTree = "<group>"; };
 		8A4937B122B5CDCC008EA659 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -274,6 +278,15 @@
 			path = Option;
 			sourceTree = "<group>";
 		};
+		8A315E8A22D5BB9A00097535 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8A315E8B22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift */,
+				8A315E8D22D5BC8500097535 /* UIAlertController+ValidName.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		8A4937BA22B5CF3B008EA659 /* ARHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +358,7 @@
 				8A4937BB22B5D022008EA659 /* QAHelper */,
 				E93D6C6322D0C8CE00CF15C4 /* Profile */,
 				8A00394822CFA198007E936D /* Option */,
+				8A315E8A22D5BB9A00097535 /* Extension */,
 				8A94FE68228A6111002E6F08 /* AppDelegate.swift */,
 				8A94FE6A228A6111002E6F08 /* art.scnassets */,
 				8A94FE6E228A6111002E6F08 /* Main.storyboard */,
@@ -775,6 +789,7 @@
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
 				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
+				8A315E8E22D5BC8500097535 /* UIAlertController+ValidName.swift in Sources */,
 				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A29A22B22D237570086A33E /* ProfileViewController.swift in Sources */,
@@ -786,6 +801,7 @@
 				8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */,
 				8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */,
 				8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */,
+				8A315E8C22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift in Sources */,
 				8A67012422B338A200C7A09E /* QAViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -212,7 +212,7 @@ class LaunchViewController: UIViewController {
             let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
             alertController.addTextField(configurationHandler: {
                 $0.placeholder = "Name"
-                $0.addTarget(alertController, action: #selector(alertController.textDidChangeInLoginAlert), for: .editingChanged)
+                $0.addTarget(alertController, action: #selector(alertController.textDidChangeInNameTextField), for: .editingChanged)
             })
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             
@@ -252,19 +252,3 @@ class LaunchViewController: UIViewController {
     
 }
 
-extension UIAlertController {
-    
-    func isValidName(_ name: String) -> Bool {
-        print(NSPredicate(format: "self matches %@","^[a-zA-Z0-9].*").evaluate(with: name))
-        
-        return name.count > 0 && NSPredicate(format: "self matches %@","^[a-zA-Z0-9].*").evaluate(with: name)
-    }
-    
-    
-    @objc func textDidChangeInLoginAlert() {
-        if let name = textFields?[0].text,
-            let action = actions.last {
-            action.isEnabled = isValidName(name)
-        }
-    }
-}

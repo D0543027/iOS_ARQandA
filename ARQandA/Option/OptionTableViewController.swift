@@ -57,7 +57,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
                 let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
                 alertController.addTextField(configurationHandler: {
                     $0.placeholder = "Name"
-                    $0.addTarget(alertController, action: #selector(alertController.textDidChangeInLoginAlert), for: .editingChanged)
+                    $0.addTarget(alertController, action: #selector(alertController.textDidChangeInNameTextField), for: .editingChanged)
                 })
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                 
