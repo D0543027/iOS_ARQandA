@@ -186,13 +186,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         let rotation = frame.camera.eulerAngles
         new_RotateY = rotation.y
-        //print("rotation: \(new_RotateY)")
+        print("\(rotation.z)")
         
         
         guard currentBuffer == nil else{ return }
         
         visionQueue.async {
-            if self.DeviceMoving() == true {
+            if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
                 self.updatePosition()
                 self.currentBuffer = frame.capturedImage
                 self.predictUsingVision(pixelBuffer: self.currentBuffer!)
