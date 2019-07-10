@@ -12,6 +12,7 @@ import AVFoundation
 class LaunchViewController: UIViewController {
     var audioPlayerEnter = AVAudioPlayer()
     var audioPlayerBack = AVAudioPlayer()
+    var bgm = AVAudioPlayer()
     
     @IBOutlet var background: UIImageView!
     override func viewDidLoad() {
@@ -82,6 +83,8 @@ class LaunchViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         do{
+            let BGM = URL(fileURLWithPath: Bundle.main.path(forResource:"bgm", ofType:"mp3")!)
+            bgm = try AVAudioPlayer(contentsOf:BGM)
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
             audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
             let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
@@ -89,6 +92,9 @@ class LaunchViewController: UIViewController {
         }catch{
             
         }
+        bgm.numberOfLoops = -1
+        bgm.prepareToPlay()
+        bgm.play()
         audioPlayerEnter.prepareToPlay()
         audioPlayerBack.prepareToPlay()
     }
@@ -231,6 +237,12 @@ class LaunchViewController: UIViewController {
             performSegue(withIdentifier: "ToMenu", sender: sender)
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if let sendBgm = segue.destination as? MenuViewController{
+            sendBgm.bgm = self.bgm
+        }
     }
     
     @IBOutlet weak var closeBtn: UIButton!

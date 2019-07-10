@@ -41,6 +41,7 @@
 		8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
+		E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E91ED0A822D5C36200DBFF96 /* bgm.mp3 */; };
 		E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */; };
 		E945C2A422D4619F00157F64 /* MenuButtonEX04.png in Resources */ = {isa = PBXBuildFile; fileRef = E945C2A322D4619F00157F64 /* MenuButtonEX04.png */; };
 		E945C2A722D462C600157F64 /* enterSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E945C2A522D462C500157F64 /* enterSound.mp3 */; };
@@ -165,6 +166,7 @@
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E91ED0A822D5C36200DBFF96 /* bgm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm.mp3; sourceTree = "<group>"; };
 		E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileBackground.jpg; sourceTree = "<group>"; };
 		E945C2A322D4619F00157F64 /* MenuButtonEX04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButtonEX04.png; sourceTree = "<group>"; };
 		E945C2A522D462C500157F64 /* enterSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = enterSound.mp3; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		8A94FE67228A6111002E6F08 /* ARQandA */ = {
 			isa = PBXGroup;
 			children = (
+				E91ED0A822D5C36200DBFF96 /* bgm.mp3 */,
 				E945C2A622D462C600157F64 /* backSound.mp3 */,
 				E945C2A522D462C500157F64 /* enterSound.mp3 */,
 				8A94FE6C228A6111002E6F08 /* ARViewController.swift */,
@@ -623,6 +626,7 @@
 				E9A79A7D22CF36FE00295C53 /* background30.png in Resources */,
 				E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */,
 				E9A79A8E22CF36FE00295C53 /* background22.png in Resources */,
+				E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */,
 				E945C2AC22D4708100157F64 /* close.png in Resources */,
 				E9A79A9122CF36FE00295C53 /* background13.png in Resources */,
 				E9A79A8022CF36FE00295C53 /* background02.png in Resources */,

@@ -11,10 +11,18 @@ import AVFoundation
 
 class MenuViewController: UIViewController {
     var audioPlayerEnter = AVAudioPlayer()
+    var bgm = AVAudioPlayer()
     
     @IBOutlet var background: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !bgm.isPlaying{
+            bgm.play()
+        }
+
+        
         let fullScreenSize = UIScreen.main.bounds.size
         background = UIImageView(frame : CGRect(x:0, y:0, width: fullScreenSize.width, height: fullScreenSize.height))
         let imgArr = [UIImage(named:"background01")!,
