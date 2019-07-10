@@ -591,28 +591,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="分數：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8o-oT-7Hm">
-                                <rect key="frame" x="107" y="208" width="80" height="32"/>
+                                <rect key="frame" x="107" y="208" width="94" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="答對數：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E22-rC-cmT">
-                                <rect key="frame" x="107" y="254" width="70" height="21"/>
+                                <rect key="frame" x="107" y="254" width="83" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="答錯數：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaZ-0Q-zqt">
-                                <rect key="frame" x="107" y="282" width="70" height="21"/>
+                                <rect key="frame" x="107" y="282" width="83" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="單次遊玩最高分：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePK-ZY-3Xa">
-                                <rect key="frame" x="107" y="323" width="131" height="20"/>
+                                <rect key="frame" x="107" y="323" width="137" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
@@ -681,9 +681,13 @@
                         <outlet property="resultBack" destination="LUX-6i-JN2" id="kap-Rq-tpR"/>
                         <outlet property="resultBackground" destination="9YG-66-BoV" id="KSf-st-mFb"/>
                         <outlet property="singleHighScoreLb" destination="tLD-Qo-O5a" id="8Gq-XF-hUM"/>
+                        <outlet property="singleHighScoreLbT" destination="ePK-ZY-3Xa" id="Me0-dE-Frl"/>
                         <outlet property="singleRightLb" destination="Vxx-Yk-ohH" id="7Mu-IH-D2W"/>
+                        <outlet property="singleRightLbT" destination="E22-rC-cmT" id="GDW-RR-DpG"/>
                         <outlet property="singleScoreLb" destination="jWE-0t-eJI" id="kaJ-fo-6og"/>
+                        <outlet property="singleScoreLbT" destination="J8o-oT-7Hm" id="UvU-ot-ZMe"/>
                         <outlet property="singleWrongLb" destination="Wgk-q2-P7h" id="LgB-eo-rop"/>
+                        <outlet property="singleWrongLbT" destination="ZaZ-0Q-zqt" id="qls-eU-nfa"/>
                         <outlet property="victory" destination="Tkg-Fn-MM8" id="abH-KL-FC4"/>
                         <segue destination="BV1-FR-VrT" kind="presentation" identifier="finish_qa" id="mDc-cM-YHl"/>
                     </connections>
@@ -747,7 +751,7 @@
         <image name="textBox01.png" width="211" height="206"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="alU-ZC-5hF"/>
+        <segue reference="mDc-cM-YHl"/>
         <segue reference="tsd-eL-jiP"/>
     </inferredMetricsTieBreakers>
 </document>
