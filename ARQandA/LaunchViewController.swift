@@ -99,7 +99,6 @@ class LaunchViewController: UIViewController {
         }
         bgm.numberOfLoops = -1
         bgm.prepareToPlay()
-        bgm.play()
         audioPlayerEnter.prepareToPlay()
         audioPlayerBack.prepareToPlay()
     }
