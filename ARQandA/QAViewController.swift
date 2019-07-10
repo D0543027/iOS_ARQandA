@@ -20,7 +20,6 @@ class QAViewController: UIViewController {
     var numberOfQuestion = ""   // 題數
     
     var data: JSON?
-    var bgm = AVAudioPlayer()
     var audioPlayerF = AVAudioPlayer()
     var audioPlayerV = AVAudioPlayer()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -102,7 +101,6 @@ class QAViewController: UIViewController {
     
     @IBOutlet weak var resultBackground: UIImageView!
     @IBOutlet weak var resultBack: UIImageView!
-    @IBOutlet weak var back: UIButton!
     @IBOutlet weak var singleScoreLb: UILabel!
     @IBOutlet weak var singleRightLb: UILabel!
     @IBOutlet weak var singleWrongLb: UILabel!

@@ -120,7 +120,7 @@
                     <connections>
                         <outlet property="aboutBtn" destination="Cei-JA-gLD" id="zXf-1e-yLS"/>
                         <outlet property="background" destination="Utz-4h-L18" id="Acj-TD-Zy2"/>
-                        <outlet property="closeBtn" destination="zZf-Cm-KRM" id="AUj-Jc-Ac1"/>
+                        <outlet property="closeBtn" destination="zZf-Cm-KRM" id="2tt-wC-qwZ"/>
                         <outlet property="info01" destination="Tok-p2-HD7" id="tOh-EG-GwU"/>
                         <outlet property="info02" destination="4O5-K8-OUj" id="liT-Hx-9G9"/>
                         <outlet property="info03" destination="GWH-ya-1o4" id="g9O-V7-Odr"/>
@@ -180,7 +180,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="&lt;"/>
                                 <connections>
-                                    <action selector="backToMenu" destination="qcs-DB-xq2" eventType="touchUpInside" id="tt4-7x-kP0"/>
                                     <segue destination="yS4-0g-95t" kind="presentation" identifier="ReturnMenu01" id="M9J-3j-TJO"/>
                                 </connections>
                             </button>
@@ -679,6 +678,8 @@
                         <outlet property="ChoiceBtnLabel4" destination="ejo-Da-aDC" id="UNf-O4-koB"/>
                         <outlet property="failed" destination="l9u-VG-cte" id="G7v-3f-HPl"/>
                         <outlet property="lb" destination="shH-hX-oto" id="qIW-Eo-HvU"/>
+                        <outlet property="resultBack" destination="LUX-6i-JN2" id="kap-Rq-tpR"/>
+                        <outlet property="resultBackground" destination="9YG-66-BoV" id="2Oy-QW-82b"/>
                         <outlet property="resultback" destination="LUX-6i-JN2" id="43l-YC-VQC"/>
                         <outlet property="resultbackground" destination="9YG-66-BoV" id="OfR-WY-Wrp"/>
                         <outlet property="singleHighScoreLb" destination="tLD-Qo-O5a" id="8Gq-XF-hUM"/>
@@ -749,6 +750,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="alU-ZC-5hF"/>
-        <segue reference="CS8-va-412"/>
+        <segue reference="tsd-eL-jiP"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,7 +10,6 @@ import UIKit
 import AVFoundation
 
 class ProfileViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate{
-    var bgm = AVAudioPlayer()
     var audioPlayerBack = AVAudioPlayer()
     
     let profileTitle = ["名字：",
@@ -34,11 +33,6 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if !bgm.isPlaying{
-            bgm.play()
-        }
-        
         profile.delegate = self
         profile.dataSource = self
     }
@@ -56,13 +50,6 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
     
     @IBAction func back(_ sender: Any){
         audioPlayerBack.play()
-        performSegue(withIdentifier: "ReturnToMenu02", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        if let sendBgm = segue.destination as? MenuViewController{
-            sendBgm.bgm = self.bgm
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

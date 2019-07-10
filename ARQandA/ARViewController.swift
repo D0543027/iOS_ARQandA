@@ -14,8 +14,6 @@ import AVFoundation
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
-    var bgm = AVAudioPlayer()
-    
     @IBOutlet var sceneView: ARSCNView!
     
     let yolo = YOLO()
@@ -47,10 +45,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        if !bgm.isPlaying{
-            bgm.play()
-        }
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -394,7 +388,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if let dest = segue.destination as? QAViewController{
             dest.label = self.label
             dest.numberOfQuestion = self.numberOfQuestionToSend
-            dest.bgm = self.bgm
         }
     }
     

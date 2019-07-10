@@ -9,8 +9,6 @@
 import UIKit
 import AVFoundation
 class OptionTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
-    var bgm = AVAudioPlayer()
    
     @IBOutlet weak var btnBackToMenu: UIButton!
     var nameTextField: UITextField?
@@ -23,20 +21,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !bgm.isPlaying{
-            bgm.play()
-        }
-        
         btnBackToMenu.bounds.size.width = 44
-    }
-    
-    @IBAction func backToMenu(){
-         performSegue(withIdentifier: "ReturnToMenu01", sender: self)
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        if let sendBgm = segue.destination as? MenuViewController{
-            sendBgm.bgm = self.bgm
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +48,6 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section{
         case 0:
-            bgm.stop()
             if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
                 present(backToTitle, animated: true, completion: nil)
             }
@@ -146,7 +130,6 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         UserDefaults.standard.synchronize()
         
-        bgm.stop()
         if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
             present(backToTitle, animated: true, completion: nil)
         }

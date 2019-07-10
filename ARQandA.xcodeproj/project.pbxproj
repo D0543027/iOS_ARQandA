@@ -42,6 +42,7 @@
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 		E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E91ED0A822D5C36200DBFF96 /* bgm.mp3 */; };
+		E91ED0CF22D634C600DBFF96 /* Audiomanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91ED0CE22D634C600DBFF96 /* Audiomanager.swift */; };
 		E93D6C6022D0BE6900CF15C4 /* profileBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */; };
 		E945C2A422D4619F00157F64 /* MenuButtonEX04.png in Resources */ = {isa = PBXBuildFile; fileRef = E945C2A322D4619F00157F64 /* MenuButtonEX04.png */; };
 		E945C2A722D462C600157F64 /* enterSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E945C2A522D462C500157F64 /* enterSound.mp3 */; };
@@ -167,6 +168,7 @@
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
 		CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91ED0A822D5C36200DBFF96 /* bgm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm.mp3; sourceTree = "<group>"; };
+		E91ED0CE22D634C600DBFF96 /* Audiomanager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audiomanager.swift; sourceTree = "<group>"; };
 		E93D6C5F22D0BE6900CF15C4 /* profileBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileBackground.jpg; sourceTree = "<group>"; };
 		E945C2A322D4619F00157F64 /* MenuButtonEX04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButtonEX04.png; sourceTree = "<group>"; };
 		E945C2A522D462C500157F64 /* enterSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = enterSound.mp3; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				8A67012322B338A200C7A09E /* QAViewController.swift */,
 				8A69796F22B9DD16000FD70F /* LaunchViewController.swift */,
 				E9B084F322CC847800FDF797 /* MenuViewController.swift */,
+				E91ED0CE22D634C600DBFF96 /* Audiomanager.swift */,
 				8A4937BA22B5CF3B008EA659 /* ARHelpers */,
 				8A4937BB22B5D022008EA659 /* QAHelper */,
 				E93D6C6322D0C8CE00CF15C4 /* Profile */,
@@ -793,6 +796,7 @@
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
 				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
+				E91ED0CF22D634C600DBFF96 /* Audiomanager.swift in Sources */,
 				8A315E8E22D5BC8500097535 /* UIAlertController+ValidName.swift in Sources */,
 				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,

@@ -11,18 +11,12 @@ import AVFoundation
 
 class MenuViewController: UIViewController {
     var audioPlayerEnter = AVAudioPlayer()
-    var bgm = AVAudioPlayer()
     
     @IBOutlet var background: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if !bgm.isPlaying{
-            bgm.play()
-        }
 
-        
         let fullScreenSize = UIScreen.main.bounds.size
         background = UIImageView(frame : CGRect(x:0, y:0, width: fullScreenSize.width, height: fullScreenSize.height))
         let imgArr = [UIImage(named:"background01")!,
@@ -86,7 +80,6 @@ class MenuViewController: UIViewController {
     
     @IBAction func single(_ sender: Any){
         audioPlayerEnter.play()
-        performSegue(withIdentifier: "ToSingle", sender: self)
     }
     @IBAction func multi(_ sender: Any){
         audioPlayerEnter.play()
@@ -96,27 +89,10 @@ class MenuViewController: UIViewController {
     }
     @IBAction func profile(_ sender: Any){
         audioPlayerEnter.play()
-        performSegue(withIdentifier: "ToProfile", sender: self)
     }
     @IBAction func option(_ sender: Any){
         audioPlayerEnter.play()
-        performSegue(withIdentifier: "ToOption", sender: self)
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        if segue.identifier == "ToSingle"{
-            let sendBgm = segue.destination as? ARViewController
-                sendBgm?.bgm = self.bgm
-        }else if segue.identifier == "ToProfile"{
-            let sendBgm = segue.destination as? ProfileViewController
-                sendBgm?.bgm = self.bgm
-        }else if segue.identifier == "ToOption"{
-            let sendBgm = segue.destination as? OptionTableViewController
-                sendBgm?.bgm = self.bgm
-        }
-    }
-    
-    
-    
 
     /*
     // MARK: - Navigation

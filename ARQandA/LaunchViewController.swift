@@ -18,6 +18,8 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AudioManager.sharedInstance.startMusic()
+        
         let fullScreenSize = UIScreen.main.bounds.size
         background = UIImageView(frame : CGRect(x:0, y:0, width: fullScreenSize.width, height: fullScreenSize.height))
         let imgArr = [UIImage(named:"background01")!,
@@ -84,8 +86,6 @@ class LaunchViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         do{
-            let BGM = URL(fileURLWithPath: Bundle.main.path(forResource:"bgm", ofType:"mp3")!)
-            bgm = try AVAudioPlayer(contentsOf:BGM)
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
             audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
             let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
@@ -93,9 +93,6 @@ class LaunchViewController: UIViewController {
         }catch{
             
         }
-        bgm.numberOfLoops = -1
-        bgm.prepareToPlay()
-        bgm.play()
         audioPlayerEnter.prepareToPlay()
         audioPlayerBack.prepareToPlay()
     }
@@ -238,30 +235,21 @@ class LaunchViewController: UIViewController {
         else{
             performSegue(withIdentifier: "ToMenu", sender: self)
         }
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        if let sendBgm = segue.destination as? MenuViewController{
-            sendBgm.bgm = self.bgm
-        }
     }
     
     @IBOutlet weak var closeBtn: UIButton!
     @IBAction func close(_ sender: Any) {
-        audioPlayerBack.play()
-        textBox.isHidden = true
-        info01.isHidden = true
-        info02.isHidden = true
-        info03.isHidden = true
-        info04.isHidden = true
-        info05.isHidden = true
-        info06.isHidden = true
-        info07.isHidden = true
-        closeBtn.isHidden = true
-        
-        
-    }
+    audioPlayerBack.play()
+    textBox.isHidden = true
+    info01.isHidden = true
+    info02.isHidden = true
+    info03.isHidden = true
+    info04.isHidden = true
+    info05.isHidden = true
+    info06.isHidden = true
+    info07.isHidden = true
+    closeBtn.isHidden = true
+}
     @IBOutlet weak var textBox: UIImageView!
     
 }
