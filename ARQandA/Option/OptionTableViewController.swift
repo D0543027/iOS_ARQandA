@@ -30,6 +30,15 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         btnBackToMenu.bounds.size.width = 44
     }
     
+    @IBAction func backToMenu(){
+         performSegue(withIdentifier: "ReturnToMenu01", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if let sendBgm = segue.destination as? MenuViewController{
+            sendBgm.bgm = self.bgm
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list[section].count
     }
@@ -54,9 +63,13 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section{
         case 0:
+            let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title") as! LaunchViewController
+            backToTitle.bgm = self.bgm
+            present(backToTitle, animated: true, completion: nil)
+            /*
             if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
                 present(backToTitle, animated: true, completion: nil)
-            }
+            }*/
             break
         case 1:
             switch indexPath.row{
@@ -136,9 +149,13 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         UserDefaults.standard.synchronize()
         
+        let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title") as! LaunchViewController
+        backToTitle.bgm = self.bgm
+        present(backToTitle, animated: true, completion: nil)
+        /*
         if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
             present(backToTitle, animated: true, completion: nil)
         }
-        
+        */
     }
 }

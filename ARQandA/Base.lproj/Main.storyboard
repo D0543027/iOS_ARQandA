@@ -139,7 +139,7 @@
         <!--OptionTableViewController-->
         <scene sceneID="UcG-xB-l8z">
             <objects>
-                <viewController id="qcs-DB-xq2" userLabel="OptionTableViewController" customClass="OptionTableViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Option" id="qcs-DB-xq2" userLabel="OptionTableViewController" customClass="OptionTableViewController" customModule="ARQandA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uMO-A6-aup">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,6 +180,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="&lt;"/>
                                 <connections>
+                                    <action selector="backToMenu" destination="qcs-DB-xq2" eventType="touchUpInside" id="tt4-7x-kP0"/>
                                     <segue destination="yS4-0g-95t" kind="presentation" identifier="ReturnMenu01" id="M9J-3j-TJO"/>
                                 </connections>
                             </button>
@@ -748,6 +749,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="alU-ZC-5hF"/>
-        <segue reference="M9J-3j-TJO"/>
+        <segue reference="CS8-va-412"/>
     </inferredMetricsTieBreakers>
 </document>

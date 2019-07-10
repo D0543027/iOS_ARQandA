@@ -49,13 +49,20 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
             let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
             audioPlayerBack = try AVAudioPlayer(contentsOf:BS)
         }catch{
-            
         }
         audioPlayerBack.prepareToPlay()
     }
+
     
     @IBAction func back(_ sender: Any){
         audioPlayerBack.play()
+        performSegue(withIdentifier: "ReturnToMenu02", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if let sendBgm = segue.destination as? MenuViewController{
+            sendBgm.bgm = self.bgm
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

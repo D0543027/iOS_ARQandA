@@ -149,7 +149,7 @@ class QAViewController: UIViewController {
             }
             
             calculatePercentage()
-            // 設延遲(2 sec)
+            // 設延遲(5 sec)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5) , execute: {
                 self.dismiss(animated: true, completion: nil)
             })
