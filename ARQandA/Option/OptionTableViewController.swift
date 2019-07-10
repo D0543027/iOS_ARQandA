@@ -63,13 +63,10 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section{
         case 0:
-            let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title") as! LaunchViewController
-            backToTitle.bgm = self.bgm
-            present(backToTitle, animated: true, completion: nil)
-            /*
+            bgm.stop()
             if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
                 present(backToTitle, animated: true, completion: nil)
-            }*/
+            }
             break
         case 1:
             switch indexPath.row{
@@ -149,13 +146,9 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         UserDefaults.standard.synchronize()
         
-        let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title") as! LaunchViewController
-        backToTitle.bgm = self.bgm
-        present(backToTitle, animated: true, completion: nil)
-        /*
+        bgm.stop()
         if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
             present(backToTitle, animated: true, completion: nil)
         }
-        */
     }
 }
