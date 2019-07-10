@@ -20,9 +20,9 @@ class QAViewController: UIViewController {
     var numberOfQuestion = ""   // 題數
     
     var data: JSON?
-    
-    var audioPlayerF = AVAudioPlayer();
-    var audioPlayerV = AVAudioPlayer();
+    var bgm = AVAudioPlayer()
+    var audioPlayerF = AVAudioPlayer()
+    var audioPlayerV = AVAudioPlayer()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     

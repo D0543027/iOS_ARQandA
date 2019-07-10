@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 class ProfileViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate{
+    var bgm = AVAudioPlayer()
     var audioPlayerBack = AVAudioPlayer()
     
     let profileTitle = ["名字：",
@@ -33,6 +34,10 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !bgm.isPlaying{
+            bgm.play()
+        }
         
         profile.delegate = self
         profile.dataSource = self
