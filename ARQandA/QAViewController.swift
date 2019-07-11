@@ -27,7 +27,13 @@ class QAViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //讓文字換行，避免文字太常產生省略情形(abc...xyz這樣)
+        lb.numberOfLines = 0
+        ChoiceBtnLabel1.titleLabel?.numberOfLines = 0
+        ChoiceBtnLabel2.titleLabel?.numberOfLines = 0
+        ChoiceBtnLabel3.titleLabel?.numberOfLines = 0
+        ChoiceBtnLabel4.titleLabel?.numberOfLines = 0
+
         self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
         //隱藏結算畫面物件
         resultBackground.isHidden = true
@@ -89,7 +95,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://7f1e37d5.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://beb0831c.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -165,7 +171,6 @@ class QAViewController: UIViewController {
             
         }
         else {
-            
             lb.text = self.data![index]["Question"].string
             
             RightAnswer = self.data![index]["Ans"].string
@@ -175,10 +180,27 @@ class QAViewController: UIViewController {
             ChoiceBtnLabel2.setTitle(self.data![index]["Ans"].string, for: .normal)
             ChoiceBtnLabel3.setTitle(self.data![index]["choose3"].string, for: .normal)
             ChoiceBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
+            
+            print(ChoiceBtnLabel1.currentTitle!)
+            print(ChoiceBtnLabel2.currentTitle!)
+            print(ChoiceBtnLabel3.currentTitle!)
+            print(ChoiceBtnLabel4.currentTitle!)
+
+            shuffleChoice()
             index = index + 1
         }
     }
-
+    
+    func shuffleChoice(){
+        let choiceArray = [ChoiceBtnLabel1,ChoiceBtnLabel2,ChoiceBtnLabel3,ChoiceBtnLabel4]
+        for _ in 0...50{
+            let rand = Int.random(in: 0...3)
+            let selectString = choiceArray[rand]?.currentTitle
+            let temp = choiceArray[0]?.currentTitle
+            choiceArray[0]?.setTitle(selectString, for: .normal)
+            choiceArray[rand]?.setTitle(temp, for: .normal)
+        }
+    }
     func validAnswer(button: UIButton){
         
         let total = UserDefaults.standard.integer(forKey: "total")

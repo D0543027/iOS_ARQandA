@@ -170,7 +170,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Option" id="fh3-5q-4y6">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="2yb-Ol-2Dv">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NHg-aK-fQa">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NHg-aK-fQa">
                                 <rect key="frame" x="16" y="0.0" width="84" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -537,8 +537,8 @@
                                     <action selector="ChoiceBtn4:" destination="yIf-aG-0wL" eventType="touchUpInside" id="Pu7-nq-fLP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shH-hX-oto">
-                                <rect key="frame" x="45" y="98" width="286" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shH-hX-oto">
+                                <rect key="frame" x="45" y="54" width="286" height="123"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -645,7 +645,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7A-Ub-0Z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550.72463768115949" y="-774.45652173913049"/>
+            <point key="canvasLocation" x="549.60000000000002" y="-774.96251874062978"/>
         </scene>
         <!--Tutorial Page View Controller-->
         <scene sceneID="oiq-gT-Of5">
