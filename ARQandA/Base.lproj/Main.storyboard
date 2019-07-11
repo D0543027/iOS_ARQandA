@@ -180,7 +180,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="&lt;"/>
                                 <connections>
-                                    <segue destination="yS4-0g-95t" kind="presentation" identifier="ReturnMenu01" id="M9J-3j-TJO"/>
+                                    <segue destination="8ij-OK-EPs" kind="unwind" unwindAction="backToMenu:" id="O1k-ua-7PQ"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -191,6 +191,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNn-iT-Gee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8ij-OK-EPs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-197.10144927536234" y="729.61956521739137"/>
         </scene>
@@ -334,7 +335,7 @@
                                             <inset key="imageInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <connections>
                                                 <action selector="back:" destination="0dB-wy-epn" id="kWz-hE-T43"/>
-                                                <segue destination="yS4-0g-95t" kind="presentation" identifier="ReturnMenu02" id="CS8-va-412"/>
+                                                <segue destination="Dmm-uL-2XI" kind="unwind" unwindAction="backToMenu:" id="OdX-vb-4fN"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -380,6 +381,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJz-Zh-YYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Dmm-uL-2XI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="550.72463768115949" y="-24.456521739130437"/>
         </scene>
@@ -689,7 +691,6 @@
                         <outlet property="singleWrongLb" destination="Wgk-q2-P7h" id="LgB-eo-rop"/>
                         <outlet property="singleWrongLbT" destination="ZaZ-0Q-zqt" id="qls-eU-nfa"/>
                         <outlet property="victory" destination="Tkg-Fn-MM8" id="abH-KL-FC4"/>
-                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="finish_qa" id="mDc-cM-YHl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7A-Ub-0Z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -750,8 +751,4 @@
         <image name="space.png" width="489" height="580"/>
         <image name="textBox01.png" width="211" height="206"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="mDc-cM-YHl"/>
-        <segue reference="OcB-8z-bOf"/>
-    </inferredMetricsTieBreakers>
 </document>

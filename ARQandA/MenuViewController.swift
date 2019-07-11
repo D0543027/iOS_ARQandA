@@ -13,7 +13,9 @@ class MenuViewController: UIViewController {
     var audioPlayerEnter = AVAudioPlayer()
     
     @IBOutlet var background: UIImageView!
-    
+    @IBAction func backToMenu(_ segue: UIStoryboardSegue){
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

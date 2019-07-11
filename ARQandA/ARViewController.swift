@@ -15,7 +15,6 @@ import AVFoundation
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    
     let yolo = YOLO()
     var request: VNCoreMLRequest!
     
