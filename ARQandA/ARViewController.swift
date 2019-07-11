@@ -27,10 +27,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var currentBuffer: CVPixelBuffer?
     
-    var score = UILabel()
     // Default device == iPhone
-    var scoreWidth = 70
-    var scoreHeight = 70
+
     var buttonWidth = 45
     var buttonHeight = 45
     var objectInfoWidth = 220
@@ -57,7 +55,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Set the scene to the view
         //sceneView.scene = scene
-        setUpScore()
         setUpBackBtn()
         setUpBoundingBoxes()
         setUpVision()
@@ -72,7 +69,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        score.text = "\(getScore())"
+        
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         
@@ -88,34 +85,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.pause()
     }
     
-    fileprivate func setUpScore() {
-        // Set up score
-        // If device == iPad
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad{
-            scoreWidth = 120
-            scoreHeight = 120
-            buttonWidth = 70
-            buttonHeight = 70
-            objectInfoWidth = 300
-            objectInfoHeight = 100
-            backButtonWidth = 120
-            backButtonHeight = 120
-        }
-        
-        score = UILabel(frame: CGRect(x: Int(UIScreen.main.bounds.width) - scoreWidth - 10 , y: 50, width: scoreWidth , height: scoreHeight))
-        score.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
-        score.textColor = UIColor(white: 1, alpha: 1)
-        score.font = UIFont(name: "AthensClassic", size: CGFloat(scoreWidth / 2 + 10))
-        score.textAlignment = .center
-        score.layer.masksToBounds = true
-        score.layer.cornerRadius = score.bounds.width / 2
-        score.layer.zPosition = 1;
-        view.addSubview(score)
-    }
-    
-    func getScore() -> Int{
-        return UserDefaults.standard.integer(forKey: "right")
-    }
     
     fileprivate func setUpBackBtn() {
         backButton.frame = CGRect(x: 15, y: 50, width: backButtonWidth, height: backButtonHeight)
@@ -339,7 +308,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
         
         if newRect.origin.y <= 50 + backButton.bounds.height{
-            if (newRect.origin.x <=  15 + backButton.bounds.width) || (newRect.origin.x >= UIScreen.main.bounds.width - CGFloat(scoreWidth) - 10)
+            if (newRect.origin.x <=  15 + backButton.bounds.width)
             {
                 newRect.origin.y = 50 + backButton.bounds.height
             }

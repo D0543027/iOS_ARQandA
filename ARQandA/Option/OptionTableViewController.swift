@@ -65,7 +65,6 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
                     guard let name = alertController.textFields?[0].text else{return}
                     UserDefaults.standard.set(name,forKey: "name")
-                    UserDefaults.standard.synchronize()
                 })
                 
                 okAction.isEnabled = false
@@ -128,7 +127,6 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         UserDefaults.standard.set(1, forKey: "playDate")
         
         
-        UserDefaults.standard.synchronize()
         
         if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
             present(backToTitle, animated: true, completion: nil)

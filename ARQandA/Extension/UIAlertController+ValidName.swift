@@ -11,8 +11,9 @@ import UIKit
 
 extension UIAlertController {
     
-    func isValidName(_ name: String) -> Bool {        
-        return name.count > 0 && NSPredicate(format: "self matches %@","^[a-zA-Z0-9].*").evaluate(with: name)
+    func isValidName(_ name: String) -> Bool {
+        // 名字最多 10 字，開頭不為空白，中間可以ㄈ
+        return name.count > 0 && NSPredicate(format: "self matches %@","^[a-zA-Z0-9].{0,9}").evaluate(with: name)
     }
     
     

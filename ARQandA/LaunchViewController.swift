@@ -101,22 +101,18 @@ class LaunchViewController: UIViewController {
     func FirstLaunch(){
         if UserDefaults.standard.object(forKey: "name") == nil{
             UserDefaults.standard.set(" ", forKey: "name")
-            UserDefaults.standard.synchronize()
         }
         //記錄最高分數
         if UserDefaults.standard.object(forKey: "highScore") == nil{
             UserDefaults.standard.set(0, forKey: "highScore")
-            UserDefaults.standard.synchronize()
         }
         //記錄總答錯數
         if UserDefaults.standard.object(forKey: "wrong") == nil{
             UserDefaults.standard.set(0, forKey: "wrong")
-            UserDefaults.standard.synchronize()
         }
         //記錄總答對數
         if UserDefaults.standard.object(forKey: "right") == nil{
             UserDefaults.standard.set(0, forKey: "right")
-            UserDefaults.standard.synchronize()
         }
         
         if UserDefaults.standard.object(forKey: "startDate") == nil{
@@ -126,12 +122,10 @@ class LaunchViewController: UIViewController {
             dataFormatter.dateFormat = "YYYY-MM-dd"
             let stringDate = dataFormatter.string(from: currentDate)
             UserDefaults.standard.set(stringDate, forKey: "startDate")
-            UserDefaults.standard.synchronize()
         }
         
         if UserDefaults.standard.object(forKey: "playDate") == nil{
             UserDefaults.standard.set(1, forKey: "playDate")
-            UserDefaults.standard.synchronize()
         }
         
         if UserDefaults.standard.object(forKey: "currentDate") == nil{
@@ -141,17 +135,14 @@ class LaunchViewController: UIViewController {
             dataFormatter.dateFormat = "YYYY-MM-dd"
             let stringDate = dataFormatter.string(from: currentDate)
             UserDefaults.standard.set(stringDate, forKey: "currentDate")
-            UserDefaults.standard.synchronize()
         }
         
         if UserDefaults.standard.object(forKey: "total") == nil{
             UserDefaults.standard.set(0, forKey: "total")
-            UserDefaults.standard.synchronize()
         }
         
         if UserDefaults.standard.object(forKey: "correctPercentage") == nil{
             UserDefaults.standard.set(0, forKey: "correctPercentage")
-            UserDefaults.standard.synchronize()
         }
     }
     
@@ -169,9 +160,7 @@ class LaunchViewController: UIViewController {
         if currentDate != savedCurrentDate{
             playDate = playDate + 1
             UserDefaults.standard.set(playDate,forKey: "playDate")
-            UserDefaults.standard.synchronize()
             UserDefaults.standard.set(currentDate,forKey: "currentDate")
-            UserDefaults.standard.synchronize()
         }
     }
     /*
@@ -224,7 +213,6 @@ class LaunchViewController: UIViewController {
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
                 guard let name = alertController.textFields?[0].text else{return}
                 UserDefaults.standard.set(name,forKey: "name")
-                UserDefaults.standard.synchronize()
                 self.performSegue(withIdentifier: "ToMenu", sender: self)
             })
             

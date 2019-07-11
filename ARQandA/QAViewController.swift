@@ -89,7 +89,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://28559f70.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://619e2fd9.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -116,9 +116,10 @@ class QAViewController: UIViewController {
     
     func updateQuestion(){
         
+        enableChoiceButton()
+        
         // 答完題目
         if index == data!.count{
-            print("Finish")
             // 答題結束畫面
             lb.text = ""
             ChoiceBtnLabel1.setTitle("", for: .normal)
@@ -140,23 +141,21 @@ class QAViewController: UIViewController {
             if score < 0{
                 score = 0
             }
+            
+            var highScore = UserDefaults.standard.integer(forKey: "highScore")
+            //更新最高分數
+            if highScore < score {
+                highScore = score
+                UserDefaults.standard.set(highScore, forKey: "highScore")
+            }
+            
             singleScoreLb.text = String(score)
             singleRightLb.text = String(singleRight)
             singleWrongLb.text = String(singleWrong)
             singleHighScoreLb.text = UserDefaults.standard.string(forKey: "highScore")
             // 答完題 不得觸發選項(點選項不動作）
-            ChoiceBtnLabel1.isEnabled = false
-            ChoiceBtnLabel2.isEnabled = false
-            ChoiceBtnLabel3.isEnabled = false
-            ChoiceBtnLabel4.isEnabled = false
-            //更新最高分數
-            var highScore = UserDefaults.standard.integer(forKey: "highScore")
-            
-            if highScore < score {
-                highScore = score
-                UserDefaults.standard.set(highScore, forKey: "highScore")
-                UserDefaults.standard.synchronize()
-            }
+
+
             
             calculatePercentage()
             // 設延遲(5 sec)
@@ -191,7 +190,6 @@ class QAViewController: UIViewController {
             //總答對數++
             let rightCount = UserDefaults.standard.integer(forKey: "right")
             UserDefaults.standard.set(rightCount + 1, forKey: "right")
-            UserDefaults.standard.synchronize()
             
             singleRight = singleRight + 1
         } else {
@@ -201,13 +199,11 @@ class QAViewController: UIViewController {
             //總答錯數++
             let countWrong = UserDefaults.standard.integer(forKey: "wrong")
             UserDefaults.standard.set(countWrong + 1, forKey: "wrong")
-            UserDefaults.standard.synchronize()
             
             singleWrong = singleWrong + 1
         }
         
         UserDefaults.standard.set(total + 1, forKey: "total")
-        UserDefaults.standard.synchronize()
 
     }
     
@@ -218,7 +214,6 @@ class QAViewController: UIViewController {
         let percentage = (Double(rightCount) / Double(total) ) * 100
         let strPercentage = "\(String(format: "%.2f", percentage)) %"
         UserDefaults.standard.set(strPercentage, forKey: "correctPercentage")
-        UserDefaults.standard.synchronize()
 
     }
     
@@ -247,7 +242,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel1: UIButton!
     @IBAction func ChoiceBtn1(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel1)
-        
+        disableChoiceButton()
         //延遲1秒
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
@@ -260,6 +255,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel2: UIButton!
     @IBAction func ChoiceBtn2(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel2)
+        disableChoiceButton()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
@@ -272,6 +268,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel3: UIButton!
     @IBAction func ChoiceBtn3(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel3)
+        disableChoiceButton()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
@@ -284,6 +281,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel4: UIButton!
     @IBAction func ChoiceBtn4(_ sender: Any) {
         validAnswer(button: ChoiceBtnLabel4)
+        disableChoiceButton()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
@@ -293,5 +291,18 @@ class QAViewController: UIViewController {
         })
     }
     
+    func enableChoiceButton(){
+        ChoiceBtnLabel1.isEnabled = true
+        ChoiceBtnLabel2.isEnabled = true
+        ChoiceBtnLabel3.isEnabled = true
+        ChoiceBtnLabel4.isEnabled = true
+    }
+    
+    func disableChoiceButton(){
+        ChoiceBtnLabel1.isEnabled = false
+        ChoiceBtnLabel2.isEnabled = false
+        ChoiceBtnLabel3.isEnabled = false
+        ChoiceBtnLabel4.isEnabled = false
+    }
     
 }

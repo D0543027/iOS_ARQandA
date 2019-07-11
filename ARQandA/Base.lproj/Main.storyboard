@@ -37,7 +37,6 @@
                                 <state key="normal" image="START.png"/>
                                 <connections>
                                     <action selector="start:" destination="cNd-bV-ZPi" eventType="touchUpInside" id="FkQ-8V-u7K"/>
-                                    <segue destination="yS4-0g-95t" kind="showDetail" identifier="ToMenu" id="tsd-eL-jiP"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="textBox01.png" translatesAutoresizingMaskIntoConstraints="NO" id="dcA-fj-op0">
@@ -130,6 +129,7 @@
                         <outlet property="info07" destination="2N8-I7-qJk" id="9ZR-3k-knI"/>
                         <outlet property="startBtn" destination="ZZv-Sj-pHy" id="Isq-bC-SHV"/>
                         <outlet property="textBox" destination="dcA-fj-op0" id="WJV-xf-S86"/>
+                        <segue destination="yS4-0g-95t" kind="presentation" identifier="ToMenu" id="OcB-8z-bOf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3T-i5-gPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -752,6 +752,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mDc-cM-YHl"/>
-        <segue reference="tsd-eL-jiP"/>
+        <segue reference="OcB-8z-bOf"/>
     </inferredMetricsTieBreakers>
 </document>
