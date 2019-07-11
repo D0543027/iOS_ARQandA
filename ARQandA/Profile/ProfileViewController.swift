@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profile.tableFooterView = UIView(frame: .zero)
         profile.delegate = self
         profile.dataSource = self
     }
@@ -60,7 +61,7 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         
         cell.textLabel?.text = profileTitle[indexPath.row]
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 18.5)
         
         cell.detailTextLabel?.text = profileData[indexPath.row]
         cell.detailTextLabel?.textColor = UIColor.blue
