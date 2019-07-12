@@ -61,13 +61,14 @@ class ProfileViewController: UIViewController ,UITableViewDataSource, UITableVie
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         
         cell.textLabel?.text = profileTitle[indexPath.row]
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 18.5)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+        cell.textLabel?.minimumScaleFactor = 0.5
         
         cell.detailTextLabel?.text = profileData[indexPath.row]
         cell.detailTextLabel?.textColor = UIColor.blue
         cell.detailTextLabel?.textAlignment = .right
         cell.detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        
+        cell.detailTextLabel?.minimumScaleFactor = 0.5
         return cell
     }
 }
