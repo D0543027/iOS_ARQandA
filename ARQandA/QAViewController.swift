@@ -95,7 +95,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://beb0831c.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://829652d2.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -180,11 +180,6 @@ class QAViewController: UIViewController {
             ChoiceBtnLabel2.setTitle(self.data![index]["Ans"].string, for: .normal)
             ChoiceBtnLabel3.setTitle(self.data![index]["choose3"].string, for: .normal)
             ChoiceBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
-            
-            print(ChoiceBtnLabel1.currentTitle!)
-            print(ChoiceBtnLabel2.currentTitle!)
-            print(ChoiceBtnLabel3.currentTitle!)
-            print(ChoiceBtnLabel4.currentTitle!)
 
             shuffleChoice()
             index = index + 1
@@ -196,9 +191,11 @@ class QAViewController: UIViewController {
         for _ in 0...50{
             let rand = Int.random(in: 0...3)
             let selectString = choiceArray[rand]?.currentTitle
-            let temp = choiceArray[0]?.currentTitle
-            choiceArray[0]?.setTitle(selectString, for: .normal)
-            choiceArray[rand]?.setTitle(temp, for: .normal)
+            if selectString?.isEmpty != true{
+                let temp = choiceArray[0]?.currentTitle
+                choiceArray[0]?.setTitle(selectString, for: .normal)
+                choiceArray[rand]?.setTitle(temp, for: .normal)
+            }
         }
     }
     func validAnswer(button: UIButton){
