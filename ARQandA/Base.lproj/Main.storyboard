@@ -176,7 +176,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="&lt;"/>
                                 <connections>
-                                    <segue destination="8ij-OK-EPs" kind="unwind" unwindAction="backToMenu:" id="O1k-ua-7PQ"/>
+                                    <segue destination="8ij-OK-EPs" kind="unwind" identifier="backToMenu" unwindAction="backToMenu:" id="O1k-ua-7PQ"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -184,6 +184,7 @@
                     <connections>
                         <outlet property="btnBackToMenu" destination="NHg-aK-fQa" id="lOt-Zl-dnX"/>
                         <segue destination="HIq-Xw-OvW" kind="presentation" identifier="Tutorial" id="wPc-YC-6Rf"/>
+                        <segue destination="8ij-OK-EPs" kind="unwind" identifier="backToLaunch" unwindAction="backToLaunch:" id="uXI-Gh-Ydd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNn-iT-Gee" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -420,7 +421,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pT4-NX-4fZ">
-                                <rect key="frame" x="178.66666666666663" y="350" width="57" height="36"/>
+                                <rect key="frame" x="178.66666666666666" y="350" width="57" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -447,7 +448,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zqr-a2-lmA">
-                                <rect key="frame" x="157.66666666666663" y="350" width="98.999999999999972" height="36"/>
+                                <rect key="frame" x="157.66666666666666" y="350" width="98.999999999999972" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -474,7 +475,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Third" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hb6-mi-PUG">
-                                <rect key="frame" x="173.66666666666663" y="350" width="67" height="36"/>
+                                <rect key="frame" x="173.66666666666666" y="350" width="67" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

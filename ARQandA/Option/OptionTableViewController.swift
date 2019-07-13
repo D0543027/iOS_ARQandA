@@ -48,9 +48,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section{
         case 0:
-            if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
-                present(backToTitle, animated: true, completion: nil)
-            }
+            performSegue(withIdentifier: "backToLaunch", sender: self)
             break
         case 1:
             switch indexPath.row{
@@ -126,10 +124,6 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         UserDefaults.standard.set(0, forKey: "correctPercentage")
         UserDefaults.standard.set(1, forKey: "playDate")
         
-        
-        
-        if let backToTitle = storyboard?.instantiateViewController(withIdentifier: "Title"){
-            present(backToTitle, animated: true, completion: nil)
-        }
+        performSegue(withIdentifier: "backToLaunch", sender: self)
     }
 }

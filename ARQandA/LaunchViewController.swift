@@ -15,6 +15,9 @@ class LaunchViewController: UIViewController {
     var bgm = AVAudioPlayer()
     
     @IBOutlet var background: UIImageView!
+    @IBAction func backToLaunch(_ segue: UIStoryboardSegue){
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
