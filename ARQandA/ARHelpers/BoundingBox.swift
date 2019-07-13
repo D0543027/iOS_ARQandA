@@ -3,31 +3,15 @@ import UIKit
 
 class BoundingBox{
     let shapeLayer: CAShapeLayer
-    //let textLayer: CATextLayer
-    //let infoLayer: CAShapeLayer
+
     let infoTextLayer: CATextLayer
     let starLayer: CAShapeLayer
-    
+    var starWidth: CGFloat
     init() {
         shapeLayer = CAShapeLayer()
         shapeLayer.fillColor =  UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.8).cgColor
         shapeLayer.isHidden = true
         
-        /*
-         textLayer = CATextLayer()
-         textLayer.foregroundColor = UIColor.black.cgColor
-         textLayer.isHidden = true
-         textLayer.contentsScale = UIScreen.main.scale
-         textLayer.fontSize = 14
-         textLayer.font = UIFont(name: "Avenir", size: textLayer.fontSize)
-         textLayer.alignmentMode = CATextLayerAlignmentMode.center
-         */
-        /*
-         infoLayer = CAShapeLayer()
-         infoLayer.lineWidth = 4
-         infoLayer.isHidden = true
-         
-         */
         infoTextLayer = CATextLayer()
         infoTextLayer.foregroundColor = UIColor.black.cgColor
         infoTextLayer.isHidden = true
@@ -39,13 +23,13 @@ class BoundingBox{
         starLayer = CAShapeLayer()
         starLayer.fillColor = UIColor.black.cgColor
         starLayer.isHidden = true
+        
+        starWidth = 0.0
     }
     
     
     func addToLayer(_ parent: CALayer) {
         parent.addSublayer(shapeLayer)
-        //parent.addSublayer(textLayer)
-        //parent.addSublayer(infoLayer)
         parent.addSublayer(infoTextLayer)
         parent.addSublayer(starLayer)
         
@@ -54,86 +38,53 @@ class BoundingBox{
     func show(frame: CGRect, label: String,difficulty: String) {
         CATransaction.setDisableActions(true)
         
-        let infoRect = CGRect(x: frame.origin.x + 50 + 10, y: frame.origin.y + 5, width: 150, height: 100)
-        let path = UIBezierPath(rect: frame)
-        //let infoPath = UIBezierPath(rect: infoRect)
-        
-        
-        shapeLayer.path = path.cgPath
-        //shapeLayer.strokeColor = color.cgColor
-        shapeLayer.isHidden = false
-        
-        /*
-         textLayer.string = label
-         textLayer.backgroundColor = color.cgColor
-         textLayer.isHidden = false
-         */
-        
-        /*
-         infoLayer.path = infoPath.cgPath
-         infoLayer.isHidden = false
-         infoLayer.fillColor = UIColor.yellow.cgColor
-         */
-        
+        // 顯示出 Name: Label
         let infoText = "Name: " + label
-        
         infoTextLayer.string = infoText
         infoTextLayer.isWrapped = false
         infoTextLayer.alignmentMode = .left
-        
         infoTextLayer.backgroundColor = UIColor.clear.cgColor
-        
-        var starCount = 0
-        switch difficulty {
-        case "Easy":
-            starCount = 1
-        case "Normal":
-            starCount = 3
-        case "Hard":
-            starCount = 5
-        default:
-            starCount = 0
-        }
-        
         infoTextLayer.isHidden = false
-        
-        let infoTextSize = CGSize(width: infoRect.width, height: infoRect.height)
-        
-        let infoTextOrigin = CGPoint(x: infoRect.origin.x , y: infoRect.origin.y)
+        let infoTextSize = getSizeFromString(string: infoText, withFont: UIFont(name: "Avenir", size: infoTextLayer.fontSize)!)
+        let infoTextOrigin = CGPoint(x: frame.origin.x + 50 + 10 , y: frame.origin.y + 5)
         infoTextLayer.frame = CGRect(origin: infoTextOrigin, size: infoTextSize)
         
-        /*
-         let attributes = [
-         NSAttributedString.Key.font: textLayer.font as Any
-         ]
-         
-         let textRect = label.boundingRect(with: CGSize(width: 400, height: 100),
-         options: .truncatesLastVisibleLine,
-         attributes: attributes, context: nil)
-         let textSize = CGSize(width: textRect.width + 12, height: textRect.height)
-         let textOrigin = CGPoint(x: frame.origin.x - 2, y: frame.origin.y - textSize.height)
-         textLayer.frame = CGRect(origin: textOrigin, size: textSize)
-         */
-        
-        
+        // 畫星星
+        let starCount = getStarCountByDifficulty(difficulty: difficulty)
         starLayer.path = drawStar(x: frame.origin.x + 75, y: frame.origin.y + 45, starCount: starCount).cgPath
-        
         starLayer.isHidden = false
+        
+        // 整個包起來
+        var newFrame = frame
+        newFrame.size.width = computeWidthForShapeLayer(textWidth: infoTextOrigin.x + infoTextSize.width, starWidth: starWidth) - newFrame.origin.x
+        let path = UIBezierPath(rect: newFrame)
+        shapeLayer.path = path.cgPath
+        shapeLayer.isHidden = false
     }
     
     func hide() {
         shapeLayer.isHidden = true
-        // textLayer.isHidden = true
-        //infoLayer.isHidden = true
         infoTextLayer.isHidden = true
         starLayer.isHidden = true
     }
     
-    func drawStar(x: CGFloat,y: CGFloat,starCount: Int) -> UIBezierPath{
+    private func getStarCountByDifficulty(difficulty: String) -> Int{
+        switch difficulty {
+        case "Easy":
+            return 1
+        case "Normal":
+            return 3
+        case "Hard":
+            return 5
+        default:
+            return 0
+        }
+    }
+    private func drawStar(x: CGFloat,y: CGFloat,starCount: Int) -> UIBezierPath{
         let starPath = UIBezierPath()
         
         var xCenter: CGFloat = x
-        var yCenter: CGFloat = y
+        let yCenter: CGFloat = y
         
         let w = CGFloat(20)
         let r = w / 2.0
@@ -154,7 +105,26 @@ class BoundingBox{
             
             xCenter = xCenter + 25
         }
+        starWidth = xCenter
         starPath.close()
         return starPath
+    }
+    
+    private func getSizeFromString(string:String, withFont font:UIFont)->CGSize{
+        
+        let textSize = NSString(string: string ).size(
+            withAttributes: [ NSAttributedString.Key.font:font ])
+        
+        return textSize
+    }
+    
+    private func computeWidthForShapeLayer(textWidth: CGFloat, starWidth: CGFloat) -> CGFloat{
+        if textWidth >= starWidth{
+            return textWidth + 15
+        }
+        else{
+            return starWidth
+        }
+        
     }
 }

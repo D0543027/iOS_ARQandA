@@ -328,7 +328,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     // Create button programmtically
     func addButton(frame:CGRect,label: String, numberOfQuestion:String, indexOfObject: Int){
         
-        button = MyButton(frame: frame, label: label, numberOfQuestion: numberOfQuestion, indexOfObject: indexOfObject)
+        button = MyButton(frame: frame, label: label, numberOfQuestion: numberOfQuestion)
+        button.tag = indexOfObject
         button.backgroundColor = .green
         button.setTitle("Go", for: .normal)
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
@@ -345,7 +346,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @objc func buttonAction(sender: MyButton!){
         label = sender.label
         numberOfQuestionToSend = sender.numberOfQuestion
-        boundingBoxes[sender.indexOfObject].hide()
+        boundingBoxes[sender.tag].hide()
         self.performSegue(withIdentifier: "switchScene", sender: self)
         sender.removeFromSuperview()
     }
@@ -390,14 +391,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 class MyButton: UIButton{
     var label: String!
     var numberOfQuestion: String!
-    var indexOfObject: Int!
     
-    init(frame: CGRect, label: String, numberOfQuestion: String, indexOfObject: Int) {
+    init(frame: CGRect, label: String, numberOfQuestion: String) {
         super.init(frame: frame)
         
         self.label = label
         self.numberOfQuestion = numberOfQuestion
-        self.indexOfObject = indexOfObject
     }
     
     required init?(coder aDecoder: NSCoder) {

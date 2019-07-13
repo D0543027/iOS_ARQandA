@@ -95,7 +95,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://1cc70050.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://8e1f39b9.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -180,7 +180,12 @@ class QAViewController: UIViewController {
             ChoiceBtnLabel2.setTitle(self.data![index]["Ans"].string, for: .normal)
             ChoiceBtnLabel3.setTitle(self.data![index]["choose3"].string, for: .normal)
             ChoiceBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
-
+            
+            // 如果只有三個選項，第四個選項不能選
+            if (ChoiceBtnLabel4.currentTitle?.isEmpty)!{
+                ChoiceBtnLabel4.isEnabled = false
+            }
+            // 打亂順序
             shuffleChoice()
             index = index + 1
         }
