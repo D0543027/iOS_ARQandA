@@ -30,7 +30,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     var buttonWidth = 45
     var buttonHeight = 45
-    var objectInfoWidth = 220
+    var objectInfoWidth = 250
     var objectInfoHeight = 70
     
     let backButton = UIButton()

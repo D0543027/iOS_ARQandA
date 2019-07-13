@@ -40,12 +40,14 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "123"
+        return ""
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         switch indexPath.section{
         case 0:
             performSegue(withIdentifier: "backToLaunch", sender: self)
