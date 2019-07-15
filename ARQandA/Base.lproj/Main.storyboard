@@ -420,18 +420,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pT4-NX-4fZ">
-                                <rect key="frame" x="178.66666666666666" y="350" width="57" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="l40-TL-475">
+                                <rect key="frame" x="-98" y="0.0" width="610" height="736"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tech01.png" translatesAutoresizingMaskIntoConstraints="NO" id="rtJ-jC-TKJ">
+                                <rect key="frame" x="0.0" y="32" width="414" height="552"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="pT4-NX-4fZ" firstAttribute="centerY" secondItem="oTR-OO-ekw" secondAttribute="centerY" id="18Q-yU-atg"/>
-                            <constraint firstItem="pT4-NX-4fZ" firstAttribute="centerX" secondItem="oTR-OO-ekw" secondAttribute="centerX" id="iSi-Cq-eMC"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cwQ-Uh-KXr"/>
                     </view>
                 </viewController>
@@ -447,18 +445,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zqr-a2-lmA">
-                                <rect key="frame" x="157.66666666666666" y="350" width="98.999999999999972" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="rZP-kU-s0D">
+                                <rect key="frame" x="-98" y="0.0" width="610" height="736"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tech02.png" translatesAutoresizingMaskIntoConstraints="NO" id="BJW-1X-4b1">
+                                <rect key="frame" x="0.0" y="27" width="414" height="558"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Zqr-a2-lmA" firstAttribute="centerX" secondItem="PdD-Xj-LPJ" secondAttribute="centerX" id="ShY-sg-cvS"/>
-                            <constraint firstItem="Zqr-a2-lmA" firstAttribute="centerY" secondItem="PdD-Xj-LPJ" secondAttribute="centerY" id="YO8-vQ-9qV"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gPZ-SU-k5s"/>
                     </view>
                 </viewController>
@@ -474,24 +470,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Third" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hb6-mi-PUG">
-                                <rect key="frame" x="173.66666666666666" y="350" width="67" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="gG5-F6-qie">
+                                <rect key="frame" x="-94" y="0.0" width="601" height="736"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tech03.png" translatesAutoresizingMaskIntoConstraints="NO" id="FT0-Vi-c5i">
+                                <rect key="frame" x="-13" y="55" width="427" height="531"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="hb6-mi-PUG" firstAttribute="centerY" secondItem="T7P-0X-LK8" secondAttribute="centerY" id="202-Cn-gRq"/>
-                            <constraint firstItem="hb6-mi-PUG" firstAttribute="centerX" secondItem="T7P-0X-LK8" secondAttribute="centerX" id="VT3-97-DNr"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Gbl-dD-NsL"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hs7-Gs-Rg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4173.913043478261" y="722.28260869565224"/>
+            <point key="canvasLocation" x="4092.753623188406" y="729.61956521739137"/>
         </scene>
         <!--QA View Controller-->
         <scene sceneID="mgQ-RN-bPz">
@@ -732,6 +726,10 @@
         <image name="giphy.png" width="1803" height="1800"/>
         <image name="profileBackground.jpg" width="1024" height="1369"/>
         <image name="space.png" width="489" height="580"/>
+        <image name="teachBackground.png" width="500" height="400"/>
+        <image name="tech01.png" width="697" height="900"/>
+        <image name="tech02.png" width="697" height="900"/>
+        <image name="tech03.png" width="697" height="900"/>
         <image name="textBox01.png" width="211" height="206"/>
     </resources>
 </document>
