@@ -27,7 +27,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var currentBuffer: CVPixelBuffer?
     
     // Default device == iPhone
-
+    
     var buttonWidth = 45
     var buttonHeight = 45
     var objectInfoWidth = 250
@@ -154,24 +154,34 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         visionQueue.async {
             if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
+                if self.toQAButton != nil{
+                    DispatchQueue.main.async {
+                        self.toQAButton.isEnabled = false
+                    }
+                }
                 self.updatePosition()
                 self.currentBuffer = frame.capturedImage
                 self.predictUsingVision(pixelBuffer: self.currentBuffer!)
             }
+            else{
+                if self.toQAButton != nil{
+                    DispatchQueue.main.async {
+                        self.toQAButton.isEnabled = true
+                    }
+                }
+            }
+            
         }
-        
-        //print("-----------------")
-        
     }
     
     func DeviceMoving() -> Bool{
-        if abs(self.pre_MoveX - self.new_MoveX) > 0.01{
+        if abs(self.pre_MoveX - self.new_MoveX) > 0.015{
             return true;
         }
-        if abs(self.pre_MoveY - self.new_MoveY) > 0.01{
+        if abs(self.pre_MoveY - self.new_MoveY) > 0.015{
             return true;
         }
-        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.01{
+        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.015{
             return true;
         }
         if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
@@ -323,24 +333,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         return newRect
     }
     
-    var button: MyButton!
+    var toQAButton: MyButton!
     
     // Create button programmtically
     func addButton(frame:CGRect,label: String, numberOfQuestion:String, indexOfObject: Int){
         
-        button = MyButton(frame: frame, label: label, numberOfQuestion: numberOfQuestion)
-        button.tag = indexOfObject
-        button.backgroundColor = .green
-        button.setTitle("Go", for: .normal)
-        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        button.layer.shadowOpacity = 1.0
-        button.layer.shadowRadius = 0.0
-        button.layer.masksToBounds = false
-        button.layer.cornerRadius = 4.0
+        toQAButton = MyButton(frame: frame, label: label, numberOfQuestion: numberOfQuestion)
+        toQAButton.tag = indexOfObject
+        toQAButton.backgroundColor = .green
+        toQAButton.setTitle("Go", for: .normal)
+        toQAButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        toQAButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        toQAButton.layer.shadowOpacity = 1.0
+        toQAButton.layer.shadowRadius = 0.0
+        toQAButton.layer.masksToBounds = false
+        toQAButton.layer.cornerRadius = 4.0
         
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        self.sceneView.addSubview(button)
+        toQAButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.sceneView.addSubview(toQAButton)
     }
     
     @objc func buttonAction(sender: MyButton!){

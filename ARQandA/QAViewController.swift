@@ -95,7 +95,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://8e1f39b9.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://4255ec57.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
