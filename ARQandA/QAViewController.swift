@@ -50,6 +50,10 @@ class QAViewController: UIViewController {
         victory.isHidden = true
         failed.isHidden = true
         
+        ValidButton1.isHidden = true
+        ValidButton2.isHidden = true
+        ValidButton3.isHidden = true
+        ValidButton4.isHidden = true
         // 讀取中，轉圈
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -95,7 +99,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://4255ec57.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://a1cee1cd.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -123,7 +127,7 @@ class QAViewController: UIViewController {
     func updateQuestion(){
         
         enableChoiceButton()
-        
+        clearValidSign()
         // 答完題目
         if index == data!.count{
             // 答題結束畫面
@@ -203,10 +207,11 @@ class QAViewController: UIViewController {
             }
         }
     }
-    func validAnswer(button: UIButton){
+    func validAnswer(button: UIButton) -> Bool{
         
         let total = UserDefaults.standard.integer(forKey: "total")
-        
+        UserDefaults.standard.set(total + 1, forKey: "total")
+
         if RightAnswer == button.currentTitle{
             BtnVictory()
             //答對分數++（答對一題＋5分）
@@ -216,21 +221,50 @@ class QAViewController: UIViewController {
             UserDefaults.standard.set(rightCount + 1, forKey: "right")
             
             singleRight = singleRight + 1
+            return true
         } else {
             BtnFailed()
+            
             //答錯一題-3分
             score = score - 3
             //總答錯數++
             let countWrong = UserDefaults.standard.integer(forKey: "wrong")
             UserDefaults.standard.set(countWrong + 1, forKey: "wrong")
-            
+    
             singleWrong = singleWrong + 1
+            return false
         }
         
-        UserDefaults.standard.set(total + 1, forKey: "total")
-
     }
     
+    func showAnswer(){
+        let choices = [ChoiceBtnLabel1,ChoiceBtnLabel2,ChoiceBtnLabel3,ChoiceBtnLabel4]
+        var index = 0
+        for btn in choices{
+            if RightAnswer == btn?.currentTitle{
+                break;
+            }
+            index = index + 1
+        }
+        switch index {
+        case 0:
+            ValidButton1.image = UIImage(named: "checksign.jpg")
+            ValidButton1.isHidden = false
+            break
+        case 1:
+            ValidButton2.image = UIImage(named: "checksign.jpg")
+            ValidButton2.isHidden = false
+            break
+        case 2:
+            ValidButton3.image = UIImage(named: "checksign.jpg")
+            ValidButton3.isHidden = false
+            break
+        default:
+            ValidButton4.image = UIImage(named: "checksign.jpg")
+            ValidButton4.isHidden = false
+            break
+        }
+    }
     func calculatePercentage(){
         let rightCount = UserDefaults.standard.integer(forKey: "right")
         let total = UserDefaults.standard.integer(forKey: "total")
@@ -264,53 +298,86 @@ class QAViewController: UIViewController {
     @IBOutlet weak var victory: UIImageView!
     @IBOutlet weak var failed: UIImageView!
     @IBOutlet weak var ChoiceBtnLabel1: UIButton!
+    @IBOutlet weak var ValidButton1: UIImageView!
     @IBAction func ChoiceBtn1(_ sender: Any) {
-        validAnswer(button: ChoiceBtnLabel1)
+        let isCorrect = validAnswer(button: ChoiceBtnLabel1)
+        
         disableChoiceButton()
+        if isCorrect{
+            ValidButton1.image = UIImage(named: "checksign.jpg")
+        }
+        else{
+            ValidButton1.image = UIImage(named: "wrongsign.jpeg")
+        }
+        ValidButton1.isHidden = false
+        showAnswer()
         //延遲1秒
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
             self.failed.isHidden = true
-            
             self.updateQuestion()
         })
     }
     
     @IBOutlet weak var ChoiceBtnLabel2: UIButton!
+    @IBOutlet weak var ValidButton2: UIImageView!
     @IBAction func ChoiceBtn2(_ sender: Any) {
-        validAnswer(button: ChoiceBtnLabel2)
+        let isCorrect = validAnswer(button: ChoiceBtnLabel2)
         disableChoiceButton()
         
+        if isCorrect{
+            ValidButton2.image = UIImage(named: "checksign.jpg")
+        }
+        else{
+            ValidButton2.image = UIImage(named: "wrongsign.jpeg")
+        }
+        ValidButton2.isHidden = false
+        showAnswer()
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
             self.failed.isHidden = true
-            
             self.updateQuestion()
         })
     }
     
     @IBOutlet weak var ChoiceBtnLabel3: UIButton!
+    @IBOutlet weak var ValidButton3: UIImageView!
     @IBAction func ChoiceBtn3(_ sender: Any) {
-        validAnswer(button: ChoiceBtnLabel3)
+        let isCorrect = validAnswer(button: ChoiceBtnLabel3)
         disableChoiceButton()
         
+        if isCorrect{
+            ValidButton3.image = UIImage(named: "checksign.jpg")
+        }
+        else{
+            ValidButton3.image = UIImage(named: "wrongsign.jpeg")
+        }
+        ValidButton3.isHidden = false
+        showAnswer()
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
             self.failed.isHidden = true
-            
             self.updateQuestion()
         })
     }
     
     @IBOutlet weak var ChoiceBtnLabel4: UIButton!
+    @IBOutlet weak var ValidButton4: UIImageView!
     @IBAction func ChoiceBtn4(_ sender: Any) {
-        validAnswer(button: ChoiceBtnLabel4)
+        let isCorrect = validAnswer(button: ChoiceBtnLabel4)
         disableChoiceButton()
         
+        if isCorrect{
+            ValidButton4.image = UIImage(named: "checksign.jpg")
+        }
+        else{
+            ValidButton4.image = UIImage(named: "wrongsign.jpeg")
+        }
+        ValidButton4.isHidden = false
+        showAnswer()
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.victory.isHidden = true
             self.failed.isHidden = true
-            
             self.updateQuestion()
         })
     }
@@ -329,4 +396,10 @@ class QAViewController: UIViewController {
         ChoiceBtnLabel4.isEnabled = false
     }
     
+    func clearValidSign(){
+        ValidButton1.isHidden = true
+        ValidButton2.isHidden = true
+        ValidButton3.isHidden = true
+        ValidButton4.isHidden = true
+    }
 }

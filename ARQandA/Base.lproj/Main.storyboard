@@ -421,7 +421,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pT4-NX-4fZ">
-                                <rect key="frame" x="178.66666666666663" y="350" width="57" height="36"/>
+                                <rect key="frame" x="178.66666666666666" y="350" width="57" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -448,7 +448,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zqr-a2-lmA">
-                                <rect key="frame" x="157.66666666666663" y="350" width="98.999999999999972" height="36"/>
+                                <rect key="frame" x="157.66666666666666" y="350" width="98.999999999999972" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -475,7 +475,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Third" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hb6-mi-PUG">
-                                <rect key="frame" x="173.66666666666663" y="350" width="67" height="36"/>
+                                <rect key="frame" x="173.66666666666666" y="350" width="67" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -628,6 +628,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checksign.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3LH-cy-FKy" userLabel="ValidButton1">
+                                <rect key="frame" x="319" y="416" width="51" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checksign.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BFl-ij-Xt6" userLabel="ValidButton2">
+                                <rect key="frame" x="319" y="484" width="51" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checksign.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DEy-he-8q7" userLabel="ValidButton3">
+                                <rect key="frame" x="319" y="552" width="51" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checksign.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8fa-gx-njQ" userLabel="ValidButton4">
+                                <rect key="frame" x="319" y="620" width="51" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <accessibility key="accessibilityConfiguration">
@@ -640,6 +656,10 @@
                         <outlet property="ChoiceBtnLabel2" destination="HfW-w1-6Hf" id="diZ-e7-Wot"/>
                         <outlet property="ChoiceBtnLabel3" destination="nob-Sb-9De" id="WWu-KN-EeR"/>
                         <outlet property="ChoiceBtnLabel4" destination="ejo-Da-aDC" id="UNf-O4-koB"/>
+                        <outlet property="ValidButton1" destination="3LH-cy-FKy" id="glK-bS-01h"/>
+                        <outlet property="ValidButton2" destination="BFl-ij-Xt6" id="8jh-t5-CGL"/>
+                        <outlet property="ValidButton3" destination="DEy-he-8q7" id="vlV-KP-sev"/>
+                        <outlet property="ValidButton4" destination="8fa-gx-njQ" id="yBy-1b-abY"/>
                         <outlet property="failed" destination="l9u-VG-cte" id="G7v-3f-HPl"/>
                         <outlet property="lb" destination="shH-hX-oto" id="qIW-Eo-HvU"/>
                         <outlet property="resultBack" destination="LUX-6i-JN2" id="kap-Rq-tpR"/>
@@ -657,7 +677,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7A-Ub-0Z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="546.09375" y="-776.13469985358711"/>
+            <point key="canvasLocation" x="544.92753623188412" y="-776.9021739130435"/>
         </scene>
         <!--Tutorial Page View Controller-->
         <scene sceneID="oiq-gT-Of5">
@@ -707,6 +727,7 @@
         <image name="START.png" width="239" height="121"/>
         <image name="Victory.png" width="485" height="200"/>
         <image name="arrowBack.png" width="96" height="124"/>
+        <image name="checksign.jpg" width="516" height="485"/>
         <image name="close.png" width="237" height="116"/>
         <image name="giphy.png" width="1803" height="1800"/>
         <image name="profileBackground.jpg" width="1024" height="1369"/>
