@@ -21,8 +21,6 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AudioManager.sharedInstance.startMusic()
-        
         let fullScreenSize = UIScreen.main.bounds.size
         background = UIImageView(frame : CGRect(x:0, y:0, width: fullScreenSize.width, height: fullScreenSize.height))
         let imgArr = [UIImage(named:"background01")!,
@@ -87,7 +85,8 @@ class LaunchViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        AudioManager.sharedInstance.startMusic()
+
         do{
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
             audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)

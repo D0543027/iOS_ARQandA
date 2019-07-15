@@ -426,10 +426,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="l40-TL-475">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TutorialBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="l40-TL-475">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tech01.png" translatesAutoresizingMaskIntoConstraints="NO" id="rtJ-jC-TKJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial01.png" translatesAutoresizingMaskIntoConstraints="NO" id="rtJ-jC-TKJ">
                                 <rect key="frame" x="0.0" y="32" width="414" height="552"/>
                             </imageView>
                         </subviews>
@@ -461,10 +461,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="rZP-kU-s0D">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TutorialBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="rZP-kU-s0D">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tech02.png" translatesAutoresizingMaskIntoConstraints="NO" id="BJW-1X-4b1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial02.png" translatesAutoresizingMaskIntoConstraints="NO" id="BJW-1X-4b1">
                                 <rect key="frame" x="0.0" y="32" width="414" height="553"/>
                             </imageView>
                         </subviews>
@@ -494,10 +494,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="gG5-F6-qie">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TutorialBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="gG5-F6-qie">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tech03.png" translatesAutoresizingMaskIntoConstraints="NO" id="FT0-Vi-c5i">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Tutorial03.png" translatesAutoresizingMaskIntoConstraints="NO" id="FT0-Vi-c5i">
                                 <rect key="frame" x="-13" y="55" width="427" height="531"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -748,6 +748,10 @@
         <image name="MenuButtonEX05.png" width="211" height="206"/>
         <image name="MenuButtonEX06.png" width="211" height="206"/>
         <image name="START.png" width="239" height="121"/>
+        <image name="Tutorial01.png" width="697" height="900"/>
+        <image name="Tutorial02.png" width="697" height="900"/>
+        <image name="Tutorial03.png" width="697" height="900"/>
+        <image name="TutorialBackground.png" width="500" height="400"/>
         <image name="Victory.png" width="485" height="200"/>
         <image name="arrowBack.png" width="96" height="124"/>
         <image name="checksign.jpg" width="516" height="485"/>
@@ -755,10 +759,6 @@
         <image name="giphy.png" width="1803" height="1800"/>
         <image name="profileBackground.jpg" width="1024" height="1369"/>
         <image name="space.png" width="489" height="580"/>
-        <image name="teachBackground.png" width="500" height="400"/>
-        <image name="tech01.png" width="697" height="900"/>
-        <image name="tech02.png" width="697" height="900"/>
-        <image name="tech03.png" width="697" height="900"/>
         <image name="textBox01.png" width="211" height="206"/>
     </resources>
 </document>
