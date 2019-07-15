@@ -19,6 +19,7 @@ class TutorialViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnToNextPage.layer.cornerRadius = btnToNextPage.frame.height / 2
         btnToNextPage.isHidden = true
         btnToNextPage.isEnabled = false
         // Do any additional setup after loading the view.

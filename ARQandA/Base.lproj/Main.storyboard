@@ -207,12 +207,15 @@
                                 </connections>
                             </containerView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qV3-HV-Kx3">
-                                <rect key="frame" x="188" y="685" width="39" height="37"/>
+                                <rect key="frame" x="100" y="685" width="214" height="37"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCT-rn-9Hf" userLabel="BtnToNextPage">
-                                <rect key="frame" x="182" y="629" width="51" height="48"/>
+                                <rect key="frame" x="100" y="629" width="214" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="End"/>
+                                <state key="normal" title="End">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="switchPage:" destination="ZUa-Ib-HTm" eventType="touchUpInside" id="QKO-2M-MXw"/>
                                     <action selector="switchPage:" destination="HIq-Xw-OvW" eventType="touchUpInside" id="em0-Hi-MvY"/>
@@ -221,14 +224,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qV3-HV-Kx3" firstAttribute="leading" secondItem="fPd-ae-hRJ" secondAttribute="leading" constant="100" id="AwB-YP-MUQ"/>
+                            <constraint firstItem="kCT-rn-9Hf" firstAttribute="leading" relation="lessThanOrEqual" secondItem="fPd-ae-hRJ" secondAttribute="leading" constant="100" id="LAL-Ok-7w6"/>
                             <constraint firstItem="qV3-HV-Kx3" firstAttribute="centerX" secondItem="kCT-rn-9Hf" secondAttribute="centerX" id="MrE-b8-314"/>
                             <constraint firstItem="fPd-ae-hRJ" firstAttribute="bottom" secondItem="Jc9-jg-8cf" secondAttribute="bottom" id="PYI-kC-jyD"/>
                             <constraint firstItem="fPd-ae-hRJ" firstAttribute="bottom" secondItem="qV3-HV-Kx3" secondAttribute="bottom" constant="14" id="XCO-WA-ll0"/>
+                            <constraint firstItem="fPd-ae-hRJ" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="kCT-rn-9Hf" secondAttribute="trailing" constant="100" id="avd-Ia-WvH"/>
                             <constraint firstItem="fPd-ae-hRJ" firstAttribute="trailing" secondItem="Jc9-jg-8cf" secondAttribute="trailing" id="cgt-nb-G8N"/>
                             <constraint firstItem="qV3-HV-Kx3" firstAttribute="top" secondItem="kCT-rn-9Hf" secondAttribute="bottom" constant="8" id="eC4-eX-H6X"/>
                             <constraint firstItem="Jc9-jg-8cf" firstAttribute="leading" secondItem="fPd-ae-hRJ" secondAttribute="leading" id="jSI-Ru-1Nc"/>
                             <constraint firstItem="Jc9-jg-8cf" firstAttribute="top" secondItem="fPd-ae-hRJ" secondAttribute="top" id="k8s-Ax-tHs"/>
-                            <constraint firstItem="fPd-ae-hRJ" firstAttribute="trailing" secondItem="kCT-rn-9Hf" secondAttribute="trailing" constant="181" id="znO-n3-RvW"/>
+                            <constraint firstItem="fPd-ae-hRJ" firstAttribute="trailing" secondItem="qV3-HV-Kx3" secondAttribute="trailing" constant="100" id="tfZ-9n-5LM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fPd-ae-hRJ"/>
                     </view>
@@ -420,16 +426,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="l40-TL-475">
-                                <rect key="frame" x="-98" y="0.0" width="610" height="736"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="l40-TL-475">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tech01.png" translatesAutoresizingMaskIntoConstraints="NO" id="rtJ-jC-TKJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tech01.png" translatesAutoresizingMaskIntoConstraints="NO" id="rtJ-jC-TKJ">
                                 <rect key="frame" x="0.0" y="32" width="414" height="552"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="l40-TL-475" secondAttribute="trailing" id="1NB-IE-jMH"/>
+                            <constraint firstItem="l40-TL-475" firstAttribute="bottom" secondItem="cwQ-Uh-KXr" secondAttribute="bottom" id="2t7-a5-ayG"/>
+                            <constraint firstItem="l40-TL-475" firstAttribute="top" secondItem="oTR-OO-ekw" secondAttribute="top" id="8s7-1D-qBP"/>
+                            <constraint firstItem="rtJ-jC-TKJ" firstAttribute="top" secondItem="cwQ-Uh-KXr" secondAttribute="top" constant="12" id="KCG-Tt-MLg"/>
+                            <constraint firstItem="cwQ-Uh-KXr" firstAttribute="bottom" secondItem="rtJ-jC-TKJ" secondAttribute="bottom" constant="152" id="PK3-1U-KWe"/>
+                            <constraint firstItem="rtJ-jC-TKJ" firstAttribute="trailing" secondItem="cwQ-Uh-KXr" secondAttribute="trailing" id="Xi9-CG-jQs"/>
+                            <constraint firstItem="l40-TL-475" firstAttribute="leading" secondItem="oTR-OO-ekw" secondAttribute="leading" id="ZcL-U2-YcS"/>
+                            <constraint firstItem="cwQ-Uh-KXr" firstAttribute="bottom" secondItem="rtJ-jC-TKJ" secondAttribute="bottom" constant="152" id="cRf-8M-wX7"/>
+                            <constraint firstItem="rtJ-jC-TKJ" firstAttribute="top" secondItem="cwQ-Uh-KXr" secondAttribute="top" constant="12" id="cz9-BO-qKF"/>
+                            <constraint firstItem="rtJ-jC-TKJ" firstAttribute="leading" secondItem="cwQ-Uh-KXr" secondAttribute="leading" id="uDh-4Q-IfD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cwQ-Uh-KXr"/>
                     </view>
                 </viewController>
@@ -445,16 +461,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="rZP-kU-s0D">
-                                <rect key="frame" x="-98" y="0.0" width="610" height="736"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="rZP-kU-s0D">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tech02.png" translatesAutoresizingMaskIntoConstraints="NO" id="BJW-1X-4b1">
-                                <rect key="frame" x="0.0" y="27" width="414" height="558"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tech02.png" translatesAutoresizingMaskIntoConstraints="NO" id="BJW-1X-4b1">
+                                <rect key="frame" x="0.0" y="32" width="414" height="553"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BJW-1X-4b1" firstAttribute="leading" secondItem="gPZ-SU-k5s" secondAttribute="leading" id="7Xa-Im-359"/>
+                            <constraint firstItem="gPZ-SU-k5s" firstAttribute="bottom" secondItem="rZP-kU-s0D" secondAttribute="bottom" id="9pz-eQ-fTE"/>
+                            <constraint firstItem="gPZ-SU-k5s" firstAttribute="bottom" secondItem="BJW-1X-4b1" secondAttribute="bottom" constant="151" id="Aks-sG-MHt"/>
+                            <constraint firstItem="rZP-kU-s0D" firstAttribute="leading" secondItem="PdD-Xj-LPJ" secondAttribute="leading" id="Foz-EU-o8c"/>
+                            <constraint firstItem="BJW-1X-4b1" firstAttribute="top" secondItem="gPZ-SU-k5s" secondAttribute="top" constant="12" id="Q3A-9e-0MD"/>
+                            <constraint firstAttribute="trailing" secondItem="rZP-kU-s0D" secondAttribute="trailing" id="bxT-jc-xOC"/>
+                            <constraint firstItem="BJW-1X-4b1" firstAttribute="trailing" secondItem="gPZ-SU-k5s" secondAttribute="trailing" id="vIx-7L-0Kl"/>
+                            <constraint firstItem="rZP-kU-s0D" firstAttribute="top" secondItem="PdD-Xj-LPJ" secondAttribute="top" id="ygK-h6-Qpu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gPZ-SU-k5s"/>
                     </view>
                 </viewController>
@@ -470,9 +494,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="gG5-F6-qie">
-                                <rect key="frame" x="-94" y="0.0" width="601" height="736"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teachBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="gG5-F6-qie">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tech03.png" translatesAutoresizingMaskIntoConstraints="NO" id="FT0-Vi-c5i">
                                 <rect key="frame" x="-13" y="55" width="427" height="531"/>
@@ -480,6 +503,12 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gbl-dD-NsL" firstAttribute="bottom" secondItem="gG5-F6-qie" secondAttribute="bottom" id="4oI-bb-2fX"/>
+                            <constraint firstItem="gG5-F6-qie" firstAttribute="leading" secondItem="T7P-0X-LK8" secondAttribute="leading" id="74k-AC-F7Q"/>
+                            <constraint firstItem="gG5-F6-qie" firstAttribute="top" secondItem="T7P-0X-LK8" secondAttribute="top" id="ESP-LP-0MW"/>
+                            <constraint firstAttribute="trailing" secondItem="gG5-F6-qie" secondAttribute="trailing" id="U4y-kU-tVD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Gbl-dD-NsL"/>
                     </view>
                 </viewController>
