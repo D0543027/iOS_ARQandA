@@ -96,7 +96,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         backButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
         
         backButton.addTarget(self, action: #selector(backToMenu), for: .touchUpInside)
-        backButton.layer.zPosition = 1;
         view.addSubview(backButton)
     }
     
@@ -315,12 +314,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if newRect.origin.y < 0.0{
             newRect.origin.y = 0.0
         }
-        
-        if newRect.origin.y <= 50 + backButton.bounds.height{
-            if (newRect.origin.x <=  15 + backButton.bounds.width)
-            {
-                newRect.origin.y = 50 + backButton.bounds.height
-            }
+        if newRect.origin.x <= 15 + backButton.bounds.width && newRect.origin.y <= 50 + backButton.bounds.height{
+            newRect.origin.y = 50 + backButton.bounds.height
         }
         /*
          if newRect.origin.x + newRect.size.width > UIScreen.main.bounds.width{

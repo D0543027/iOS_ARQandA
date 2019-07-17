@@ -25,42 +25,19 @@ class QAViewController: UIViewController {
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //讓文字換行，避免文字太常產生省略情形(abc...xyz這樣)
         lb.numberOfLines = 0
-        ChoiceBtnLabel1.titleLabel?.numberOfLines = 0
-        ChoiceBtnLabel2.titleLabel?.numberOfLines = 0
-        ChoiceBtnLabel3.titleLabel?.numberOfLines = 0
-        ChoiceBtnLabel4.titleLabel?.numberOfLines = 0
-
-        self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
-        //隱藏結算畫面物件
-        resultBackground.isHidden = true
-        resultBack.isHidden = true
-        singleScoreLb.isHidden = true
-        singleRightLb.isHidden = true
-        singleWrongLb.isHidden = true
-        singleHighScoreLb.isHidden = true
-        singleScoreLbT.isHidden = true
-        singleRightLbT.isHidden = true
-        singleWrongLbT.isHidden = true
-        singleHighScoreLbT.isHidden = true
-        //隱藏victory和failed圖示
-        victory.isHidden = true
-        failed.isHidden = true
         
-        ValidButton1.isHidden = true
-        ValidButton2.isHidden = true
-        ValidButton3.isHidden = true
-        ValidButton4.isHidden = true
-        // 讀取中，轉圈
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = .whiteLarge
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents() //不觸發任何元件
+        self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
+        setUpResultScene()
+        setUpVictoryFailed()
+        setUpValidButton()
+        setUpChoiceButton()
+        setUpActivityIndicator()
         
         getData()
     }
@@ -92,6 +69,54 @@ class QAViewController: UIViewController {
         
     }
     
+    fileprivate func setUpResultScene() {
+        //隱藏結算畫面物件
+        resultBackground.isHidden = true
+        resultBack.isHidden = true
+        singleScoreLb.isHidden = true
+        singleRightLb.isHidden = true
+        singleWrongLb.isHidden = true
+        singleHighScoreLb.isHidden = true
+        singleScoreLbT.isHidden = true
+        singleRightLbT.isHidden = true
+        singleWrongLbT.isHidden = true
+        singleHighScoreLbT.isHidden = true
+    }
+    
+    fileprivate func setUpValidButton() {
+        ValidButton1.isHidden = true
+        ValidButton2.isHidden = true
+        ValidButton3.isHidden = true
+        ValidButton4.isHidden = true
+    }
+    
+    fileprivate func setUpVictoryFailed() {
+        //隱藏victory和failed圖示
+        victory.isHidden = true
+        failed.isHidden = true
+    }
+    
+    fileprivate func setUpChoiceButton(){
+        ChoiceBtnLabel1.tag = 1
+        ChoiceBtnLabel2.tag = 2
+        ChoiceBtnLabel3.tag = 3
+        ChoiceBtnLabel4.tag = 4
+        
+        ChoiceBtnLabel1.titleLabel?.numberOfLines = 0
+        ChoiceBtnLabel2.titleLabel?.numberOfLines = 0
+        ChoiceBtnLabel3.titleLabel?.numberOfLines = 0
+        ChoiceBtnLabel4.titleLabel?.numberOfLines = 0
+    }
+    
+    fileprivate func setUpActivityIndicator() {
+        // 讀取中，轉圈
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .whiteLarge
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
     
     func getData(){
         let queue = DispatchQueue(label: "queue")
@@ -99,7 +124,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://a1cee1cd.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://ef5286b2.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -124,10 +149,21 @@ class QAViewController: UIViewController {
     @IBOutlet weak var singleWrongLbT: UILabel!
     @IBOutlet weak var singleHighScoreLbT: UILabel!
     
+    fileprivate func showResultScene() {
+        resultBackground.isHidden = false
+        resultBack.isHidden = false
+        singleScoreLb.isHidden = false
+        singleRightLb.isHidden = false
+        singleWrongLb.isHidden = false
+        singleHighScoreLb.isHidden = false
+        singleScoreLbT.isHidden = false
+        singleRightLbT.isHidden = false
+        singleWrongLbT.isHidden = false
+        singleHighScoreLbT.isHidden = false
+    }
+    
     func updateQuestion(){
         
-        enableChoiceButton()
-        clearValidSign()
         // 答完題目
         if index == data!.count{
             // 答題結束畫面
@@ -137,16 +173,7 @@ class QAViewController: UIViewController {
             ChoiceBtnLabel3.setTitle("", for: .normal)
             ChoiceBtnLabel4.setTitle("", for: .normal)
             
-            resultBackground.isHidden = false
-            resultBack.isHidden = false
-            singleScoreLb.isHidden = false
-            singleRightLb.isHidden = false
-            singleWrongLb.isHidden = false
-            singleHighScoreLb.isHidden = false
-            singleScoreLbT.isHidden = false
-            singleRightLbT.isHidden = false
-            singleWrongLbT.isHidden = false
-            singleHighScoreLbT.isHidden = false
+            showResultScene()
             
             if score < 0{
                 score = 0
@@ -164,8 +191,6 @@ class QAViewController: UIViewController {
             singleWrongLb.text = String(singleWrong)
             singleHighScoreLb.text = UserDefaults.standard.string(forKey: "highScore")
             // 答完題 不得觸發選項(點選項不動作）
-
-
             
             calculatePercentage()
             // 設延遲(5 sec)
@@ -175,6 +200,7 @@ class QAViewController: UIViewController {
             
         }
         else {
+            enableChoiceButton()
             lb.text = self.data![index]["Question"].string
             
             RightAnswer = self.data![index]["Ans"].string
@@ -186,7 +212,7 @@ class QAViewController: UIViewController {
             ChoiceBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
             
             // 如果只有三個選項，第四個選項不能選
-            if (ChoiceBtnLabel4.currentTitle?.isEmpty)!{
+            if ChoiceBtnLabel4.currentTitle == ""{
                 ChoiceBtnLabel4.isEnabled = false
             }
             // 打亂順序
@@ -207,13 +233,17 @@ class QAViewController: UIViewController {
             }
         }
     }
-    func validAnswer(button: UIButton) -> Bool{
+    func validAnswer(button: UIButton){
+        let validSign = [ValidButton1, ValidButton2, ValidButton3, ValidButton4]
+        let selectButton = button.tag - 1
         
         let total = UserDefaults.standard.integer(forKey: "total")
         UserDefaults.standard.set(total + 1, forKey: "total")
-
+        
         if RightAnswer == button.currentTitle{
             BtnVictory()
+            validSign[selectButton]!.image = UIImage(named: "checksign.jpg")
+            
             //答對分數++（答對一題＋5分）
             score = score + 5
             //總答對數++
@@ -221,10 +251,10 @@ class QAViewController: UIViewController {
             UserDefaults.standard.set(rightCount + 1, forKey: "right")
             
             singleRight = singleRight + 1
-            return true
+
         } else {
             BtnFailed()
-            
+            validSign[selectButton]!.image = UIImage(named: "wrongsign.jpeg")
             //答錯一題-3分
             score = score - 3
             //總答錯數++
@@ -232,38 +262,25 @@ class QAViewController: UIViewController {
             UserDefaults.standard.set(countWrong + 1, forKey: "wrong")
     
             singleWrong = singleWrong + 1
-            return false
+           
         }
-        
+        validSign[selectButton]?.isHidden = false
     }
     
     func showAnswer(){
         let choices = [ChoiceBtnLabel1,ChoiceBtnLabel2,ChoiceBtnLabel3,ChoiceBtnLabel4]
-        var index = 0
+        let checkSign = [ValidButton1, ValidButton2, ValidButton3, ValidButton4]
+        var tag = 0
         for btn in choices{
             if RightAnswer == btn?.currentTitle{
-                break;
+                tag = (btn?.tag)!
+                break
             }
-            index = index + 1
         }
-        switch index {
-        case 0:
-            ValidButton1.image = UIImage(named: "checksign.jpg")
-            ValidButton1.isHidden = false
-            break
-        case 1:
-            ValidButton2.image = UIImage(named: "checksign.jpg")
-            ValidButton2.isHidden = false
-            break
-        case 2:
-            ValidButton3.image = UIImage(named: "checksign.jpg")
-            ValidButton3.isHidden = false
-            break
-        default:
-            ValidButton4.image = UIImage(named: "checksign.jpg")
-            ValidButton4.isHidden = false
-            break
-        }
+        tag = tag - 1
+        checkSign[tag]?.image = UIImage(named: "checksign.jpg")
+        checkSign[tag]?.isHidden = false
+        
     }
     func calculatePercentage(){
         let rightCount = UserDefaults.standard.integer(forKey: "right")
@@ -274,14 +291,7 @@ class QAViewController: UIViewController {
         UserDefaults.standard.set(strPercentage, forKey: "correctPercentage")
 
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
+
     func BtnVictory() {
         audioPlayerV.play()
         victory.isHidden = false
@@ -300,21 +310,14 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel1: UIButton!
     @IBOutlet weak var ValidButton1: UIImageView!
     @IBAction func ChoiceBtn1(_ sender: Any) {
-        let isCorrect = validAnswer(button: ChoiceBtnLabel1)
-        
         disableChoiceButton()
-        if isCorrect{
-            ValidButton1.image = UIImage(named: "checksign.jpg")
-        }
-        else{
-            ValidButton1.image = UIImage(named: "wrongsign.jpeg")
-        }
-        ValidButton1.isHidden = false
+        validAnswer(button: ChoiceBtnLabel1)
         showAnswer()
+        
         //延遲1秒
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
-            self.victory.isHidden = true
-            self.failed.isHidden = true
+            self.hideVictoryFailed()
+            self.hideValidSign()
             self.updateQuestion()
         })
     }
@@ -322,20 +325,13 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel2: UIButton!
     @IBOutlet weak var ValidButton2: UIImageView!
     @IBAction func ChoiceBtn2(_ sender: Any) {
-        let isCorrect = validAnswer(button: ChoiceBtnLabel2)
         disableChoiceButton()
-        
-        if isCorrect{
-            ValidButton2.image = UIImage(named: "checksign.jpg")
-        }
-        else{
-            ValidButton2.image = UIImage(named: "wrongsign.jpeg")
-        }
-        ValidButton2.isHidden = false
+        validAnswer(button: ChoiceBtnLabel2)
         showAnswer()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
-            self.victory.isHidden = true
-            self.failed.isHidden = true
+            self.hideVictoryFailed()
+            self.hideValidSign()
             self.updateQuestion()
         })
     }
@@ -343,20 +339,13 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel3: UIButton!
     @IBOutlet weak var ValidButton3: UIImageView!
     @IBAction func ChoiceBtn3(_ sender: Any) {
-        let isCorrect = validAnswer(button: ChoiceBtnLabel3)
         disableChoiceButton()
-        
-        if isCorrect{
-            ValidButton3.image = UIImage(named: "checksign.jpg")
-        }
-        else{
-            ValidButton3.image = UIImage(named: "wrongsign.jpeg")
-        }
-        ValidButton3.isHidden = false
+        validAnswer(button: ChoiceBtnLabel3)
         showAnswer()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
-            self.victory.isHidden = true
-            self.failed.isHidden = true
+            self.hideVictoryFailed()
+            self.hideValidSign()
             self.updateQuestion()
         })
     }
@@ -364,20 +353,13 @@ class QAViewController: UIViewController {
     @IBOutlet weak var ChoiceBtnLabel4: UIButton!
     @IBOutlet weak var ValidButton4: UIImageView!
     @IBAction func ChoiceBtn4(_ sender: Any) {
-        let isCorrect = validAnswer(button: ChoiceBtnLabel4)
         disableChoiceButton()
-        
-        if isCorrect{
-            ValidButton4.image = UIImage(named: "checksign.jpg")
-        }
-        else{
-            ValidButton4.image = UIImage(named: "wrongsign.jpeg")
-        }
-        ValidButton4.isHidden = false
+        validAnswer(button: ChoiceBtnLabel4)
         showAnswer()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
-            self.victory.isHidden = true
-            self.failed.isHidden = true
+            self.hideVictoryFailed()
+            self.hideValidSign()
             self.updateQuestion()
         })
     }
@@ -396,10 +378,21 @@ class QAViewController: UIViewController {
         ChoiceBtnLabel4.isEnabled = false
     }
     
-    func clearValidSign(){
+    func hideValidSign(){
         ValidButton1.isHidden = true
         ValidButton2.isHidden = true
         ValidButton3.isHidden = true
         ValidButton4.isHidden = true
+    }
+    
+    func hideVictoryFailed(){
+        victory.isHidden = true
+        failed.isHidden = true
+    }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 }
