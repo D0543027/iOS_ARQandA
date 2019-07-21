@@ -30,7 +30,7 @@ class QAViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //讓文字換行，避免文字太常產生省略情形(abc...xyz這樣)
-        lb.numberOfLines = 0
+        questionLabel.numberOfLines = 0
         
         self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
         setUpResultScene()
@@ -73,21 +73,21 @@ class QAViewController: UIViewController {
         //隱藏結算畫面物件
         resultBackground.isHidden = true
         resultBack.isHidden = true
-        singleScoreLb.isHidden = true
-        singleRightLb.isHidden = true
-        singleWrongLb.isHidden = true
-        singleHighScoreLb.isHidden = true
-        singleScoreLbT.isHidden = true
-        singleRightLbT.isHidden = true
-        singleWrongLbT.isHidden = true
-        singleHighScoreLbT.isHidden = true
+        singleScoreValue.isHidden = true
+        singleRightValue.isHidden = true
+        singleWrongValue.isHidden = true
+        singleHighScoreValue.isHidden = true
+        singleScoreLabel.isHidden = true
+        singleRightLabel.isHidden = true
+        singleWrongLabel.isHidden = true
+        singleHighScoreLabel.isHidden = true
     }
     
     fileprivate func setUpValidButton() {
-        ValidButton1.isHidden = true
-        ValidButton2.isHidden = true
-        ValidButton3.isHidden = true
-        ValidButton4.isHidden = true
+        validFirstChoice.isHidden = true
+        validSecondChoice.isHidden = true
+        validThirdChoice.isHidden = true
+        validFourthChoice.isHidden = true
     }
     
     fileprivate func setUpVictoryFailed() {
@@ -97,15 +97,15 @@ class QAViewController: UIViewController {
     }
     
     fileprivate func setUpChoiceButton(){
-        ChoiceBtnLabel1.tag = 1
-        ChoiceBtnLabel2.tag = 2
-        ChoiceBtnLabel3.tag = 3
-        ChoiceBtnLabel4.tag = 4
+        firstChoice.tag = 1
+        secondChoice.tag = 2
+        thirdChoice.tag = 3
+        fourthChoice.tag = 4
         
-        ChoiceBtnLabel1.titleLabel?.numberOfLines = 0
-        ChoiceBtnLabel2.titleLabel?.numberOfLines = 0
-        ChoiceBtnLabel3.titleLabel?.numberOfLines = 0
-        ChoiceBtnLabel4.titleLabel?.numberOfLines = 0
+        firstChoice.titleLabel?.numberOfLines = 0
+        secondChoice.titleLabel?.numberOfLines = 0
+        thirdChoice.titleLabel?.numberOfLines = 0
+        fourthChoice.titleLabel?.numberOfLines = 0
     }
     
     fileprivate func setUpActivityIndicator() {
@@ -140,26 +140,26 @@ class QAViewController: UIViewController {
     
     @IBOutlet weak var resultBackground: UIImageView!
     @IBOutlet weak var resultBack: UIImageView!
-    @IBOutlet weak var singleScoreLb: UILabel!
-    @IBOutlet weak var singleRightLb: UILabel!
-    @IBOutlet weak var singleWrongLb: UILabel!
-    @IBOutlet weak var singleHighScoreLb: UILabel!
-    @IBOutlet weak var singleScoreLbT: UILabel!
-    @IBOutlet weak var singleRightLbT: UILabel!
-    @IBOutlet weak var singleWrongLbT: UILabel!
-    @IBOutlet weak var singleHighScoreLbT: UILabel!
+    @IBOutlet weak var singleScoreValue: UILabel!
+    @IBOutlet weak var singleRightValue: UILabel!
+    @IBOutlet weak var singleWrongValue: UILabel!
+    @IBOutlet weak var singleHighScoreValue: UILabel!
+    @IBOutlet weak var singleScoreLabel: UILabel!
+    @IBOutlet weak var singleRightLabel: UILabel!
+    @IBOutlet weak var singleWrongLabel: UILabel!
+    @IBOutlet weak var singleHighScoreLabel: UILabel!
     
     fileprivate func showResultScene() {
         resultBackground.isHidden = false
         resultBack.isHidden = false
-        singleScoreLb.isHidden = false
-        singleRightLb.isHidden = false
-        singleWrongLb.isHidden = false
-        singleHighScoreLb.isHidden = false
-        singleScoreLbT.isHidden = false
-        singleRightLbT.isHidden = false
-        singleWrongLbT.isHidden = false
-        singleHighScoreLbT.isHidden = false
+        singleScoreValue.isHidden = false
+        singleRightValue.isHidden = false
+        singleWrongValue.isHidden = false
+        singleHighScoreValue.isHidden = false
+        singleScoreLabel.isHidden = false
+        singleRightLabel.isHidden = false
+        singleWrongLabel.isHidden = false
+        singleHighScoreLabel.isHidden = false
     }
     
     func updateQuestion(){
@@ -167,11 +167,11 @@ class QAViewController: UIViewController {
         // 答完題目
         if index == data!.count{
             // 答題結束畫面
-            lb.text = ""
-            ChoiceBtnLabel1.setTitle("", for: .normal)
-            ChoiceBtnLabel2.setTitle("", for: .normal)
-            ChoiceBtnLabel3.setTitle("", for: .normal)
-            ChoiceBtnLabel4.setTitle("", for: .normal)
+            questionLabel.text = ""
+            firstChoice.setTitle("", for: .normal)
+            secondChoice.setTitle("", for: .normal)
+            thirdChoice.setTitle("", for: .normal)
+            fourthChoice.setTitle("", for: .normal)
             
             showResultScene()
             
@@ -186,10 +186,10 @@ class QAViewController: UIViewController {
                 UserDefaults.standard.set(highScore, forKey: "highScore")
             }
             
-            singleScoreLb.text = String(score)
-            singleRightLb.text = String(singleRight)
-            singleWrongLb.text = String(singleWrong)
-            singleHighScoreLb.text = UserDefaults.standard.string(forKey: "highScore")
+            singleScoreValue.text = String(score)
+            singleRightValue.text = String(singleRight)
+            singleWrongValue.text = String(singleWrong)
+            singleHighScoreValue.text = UserDefaults.standard.string(forKey: "highScore")
             // 答完題 不得觸發選項(點選項不動作）
             
             calculatePercentage()
@@ -201,19 +201,19 @@ class QAViewController: UIViewController {
         }
         else {
             enableChoiceButton()
-            lb.text = self.data![index]["Question"].string
+            questionLabel.text = self.data![index]["Question"].string
             
             RightAnswer = self.data![index]["Ans"].string
             
             // 預設：第二個選項是解答
-            ChoiceBtnLabel1.setTitle(self.data![index]["choose1"].string, for: .normal)
-            ChoiceBtnLabel2.setTitle(self.data![index]["Ans"].string, for: .normal)
-            ChoiceBtnLabel3.setTitle(self.data![index]["choose3"].string, for: .normal)
-            ChoiceBtnLabel4.setTitle(self.data![index]["choose4"].string, for: .normal)
+            firstChoice.setTitle(self.data![index]["choose1"].string, for: .normal)
+            secondChoice.setTitle(self.data![index]["Ans"].string, for: .normal)
+            thirdChoice.setTitle(self.data![index]["choose3"].string, for: .normal)
+            fourthChoice.setTitle(self.data![index]["choose4"].string, for: .normal)
             
             // 如果只有三個選項，第四個選項不能選
-            if ChoiceBtnLabel4.currentTitle == ""{
-                ChoiceBtnLabel4.isEnabled = false
+            if fourthChoice.currentTitle == ""{
+                fourthChoice.isEnabled = false
             }
             // 打亂順序
             shuffleChoice()
@@ -222,7 +222,7 @@ class QAViewController: UIViewController {
     }
     
     func shuffleChoice(){
-        let choiceArray = [ChoiceBtnLabel1,ChoiceBtnLabel2,ChoiceBtnLabel3,ChoiceBtnLabel4]
+        let choiceArray = [firstChoice,secondChoice,thirdChoice,fourthChoice]
         for _ in 0...50{
             let rand = Int.random(in: 0...3)
             let selectString = choiceArray[rand]?.currentTitle
@@ -234,7 +234,7 @@ class QAViewController: UIViewController {
         }
     }
     func validAnswer(button: UIButton){
-        let validSign = [ValidButton1, ValidButton2, ValidButton3, ValidButton4]
+        let validSign = [validFirstChoice, validSecondChoice, validThirdChoice, validFourthChoice]
         let selectButton = button.tag - 1
         
         let total = UserDefaults.standard.integer(forKey: "total")
@@ -268,8 +268,8 @@ class QAViewController: UIViewController {
     }
     
     func showAnswer(){
-        let choices = [ChoiceBtnLabel1,ChoiceBtnLabel2,ChoiceBtnLabel3,ChoiceBtnLabel4]
-        let checkSign = [ValidButton1, ValidButton2, ValidButton3, ValidButton4]
+        let choices = [firstChoice,secondChoice,thirdChoice,fourthChoice]
+        let checkSign = [validFirstChoice, validSecondChoice, validThirdChoice, validFourthChoice]
         var tag = 0
         for btn in choices{
             if RightAnswer == btn?.currentTitle{
@@ -304,14 +304,14 @@ class QAViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var lb: UILabel!
+    @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var victory: UIImageView!
     @IBOutlet weak var failed: UIImageView!
-    @IBOutlet weak var ChoiceBtnLabel1: UIButton!
-    @IBOutlet weak var ValidButton1: UIImageView!
-    @IBAction func ChoiceBtn1(_ sender: Any) {
+    @IBOutlet weak var firstChoice: UIButton!
+    @IBOutlet weak var validFirstChoice: UIImageView!
+    @IBAction func firstChocieTapped(_ sender: Any) {
         disableChoiceButton()
-        validAnswer(button: ChoiceBtnLabel1)
+        validAnswer(button: firstChoice)
         showAnswer()
         
         //延遲1秒
@@ -322,11 +322,11 @@ class QAViewController: UIViewController {
         })
     }
     
-    @IBOutlet weak var ChoiceBtnLabel2: UIButton!
-    @IBOutlet weak var ValidButton2: UIImageView!
-    @IBAction func ChoiceBtn2(_ sender: Any) {
+    @IBOutlet weak var secondChoice: UIButton!
+    @IBOutlet weak var validSecondChoice: UIImageView!
+    @IBAction func secondChoiceTapped(_ sender: Any) {
         disableChoiceButton()
-        validAnswer(button: ChoiceBtnLabel2)
+        validAnswer(button: secondChoice)
         showAnswer()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
@@ -336,11 +336,11 @@ class QAViewController: UIViewController {
         })
     }
     
-    @IBOutlet weak var ChoiceBtnLabel3: UIButton!
-    @IBOutlet weak var ValidButton3: UIImageView!
-    @IBAction func ChoiceBtn3(_ sender: Any) {
+    @IBOutlet weak var thirdChoice: UIButton!
+    @IBOutlet weak var validThirdChoice: UIImageView!
+    @IBAction func thirdChoiceTapped(_ sender: Any) {
         disableChoiceButton()
-        validAnswer(button: ChoiceBtnLabel3)
+        validAnswer(button: thirdChoice)
         showAnswer()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
@@ -350,11 +350,11 @@ class QAViewController: UIViewController {
         })
     }
     
-    @IBOutlet weak var ChoiceBtnLabel4: UIButton!
-    @IBOutlet weak var ValidButton4: UIImageView!
-    @IBAction func ChoiceBtn4(_ sender: Any) {
+    @IBOutlet weak var fourthChoice: UIButton!
+    @IBOutlet weak var validFourthChoice: UIImageView!
+    @IBAction func fourthChoiceTapped(_ sender: Any) {
         disableChoiceButton()
-        validAnswer(button: ChoiceBtnLabel4)
+        validAnswer(button: fourthChoice)
         showAnswer()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
@@ -365,24 +365,24 @@ class QAViewController: UIViewController {
     }
     
     func enableChoiceButton(){
-        ChoiceBtnLabel1.isEnabled = true
-        ChoiceBtnLabel2.isEnabled = true
-        ChoiceBtnLabel3.isEnabled = true
-        ChoiceBtnLabel4.isEnabled = true
+        firstChoice.isEnabled = true
+        secondChoice.isEnabled = true
+        thirdChoice.isEnabled = true
+        fourthChoice.isEnabled = true
     }
     
     func disableChoiceButton(){
-        ChoiceBtnLabel1.isEnabled = false
-        ChoiceBtnLabel2.isEnabled = false
-        ChoiceBtnLabel3.isEnabled = false
-        ChoiceBtnLabel4.isEnabled = false
+        firstChoice.isEnabled = false
+        secondChoice.isEnabled = false
+        thirdChoice.isEnabled = false
+        fourthChoice.isEnabled = false
     }
     
     func hideValidSign(){
-        ValidButton1.isHidden = true
-        ValidButton2.isHidden = true
-        ValidButton3.isHidden = true
-        ValidButton4.isHidden = true
+        validFirstChoice.isHidden = true
+        validSecondChoice.isHidden = true
+        validThirdChoice.isHidden = true
+        validFourthChoice.isHidden = true
     }
     
     func hideVictoryFailed(){
