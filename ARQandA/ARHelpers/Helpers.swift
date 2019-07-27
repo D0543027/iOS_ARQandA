@@ -88,7 +88,7 @@ let labels = [
     "electric fans"
 ]
 
-let difficulty: [String:String] =  [
+let difficultyOfLabels: [String:String] =  [
     "person": "Easy",
     "bicycle": "Normal",
     "car": "Normal",
