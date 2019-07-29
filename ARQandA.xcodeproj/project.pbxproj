@@ -45,7 +45,6 @@
 		8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A48005A22CE2B910063B35F /* AthensClassic.ttf */; };
 		8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B022B5CDCC008EA659 /* YOLO.swift */; };
 		8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B122B5CDCC008EA659 /* Helpers.swift */; };
-		8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
 		8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA022CF9974004F3774 /* TutorialViewController.swift */; };
 		8A514CA322CF9982004F3774 /* TutorialFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA222CF9982004F3774 /* TutorialFirstViewController.swift */; };
 		8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */; };
@@ -62,7 +61,6 @@
 		8A94FE80228A6112002E6F08 /* ARQandATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE7F228A6112002E6F08 /* ARQandATests.swift */; };
 		8A94FE8B228A6112002E6F08 /* ARQandAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */; };
 		8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE99228A6133002E6F08 /* yolo.mlmodel */; };
-		8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B222B5CDCC008EA659 /* BoundingBox.swift */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 		E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E91ED0A822D5C36200DBFF96 /* bgm.mp3 */; };
@@ -170,7 +168,6 @@
 		8A48005A22CE2B910063B35F /* AthensClassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthensClassic.ttf; sourceTree = "<group>"; };
 		8A4937B022B5CDCC008EA659 /* YOLO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLO.swift; sourceTree = "<group>"; };
 		8A4937B122B5CDCC008EA659 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		8A4937B222B5CDCC008EA659 /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		8A514CA022CF9974004F3774 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		8A514CA222CF9982004F3774 /* TutorialFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFirstViewController.swift; sourceTree = "<group>"; };
 		8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSecondViewController.swift; sourceTree = "<group>"; };
@@ -365,7 +362,6 @@
 			isa = PBXGroup;
 			children = (
 				8A48005A22CE2B910063B35F /* AthensClassic.ttf */,
-				8A4937B222B5CDCC008EA659 /* BoundingBox.swift */,
 				8A4937B122B5CDCC008EA659 /* Helpers.swift */,
 				8A4937B022B5CDCC008EA659 /* YOLO.swift */,
 			);
@@ -833,7 +829,6 @@
 				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A29A22B22D237570086A33E /* ProfileViewController.swift in Sources */,
-				8A4937B522B5CDCC008EA659 /* BoundingBox.swift in Sources */,
 				8A514CA322CF9982004F3774 /* TutorialFirstViewController.swift in Sources */,
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
@@ -851,7 +846,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A94FE80228A6112002E6F08 /* ARQandATests.swift in Sources */,
-				8ADDE85122C0AD2100C2AFAE /* BoundingBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
