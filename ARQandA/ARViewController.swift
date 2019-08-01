@@ -29,9 +29,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var request: VNCoreMLRequest!
     
     var colors: [UIColor] = []
-    var shapeLayerArray: [CAShapeLayer] = []
-    var predictLabel: [String] = []
-    var nodeArray: [SCNNode] = []
+    var boundingBoxArray: [CAShapeLayer] = []
+    var predictLabelArray: [String] = []
+    var labelNodeArray: [SCNNode] = []
+    var starNodeArray: [SCNNode] = []
     var tappedPredictionLabel: String = "..."
     var Difficult_Number_Dict  = ["Easy": "3", "Normal": "5", "Hard": "7"]
     var Diffucult_StarCount_Dict = ["Easy": 1, "Normal": 3, "Hard": 5]
@@ -49,8 +50,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var backButtonWidth = 70
     var backButtonHeight = 70
     
-    
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -60,24 +59,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.delegate = self
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
+        sceneView.autoenablesDefaultLighting = true
         // Create a new scene
         // let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         // Set the scene to the view
         //sceneView.scene = scene
+        setUpQAButton()
         setUpBackBtn()
-        setUpBoundingBoxes()
+        setUpBoundingBoxesColor()
         setUpVision()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
-        view.addGestureRecognizer(tapGesture)
-        
-        toQAButton.layer.masksToBounds = false
-        toQAButton.layer.cornerRadius = 4.0
-        toQAButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
-        toQAButton.titleLabel?.font = UIFont(name: "AthensClassic", size: 25.0)
-        
+        addTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,10 +111,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         dismiss(animated: true, completion: nil);
     }
     
-    
-    func setUpBoundingBoxes() {
-        // Make colors for the bounding boxes. There is one color for each class,
-        // 80 classes in total.
+    func setUpBoundingBoxesColor() {
         for r: CGFloat in [0.2, 0.4, 0.6, 0.85, 1.0] {
             for g: CGFloat in [0.6, 0.7, 0.8, 0.9] {
                 for b: CGFloat in [0.6, 0.7, 0.8, 1.0] {
@@ -145,6 +135,19 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         request.imageCropAndScaleOption = .scaleFill
     }
     
+    
+    fileprivate func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    fileprivate func setUpQAButton(){
+        toQAButton.layer.masksToBounds = false
+        toQAButton.layer.cornerRadius = 4.0
+        toQAButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        toQAButton.titleLabel?.font = UIFont(name: "AthensClassic", size: 25.0)
+        toQAButton.isEnabled = false
+    }
     var new_MoveX: Float = 0.0
     var new_MoveY: Float = 0.0
     var new_MoveZ: Float = 0.0
@@ -173,7 +176,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         visionQueue.async {
             if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
                 self.clearShapeArray()
-                self.predictLabel.removeAll()
+                self.predictLabelArray.removeAll()
                 self.sceneView.scene.rootNode.enumerateChildNodes{
                     (node,stop) in
                     node.removeFromParentNode()
@@ -212,11 +215,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func clearShapeArray(){
         
         DispatchQueue.main.sync {
-            for shape in self.shapeLayerArray{
+            for shape in self.boundingBoxArray{
                 shape.removeFromSuperlayer()
             }
         }
-        self.shapeLayerArray.removeAll()
+        self.boundingBoxArray.removeAll()
     }
     func predictUsingVision(pixelBuffer: CVPixelBuffer) {
         /*
@@ -288,10 +291,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 
                 let boundingBox = drawBoundingBox(frame: rect, color: color)
                 
-                //boundingBoxes[i].show(frame: rect, label: label, color: color)
-                shapeLayerArray.append(boundingBox)
-                predictLabel.append(labels[prediction.classIndex])
-                nodeArray.append(SCNNode())
+                boundingBoxArray.append(boundingBox)
+                predictLabelArray.append(labels[prediction.classIndex])
+                labelNodeArray.append(SCNNode())
+                starNodeArray.append(SCNNode())
+                
             }
         }
     }
@@ -311,45 +315,70 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         return boundingBox
     }
     var touchPosition: CGPoint!
-    
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
         
+        var fitIndex: [Int] = []
         touchPosition = gestureRecognize.location(in: self.view)
-        
-        for i in 0..<shapeLayerArray.count{
-            if shapeLayerArray[i].path!.contains(touchPosition){
-                tappedPredictionLabel = predictLabel[i]
-                let arHitTestResults : [ARHitTestResult] = sceneView.hitTest(touchPosition, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
-                
-                if let closestResult = arHitTestResults.first {
-                    // Get Coordinates of HitTest
-                    let transform : matrix_float4x4 = closestResult.worldTransform
-                    let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
-                    
-                    difficulty = difficultyOfLabels[tappedPredictionLabel]
-                    numberOfQuestion = Difficult_Number_Dict[difficulty]
-
-                    // Create 3D Text
-                    let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
-                    labelNode.position = worldCoord
-                    
-                    // Create star
-                    let starNode: SCNNode = createStar()
-                    starNode.position = SCNVector3Make(transform.columns.3.x + 0.01, transform.columns.3.y - 0.03, transform.columns.3.z)
-                    
-                    let node = SCNNode()
-                    node.addChildNode(labelNode)
-                    node.addChildNode(starNode)
-                    
-                    // Delete previous node from scene, then add new node to scene
-                    nodeArray[i].removeFromParentNode()
-                    nodeArray[i] = node
-                    sceneView.scene.rootNode.addChildNode(node)
-                }
-            
-                break
+        var target = 0
+        for i in 0..<boundingBoxArray.count{
+            if boundingBoxArray[i].path!.contains(touchPosition){
+                target = i
+                fitIndex.append(i)
+                print(predictLabelArray[i])
             }
         }
+        if fitIndex.count > 1{
+            target = getNear(o: fitIndex)
+        }
+        
+        if fitIndex.count == 0{
+            toQAButton.isEnabled = false
+        }
+        else{
+            tappedPredictionLabel = predictLabelArray[target]
+            
+            let arHitTestResults : [ARHitTestResult] = sceneView.hitTest(touchPosition, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
+            
+            if let closestResult = arHitTestResults.first {
+                // Get Coordinates of HitTest
+                let transform : matrix_float4x4 = closestResult.worldTransform
+                let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+                
+                difficulty = difficultyOfLabels[tappedPredictionLabel]
+                numberOfQuestion = Difficult_Number_Dict[difficulty]
+                
+                boundingBoxArray[target].isHidden = true
+                // Create 3D Text
+                let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
+                labelNode.position = worldCoord
+                labelNodeArray[target].removeFromParentNode()
+                labelNodeArray[target] = labelNode
+                sceneView.scene.rootNode.addChildNode(labelNodeArray[target])
+                // Create star
+                let starNode: SCNNode = createStar()
+                starNode.position = SCNVector3Make(transform.columns.3.x + 0.01, transform.columns.3.y - 0.03, transform.columns.3.z)
+                starNodeArray[target].removeFromParentNode()
+                starNodeArray[target] = starNode
+                sceneView.scene.rootNode.addChildNode(starNodeArray[target])
+                
+                toQAButton.isEnabled = true
+                print("Finish...")
+            }
+        }
+        
+    }
+    
+    func getNear(o: [Int]) -> Int{
+        var nearestRange = sqrt(pow(touchPosition.x - boundingBoxArray[o[0]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[o[0]].path!.boundingBox.minY, 2))
+        var nearestIndex = 0
+        for i in 1..<o.count{
+            let range = sqrt(pow(touchPosition.x - boundingBoxArray[o[i]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[o[i]].path!.boundingBox.minY, 2))
+            if nearestRange > range{
+                nearestRange = range
+                nearestIndex = i
+            }
+        }
+        return nearestIndex
     }
     
     func createNewBubbleParentNode(_ text : String) -> SCNNode {
@@ -360,25 +389,25 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
         // BUBBLE-TEXT
-        let bubbleDepth : Float = 0.01 // the 'depth' of 3D text
+        let bubbleDepth: Float = 0.03
         let bubble = SCNText(string: text, extrusionDepth: CGFloat(bubbleDepth))
         var font = UIFont(name: "Futura", size: 0.15)
         font = font?.withTraits(traits: .traitBold)
         bubble.font = font
         bubble.alignmentMode = CATextLayerAlignmentMode.center.rawValue
         bubble.firstMaterial?.diffuse.contents = UIColor.orange
-        bubble.firstMaterial?.specular.contents = UIColor.white
+        bubble.firstMaterial?.specular.contents = UIColor.black
         bubble.firstMaterial?.isDoubleSided = true
-        // bubble.flatness // setting this too low can cause crashes.
+        bubble.flatness = 0.2 // setting this too low can cause crashes.
         bubble.chamferRadius = CGFloat(bubbleDepth)
         
         // BUBBLE NODE
         let (minBound, maxBound) = bubble.boundingBox
         let bubbleNode = SCNNode(geometry: bubble)
         // Centre Node - to Centre-Bottom point
-        bubbleNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
+        bubbleNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth / 2)
         // Reduce default text size
-        bubbleNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
+        bubbleNode.scale = SCNVector3Make(0.4, 0.4, 0.4)
         
         
         // BUBBLE PARENT NODE
@@ -388,7 +417,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         return bubbleNodeParent
     }
-    
     func createStar() -> SCNNode{
         let billboardConstraint = SCNBillboardConstraint()
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
@@ -410,15 +438,17 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             path.addLine(to: CGPoint(x: x, y: 0.02))
             x = x + 0.08
         }
-        let shape = SCNShape(path: path, extrusionDepth: 0.0)
+        let shapeDepth: Float = 0.02
+        let shape = SCNShape(path: path, extrusionDepth: CGFloat(shapeDepth))
         let color = #colorLiteral(red: 0.9915831685, green: 1, blue: 0, alpha: 1)
         shape.firstMaterial?.diffuse.contents = color
+        shape.firstMaterial?.specular.contents = UIColor.black
         
         
         let (minBound, maxBound) = shape.boundingBox
         let starNode = SCNNode(geometry: shape)
-        starNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, 0)
-        starNode.scale = SCNVector3Make(0.35, 0.35, 0.35)
+        starNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, shapeDepth / 2)
+        starNode.scale = SCNVector3Make(0.4, 0.4, 0.4)
         
         
         // BUBBLE PARENT NODE
@@ -428,7 +458,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         return starNodeParent
     }
-
+    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         

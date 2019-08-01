@@ -25,8 +25,6 @@ class QAViewController: UIViewController {
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     
- 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //讓文字換行，避免文字太常產生省略情形(abc...xyz這樣)
@@ -35,7 +33,7 @@ class QAViewController: UIViewController {
         self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
         setUpResultScene()
         setUpVictoryFailed()
-        setUpValidButton()
+        setUpValidChoice()
         setUpChoiceButton()
         setUpActivityIndicator()
         
@@ -51,8 +49,6 @@ class QAViewController: UIViewController {
         //抓完資料，轉圈停止
         activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents() //可觸發任何元件(按鈕......等)
-        
-        //print(data!)
         
         updateQuestion()
         
@@ -83,7 +79,7 @@ class QAViewController: UIViewController {
         singleHighScoreLabel.isHidden = true
     }
     
-    fileprivate func setUpValidButton() {
+    fileprivate func setUpValidChoice() {
         validFirstChoice.isHidden = true
         validSecondChoice.isHidden = true
         validThirdChoice.isHidden = true
@@ -124,7 +120,7 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
         
         
-        Alamofire.request("https://826588e7.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://f3a667ee.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
@@ -190,14 +186,12 @@ class QAViewController: UIViewController {
             singleRightValue.text = String(singleRight)
             singleWrongValue.text = String(singleWrong)
             singleHighScoreValue.text = UserDefaults.standard.string(forKey: "highScore")
-            // 答完題 不得觸發選項(點選項不動作）
             
             calculatePercentage()
             // 設延遲(5 sec)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5) , execute: {
                 self.dismiss(animated: true, completion: nil)
             })
-            
         }
         else {
             enableChoiceButton()
@@ -221,6 +215,7 @@ class QAViewController: UIViewController {
         }
     }
     
+    //打亂順序
     func shuffleChoice(){
         let choiceArray = [firstChoice,secondChoice,thirdChoice,fourthChoice]
         for _ in 0...50{
@@ -233,7 +228,9 @@ class QAViewController: UIViewController {
             }
         }
     }
+    
     func validAnswer(button: UIButton){
+        
         let validSign = [validFirstChoice, validSecondChoice, validThirdChoice, validFourthChoice]
         let selectButton = button.tag - 1
         
@@ -389,7 +386,6 @@ class QAViewController: UIViewController {
         victory.isHidden = true
         failed.isHidden = true
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

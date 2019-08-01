@@ -49,12 +49,12 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section{
-        case 0:
+        case 0: //返回標題
             performSegue(withIdentifier: "backToLaunch", sender: self)
             break
         case 1:
             switch indexPath.row{
-            case 0:
+            case 0: //修改個人資料
                 let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
                 alertController.addTextField(configurationHandler: {
                     $0.placeholder = "Name"
@@ -71,7 +71,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
                 alertController.addAction(okAction)
                 present(alertController, animated: true)
                 break
-            case 1:
+            case 1: //清除資料
                 let alertController = UIAlertController(title: "確定要清除資料？", message: nil, preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: self.clearProfile)
@@ -87,13 +87,13 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
             break
         case 2:
             switch indexPath.row{
-            case 0:
+            case 0: //教學導覽
                 if let tutorialController = storyboard?.instantiateViewController(withIdentifier: String(describing: TutorialViewController.self)) as? TutorialViewController{
                     present(tutorialController, animated: true, completion: nil)
                 }
                 break
-            case 1:
-                let text = "J個很好玩"
+            case 1: //分享給好友
+                let text = "TEST..."
                 let image = UIImage(named: "LOGO.png")
                 let sharedAll = [text,image!] as[ Any]
                 let activityController = UIActivityViewController(activityItems: sharedAll, applicationActivities: nil)
