@@ -14,16 +14,6 @@ import AVFoundation
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
-    @IBAction func toQAButtonTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: "switchToQA", sender: self)
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? QAViewController{
-            dest.label = self.tappedPredictionLabel
-            dest.numberOfQuestion = self.numberOfQuestion
-        }
-    }
-    @IBOutlet weak var toQAButton: UIButton!
     @IBOutlet var sceneView: ARSCNView!
     let yolo = YOLO()
     var request: VNCoreMLRequest!
@@ -42,13 +32,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     let visionQueue = DispatchQueue(label: "visionQueue")
     
-    
     var currentBuffer: CVPixelBuffer?
-    
-    
-    let backButton = UIButton()
-    var backButtonWidth = 70
-    var backButtonHeight = 70
+
+    let toQAButton = UIButton()
+
     
     override func viewDidLoad() {
         
@@ -67,6 +54,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         //sceneView.scene = scene
         setUpQAButton()
         setUpBackBtn()
+        setUpShowBoundingBoxButton()
         setUpBoundingBoxesColor()
         setUpVision()
         
@@ -94,6 +82,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     
     fileprivate func setUpBackBtn() {
+        let backButton = UIButton()
+        let backButtonWidth = 70
+        let backButtonHeight = 70
+        
         backButton.frame = CGRect(x: 15, y: 50, width: backButtonWidth, height: backButtonHeight)
         backButton.layer.cornerRadius = backButton.bounds.width / 2
         backButton.setTitle("<", for: .normal)
@@ -109,6 +101,57 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @objc func backToMenu(sender: UIButton){
         dismiss(animated: true, completion: nil);
+    }
+    
+    fileprivate func setUpQAButton(){
+        let deviceWidth = UIScreen.main.bounds.width
+        let deviceHeight = UIScreen.main.bounds.height
+        
+        let buttonWidth:CGFloat = 140
+        let buttonHeight:CGFloat = 45
+        toQAButton.frame = CGRect(x: deviceWidth - buttonWidth, y: deviceHeight - buttonHeight - 20, width: buttonWidth, height: buttonHeight)
+        toQAButton.layer.masksToBounds = false
+        toQAButton.layer.cornerRadius = 4.0
+        toQAButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        toQAButton.setTitle("我要答題", for: .normal)
+        toQAButton.titleLabel?.font = UIFont(name: "AthensClassic", size: 25.0)
+        toQAButton.addTarget(self, action: #selector(toQAButtonTapped), for: .touchUpInside)
+        toQAButton.isEnabled = false
+        view.addSubview(toQAButton)
+    }
+    
+    @objc func toQAButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "switchToQA", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? QAViewController{
+            dest.label = self.tappedPredictionLabel
+            dest.numberOfQuestion = self.numberOfQuestion
+        }
+    }
+    
+    func setUpShowBoundingBoxButton(){
+        let showBoundingBoxButton = UIButton()
+        let showBoundingBoxButtonWidth:CGFloat = 70
+        let showBoundingBoxButtonHeight:CGFloat = 70
+        let deviceHeight = UIScreen.main.bounds.height
+        
+        showBoundingBoxButton.frame = CGRect(x: 15, y: deviceHeight - showBoundingBoxButtonHeight - 50, width: showBoundingBoxButtonWidth, height: showBoundingBoxButtonHeight)
+        showBoundingBoxButton.layer.cornerRadius = showBoundingBoxButton.bounds.width / 2
+        showBoundingBoxButton.setTitle("口", for: .normal)
+        showBoundingBoxButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
+        showBoundingBoxButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(30))
+        showBoundingBoxButton.contentHorizontalAlignment = .center
+        showBoundingBoxButton.contentVerticalAlignment = .center
+        showBoundingBoxButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        showBoundingBoxButton.addTarget(self, action: #selector(showBoundingBox), for: .touchUpInside)
+        view.addSubview(showBoundingBoxButton)
+    }
+    
+    @objc func showBoundingBox(){
+        for box in boundingBoxArray{
+            box.isHidden = false
+        }
     }
     
     func setUpBoundingBoxesColor() {
@@ -141,13 +184,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         view.addGestureRecognizer(tapGesture)
     }
     
-    fileprivate func setUpQAButton(){
-        toQAButton.layer.masksToBounds = false
-        toQAButton.layer.cornerRadius = 4.0
-        toQAButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
-        toQAButton.titleLabel?.font = UIFont(name: "AthensClassic", size: 25.0)
-        toQAButton.isEnabled = false
-    }
+    
     var new_MoveX: Float = 0.0
     var new_MoveY: Float = 0.0
     var new_MoveZ: Float = 0.0
@@ -185,7 +222,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 self.currentBuffer = frame.capturedImage
                 self.predictUsingVision(pixelBuffer: self.currentBuffer!)
             }
-            
         }
     }
     
@@ -251,17 +287,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let features = observations.first?.featureValue.multiArrayValue {
             
             let boundingBoxes = yolo.computeBoundingBoxes(features: features)
-            showOnMainThread(boundingBoxes)
+            //showOnMainThread(boundingBoxes)
+            DispatchQueue.main.async {
+                self.getResult(predictions: boundingBoxes)
+            }
         }
     }
     
     func showOnMainThread(_ boundingBoxes: [YOLO.Prediction]) {
         DispatchQueue.main.async {
-            self.show(predictions: boundingBoxes)
+            self.getResult(predictions: boundingBoxes)
         }
     }
     
-    func show(predictions: [YOLO.Prediction]) {
+    func getResult(predictions: [YOLO.Prediction]) {
         for i in 0..<YOLO.maxBoundingBoxes {
             if i < predictions.count {
                 let prediction = predictions[i]
@@ -290,12 +329,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 let color = colors[prediction.classIndex]
                 
                 let boundingBox = drawBoundingBox(frame: rect, color: color)
-                
                 boundingBoxArray.append(boundingBox)
                 predictLabelArray.append(labels[prediction.classIndex])
                 labelNodeArray.append(SCNNode())
                 starNodeArray.append(SCNNode())
-                
             }
         }
     }
@@ -314,24 +351,25 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         return boundingBox
     }
+    
     var touchPosition: CGPoint!
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
         
-        var fitIndex: [Int] = []
+        var satisfiedIndex: [Int] = []
         touchPosition = gestureRecognize.location(in: self.view)
         var target = 0
         for i in 0..<boundingBoxArray.count{
             if boundingBoxArray[i].path!.contains(touchPosition){
                 target = i
-                fitIndex.append(i)
+                satisfiedIndex.append(i)
                 print(predictLabelArray[i])
             }
         }
-        if fitIndex.count > 1{
-            target = getNear(o: fitIndex)
+        if satisfiedIndex.count > 1{
+            target = getNear(satisfiedIndex: satisfiedIndex)
         }
         
-        if fitIndex.count == 0{
+        if satisfiedIndex.count == 0{
             toQAButton.isEnabled = false
         }
         else{
@@ -362,17 +400,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 sceneView.scene.rootNode.addChildNode(starNodeArray[target])
                 
                 toQAButton.isEnabled = true
-                print("Finish...")
             }
         }
         
     }
     
-    func getNear(o: [Int]) -> Int{
-        var nearestRange = sqrt(pow(touchPosition.x - boundingBoxArray[o[0]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[o[0]].path!.boundingBox.minY, 2))
+    func getNear(satisfiedIndex: [Int]) -> Int{
+        var nearestRange = sqrt(pow(touchPosition.x - boundingBoxArray[satisfiedIndex[0]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[satisfiedIndex[0]].path!.boundingBox.minY, 2))
         var nearestIndex = 0
-        for i in 1..<o.count{
-            let range = sqrt(pow(touchPosition.x - boundingBoxArray[o[i]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[o[i]].path!.boundingBox.minY, 2))
+        for i in 1..<satisfiedIndex.count{
+            let range = sqrt(pow(touchPosition.x - boundingBoxArray[satisfiedIndex[i]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[satisfiedIndex[i]].path!.boundingBox.minY, 2))
             if nearestRange > range{
                 nearestRange = range
                 nearestIndex = i
@@ -475,7 +512,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
 }
-
 
 extension UIFont {
     // Based on: https://stackoverflow.com/questions/4713236/how-do-i-set-bold-and-italic-on-uilabel-of-iphone-ipad
