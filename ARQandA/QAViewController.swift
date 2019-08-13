@@ -115,12 +115,12 @@ class QAViewController: UIViewController {
     }
     
     func getData(){
-        let queue = DispatchQueue(label: "queue")
+        let queue = DispatchQueue(label: "queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .workItem)
         // parameters： 參數對應 query.php 的 _POST
         let parameters = ["label": self.label, "num": self.numberOfQuestion]
+        print("Selected label: \(label) NumberofQuestion:\(numberOfQuestion)")
         
-        
-        Alamofire.request("https://83bbce82.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("https://cf073d74.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)

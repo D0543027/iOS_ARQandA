@@ -54,7 +54,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         //sceneView.scene = scene
         setUpQAButton()
         setUpBackBtn()
-        setUpShowBoundingBoxButton()
+        //setUpShowBoundingBoxButton()
         setUpBoundingBoxesColor()
         setUpVision()
         
@@ -121,6 +121,17 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @objc func toQAButtonTapped(_ sender: Any) {
+        for shape in boundingBoxArray{
+            shape.isHidden = true
+        }
+        print(predictLabelArray.count)
+        predictLabelArray.removeAll()
+        print(predictLabelArray.count)
+        sceneView.scene.rootNode.enumerateChildNodes{
+            (node,stop) in
+            node.removeFromParentNode()
+        }
+        sceneView.session.pause()
         self.performSegue(withIdentifier: "switchToQA", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -222,6 +233,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 self.currentBuffer = frame.capturedImage
                 self.predictUsingVision(pixelBuffer: self.currentBuffer!)
             }
+            else{
+
+            }
         }
     }
     
@@ -249,7 +263,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func clearShapeArray(){
-        
         DispatchQueue.main.sync {
             for shape in self.boundingBoxArray{
                 shape.removeFromSuperlayer()
@@ -293,13 +306,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
         }
     }
-    
+    /*
     func showOnMainThread(_ boundingBoxes: [YOLO.Prediction]) {
         DispatchQueue.main.async {
             self.getResult(predictions: boundingBoxes)
         }
     }
-    
+    */
     func getResult(predictions: [YOLO.Prediction]) {
         for i in 0..<YOLO.maxBoundingBoxes {
             if i < predictions.count {
@@ -353,11 +366,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     var touchPosition: CGPoint!
+    var target = 0
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
-        
         var satisfiedIndex: [Int] = []
+        
+        labelNodeArray[target].removeFromParentNode()
+        starNodeArray[target].removeFromParentNode()
+        
         touchPosition = gestureRecognize.location(in: self.view)
-        var target = 0
         for i in 0..<boundingBoxArray.count{
             if boundingBoxArray[i].path!.contains(touchPosition){
                 target = i
@@ -377,7 +393,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             
             let arHitTestResults : [ARHitTestResult] = sceneView.hitTest(touchPosition, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
             
-            if let closestResult = arHitTestResults.first {
+            guard let closestResult = arHitTestResults.first else{
+                print("No Result")
+                return
+            }
                 // Get Coordinates of HitTest
                 let transform : matrix_float4x4 = closestResult.worldTransform
                 let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
@@ -385,7 +404,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 difficulty = difficultyOfLabels[tappedPredictionLabel]
                 numberOfQuestion = Difficult_Number_Dict[difficulty]
                 
-                boundingBoxArray[target].isHidden = true
+                
+                //boundingBoxArray[target].isHidden = true
                 // Create 3D Text
                 let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
                 labelNode.position = worldCoord
@@ -398,9 +418,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 starNodeArray[target].removeFromParentNode()
                 starNodeArray[target] = starNode
                 sceneView.scene.rootNode.addChildNode(starNodeArray[target])
+
+                let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 3.0)
+                let actionLoop = SCNAction.repeatForever(action)
+                starNodeArray[target].runAction(actionLoop)
+                labelNodeArray[target].runAction(actionLoop)
                 
                 toQAButton.isEnabled = true
-            }
+            
         }
         
     }
@@ -450,7 +475,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // BUBBLE PARENT NODE
         let bubbleNodeParent = SCNNode()
         bubbleNodeParent.addChildNode(bubbleNode)
-        bubbleNodeParent.constraints = [billboardConstraint]
+        //bubbleNodeParent.constraints = [billboardConstraint]
         
         return bubbleNodeParent
     }
@@ -491,7 +516,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // BUBBLE PARENT NODE
         let starNodeParent = SCNNode()
         starNodeParent.addChildNode(starNode)
-        starNodeParent.constraints = [billboardConstraint]
+        //starNodeParent.constraints = [billboardConstraint]
         
         return starNodeParent
     }
