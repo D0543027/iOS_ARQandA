@@ -61,6 +61,9 @@
 		8A94FE80228A6112002E6F08 /* ARQandATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE7F228A6112002E6F08 /* ARQandATests.swift */; };
 		8A94FE8B228A6112002E6F08 /* ARQandAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */; };
 		8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE99228A6133002E6F08 /* yolo.mlmodel */; };
+		8AA34E1223044067002FB2E2 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */; };
+		8AA34E142304410D002FB2E2 /* Yolov3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E132304410D002FB2E2 /* Yolov3.mlmodel */; };
+		8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 		E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E91ED0A822D5C36200DBFF96 /* bgm.mp3 */; };
@@ -190,6 +193,9 @@
 		8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQandAUITests.swift; sourceTree = "<group>"; };
 		8A94FE8C228A6112002E6F08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A94FE99228A6133002E6F08 /* yolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolo.mlmodel; sourceTree = "<group>"; };
+		8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
+		8AA34E132304410D002FB2E2 /* Yolov3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Yolov3.mlmodel; sourceTree = "<group>"; };
+		8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
 		8C6AB45C759D86C6B6BF3569 /* Pods-ARQandATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.release.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.release.xcconfig"; sourceTree = "<group>"; };
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
@@ -354,6 +360,8 @@
 			children = (
 				8A315E8B22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift */,
 				8A315E8D22D5BC8500097535 /* UIAlertController+ValidName.swift */,
+				8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */,
+				8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -439,6 +447,7 @@
 				8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */,
 				8A94FE76228A6112002E6F08 /* Info.plist */,
 				8A94FE99228A6133002E6F08 /* yolo.mlmodel */,
+				8AA34E132304410D002FB2E2 /* Yolov3.mlmodel */,
 			);
 			path = ARQandA;
 			sourceTree = "<group>";
@@ -822,10 +831,12 @@
 			files = (
 				8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */,
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
+				8AA34E142304410D002FB2E2 /* Yolov3.mlmodel in Sources */,
 				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
 				E91ED0CF22D634C600DBFF96 /* Audiomanager.swift in Sources */,
 				8A315E8E22D5BC8500097535 /* UIAlertController+ValidName.swift in Sources */,
+				8AA34E1223044067002FB2E2 /* UIImage+CVPixelBuffer.swift in Sources */,
 				8A514CA122CF9974004F3774 /* TutorialViewController.swift in Sources */,
 				8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */,
 				8A29A22B22D237570086A33E /* ProfileViewController.swift in Sources */,
@@ -833,6 +844,7 @@
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
 				8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */,
+				8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */,
 				8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */,
 				8A94FE9D228A6133002E6F08 /* yolo.mlmodel in Sources */,
 				8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */,

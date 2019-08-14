@@ -13,7 +13,7 @@ import Vision
 import AVFoundation
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
-    
+
     @IBOutlet var sceneView: ARSCNView!
     let yolo = YOLO()
     var request: VNCoreMLRequest!
@@ -32,10 +32,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     let visionQueue = DispatchQueue(label: "visionQueue")
     
-    var currentBuffer: CVPixelBuffer?
-
+    let ciContext = CIContext()
+    var resizedPixelBuffer: CVPixelBuffer?
+    
     let toQAButton = UIButton()
-
+    
     
     override func viewDidLoad() {
         
@@ -45,7 +46,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.delegate = self
         sceneView.session.delegate = self
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        // sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         // Create a new scene
         // let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -54,10 +55,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         //sceneView.scene = scene
         setUpQAButton()
         setUpBackBtn()
-        //setUpShowBoundingBoxButton()
+        setUpPredictButton()
         setUpBoundingBoxesColor()
         setUpVision()
-        
+        setUpCoreImage()
         addTapGesture()
     }
     
@@ -120,7 +121,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         view.addSubview(toQAButton)
     }
     
-    @objc func toQAButtonTapped(_ sender: Any) {
+    @objc func toQAButtonTapped(_ sender: UIButton) {
         for shape in boundingBoxArray{
             shape.isHidden = true
         }
@@ -140,31 +141,45 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             dest.numberOfQuestion = self.numberOfQuestion
         }
     }
-    
-    func setUpShowBoundingBoxButton(){
-        let showBoundingBoxButton = UIButton()
-        let showBoundingBoxButtonWidth:CGFloat = 70
-        let showBoundingBoxButtonHeight:CGFloat = 70
-        let deviceHeight = UIScreen.main.bounds.height
-        
-        showBoundingBoxButton.frame = CGRect(x: 15, y: deviceHeight - showBoundingBoxButtonHeight - 50, width: showBoundingBoxButtonWidth, height: showBoundingBoxButtonHeight)
-        showBoundingBoxButton.layer.cornerRadius = showBoundingBoxButton.bounds.width / 2
-        showBoundingBoxButton.setTitle("口", for: .normal)
-        showBoundingBoxButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
-        showBoundingBoxButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(30))
-        showBoundingBoxButton.contentHorizontalAlignment = .center
-        showBoundingBoxButton.contentVerticalAlignment = .center
-        showBoundingBoxButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
-        showBoundingBoxButton.addTarget(self, action: #selector(showBoundingBox), for: .touchUpInside)
-        view.addSubview(showBoundingBoxButton)
-    }
-    
-    @objc func showBoundingBox(){
-        for box in boundingBoxArray{
-            box.isHidden = false
+    func setUpCoreImage() {
+        let status = CVPixelBufferCreate(nil, YOLO.inputWidth, YOLO.inputHeight,
+                                         kCVPixelFormatType_32BGRA, nil,
+                                         &resizedPixelBuffer)
+        if status != kCVReturnSuccess {
+            print("Error: could not create resized pixel buffer", status)
         }
     }
     
+     func setUpPredictButton(){
+     let predictButton = UIButton()
+     let showBoundingBoxButtonWidth:CGFloat = 70
+     let showBoundingBoxButtonHeight:CGFloat = 70
+     let deviceHeight = UIScreen.main.bounds.height
+     
+     predictButton.frame = CGRect(x: 15, y: deviceHeight - showBoundingBoxButtonHeight - 50, width: showBoundingBoxButtonWidth, height: showBoundingBoxButtonHeight)
+     predictButton.layer.cornerRadius = predictButton.bounds.width / 2
+     predictButton.setTitle("口", for: .normal)
+     predictButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
+     predictButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(30))
+     predictButton.contentHorizontalAlignment = .center
+     predictButton.contentVerticalAlignment = .center
+     predictButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+     predictButton.addTarget(self, action: #selector(predictButtonTapped), for: .touchUpInside)
+     predictButton.isEnabled = true
+     view.addSubview(predictButton)
+     }
+     
+     @objc func predictButtonTapped(_ sender: UIButton){
+     clearShapeArray()
+     self.predictLabelArray.removeAll()
+     self.sceneView.scene.rootNode.enumerateChildNodes{
+     (node,stop) in
+     node.removeFromParentNode()
+     }
+     let currentbuffer = sceneView.session.currentFrame?.capturedImage
+     predict(pixelBuffer: currentbuffer!)
+     }
+ 
     func setUpBoundingBoxesColor() {
         for r: CGFloat in [0.2, 0.4, 0.6, 0.85, 1.0] {
             for g: CGFloat in [0.6, 0.7, 0.8, 0.9] {
@@ -195,124 +210,154 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         view.addGestureRecognizer(tapGesture)
     }
     
-    
-    var new_MoveX: Float = 0.0
-    var new_MoveY: Float = 0.0
-    var new_MoveZ: Float = 0.0
-    var new_RotateY: Float = 0.0
-    
-    var pre_MoveX: Float = 0.0
-    var pre_MoveY: Float = 0.0
-    var pre_MoveZ: Float = 0.0
-    var pre_RotateY: Float = 0.0
-    
-    func session(_ session: ARSession, didUpdate frame: ARFrame){
-        let currentTransform = frame.camera.transform
-        new_MoveX = currentTransform.columns.3.x
-        new_MoveY = currentTransform.columns.3.y
-        new_MoveZ = currentTransform.columns.3.z
-        
-        
-        //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
-        
-        let rotation = frame.camera.eulerAngles
-        new_RotateY = rotation.y
-        
-        
-        guard currentBuffer == nil else{ return }
-        
-        visionQueue.async {
-            if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
-                self.clearShapeArray()
-                self.predictLabelArray.removeAll()
-                self.sceneView.scene.rootNode.enumerateChildNodes{
-                    (node,stop) in
-                    node.removeFromParentNode()
-                }
-                self.updatePosition()
-                self.currentBuffer = frame.capturedImage
-                self.predictUsingVision(pixelBuffer: self.currentBuffer!)
-            }
-            else{
-
-            }
-        }
-    }
-    
-    func DeviceMoving() -> Bool{
-        if abs(self.pre_MoveX - self.new_MoveX) > 0.015{
-            return true;
-        }
-        if abs(self.pre_MoveY - self.new_MoveY) > 0.015{
-            return true;
-        }
-        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.015{
-            return true;
-        }
-        if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
-            return true;
-        }
-        return false;
-    }
-    
-    func updatePosition(){
-        self.pre_MoveX = self.new_MoveX
-        self.pre_MoveY = self.new_MoveY
-        self.pre_MoveZ = self.new_MoveZ
-        self.pre_RotateY = self.new_RotateY
-    }
-    
+    /*
+     var new_MoveX: Float = 0.0
+     var new_MoveY: Float = 0.0
+     var new_MoveZ: Float = 0.0
+     var new_RotateY: Float = 0.0
+     
+     var pre_MoveX: Float = 0.0
+     var pre_MoveY: Float = 0.0
+     var pre_MoveZ: Float = 0.0
+     var pre_RotateY: Float = 0.0
+     
+     func session(_ session: ARSession, didUpdate frame: ARFrame){
+     let currentTransform = frame.camera.transform
+     new_MoveX = currentTransform.columns.3.x
+     new_MoveY = currentTransform.columns.3.y
+     new_MoveZ = currentTransform.columns.3.z
+     
+     
+     //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
+     
+     let rotation = frame.camera.eulerAngles
+     new_RotateY = rotation.y
+     
+     
+     guard currentBuffer == nil else{ return }
+     
+     visionQueue.async {
+     if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
+     self.clearShapeArray()
+     self.predictLabelArray.removeAll()
+     self.sceneView.scene.rootNode.enumerateChildNodes{
+     (node,stop) in
+     node.removeFromParentNode()
+     }
+     self.updatePosition()
+     self.currentBuffer = frame.capturedImage
+     self.predictUsingVision(pixelBuffer: self.currentBuffer!)
+     }
+     else{
+     
+     }
+     }
+     }
+     
+     func DeviceMoving() -> Bool{
+     if abs(self.pre_MoveX - self.new_MoveX) > 0.015{
+     return true;
+     }
+     if abs(self.pre_MoveY - self.new_MoveY) > 0.015{
+     return true;
+     }
+     if abs(self.pre_MoveZ - self.new_MoveZ) > 0.015{
+     return true;
+     }
+     if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
+     return true;
+     }
+     return false;
+     }
+     
+     func updatePosition(){
+     self.pre_MoveX = self.new_MoveX
+     self.pre_MoveY = self.new_MoveY
+     self.pre_MoveZ = self.new_MoveZ
+     self.pre_RotateY = self.new_RotateY
+     }
+     */
     func clearShapeArray(){
-        DispatchQueue.main.sync {
-            for shape in self.boundingBoxArray{
-                shape.removeFromSuperlayer()
-            }
+        for shape in self.boundingBoxArray{
+            shape.removeFromSuperlayer()
         }
+        
         self.boundingBoxArray.removeAll()
     }
-    func predictUsingVision(pixelBuffer: CVPixelBuffer) {
-        /*
-         let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
-         
-         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,orientation: orientation)
-         
-         try? handler.perform([request])
-         */
-        
-        let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
-        
-        
-        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
-        visionQueue.async {
-            do {
-                // Release the pixel buffer when done, allowing the next buffer to be processed.
-                defer { self.currentBuffer = nil }
-                try requestHandler.perform([self.request])
-            } catch {
-                print("Error: Vision request failed with error \"\(error)\"")
-            }
+    
+    func predict(image: UIImage) {
+        if let pixelBuffer = image.pixelBuffer(width: YOLO.inputWidth, height: YOLO.inputHeight) {
+            predict(pixelBuffer: pixelBuffer)
         }
     }
     
+    func predict(pixelBuffer: CVPixelBuffer) {
+        // Measure how long it takes to predict a single video frame.
+        
+        // Resize the input with Core Image to 416x416.
+        guard let resizedPixelBuffer = resizedPixelBuffer else { return }
+        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+        let sx = CGFloat(YOLO.inputWidth) / CGFloat(CVPixelBufferGetWidth(pixelBuffer))
+        let sy = CGFloat(YOLO.inputHeight) / CGFloat(CVPixelBufferGetHeight(pixelBuffer))
+        let scaleTransform = CGAffineTransform(scaleX: sx, y: sy)
+        let scaledImage = ciImage.transformed(by: scaleTransform)
+        let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+        let rotateImage = scaledImage.oriented(orientation)
+       // debugImageView.image = UIImage(ciImage: rotateImage)
+        ciContext.render(rotateImage, to: resizedPixelBuffer)
+        
+        // This is an alternative way to resize the image (using vImage):
+        //if let resizedPixelBuffer = resizePixelBuffer(pixelBuffer,
+        //                                              width: YOLO.inputWidth,
+        //                                              height: YOLO.inputHeight)
+        
+        // Resize the input to 416x416 and give it to our model.
+        if let boundingBoxes = try? yolo.predict(image: resizedPixelBuffer) {
+            // let elapsed = CACurrentMediaTime() - startTime
+            showOnMainThread(boundingBoxes)
+        }
+    }
+    /*
+     func predictUsingVision(pixelBuffer: CVPixelBuffer) {
+     /*
+     let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+     
+     let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,orientation: orientation)
+     
+     try? handler.perform([request])
+     */
+     
+     let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+     
+     
+     let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
+     visionQueue.async {
+     do {
+     // Release the pixel buffer when done, allowing the next buffer to be processed.
+     defer { self.currentBuffer = nil }
+     try requestHandler.perform([self.request])
+     } catch {
+     print("Error: Vision request failed with error \"\(error)\"")
+     }
+     }
+     }
+     */
     
     func visionRequestDidComplete(request: VNRequest, error: Error?) {
         if let observations = request.results as? [VNCoreMLFeatureValueObservation],
             let features = observations.first?.featureValue.multiArrayValue {
             
-            let boundingBoxes = yolo.computeBoundingBoxes(features: features)
-            //showOnMainThread(boundingBoxes)
-            DispatchQueue.main.async {
-                self.getResult(predictions: boundingBoxes)
-            }
+            let boundingBoxes = yolo.computeBoundingBoxes(features: [features, features, features])
+            showOnMainThread(boundingBoxes)
         }
     }
-    /*
+    
     func showOnMainThread(_ boundingBoxes: [YOLO.Prediction]) {
         DispatchQueue.main.async {
             self.getResult(predictions: boundingBoxes)
         }
     }
-    */
+    
     func getResult(predictions: [YOLO.Prediction]) {
         for i in 0..<YOLO.maxBoundingBoxes {
             if i < predictions.count {
@@ -369,10 +414,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var target = 0
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
         var satisfiedIndex: [Int] = []
-        
-        labelNodeArray[target].removeFromParentNode()
-        starNodeArray[target].removeFromParentNode()
-        
+        if !labelNodeArray.isEmpty && !starNodeArray.isEmpty{
+            labelNodeArray[target].removeFromParentNode()
+            starNodeArray[target].removeFromParentNode()
+        }
         touchPosition = gestureRecognize.location(in: self.view)
         for i in 0..<boundingBoxArray.count{
             if boundingBoxArray[i].path!.contains(touchPosition){
@@ -394,39 +439,39 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let arHitTestResults : [ARHitTestResult] = sceneView.hitTest(touchPosition, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
             
             guard let closestResult = arHitTestResults.first else{
-                print("No Result")
-                return
-            }
-                // Get Coordinates of HitTest
-                let transform : matrix_float4x4 = closestResult.worldTransform
-                let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
-                
-                difficulty = difficultyOfLabels[tappedPredictionLabel]
-                numberOfQuestion = Difficult_Number_Dict[difficulty]
-                
-                
-                //boundingBoxArray[target].isHidden = true
-                // Create 3D Text
-                let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
-                labelNode.position = worldCoord
-                labelNodeArray[target].removeFromParentNode()
-                labelNodeArray[target] = labelNode
-                sceneView.scene.rootNode.addChildNode(labelNodeArray[target])
-                // Create star
-                let starNode: SCNNode = createStar()
-                starNode.position = SCNVector3Make(transform.columns.3.x + 0.01, transform.columns.3.y - 0.03, transform.columns.3.z)
-                starNodeArray[target].removeFromParentNode()
-                starNodeArray[target] = starNode
-                sceneView.scene.rootNode.addChildNode(starNodeArray[target])
-
-                let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 3.0)
-                let actionLoop = SCNAction.repeatForever(action)
-                starNodeArray[target].runAction(actionLoop)
-                labelNodeArray[target].runAction(actionLoop)
-                
-                toQAButton.isEnabled = true
+                return}
+            
+            // Get Coordinates of HitTest
+            let transform : matrix_float4x4 = closestResult.worldTransform
+            let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+            
+            difficulty = difficultyOfLabels[tappedPredictionLabel]
+            numberOfQuestion = Difficult_Number_Dict[difficulty]
+            
+            
+            //boundingBoxArray[target].isHidden = true
+            // Create 3D Text
+            let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
+            labelNode.position = worldCoord
+            labelNodeArray[target].removeFromParentNode()
+            labelNodeArray[target] = labelNode
+            sceneView.scene.rootNode.addChildNode(labelNodeArray[target])
+            // Create star
+            let starNode: SCNNode = createStar()
+            starNode.position = SCNVector3Make(transform.columns.3.x + 0.01, transform.columns.3.y - 0.03, transform.columns.3.z)
+            starNodeArray[target].removeFromParentNode()
+            starNodeArray[target] = starNode
+            sceneView.scene.rootNode.addChildNode(starNodeArray[target])
+            
+            let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 3.0)
+            let actionLoop = SCNAction.repeatForever(action)
+            starNodeArray[target].runAction(actionLoop)
+            labelNodeArray[target].runAction(actionLoop)
+            
+            toQAButton.isEnabled = true
             
         }
+        
         
     }
     

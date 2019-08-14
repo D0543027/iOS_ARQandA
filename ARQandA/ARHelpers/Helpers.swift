@@ -171,7 +171,7 @@ let difficultyOfLabels: [String:String] =  [
     "toothbrush": "Hard",
 ]
 // anchor boxes
-let anchors: [Float] = [0.57273, 0.677385, 1.87446, 2.06253, 3.33843, 5.47434, 7.88282, 3.52778, 9.77052, 9.16828]
+let anchors: [[Float]] = [[116,90,  156,198,  373,326], [30,61,  62,45,  59,119], [10,13,  16,30,  33,23]]
 
 /**
   Removes bounding boxes that overlap too much with other boxes that have
