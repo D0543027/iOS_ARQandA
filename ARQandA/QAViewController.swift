@@ -13,17 +13,20 @@ import Alamofire
 import SwiftyJSON
 
 class QAViewController: UIViewController {
-    var score = 0               // 單次分數
+    var score = 0.0             // 單次分數
     var singleRight = 0         // 單次答對數
     var singleWrong = 0         // 單次打錯數
     var label = ""              // 物件名稱
     var numberOfQuestion = ""   // 題數
-    
+    var magnification = 1.0     // 倍率
+    var point = 5.0             // 答對單題分數
     var data: JSON?
     var audioPlayerF = AVAudioPlayer()
     var audioPlayerV = AVAudioPlayer()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    let semaphore = DispatchSemaphore(value: 0)
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +46,7 @@ class QAViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        //還在抓資料，迴圈卡在這
-        while data == nil{}
+        semaphore.wait()
         
         //抓完資料，轉圈停止
         activityIndicator.stopAnimating()
@@ -64,6 +66,7 @@ class QAViewController: UIViewController {
         audioPlayerF.prepareToPlay()
         
     }
+
     
     fileprivate func setUpResultScene() {
         //隱藏結算畫面物件
@@ -117,14 +120,15 @@ class QAViewController: UIViewController {
     func getData(){
         let queue = DispatchQueue(label: "queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .workItem)
         // parameters： 參數對應 query.php 的 _POST
-        let parameters = ["label": self.label, "num": self.numberOfQuestion]
-        print("Selected label: \(label) NumberofQuestion:\(numberOfQuestion)")
+        let parameters = ["label": self.label, "num": "5"]
+        print("Selected label: \(label)")
         
-        Alamofire.request("https://cf073d74.ngrok.io/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        Alamofire.request("http:/172.20.10.7:8080/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
                     self.data = json
+                    self.semaphore.signal()
                 }
             }
         })
@@ -159,10 +163,11 @@ class QAViewController: UIViewController {
     }
     
     func updateQuestion(){
-        
         // 答完題目
         if index == data!.count{
             // 答題結束畫面
+            timer?.invalidate()
+            
             questionLabel.text = ""
             firstChoice.setTitle("", for: .normal)
             secondChoice.setTitle("", for: .normal)
@@ -175,17 +180,26 @@ class QAViewController: UIViewController {
                 score = 0
             }
             
-            var highScore = UserDefaults.standard.integer(forKey: "highScore")
+            var highScore = UserDefaults.standard.double(forKey: "highScore")
             //更新最高分數
             if highScore < score {
                 highScore = score
-                UserDefaults.standard.set(highScore, forKey: "highScore")
+                UserDefaults.standard.set(String(format: "%.2f",highScore), forKey: "highScore")
             }
             
-            singleScoreValue.text = String(score)
+            let rightCount = UserDefaults.standard.integer(forKey: "right")
+            UserDefaults.standard.set(rightCount + singleRight, forKey: "right")
+            
+            let wrongCount = UserDefaults.standard.integer(forKey: "wrong")
+            UserDefaults.standard.set(wrongCount + singleWrong, forKey: "wrong")
+            
+            let total = UserDefaults.standard.integer(forKey: "total")
+            UserDefaults.standard.set(total + rightCount + wrongCount , forKey: "total")
+            
+            singleScoreValue.text = String(format: "%.2f", score)
             singleRightValue.text = String(singleRight)
             singleWrongValue.text = String(singleWrong)
-            singleHighScoreValue.text = UserDefaults.standard.string(forKey: "highScore")
+            singleHighScoreValue.text = String(format: "%.2f",highScore)
             
             calculatePercentage()
             // 設延遲(5 sec)
@@ -212,6 +226,18 @@ class QAViewController: UIViewController {
             // 打亂順序
             shuffleChoice()
             index = index + 1
+            timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
+                self.showAnswer()
+                self.singleWrong = self.singleWrong + 1
+                self.point = 5
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
+                    self.hideVictoryFailed()
+                    self.hideValidSign()
+                    self.updateQuestion()
+                })
+                
+            }
+            
         }
     }
     
@@ -234,32 +260,27 @@ class QAViewController: UIViewController {
         let validSign = [validFirstChoice, validSecondChoice, validThirdChoice, validFourthChoice]
         let selectButton = button.tag - 1
         
-        let total = UserDefaults.standard.integer(forKey: "total")
-        UserDefaults.standard.set(total + 1, forKey: "total")
-        
         if RightAnswer == button.currentTitle{
             BtnVictory()
             validSign[selectButton]!.image = UIImage(named: "checksign.jpg")
             
-            //答對分數++（答對一題＋5分）
-            score = score + 5
-            //總答對數++
-            let rightCount = UserDefaults.standard.integer(forKey: "right")
-            UserDefaults.standard.set(rightCount + 1, forKey: "right")
-            
-            singleRight = singleRight + 1
+            score = score + point
+            point = point * 1.5
+            print("Right...")
+            print(point)
+            print(score)
 
+            singleRight = singleRight + 1
         } else {
             BtnFailed()
             validSign[selectButton]!.image = UIImage(named: "wrongsign.jpeg")
-            //答錯一題-3分
-            score = score - 3
-            //總答錯數++
-            let countWrong = UserDefaults.standard.integer(forKey: "wrong")
-            UserDefaults.standard.set(countWrong + 1, forKey: "wrong")
-    
+            
+            point = 5
+            print("Wrong...")
+            print(point)
+            print(score)
+ 
             singleWrong = singleWrong + 1
-           
         }
         validSign[selectButton]?.isHidden = false
     }
@@ -282,9 +303,11 @@ class QAViewController: UIViewController {
     func calculatePercentage(){
         let rightCount = UserDefaults.standard.integer(forKey: "right")
         let total = UserDefaults.standard.integer(forKey: "total")
-        
+        print(rightCount)
+        print(total)
         let percentage = (Double(rightCount) / Double(total) ) * 100
         let strPercentage = "\(String(format: "%.2f", percentage)) %"
+        print(strPercentage)
         UserDefaults.standard.set(strPercentage, forKey: "correctPercentage")
 
     }
@@ -306,6 +329,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var firstChoice: UIButton!
     @IBOutlet weak var validFirstChoice: UIImageView!
     @IBAction func firstChocieTapped(_ sender: Any) {
+        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: firstChoice)
         showAnswer()
@@ -321,6 +345,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var secondChoice: UIButton!
     @IBOutlet weak var validSecondChoice: UIImageView!
     @IBAction func secondChoiceTapped(_ sender: Any) {
+        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: secondChoice)
         showAnswer()
@@ -335,6 +360,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var thirdChoice: UIButton!
     @IBOutlet weak var validThirdChoice: UIImageView!
     @IBAction func thirdChoiceTapped(_ sender: Any) {
+        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: thirdChoice)
         showAnswer()
@@ -349,6 +375,7 @@ class QAViewController: UIViewController {
     @IBOutlet weak var fourthChoice: UIButton!
     @IBOutlet weak var validFourthChoice: UIImageView!
     @IBAction func fourthChoiceTapped(_ sender: Any) {
+        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: fourthChoice)
         showAnswer()

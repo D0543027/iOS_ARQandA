@@ -13,7 +13,7 @@ import Vision
 import AVFoundation
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
-
+    
     @IBOutlet var sceneView: ARSCNView!
     let yolo = YOLO()
     var request: VNCoreMLRequest!
@@ -150,36 +150,40 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-     func setUpPredictButton(){
-     let predictButton = UIButton()
-     let showBoundingBoxButtonWidth:CGFloat = 70
-     let showBoundingBoxButtonHeight:CGFloat = 70
-     let deviceHeight = UIScreen.main.bounds.height
-     
-     predictButton.frame = CGRect(x: 15, y: deviceHeight - showBoundingBoxButtonHeight - 50, width: showBoundingBoxButtonWidth, height: showBoundingBoxButtonHeight)
-     predictButton.layer.cornerRadius = predictButton.bounds.width / 2
-     predictButton.setTitle("口", for: .normal)
-     predictButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
-     predictButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(30))
-     predictButton.contentHorizontalAlignment = .center
-     predictButton.contentVerticalAlignment = .center
-     predictButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
-     predictButton.addTarget(self, action: #selector(predictButtonTapped), for: .touchUpInside)
-     predictButton.isEnabled = true
-     view.addSubview(predictButton)
-     }
-     
-     @objc func predictButtonTapped(_ sender: UIButton){
-     clearShapeArray()
-     self.predictLabelArray.removeAll()
-     self.sceneView.scene.rootNode.enumerateChildNodes{
-     (node,stop) in
-     node.removeFromParentNode()
-     }
-     let currentbuffer = sceneView.session.currentFrame?.capturedImage
-     predict(pixelBuffer: currentbuffer!)
-     }
- 
+    func setUpPredictButton(){
+        let predictButton = UIButton()
+        let showBoundingBoxButtonWidth:CGFloat = 70
+        let showBoundingBoxButtonHeight:CGFloat = 70
+        let deviceHeight = UIScreen.main.bounds.height
+        
+        predictButton.frame = CGRect(x: 15, y: deviceHeight - showBoundingBoxButtonHeight - 50, width: showBoundingBoxButtonWidth, height: showBoundingBoxButtonHeight)
+        predictButton.layer.cornerRadius = predictButton.bounds.width / 2
+        predictButton.setTitle("口", for: .normal)
+        predictButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
+        predictButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(30))
+        predictButton.contentHorizontalAlignment = .center
+        predictButton.contentVerticalAlignment = .center
+        predictButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        predictButton.addTarget(self, action: #selector(predictButtonTapped), for: .touchUpInside)
+        predictButton.isEnabled = true
+        view.addSubview(predictButton)
+    }
+    
+    @objc func predictButtonTapped(_ sender: UIButton){
+        
+        //點擊預測按鈕後，先清除原本在螢幕中的物件
+        clearShapeArray()
+        self.predictLabelArray.removeAll()
+        self.sceneView.scene.rootNode.enumerateChildNodes{
+            (node,stop) in
+            node.removeFromParentNode()
+        }
+        //擷取當下畫面
+        let currentbuffer = sceneView.session.currentFrame?.capturedImage
+        //預測
+        predict(pixelBuffer: currentbuffer!)
+    }
+    
     func setUpBoundingBoxesColor() {
         for r: CGFloat in [0.2, 0.4, 0.6, 0.85, 1.0] {
             for g: CGFloat in [0.6, 0.7, 0.8, 0.9] {
@@ -303,7 +307,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let scaledImage = ciImage.transformed(by: scaleTransform)
         let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
         let rotateImage = scaledImage.oriented(orientation)
-       // debugImageView.image = UIImage(ciImage: rotateImage)
+        // debugImageView.image = UIImage(ciImage: rotateImage)
         ciContext.render(rotateImage, to: resizedPixelBuffer)
         
         // This is an alternative way to resize the image (using vImage):
@@ -361,20 +365,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func getResult(predictions: [YOLO.Prediction]) {
         for i in 0..<YOLO.maxBoundingBoxes {
             if i < predictions.count {
-                let prediction = predictions[i]
                 
-                // The predicted bounding box is in the coordinate space of the input
-                // image, which is a square image of 416x416 pixels. We want to show it
-                // on the video preview, which is as wide as the screen and has a 4:3
-                // aspect ratio. The video preview also may be letterboxed at the top
-                // and bottom.
+                // 修正預測框 (影像辨識模組輸入為 416 * 416)
+                let prediction = predictions[i]
                 let width = view.bounds.width
                 let height = width * 4 / 3
                 let scaleX = width / CGFloat(YOLO.inputWidth)
                 let scaleY = height / CGFloat(YOLO.inputHeight)
                 let top = (view.bounds.height - height) / 2
                 
-                // Translate and scale the rectangle to our own coordinate system.
                 var rect = prediction.rect
                 rect.origin.x *= scaleX
                 rect.origin.y *= scaleY
@@ -383,12 +382,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 rect.size.height *= scaleY
                 
                 // Show the bounding box.
-                //let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
                 let color = colors[prediction.classIndex]
-                
+                let label = labels[prediction.classIndex]
                 let boundingBox = drawBoundingBox(frame: rect, color: color)
                 boundingBoxArray.append(boundingBox)
-                predictLabelArray.append(labels[prediction.classIndex])
+                predictLabelArray.append(label)
                 labelNodeArray.append(SCNNode())
                 starNodeArray.append(SCNNode())
             }
@@ -463,6 +461,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             starNodeArray[target] = starNode
             sceneView.scene.rootNode.addChildNode(starNodeArray[target])
             
+            //旋轉
             let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 3.0)
             let actionLoop = SCNAction.repeatForever(action)
             starNodeArray[target].runAction(actionLoop)

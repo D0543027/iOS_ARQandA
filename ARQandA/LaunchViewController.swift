@@ -144,7 +144,7 @@ class LaunchViewController: UIViewController {
         }
         
         if UserDefaults.standard.object(forKey: "correctPercentage") == nil{
-            UserDefaults.standard.set(0, forKey: "correctPercentage")
+            UserDefaults.standard.set("0.00 %", forKey: "correctPercentage")
         }
     }
     
