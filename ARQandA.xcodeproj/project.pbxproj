@@ -62,6 +62,7 @@
 		8A94FE8B228A6112002E6F08 /* ARQandAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */; };
 		8AA34E1223044067002FB2E2 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */; };
 		8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */; };
+		8AE5BA7E231ABFC8006AE52D /* timeout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE5BA7D231ABFC8006AE52D /* timeout.png */; };
 		8AF9A70F2316A9F30036B697 /* Yolov3_Pretrained.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9A70E2316A9F30036B697 /* Yolov3_Pretrained.mlmodel */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
@@ -193,6 +194,7 @@
 		8A94FE8C228A6112002E6F08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
+		8AE5BA7D231ABFC8006AE52D /* timeout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeout.png; sourceTree = "<group>"; };
 		8AF9A70E2316A9F30036B697 /* Yolov3_Pretrained.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Yolov3_Pretrained.mlmodel; sourceTree = "<group>"; };
 		8C6AB45C759D86C6B6BF3569 /* Pods-ARQandATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.release.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.release.xcconfig"; sourceTree = "<group>"; };
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -313,6 +315,7 @@
 		8A0D1C8C22DCA30F00BCF00D /* QA */ = {
 			isa = PBXGroup;
 			children = (
+				8AE5BA7D231ABFC8006AE52D /* timeout.png */,
 				8A0D1C8D22DCA30F00BCF00D /* VictorySound.mp3 */,
 				8A0D1C8E22DCA30F00BCF00D /* 5a17a0fd2f675.png */,
 				8A0D1C8F22DCA30F00BCF00D /* space.png */,
@@ -702,6 +705,7 @@
 				E9A79A9C22CF36FE00295C53 /* background33.png in Resources */,
 				8A0D1CB822DCA35F00BCF00D /* Tutorial03.png in Resources */,
 				E9A79A9D22CF36FE00295C53 /* background15.png in Resources */,
+				8AE5BA7E231ABFC8006AE52D /* timeout.png in Resources */,
 				8A0D1C8422DCA30800BCF00D /* profileBackground.jpg in Resources */,
 				E9A79AA322CF36FE00295C53 /* background26.png in Resources */,
 				E9A79A8D22CF36FE00295C53 /* background07.png in Resources */,

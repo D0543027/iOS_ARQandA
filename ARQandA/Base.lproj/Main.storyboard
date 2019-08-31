@@ -583,10 +583,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Failed.png" translatesAutoresizingMaskIntoConstraints="NO" id="l9u-VG-cte">
-                                <rect key="frame" x="67" y="174" width="241" height="110"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Victory.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tkg-Fn-MM8">
                                 <rect key="frame" x="67" y="169" width="241" height="115"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -679,7 +675,6 @@
                         <viewLayoutGuide key="safeArea" id="sW5-xd-tfL"/>
                     </view>
                     <connections>
-                        <outlet property="failed" destination="l9u-VG-cte" id="G7v-3f-HPl"/>
                         <outlet property="firstChoice" destination="UfQ-9F-Fgq" id="GLG-nR-P81"/>
                         <outlet property="fourthChoice" destination="ejo-Da-aDC" id="UNf-O4-koB"/>
                         <outlet property="questionLabel" destination="shH-hX-oto" id="qIW-Eo-HvU"/>
@@ -699,7 +694,7 @@
                         <outlet property="validFourthChoice" destination="8fa-gx-njQ" id="yBy-1b-abY"/>
                         <outlet property="validSecondChoice" destination="BFl-ij-Xt6" id="8jh-t5-CGL"/>
                         <outlet property="validThirdChoice" destination="DEy-he-8q7" id="vlV-KP-sev"/>
-                        <outlet property="victory" destination="Tkg-Fn-MM8" id="abH-KL-FC4"/>
+                        <outlet property="victoryFailed_pic" destination="Tkg-Fn-MM8" id="abH-KL-FC4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7A-Ub-0Z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -744,7 +739,6 @@
         <image name="5a17a0fd2f675.png" width="1000" height="1000"/>
         <image name="About.png" width="163" height="69"/>
         <image name="BlackBoard.jpg" width="1000" height="609"/>
-        <image name="Failed.png" width="252" height="123"/>
         <image name="LOGO.png" width="1000" height="1000"/>
         <image name="MenuButtonEX01.png" width="211" height="206"/>
         <image name="MenuButtonEX02.png" width="211" height="206"/>

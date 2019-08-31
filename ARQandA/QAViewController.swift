@@ -91,8 +91,7 @@ class QAViewController: UIViewController {
     
     fileprivate func setUpVictoryFailed() {
         //隱藏victory和failed圖示
-        victory.isHidden = true
-        failed.isHidden = true
+        victoryFailed_pic.isHidden = true
     }
     
     fileprivate func setUpChoiceButton(){
@@ -228,6 +227,8 @@ class QAViewController: UIViewController {
             index = index + 1
             timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
                 self.showAnswer()
+                self.victoryFailed_pic.image = UIImage(named: "timeout.png")
+                self.victoryFailed_pic.isHidden = false
                 self.singleWrong = self.singleWrong + 1
                 self.point = 5
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
@@ -314,18 +315,19 @@ class QAViewController: UIViewController {
 
     func BtnVictory() {
         audioPlayerV.play()
-        victory.isHidden = false
+        victoryFailed_pic.image = UIImage(named: "Victory.png")
+        victoryFailed_pic.isHidden = false
     }
     
     func BtnFailed() {
-        audioPlayerF.play();
-        failed.isHidden = false
+        audioPlayerF.play()
+        victoryFailed_pic.image = UIImage(named: "Failed.png")
+        victoryFailed_pic.isHidden = false
     }
     
     
     @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var victory: UIImageView!
-    @IBOutlet weak var failed: UIImageView!
+    @IBOutlet weak var victoryFailed_pic: UIImageView!
     @IBOutlet weak var firstChoice: UIButton!
     @IBOutlet weak var validFirstChoice: UIImageView!
     @IBAction func firstChocieTapped(_ sender: Any) {
@@ -409,8 +411,7 @@ class QAViewController: UIViewController {
     }
     
     func hideVictoryFailed(){
-        victory.isHidden = true
-        failed.isHidden = true
+        victoryFailed_pic.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
