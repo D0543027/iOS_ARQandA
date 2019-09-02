@@ -173,7 +173,7 @@ class YOLO {
         let rect: CGRect
     }
     
-    let model = Yolov3_Pretrained()
+    let model = Yolov3_20180901()
     
     public init() { }
     

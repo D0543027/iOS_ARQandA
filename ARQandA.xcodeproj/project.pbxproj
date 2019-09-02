@@ -50,6 +50,7 @@
 		8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */; };
 		8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA622CF999D004F3774 /* TutorialThirdViewController.swift */; };
 		8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA822CF9A8C004F3774 /* TutorialPageViewController.swift */; };
+		8A643D79231BDCDF009E50C1 /* Yolov3_20180901.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A643D78231BDCDF009E50C1 /* Yolov3_20180901.mlmodel */; };
 		8A67012422B338A200C7A09E /* QAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67012322B338A200C7A09E /* QAViewController.swift */; };
 		8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A69796F22B9DD16000FD70F /* LaunchViewController.swift */; };
 		8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE68228A6111002E6F08 /* AppDelegate.swift */; };
@@ -176,6 +177,7 @@
 		8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSecondViewController.swift; sourceTree = "<group>"; };
 		8A514CA622CF999D004F3774 /* TutorialThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialThirdViewController.swift; sourceTree = "<group>"; };
 		8A514CA822CF9A8C004F3774 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
+		8A643D78231BDCDF009E50C1 /* Yolov3_20180901.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Yolov3_20180901.mlmodel; sourceTree = "<group>"; };
 		8A67012322B338A200C7A09E /* QAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAViewController.swift; sourceTree = "<group>"; };
 		8A69796F22B9DD16000FD70F /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		8A94FE65228A6111002E6F08 /* ARQandA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARQandA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -447,6 +449,7 @@
 				8A94FE71228A6112002E6F08 /* Assets.xcassets */,
 				8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */,
 				8A94FE76228A6112002E6F08 /* Info.plist */,
+				8A643D78231BDCDF009E50C1 /* Yolov3_20180901.mlmodel */,
 				8AF9A70E2316A9F30036B697 /* Yolov3_Pretrained.mlmodel */,
 			);
 			path = ARQandA;
@@ -830,6 +833,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A643D79231BDCDF009E50C1 /* Yolov3_20180901.mlmodel in Sources */,
 				8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */,
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
 				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,

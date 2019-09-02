@@ -65,7 +65,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         
@@ -73,14 +72,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.run(configuration)
         
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         // Pause the view's session
         sceneView.session.pause()
+        request = nil
+        
     }
-    
     
     fileprivate func setUpBackBtn() {
         let backButton = UIButton()
@@ -101,7 +99,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @objc func backToMenu(sender: UIButton){
-        dismiss(animated: true, completion: nil);
+        dismiss(animated: true, completion: nil)
     }
     
     fileprivate func setUpQAButton(){
@@ -125,9 +123,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         for shape in boundingBoxArray{
             shape.isHidden = true
         }
-        print(predictLabelArray.count)
         predictLabelArray.removeAll()
-        print(predictLabelArray.count)
         sceneView.scene.rootNode.enumerateChildNodes{
             (node,stop) in
             node.removeFromParentNode()

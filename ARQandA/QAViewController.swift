@@ -43,7 +43,6 @@ class QAViewController: UIViewController {
         getData()
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         
         semaphore.wait()
@@ -67,7 +66,6 @@ class QAViewController: UIViewController {
         
     }
 
-    
     fileprivate func setUpResultScene() {
         //隱藏結算畫面物件
         resultBackground.isHidden = true
@@ -186,14 +184,15 @@ class QAViewController: UIViewController {
                 UserDefaults.standard.set(String(format: "%.2f",highScore), forKey: "highScore")
             }
             
-            let rightCount = UserDefaults.standard.integer(forKey: "right")
-            UserDefaults.standard.set(rightCount + singleRight, forKey: "right")
+            var rightCount = UserDefaults.standard.integer(forKey: "right")
+            rightCount = rightCount + singleRight
+            UserDefaults.standard.set(rightCount, forKey: "right")
             
-            let wrongCount = UserDefaults.standard.integer(forKey: "wrong")
-            UserDefaults.standard.set(wrongCount + singleWrong, forKey: "wrong")
+            var wrongCount = UserDefaults.standard.integer(forKey: "wrong")
+            wrongCount = wrongCount + singleWrong
+            UserDefaults.standard.set(wrongCount, forKey: "wrong")
             
-            let total = UserDefaults.standard.integer(forKey: "total")
-            UserDefaults.standard.set(total + rightCount + wrongCount , forKey: "total")
+            UserDefaults.standard.set(rightCount + wrongCount , forKey: "total")
             
             singleScoreValue.text = String(format: "%.2f", score)
             singleRightValue.text = String(singleRight)
@@ -227,6 +226,7 @@ class QAViewController: UIViewController {
             index = index + 1
             timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
                 self.showAnswer()
+                self.disableChoiceButton()
                 self.victoryFailed_pic.image = UIImage(named: "timeout.png")
                 self.victoryFailed_pic.isHidden = false
                 self.singleWrong = self.singleWrong + 1
