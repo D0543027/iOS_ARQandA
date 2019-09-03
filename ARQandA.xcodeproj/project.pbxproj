@@ -50,7 +50,7 @@
 		8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */; };
 		8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA622CF999D004F3774 /* TutorialThirdViewController.swift */; };
 		8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A514CA822CF9A8C004F3774 /* TutorialPageViewController.swift */; };
-		8A643D79231BDCDF009E50C1 /* Yolov3_20180901.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A643D78231BDCDF009E50C1 /* Yolov3_20180901.mlmodel */; };
+		8A55DC2A231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A55DC29231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel */; };
 		8A67012422B338A200C7A09E /* QAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67012322B338A200C7A09E /* QAViewController.swift */; };
 		8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A69796F22B9DD16000FD70F /* LaunchViewController.swift */; };
 		8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE68228A6111002E6F08 /* AppDelegate.swift */; };
@@ -64,7 +64,6 @@
 		8AA34E1223044067002FB2E2 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */; };
 		8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */; };
 		8AE5BA7E231ABFC8006AE52D /* timeout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE5BA7D231ABFC8006AE52D /* timeout.png */; };
-		8AF9A70F2316A9F30036B697 /* Yolov3_Pretrained.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9A70E2316A9F30036B697 /* Yolov3_Pretrained.mlmodel */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 		E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E91ED0A822D5C36200DBFF96 /* bgm.mp3 */; };
@@ -177,7 +176,7 @@
 		8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSecondViewController.swift; sourceTree = "<group>"; };
 		8A514CA622CF999D004F3774 /* TutorialThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialThirdViewController.swift; sourceTree = "<group>"; };
 		8A514CA822CF9A8C004F3774 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
-		8A643D78231BDCDF009E50C1 /* Yolov3_20180901.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Yolov3_20180901.mlmodel; sourceTree = "<group>"; };
+		8A55DC29231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyYolov3_Pretrained.mlmodel; sourceTree = "<group>"; };
 		8A67012322B338A200C7A09E /* QAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAViewController.swift; sourceTree = "<group>"; };
 		8A69796F22B9DD16000FD70F /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		8A94FE65228A6111002E6F08 /* ARQandA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARQandA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,7 +196,6 @@
 		8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
 		8AE5BA7D231ABFC8006AE52D /* timeout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeout.png; sourceTree = "<group>"; };
-		8AF9A70E2316A9F30036B697 /* Yolov3_Pretrained.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Yolov3_Pretrained.mlmodel; sourceTree = "<group>"; };
 		8C6AB45C759D86C6B6BF3569 /* Pods-ARQandATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.release.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.release.xcconfig"; sourceTree = "<group>"; };
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
@@ -449,8 +447,7 @@
 				8A94FE71228A6112002E6F08 /* Assets.xcassets */,
 				8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */,
 				8A94FE76228A6112002E6F08 /* Info.plist */,
-				8A643D78231BDCDF009E50C1 /* Yolov3_20180901.mlmodel */,
-				8AF9A70E2316A9F30036B697 /* Yolov3_Pretrained.mlmodel */,
+				8A55DC29231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel */,
 			);
 			path = ARQandA;
 			sourceTree = "<group>";
@@ -833,7 +830,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A643D79231BDCDF009E50C1 /* Yolov3_20180901.mlmodel in Sources */,
 				8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */,
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
 				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,
@@ -848,7 +844,7 @@
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
 				8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */,
-				8AF9A70F2316A9F30036B697 /* Yolov3_Pretrained.mlmodel in Sources */,
+				8A55DC2A231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel in Sources */,
 				8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */,
 				8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */,
 				8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */,
