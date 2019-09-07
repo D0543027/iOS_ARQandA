@@ -63,6 +63,8 @@
 		8A94FE8B228A6112002E6F08 /* ARQandAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */; };
 		8AA34E1223044067002FB2E2 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */; };
 		8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */; };
+		8AAC0AFD2323F2240089DD36 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAC0AFC2323F2240089DD36 /* eyes.png */; };
+		8ABD5F5D2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8ABD5F5C2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel */; };
 		8AE5BA7E231ABFC8006AE52D /* timeout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE5BA7D231ABFC8006AE52D /* timeout.png */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
@@ -195,6 +197,8 @@
 		8A94FE8C228A6112002E6F08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
+		8AAC0AFC2323F2240089DD36 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
+		8ABD5F5C2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyYolov3_raccoon.mlmodel; sourceTree = "<group>"; };
 		8AE5BA7D231ABFC8006AE52D /* timeout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeout.png; sourceTree = "<group>"; };
 		8C6AB45C759D86C6B6BF3569 /* Pods-ARQandATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.release.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.release.xcconfig"; sourceTree = "<group>"; };
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -370,6 +374,7 @@
 		8A4937BA22B5CF3B008EA659 /* ARHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				8AAC0AFE2323F9480089DD36 /* Pictures */,
 				8A48005A22CE2B910063B35F /* AthensClassic.ttf */,
 				8A4937B122B5CDCC008EA659 /* Helpers.swift */,
 				8A4937B022B5CDCC008EA659 /* YOLO.swift */,
@@ -447,6 +452,7 @@
 				8A94FE71228A6112002E6F08 /* Assets.xcassets */,
 				8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */,
 				8A94FE76228A6112002E6F08 /* Info.plist */,
+				8ABD5F5C2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel */,
 				8A55DC29231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel */,
 			);
 			path = ARQandA;
@@ -468,6 +474,14 @@
 				8A94FE8C228A6112002E6F08 /* Info.plist */,
 			);
 			path = ARQandAUITests;
+			sourceTree = "<group>";
+		};
+		8AAC0AFE2323F9480089DD36 /* Pictures */ = {
+			isa = PBXGroup;
+			children = (
+				8AAC0AFC2323F2240089DD36 /* eyes.png */,
+			);
+			path = Pictures;
 			sourceTree = "<group>";
 		};
 		CFE44F5CC8A529DD59319D6D /* Frameworks */ = {
@@ -648,6 +662,7 @@
 				8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */,
 				E9A79A9F22CF36FE00295C53 /* background28.png in Resources */,
 				E9A79A8B22CF36FE00295C53 /* background27.png in Resources */,
+				8AAC0AFD2323F2240089DD36 /* eyes.png in Resources */,
 				E9A79A8222CF36FE00295C53 /* background24.png in Resources */,
 				8A0D1C8622DCA30800BCF00D /* MenuButtonEX01.png in Resources */,
 				E9A79A8422CF36FE00295C53 /* background09.png in Resources */,
@@ -844,6 +859,7 @@
 				E9B084F422CC847800FDF797 /* MenuViewController.swift in Sources */,
 				8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */,
 				8A00394A22CFA306007E936D /* OptionTableViewController.swift in Sources */,
+				8ABD5F5D2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel in Sources */,
 				8A55DC2A231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel in Sources */,
 				8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */,
 				8A514CA722CF999D004F3774 /* TutorialThirdViewController.swift in Sources */,

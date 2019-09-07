@@ -17,7 +17,7 @@ class QAViewController: UIViewController {
     var singleRight = 0         // 單次答對數
     var singleWrong = 0         // 單次打錯數
     var label = ""              // 物件名稱
-    var numberOfQuestion = ""   // 題數
+    var difficulty = ""         // 難易度
     var magnification = 1.0     // 倍率
     var point = 5.0             // 答對單題分數
     var data: JSON?
@@ -28,9 +28,13 @@ class QAViewController: UIViewController {
     let semaphore = DispatchSemaphore(value: 0)
     var timer: Timer?
     
+    let secondsDict = ["Easy": 10, "Normal": 5, "Hard" : 3]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //讓文字換行，避免文字太常產生省略情形(abc...xyz這樣)
+        print(difficulty)
+        
         questionLabel.numberOfLines = 0
         
         self.view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "giphy.gif"))
@@ -160,6 +164,7 @@ class QAViewController: UIViewController {
     }
     
     func updateQuestion(){
+        timer?.invalidate()
         // 答完題目
         if index == data!.count{
             // 答題結束畫面
@@ -224,7 +229,8 @@ class QAViewController: UIViewController {
             // 打亂順序
             shuffleChoice()
             index = index + 1
-            timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
+            let timeLimit = secondsDict[difficulty]
+            timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeLimit!), repeats: false) { (_) in
                 self.showAnswer()
                 self.disableChoiceButton()
                 self.victoryFailed_pic.image = UIImage(named: "timeout.png")
@@ -331,7 +337,6 @@ class QAViewController: UIViewController {
     @IBOutlet weak var firstChoice: UIButton!
     @IBOutlet weak var validFirstChoice: UIImageView!
     @IBAction func firstChocieTapped(_ sender: Any) {
-        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: firstChoice)
         showAnswer()
@@ -347,7 +352,6 @@ class QAViewController: UIViewController {
     @IBOutlet weak var secondChoice: UIButton!
     @IBOutlet weak var validSecondChoice: UIImageView!
     @IBAction func secondChoiceTapped(_ sender: Any) {
-        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: secondChoice)
         showAnswer()
@@ -362,7 +366,6 @@ class QAViewController: UIViewController {
     @IBOutlet weak var thirdChoice: UIButton!
     @IBOutlet weak var validThirdChoice: UIImageView!
     @IBAction func thirdChoiceTapped(_ sender: Any) {
-        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: thirdChoice)
         showAnswer()
@@ -377,7 +380,6 @@ class QAViewController: UIViewController {
     @IBOutlet weak var fourthChoice: UIButton!
     @IBOutlet weak var validFourthChoice: UIImageView!
     @IBAction func fourthChoiceTapped(_ sender: Any) {
-        timer?.invalidate()
         disableChoiceButton()
         validAnswer(button: fourthChoice)
         showAnswer()

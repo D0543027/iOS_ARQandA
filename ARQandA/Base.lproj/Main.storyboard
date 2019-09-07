@@ -260,33 +260,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9i-hb-AF3">
-                                <rect key="frame" x="28" y="77" width="164" height="165"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="MenuButtonEX01.png"/>
-                                <connections>
-                                    <action selector="single:" destination="yS4-0g-95t" eventType="touchUpInside" id="aRK-EU-VSv"/>
-                                    <segue destination="BV1-FR-VrT" kind="presentation" identifier="ToSingle" id="alU-ZC-5hF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kyj-cJ-9NS">
-                                <rect key="frame" x="197" y="77" width="164" height="165"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="MenuButtonEX02.png"/>
-                                <connections>
-                                    <action selector="multi:" destination="yS4-0g-95t" eventType="touchUpInside" id="BOk-gi-5Qx"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-4U-kRY">
-                                <rect key="frame" x="197" y="245" width="164" height="166"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="MenuButtonEX04.png"/>
-                                <connections>
-                                    <action selector="friend:" destination="yS4-0g-95t" eventType="touchUpInside" id="cZ0-Qb-70l"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUu-pb-sB8">
-                                <rect key="frame" x="28" y="418" width="164" height="166"/>
+                                <rect key="frame" x="25" y="342" width="164" height="166"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MenuButtonEX05.png"/>
                                 <connections>
@@ -295,7 +270,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uV-gE-lHy">
-                                <rect key="frame" x="197" y="418" width="164" height="166"/>
+                                <rect key="frame" x="197" y="342" width="164" height="166"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MenuButtonEX06.png"/>
                                 <connections>
@@ -303,10 +278,14 @@
                                     <segue destination="Wdn-r5-krr" kind="presentation" identifier="ToOption" id="bvd-9S-36Y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUp-9X-ytg">
-                                <rect key="frame" x="28" y="245" width="164" height="166"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9i-hb-AF3">
+                                <rect key="frame" x="105" y="118" width="164" height="165"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="button"/>
+                                <state key="normal" backgroundImage="MenuButtonEX01.png"/>
+                                <connections>
+                                    <action selector="single:" destination="yS4-0g-95t" eventType="touchUpInside" id="aRK-EU-VSv"/>
+                                    <segue destination="BV1-FR-VrT" kind="presentation" identifier="ToSingle" id="alU-ZC-5hF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -741,8 +720,6 @@
         <image name="BlackBoard.jpg" width="1000" height="609"/>
         <image name="LOGO.png" width="1000" height="1000"/>
         <image name="MenuButtonEX01.png" width="211" height="206"/>
-        <image name="MenuButtonEX02.png" width="211" height="206"/>
-        <image name="MenuButtonEX04.png" width="211" height="206"/>
         <image name="MenuButtonEX05.png" width="211" height="206"/>
         <image name="MenuButtonEX06.png" width="211" height="206"/>
         <image name="START.png" width="239" height="121"/>

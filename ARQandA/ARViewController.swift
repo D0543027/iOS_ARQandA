@@ -24,10 +24,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var labelNodeArray: [SCNNode] = []
     var starNodeArray: [SCNNode] = []
     var tappedPredictionLabel: String = "..."
-    var Difficult_Number_Dict  = ["Easy": "3", "Normal": "5", "Hard": "7"]
+    
     var Diffucult_StarCount_Dict = ["Easy": 1, "Normal": 3, "Hard": 5]
     
-    var numberOfQuestion: String! = ""
     var difficulty: String! = ""
     
     let visionQueue = DispatchQueue(label: "visionQueue")
@@ -36,8 +35,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var resizedPixelBuffer: CVPixelBuffer?
     
     let toQAButton = UIButton()
-    
-    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -88,11 +86,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         backButton.frame = CGRect(x: 15, y: 50, width: backButtonWidth, height: backButtonHeight)
         backButton.layer.cornerRadius = backButton.bounds.width / 2
         backButton.setTitle("<", for: .normal)
-        backButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
+        backButton.setTitleColor(UIColor(white: 0, alpha: 1), for: .normal)
         backButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(backButtonWidth / 2 + 10))
         backButton.contentHorizontalAlignment = .center
         backButton.contentVerticalAlignment = .center
-        backButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        backButton.backgroundColor = UIColor(white: 1, alpha: 1)
+        backButton.layer.borderColor = UIColor.blue.cgColor
+        backButton.layer.borderWidth = 2
+        
         
         backButton.addTarget(self, action: #selector(backToMenu), for: .touchUpInside)
         view.addSubview(backButton)
@@ -106,17 +107,23 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let deviceWidth = UIScreen.main.bounds.width
         let deviceHeight = UIScreen.main.bounds.height
         
-        let buttonWidth:CGFloat = 140
-        let buttonHeight:CGFloat = 45
-        toQAButton.frame = CGRect(x: deviceWidth - buttonWidth, y: deviceHeight - buttonHeight - 20, width: buttonWidth, height: buttonHeight)
+        let buttonWidth:CGFloat = 70
+        let buttonHeight:CGFloat = 70
+        toQAButton.frame = CGRect(x: deviceWidth - buttonWidth - 10, y: deviceHeight - buttonHeight - 20, width: buttonWidth, height: buttonHeight)
         toQAButton.layer.masksToBounds = false
-        toQAButton.layer.cornerRadius = 4.0
-        toQAButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
-        toQAButton.setTitle("我要答題", for: .normal)
-        toQAButton.titleLabel?.font = UIFont(name: "AthensClassic", size: 25.0)
+        toQAButton.layer.cornerRadius = buttonWidth / 2
+        toQAButton.layer.borderColor = UIColor.blue.cgColor
+        toQAButton.layer.borderWidth = 2
+        toQAButton.backgroundColor = UIColor(white: 1, alpha: 1)
+        toQAButton.setTitle("QA", for: .normal)
+        toQAButton.setTitleColor(UIColor(white: 0, alpha: 1), for: .normal)
+        toQAButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(buttonWidth / 2 + 10))
+        toQAButton.contentHorizontalAlignment = .center
+        toQAButton.contentVerticalAlignment = .center
         toQAButton.addTarget(self, action: #selector(toQAButtonTapped), for: .touchUpInside)
         toQAButton.isEnabled = false
         view.addSubview(toQAButton)
+        toQAButton.isHidden = true
     }
     
     @objc func toQAButtonTapped(_ sender: UIButton) {
@@ -129,12 +136,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             node.removeFromParentNode()
         }
         sceneView.session.pause()
+        toQAButton.isEnabled = false
+        toQAButton.isHidden = true
         self.performSegue(withIdentifier: "switchToQA", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? QAViewController{
             dest.label = self.tappedPredictionLabel
-            dest.numberOfQuestion = self.numberOfQuestion
+            dest.difficulty = self.difficulty
         }
     }
     func setUpCoreImage() {
@@ -148,18 +157,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     func setUpPredictButton(){
         let predictButton = UIButton()
-        let showBoundingBoxButtonWidth:CGFloat = 70
-        let showBoundingBoxButtonHeight:CGFloat = 70
+        let buttonWidth:CGFloat = 70
+        let buttonHeight:CGFloat = 70
         let deviceHeight = UIScreen.main.bounds.height
         
-        predictButton.frame = CGRect(x: 15, y: deviceHeight - showBoundingBoxButtonHeight - 50, width: showBoundingBoxButtonWidth, height: showBoundingBoxButtonHeight)
+        predictButton.frame = CGRect(x: 15, y: deviceHeight - buttonHeight - 20, width: buttonWidth, height: buttonHeight)
         predictButton.layer.cornerRadius = predictButton.bounds.width / 2
-        predictButton.setTitle("口", for: .normal)
-        predictButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
-        predictButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(30))
-        predictButton.contentHorizontalAlignment = .center
-        predictButton.contentVerticalAlignment = .center
-        predictButton.backgroundColor = UIColor(white: 0.1, alpha: 0.5)
+        predictButton.setImage(UIImage(named: "eyes.png"), for: .normal)
+        predictButton.layer.borderColor = UIColor.blue.cgColor
+        predictButton.layer.borderWidth = 2
+        predictButton.backgroundColor = UIColor(white: 1, alpha: 1)
         predictButton.addTarget(self, action: #selector(predictButtonTapped), for: .touchUpInside)
         predictButton.isEnabled = true
         view.addSubview(predictButton)
@@ -424,7 +431,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             target = getNear(satisfiedIndex: satisfiedIndex)
         }
         
+        // 點擊框外
         if satisfiedIndex.count == 0{
+            toQAButton.isHidden = true
             toQAButton.isEnabled = false
         }
         else{
@@ -439,9 +448,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let transform : matrix_float4x4 = closestResult.worldTransform
             let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
             
-            difficulty = difficultyOfLabels[tappedPredictionLabel]
-            numberOfQuestion = Difficult_Number_Dict[difficulty]
-            
+            difficulty = difficultyOfLabels[tappedPredictionLabel]            
             
             //boundingBoxArray[target].isHidden = true
             // Create 3D Text
@@ -462,9 +469,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let actionLoop = SCNAction.repeatForever(action)
             starNodeArray[target].runAction(actionLoop)
             labelNodeArray[target].runAction(actionLoop)
-            
+            toQAButton.isHidden = false
             toQAButton.isEnabled = true
-            
         }
         
         
