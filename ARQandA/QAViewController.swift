@@ -121,7 +121,7 @@ class QAViewController: UIViewController {
     func getData(){
         let queue = DispatchQueue(label: "queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .workItem)
         // parameters： 參數對應 query.php 的 _POST
-        let parameters = ["label": self.label, "num": "5"]
+        let parameters = ["tablename": "plant_questions", "num": "5"]
         print("Selected label: \(label)")
         
         Alamofire.request("http:/172.20.10.7:8080/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
@@ -164,7 +164,6 @@ class QAViewController: UIViewController {
     }
     
     func updateQuestion(){
-        timer?.invalidate()
         // 答完題目
         if index == data!.count{
             // 答題結束畫面
@@ -237,6 +236,10 @@ class QAViewController: UIViewController {
                 self.victoryFailed_pic.isHidden = false
                 self.singleWrong = self.singleWrong + 1
                 self.point = 5
+                print("Timeout...")
+                print(self.score)
+                print(self.point)
+                self.timer?.invalidate()
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
                     self.hideVictoryFailed()
                     self.hideValidSign()
@@ -265,11 +268,11 @@ class QAViewController: UIViewController {
     func validAnswer(button: UIButton){
         
         let validSign = [validFirstChoice, validSecondChoice, validThirdChoice, validFourthChoice]
-        let selectButton = button.tag - 1
+        let selectButton = button.tag - 1 // 選項tag分別為1,2,3,4
         
         if RightAnswer == button.currentTitle{
             BtnVictory()
-            validSign[selectButton]!.image = UIImage(named: "checksign.jpg")
+            validSign[selectButton]!.image = UIImage(named: "checksign.jpg") //顯示所選的選項對錯
             
             score = score + point
             point = point * 1.5
@@ -280,7 +283,7 @@ class QAViewController: UIViewController {
             singleRight = singleRight + 1
         } else {
             BtnFailed()
-            validSign[selectButton]!.image = UIImage(named: "wrongsign.jpeg")
+            validSign[selectButton]!.image = UIImage(named: "wrongsign.jpeg") //顯示所選的選項對錯
             
             point = 5
             print("Wrong...")
@@ -298,11 +301,11 @@ class QAViewController: UIViewController {
         var tag = 0
         for btn in choices{
             if RightAnswer == btn?.currentTitle{
-                tag = (btn?.tag)!
+                tag = (btn?.tag)! //答案之選項tag
                 break
             }
         }
-        tag = tag - 1
+        tag = tag - 1 //選項tag分別為1,2,3,4，故這裡要減1
         checkSign[tag]?.image = UIImage(named: "checksign.jpg")
         checkSign[tag]?.isHidden = false
         
@@ -337,53 +340,32 @@ class QAViewController: UIViewController {
     @IBOutlet weak var firstChoice: UIButton!
     @IBOutlet weak var validFirstChoice: UIImageView!
     @IBAction func firstChocieTapped(_ sender: Any) {
-        disableChoiceButton()
-        validAnswer(button: firstChoice)
-        showAnswer()
-        
-        //延遲1秒
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
-            self.hideVictoryFailed()
-            self.hideValidSign()
-            self.updateQuestion()
-        })
+        choicesButtonAction(button: firstChoice)
     }
     
     @IBOutlet weak var secondChoice: UIButton!
     @IBOutlet weak var validSecondChoice: UIImageView!
     @IBAction func secondChoiceTapped(_ sender: Any) {
-        disableChoiceButton()
-        validAnswer(button: secondChoice)
-        showAnswer()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
-            self.hideVictoryFailed()
-            self.hideValidSign()
-            self.updateQuestion()
-        })
+        choicesButtonAction(button: secondChoice)
     }
     
     @IBOutlet weak var thirdChoice: UIButton!
     @IBOutlet weak var validThirdChoice: UIImageView!
     @IBAction func thirdChoiceTapped(_ sender: Any) {
-        disableChoiceButton()
-        validAnswer(button: thirdChoice)
-        showAnswer()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
-            self.hideVictoryFailed()
-            self.hideValidSign()
-            self.updateQuestion()
-        })
+        choicesButtonAction(button: thirdChoice)
     }
     
     @IBOutlet weak var fourthChoice: UIButton!
     @IBOutlet weak var validFourthChoice: UIImageView!
     @IBAction func fourthChoiceTapped(_ sender: Any) {
+        choicesButtonAction(button: fourthChoice)
+    }
+    
+    func choicesButtonAction(button: UIButton){
         disableChoiceButton()
-        validAnswer(button: fourthChoice)
+        timer?.invalidate()
+        validAnswer(button: button)
         showAnswer()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
             self.hideVictoryFailed()
             self.hideValidSign()
