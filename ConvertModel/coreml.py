@@ -1,3 +1,12 @@
+'''
+把這個檔案丟到training model的資料夾再執行
+轉完檔再把mlmodel檔丟到專題裡
+要改哪些東西我有簡單打在文件裡
+
+我訓練的浣熊model，可以先用這個去轉轉看，我確定可以轉
+https://drive.google.com/file/d/1PVNnh-HQuhnAt2MlC3fBPSt7sdmlN87P/view?usp=sharing
+'''
+
 import coremltools
 from keras.models import load_model
 from keras.layers import Input
