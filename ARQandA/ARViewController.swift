@@ -35,7 +35,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var resizedPixelBuffer: CVPixelBuffer?
     
     let toQAButton = UIButton()
-
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -174,17 +174,26 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @objc func predictButtonTapped(_ sender: UIButton){
         
-        //點擊預測按鈕後，先清除原本在螢幕中的物件
-        clearShapeArray()
-        self.predictLabelArray.removeAll()
-        self.sceneView.scene.rootNode.enumerateChildNodes{
-            (node,stop) in
-            node.removeFromParentNode()
+        let rotation = sceneView.session.currentFrame!.camera.eulerAngles
+        print(rotation.z)
+        if rotation.z <= -0.8 && rotation.z >= -2.5{
+            //點擊預測按鈕後，先清除原本在螢幕中的物件
+            clearShapeArray()
+            self.predictLabelArray.removeAll()
+            self.sceneView.scene.rootNode.enumerateChildNodes{
+                (node,stop) in
+                node.removeFromParentNode()
+            }
+            //擷取當下畫面
+            let currentbuffer = sceneView.session.currentFrame?.capturedImage
+            //預測
+            predict(pixelBuffer: currentbuffer!)
         }
-        //擷取當下畫面
-        let currentbuffer = sceneView.session.currentFrame?.capturedImage
-        //預測
-        predict(pixelBuffer: currentbuffer!)
+        else{
+            let alertController = UIAlertController(title: "手機請拿直的", message: nil, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "知道了", style: .cancel))
+            present(alertController, animated: true)
+        }
     }
     
     func setUpBoundingBoxesColor() {
@@ -217,73 +226,65 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         view.addGestureRecognizer(tapGesture)
     }
     
-    /*
-     var new_MoveX: Float = 0.0
-     var new_MoveY: Float = 0.0
-     var new_MoveZ: Float = 0.0
-     var new_RotateY: Float = 0.0
-     
-     var pre_MoveX: Float = 0.0
-     var pre_MoveY: Float = 0.0
-     var pre_MoveZ: Float = 0.0
-     var pre_RotateY: Float = 0.0
-     
-     func session(_ session: ARSession, didUpdate frame: ARFrame){
-     let currentTransform = frame.camera.transform
-     new_MoveX = currentTransform.columns.3.x
-     new_MoveY = currentTransform.columns.3.y
-     new_MoveZ = currentTransform.columns.3.z
-     
-     
-     //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
-     
-     let rotation = frame.camera.eulerAngles
-     new_RotateY = rotation.y
-     
-     
-     guard currentBuffer == nil else{ return }
-     
-     visionQueue.async {
-     if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
-     self.clearShapeArray()
-     self.predictLabelArray.removeAll()
-     self.sceneView.scene.rootNode.enumerateChildNodes{
-     (node,stop) in
-     node.removeFromParentNode()
-     }
-     self.updatePosition()
-     self.currentBuffer = frame.capturedImage
-     self.predictUsingVision(pixelBuffer: self.currentBuffer!)
-     }
-     else{
-     
-     }
-     }
-     }
-     
-     func DeviceMoving() -> Bool{
-     if abs(self.pre_MoveX - self.new_MoveX) > 0.015{
-     return true;
-     }
-     if abs(self.pre_MoveY - self.new_MoveY) > 0.015{
-     return true;
-     }
-     if abs(self.pre_MoveZ - self.new_MoveZ) > 0.015{
-     return true;
-     }
-     if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
-     return true;
-     }
-     return false;
-     }
-     
-     func updatePosition(){
-     self.pre_MoveX = self.new_MoveX
-     self.pre_MoveY = self.new_MoveY
-     self.pre_MoveZ = self.new_MoveZ
-     self.pre_RotateY = self.new_RotateY
-     }
-     */
+    
+    var new_MoveX: Float = 0.0
+    var new_MoveY: Float = 0.0
+    var new_MoveZ: Float = 0.0
+    var new_RotateY: Float = 0.0
+    
+    var pre_MoveX: Float = 0.0
+    var pre_MoveY: Float = 0.0
+    var pre_MoveZ: Float = 0.0
+    var pre_RotateY: Float = 0.0
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame){
+        let currentTransform = frame.camera.transform
+        new_MoveX = currentTransform.columns.3.x
+        new_MoveY = currentTransform.columns.3.y
+        new_MoveZ = currentTransform.columns.3.z
+        
+        
+        //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
+        
+        let rotation = frame.camera.eulerAngles
+        new_RotateY = rotation.y
+        
+        
+        visionQueue.async {
+            if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
+                for box in self.boundingBoxArray{
+                    DispatchQueue.main.sync {
+                        box.isHidden = true
+                    }
+                }
+                self.updatePosition()
+            }
+        }
+    }
+    
+    func DeviceMoving() -> Bool{
+        if abs(self.pre_MoveX - self.new_MoveX) > 0.02{
+            return true;
+        }
+        if abs(self.pre_MoveY - self.new_MoveY) > 0.02{
+            return true;
+        }
+        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.02{
+            return true;
+        }
+        if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
+            return true;
+        }
+        return false;
+    }
+    
+    func updatePosition(){
+        self.pre_MoveX = self.new_MoveX
+        self.pre_MoveY = self.new_MoveY
+        self.pre_MoveZ = self.new_MoveZ
+        self.pre_RotateY = self.new_RotateY
+    }
+    
     func clearShapeArray(){
         for shape in self.boundingBoxArray{
             shape.removeFromSuperlayer()
@@ -465,7 +466,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             sceneView.scene.rootNode.addChildNode(starNodeArray[target])
             
             //旋轉
-            let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 3.0)
+            let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 10.0)
             let actionLoop = SCNAction.repeatForever(action)
             starNodeArray[target].runAction(actionLoop)
             labelNodeArray[target].runAction(actionLoop)

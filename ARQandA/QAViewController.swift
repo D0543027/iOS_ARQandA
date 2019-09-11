@@ -176,28 +176,9 @@ class QAViewController: UIViewController {
             fourthChoice.setTitle("", for: .normal)
             
             showResultScene()
+            updateProfile()
             
-            if score < 0{
-                score = 0
-            }
-            
-            var highScore = UserDefaults.standard.double(forKey: "highScore")
-            //更新最高分數
-            if highScore < score {
-                highScore = score
-                UserDefaults.standard.set(String(format: "%.2f",highScore), forKey: "highScore")
-            }
-            
-            var rightCount = UserDefaults.standard.integer(forKey: "right")
-            rightCount = rightCount + singleRight
-            UserDefaults.standard.set(rightCount, forKey: "right")
-            
-            var wrongCount = UserDefaults.standard.integer(forKey: "wrong")
-            wrongCount = wrongCount + singleWrong
-            UserDefaults.standard.set(wrongCount, forKey: "wrong")
-            
-            UserDefaults.standard.set(rightCount + wrongCount , forKey: "total")
-            
+            let highScore = UserDefaults.standard.double(forKey: "highScore")
             singleScoreValue.text = String(format: "%.2f", score)
             singleRightValue.text = String(singleRight)
             singleWrongValue.text = String(singleWrong)
@@ -214,7 +195,7 @@ class QAViewController: UIViewController {
             questionLabel.text = self.data![index]["Question"].string
             
             RightAnswer = self.data![index]["Ans"].string
-            
+            print(RightAnswer)
             // 預設：第二個選項是解答
             firstChoice.setTitle(self.data![index]["choose1"].string, for: .normal)
             secondChoice.setTitle(self.data![index]["Ans"].string, for: .normal)
@@ -250,7 +231,35 @@ class QAViewController: UIViewController {
             
         }
     }
-    
+    func updateProfile(){
+        
+        var highScore = UserDefaults.standard.double(forKey: "highScore")
+        //更新最高分數
+        if highScore < score {
+            highScore = score
+            UserDefaults.standard.set(String(format: "%.2f",highScore), forKey: "highScore")
+        }
+        
+        var rightCount = UserDefaults.standard.integer(forKey: "right")
+        rightCount = rightCount + singleRight
+        UserDefaults.standard.set(rightCount, forKey: "right")
+        
+        var wrongCount = UserDefaults.standard.integer(forKey: "wrong")
+        wrongCount = wrongCount + singleWrong
+        UserDefaults.standard.set(wrongCount, forKey: "wrong")
+        
+        UserDefaults.standard.set(rightCount + wrongCount , forKey: "total")
+    }
+    func calculatePercentage(){
+        let rightCount = UserDefaults.standard.integer(forKey: "right")
+        let total = UserDefaults.standard.integer(forKey: "total")
+        print(rightCount)
+        print(total)
+        let percentage = (Double(rightCount) / Double(total) ) * 100
+        let strPercentage = "\(String(format: "%.2f", percentage)) %"
+        print(strPercentage)
+        UserDefaults.standard.set(strPercentage, forKey: "correctPercentage")
+    }
     //打亂順序
     func shuffleChoice(){
         let choiceArray = [firstChoice,secondChoice,thirdChoice,fourthChoice]
@@ -308,19 +317,8 @@ class QAViewController: UIViewController {
         tag = tag - 1 //選項tag分別為1,2,3,4，故這裡要減1
         checkSign[tag]?.image = UIImage(named: "checksign.jpg")
         checkSign[tag]?.isHidden = false
-        
     }
-    func calculatePercentage(){
-        let rightCount = UserDefaults.standard.integer(forKey: "right")
-        let total = UserDefaults.standard.integer(forKey: "total")
-        print(rightCount)
-        print(total)
-        let percentage = (Double(rightCount) / Double(total) ) * 100
-        let strPercentage = "\(String(format: "%.2f", percentage)) %"
-        print(strPercentage)
-        UserDefaults.standard.set(strPercentage, forKey: "correctPercentage")
 
-    }
 
     func BtnVictory() {
         audioPlayerV.play()
