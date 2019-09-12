@@ -175,7 +175,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @objc func predictButtonTapped(_ sender: UIButton){
         
         let rotation = sceneView.session.currentFrame!.camera.eulerAngles
-        print(rotation.z)
         if rotation.z <= -0.8 && rotation.z >= -2.5{
             //點擊預測按鈕後，先清除原本在螢幕中的物件
             clearShapeArray()
@@ -244,35 +243,29 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         new_MoveZ = currentTransform.columns.3.z
         
         
-        //print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
+       // print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
         
         let rotation = frame.camera.eulerAngles
         new_RotateY = rotation.y
         
-        
-        visionQueue.async {
-            if self.DeviceMoving() == true && rotation.z >= -2.2 && rotation.z <= -0.8 {
-                for box in self.boundingBoxArray{
-                    DispatchQueue.main.sync {
-                        box.isHidden = true
-                    }
-                }
-                self.updatePosition()
-            }
+        if self.DeviceMoving() == true{
+            print("Moving...")
+            clearShapeArray()
+            self.updatePosition()
         }
     }
     
     func DeviceMoving() -> Bool{
-        if abs(self.pre_MoveX - self.new_MoveX) > 0.02{
+        if abs(self.pre_MoveX - self.new_MoveX) > 0.25{
             return true;
         }
-        if abs(self.pre_MoveY - self.new_MoveY) > 0.02{
+        if abs(self.pre_MoveY - self.new_MoveY) > 0.25{
             return true;
         }
-        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.02{
+        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.25{
             return true;
         }
-        if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
+        if abs(self.pre_RotateY - self.new_RotateY) > 0.25{
             return true;
         }
         return false;
@@ -289,7 +282,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         for shape in self.boundingBoxArray{
             shape.removeFromSuperlayer()
         }
-        
         self.boundingBoxArray.removeAll()
     }
     
@@ -373,15 +365,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 // 修正預測框 (影像辨識模組輸入為 416 * 416)
                 let prediction = predictions[i]
                 let width = view.bounds.width
-                let height = width * 4 / 3
+                let height = view.bounds.height
                 let scaleX = width / CGFloat(YOLO.inputWidth)
                 let scaleY = height / CGFloat(YOLO.inputHeight)
-                let top = (view.bounds.height - height) / 2
+                // let top = (view.bounds.height - height) / 2
                 
                 var rect = prediction.rect
                 rect.origin.x *= scaleX
                 rect.origin.y *= scaleY
-                rect.origin.y += top
+                // rect.origin.y += top
                 rect.size.width *= scaleX
                 rect.size.height *= scaleY
                 
@@ -420,7 +412,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             labelNodeArray[target].removeFromParentNode()
             starNodeArray[target].removeFromParentNode()
         }
-        touchPosition = gestureRecognize.location(in: self.view)
+        touchPosition = gestureRecognize.location(in: sceneView)
         for i in 0..<boundingBoxArray.count{
             if boundingBoxArray[i].path!.contains(touchPosition){
                 target = i
@@ -440,38 +432,42 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         else{
             tappedPredictionLabel = predictLabelArray[target]
             
-            let arHitTestResults : [ARHitTestResult] = sceneView.hitTest(touchPosition, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
+            let arHitTestResults = sceneView.hitTest(touchPosition, types: .featurePoint) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
+            if !arHitTestResults.isEmpty{
+                let closestResult = arHitTestResults.first
+                
+                // Get Coordinates of HitTest
+                let transform : matrix_float4x4 = closestResult!.worldTransform
+                let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+                
+                difficulty = difficultyOfLabels[tappedPredictionLabel]
+                
+                //boundingBoxArray[target].isHidden = true
+                // Create 3D Text
+                let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
+                labelNode.position = worldCoord
+                labelNodeArray[target].removeFromParentNode()
+                labelNodeArray[target] = labelNode
+                sceneView.scene.rootNode.addChildNode(labelNodeArray[target])
+                // Create star
+                let starNode: SCNNode = createStar()
+                starNode.position = SCNVector3Make(transform.columns.3.x + 0.01, transform.columns.3.y - 0.03, transform.columns.3.z)
+                starNodeArray[target].removeFromParentNode()
+                starNodeArray[target] = starNode
+                sceneView.scene.rootNode.addChildNode(starNodeArray[target])
+                
+                //旋轉
+                let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 10.0)
+                let actionLoop = SCNAction.repeatForever(action)
+                starNodeArray[target].runAction(actionLoop)
+                labelNodeArray[target].runAction(actionLoop)
+                toQAButton.isHidden = false
+                toQAButton.isEnabled = true
+            }
+            else{
+                print("No hit Result")
+            }
             
-            guard let closestResult = arHitTestResults.first else{
-                return}
-            
-            // Get Coordinates of HitTest
-            let transform : matrix_float4x4 = closestResult.worldTransform
-            let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
-            
-            difficulty = difficultyOfLabels[tappedPredictionLabel]            
-            
-            //boundingBoxArray[target].isHidden = true
-            // Create 3D Text
-            let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
-            labelNode.position = worldCoord
-            labelNodeArray[target].removeFromParentNode()
-            labelNodeArray[target] = labelNode
-            sceneView.scene.rootNode.addChildNode(labelNodeArray[target])
-            // Create star
-            let starNode: SCNNode = createStar()
-            starNode.position = SCNVector3Make(transform.columns.3.x + 0.01, transform.columns.3.y - 0.03, transform.columns.3.z)
-            starNodeArray[target].removeFromParentNode()
-            starNodeArray[target] = starNode
-            sceneView.scene.rootNode.addChildNode(starNodeArray[target])
-            
-            //旋轉
-            let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 10.0)
-            let actionLoop = SCNAction.repeatForever(action)
-            starNodeArray[target].runAction(actionLoop)
-            labelNodeArray[target].runAction(actionLoop)
-            toQAButton.isHidden = false
-            toQAButton.isEnabled = true
         }
         
         

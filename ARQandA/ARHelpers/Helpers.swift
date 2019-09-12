@@ -3,9 +3,9 @@ import UIKit
 import CoreML
 import Accelerate
 
-let labels = ["raccoon"]
-let difficultyOfLabels: [String:String] = ["raccoon": "Normal"]
-/*
+//let labels = ["raccoon"]
+//let difficultyOfLabels: [String:String] = ["raccoon": "Normal"]
+
 // The labels for the 80 classes.
 let labels = [
     "person",
@@ -173,7 +173,7 @@ let difficultyOfLabels: [String:String] =  [
     "hair drier": "Normal",
     "toothbrush": "Hard",
 ]
- */
+
 // anchor boxes
 let anchors: [[Float]] = [[116,90,  156,198,  373,326], [30,61,  62,45,  59,119], [10,13,  16,30,  33,23]]
 
