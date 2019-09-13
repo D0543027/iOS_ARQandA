@@ -46,6 +46,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Show statistics such as fps and timing information
         // sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
+        sceneView.debugOptions = [.showFeaturePoints]
         // Create a new scene
         // let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
@@ -68,6 +69,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Run the view's session
         sceneView.session.run(configuration)
+        //sceneView.debugOptions = [.showFeaturePoints]
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -173,7 +175,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @objc func predictButtonTapped(_ sender: UIButton){
-        
         let rotation = sceneView.session.currentFrame!.camera.eulerAngles
         if rotation.z <= -0.8 && rotation.z >= -2.5{
             //點擊預測按鈕後，先清除原本在螢幕中的物件
@@ -186,7 +187,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             //擷取當下畫面
             let currentbuffer = sceneView.session.currentFrame?.capturedImage
             //預測
-            predict(pixelBuffer: currentbuffer!)
+            visionQueue.async {
+                self.predict(pixelBuffer: currentbuffer!)
+            }
         }
         else{
             let alertController = UIAlertController(title: "手機請拿直的", message: nil, preferredStyle: .alert)
@@ -196,9 +199,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func setUpBoundingBoxesColor() {
-        for r: CGFloat in [0.2, 0.4, 0.6, 0.85, 1.0] {
-            for g: CGFloat in [0.6, 0.7, 0.8, 0.9] {
-                for b: CGFloat in [0.6, 0.7, 0.8, 1.0] {
+        for r: CGFloat in [0.2, 0.4, 0.6, 0.8, 1.0] {
+            for g: CGFloat in [0.3, 0.7, 0.6, 0.8] {
+                for b: CGFloat in [0.4, 0.8, 0.6, 1.0] {
                     let color = UIColor(red: r, green: g, blue: b, alpha: 1)
                     colors.append(color)
                 }
@@ -430,6 +433,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             toQAButton.isEnabled = false
         }
         else{
+            print(predictLabelArray)
+            print("Target = \(target), PredictionLabel = \(predictLabelArray[target])")
             tappedPredictionLabel = predictLabelArray[target]
             
             let arHitTestResults = sceneView.hitTest(touchPosition, types: .featurePoint) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
@@ -475,12 +480,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     func getNear(satisfiedIndex: [Int]) -> Int{
         var nearestRange = sqrt(pow(touchPosition.x - boundingBoxArray[satisfiedIndex[0]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[satisfiedIndex[0]].path!.boundingBox.minY, 2))
-        var nearestIndex = 0
+        var nearestIndex = satisfiedIndex[0]
         for i in 1..<satisfiedIndex.count{
             let range = sqrt(pow(touchPosition.x - boundingBoxArray[satisfiedIndex[i]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[satisfiedIndex[i]].path!.boundingBox.minY, 2))
+            
             if nearestRange > range{
                 nearestRange = range
-                nearestIndex = i
+                nearestIndex = satisfiedIndex[i]
             }
         }
         return nearestIndex
@@ -512,7 +518,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Centre Node - to Centre-Bottom point
         bubbleNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth / 2)
         // Reduce default text size
-        bubbleNode.scale = SCNVector3Make(0.4, 0.4, 0.4)
+        bubbleNode.scale = SCNVector3Make(0.3, 0.3, 0.3)
         
         
         // BUBBLE PARENT NODE
@@ -553,7 +559,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let (minBound, maxBound) = shape.boundingBox
         let starNode = SCNNode(geometry: shape)
         starNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, shapeDepth / 2)
-        starNode.scale = SCNVector3Make(0.4, 0.4, 0.4)
+        starNode.scale = SCNVector3Make(0.3, 0.3, 0.3)
         
         
         // BUBBLE PARENT NODE
