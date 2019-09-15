@@ -61,8 +61,12 @@
 		8A94FE75228A6112002E6F08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */; };
 		8A94FE80228A6112002E6F08 /* ARQandATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE7F228A6112002E6F08 /* ARQandATests.swift */; };
 		8A94FE8B228A6112002E6F08 /* ARQandAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */; };
+		8A9F0E28232E8FDE008D0DC8 /* Timeout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A9F0E25232E8FDB008D0DC8 /* Timeout.jpg */; };
+		8A9F0E29232E8FDE008D0DC8 /* AnsCorrect.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A9F0E26232E8FDC008D0DC8 /* AnsCorrect.jpg */; };
+		8A9F0E2A232E8FDE008D0DC8 /* AnsWrong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A9F0E27232E8FDD008D0DC8 /* AnsWrong.jpg */; };
 		8AA34E1223044067002FB2E2 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */; };
 		8AA34E162304455F002FB2E2 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */; };
+		8AA351A5232E8409002B5CEB /* Tutorial-AR.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AA351A4232E8408002B5CEB /* Tutorial-AR.png */; };
 		8AAC0AFD2323F2240089DD36 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAC0AFC2323F2240089DD36 /* eyes.png */; };
 		8ABD5F5D2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8ABD5F5C2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel */; };
 		8AE5BA7E231ABFC8006AE52D /* timeout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE5BA7D231ABFC8006AE52D /* timeout.png */; };
@@ -195,8 +199,12 @@
 		8A94FE86228A6112002E6F08 /* ARQandAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARQandAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A94FE8A228A6112002E6F08 /* ARQandAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQandAUITests.swift; sourceTree = "<group>"; };
 		8A94FE8C228A6112002E6F08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A9F0E25232E8FDB008D0DC8 /* Timeout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Timeout.jpg; sourceTree = "<group>"; };
+		8A9F0E26232E8FDC008D0DC8 /* AnsCorrect.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AnsCorrect.jpg; sourceTree = "<group>"; };
+		8A9F0E27232E8FDD008D0DC8 /* AnsWrong.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AnsWrong.jpg; sourceTree = "<group>"; };
 		8AA34E1123044067002FB2E2 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		8AA34E152304455F002FB2E2 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
+		8AA351A4232E8408002B5CEB /* Tutorial-AR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tutorial-AR.png"; sourceTree = "<group>"; };
 		8AAC0AFC2323F2240089DD36 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
 		8ABD5F5C2320C8B10005EF47 /* MyYolov3_raccoon.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyYolov3_raccoon.mlmodel; sourceTree = "<group>"; };
 		8AE5BA7D231ABFC8006AE52D /* timeout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeout.png; sourceTree = "<group>"; };
@@ -352,6 +360,10 @@
 		8A0D1CB222DCA35F00BCF00D /* TutorialPicture */ = {
 			isa = PBXGroup;
 			children = (
+				8A9F0E26232E8FDC008D0DC8 /* AnsCorrect.jpg */,
+				8A9F0E27232E8FDD008D0DC8 /* AnsWrong.jpg */,
+				8A9F0E25232E8FDB008D0DC8 /* Timeout.jpg */,
+				8AA351A4232E8408002B5CEB /* Tutorial-AR.png */,
 				8A0D1CB322DCA35F00BCF00D /* Tutorial02.png */,
 				8A0D1CB422DCA35F00BCF00D /* Tutorial03.png */,
 				8A0D1CB522DCA35F00BCF00D /* Tutorial01.png */,
@@ -665,6 +677,7 @@
 				8AAC0AFD2323F2240089DD36 /* eyes.png in Resources */,
 				E9A79A8222CF36FE00295C53 /* background24.png in Resources */,
 				8A0D1C8622DCA30800BCF00D /* MenuButtonEX01.png in Resources */,
+				8A9F0E29232E8FDE008D0DC8 /* AnsCorrect.jpg in Resources */,
 				E9A79A8422CF36FE00295C53 /* background09.png in Resources */,
 				E9A79A9522CF36FE00295C53 /* background01.png in Resources */,
 				E9A79A9622CF36FE00295C53 /* background08.png in Resources */,
@@ -675,6 +688,7 @@
 				E9A79A8E22CF36FE00295C53 /* background22.png in Resources */,
 				E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */,
 				8A0D1C8A22DCA30800BCF00D /* MenuButtonEX04.png in Resources */,
+				8AA351A5232E8409002B5CEB /* Tutorial-AR.png in Resources */,
 				E9A79A9122CF36FE00295C53 /* background13.png in Resources */,
 				8A0D1C9F22DCA31000BCF00D /* FailedSound.mp3 in Resources */,
 				E9A79A8022CF36FE00295C53 /* background02.png in Resources */,
@@ -709,6 +723,7 @@
 				8A0D1CAE22DCA31900BCF00D /* LOGO.png in Resources */,
 				E9A79A9022CF36FE00295C53 /* background39.png in Resources */,
 				8A0D1CB922DCA35F00BCF00D /* Tutorial01.png in Resources */,
+				8A9F0E2A232E8FDE008D0DC8 /* AnsWrong.jpg in Resources */,
 				E9A79AA022CF36FE00295C53 /* background05.png in Resources */,
 				E9A79A9922CF36FE00295C53 /* background25.png in Resources */,
 				8A0D1CAD22DCA31900BCF00D /* background.png in Resources */,
@@ -727,6 +742,7 @@
 				E9A79A8122CF36FE00295C53 /* background12.png in Resources */,
 				8A0D1CA122DCA31000BCF00D /* checksign.jpg in Resources */,
 				8A0D1C9B22DCA31000BCF00D /* space.png in Resources */,
+				8A9F0E28232E8FDE008D0DC8 /* Timeout.jpg in Resources */,
 				E9A79A9222CF36FE00295C53 /* background34.png in Resources */,
 				E9A79A9A22CF36FE00295C53 /* background31.png in Resources */,
 				E945C2A822D462C600157F64 /* backSound.mp3 in Resources */,
