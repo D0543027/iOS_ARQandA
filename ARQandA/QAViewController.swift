@@ -18,7 +18,6 @@ class QAViewController: UIViewController {
     var singleWrong = 0         // 單次打錯數
     var label = ""              // 物件名稱
     var difficulty = ""         // 難易度
-    var magnification = 1.0     // 倍率
     var point = 5.0             // 答對單題分數
     var data: JSON?
     var audioPlayerF = AVAudioPlayer()
@@ -50,11 +49,11 @@ class QAViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         semaphore.wait()
-        
-        //抓完資料，轉圈停止
         activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents() //可觸發任何元件(按鈕......等)
         
+        //抓完資料，轉圈停止
+        if data != nil{
         updateQuestion()
         
         do{
@@ -67,9 +66,17 @@ class QAViewController: UIViewController {
         }
         audioPlayerV.prepareToPlay()
         audioPlayerF.prepareToPlay()
+        }
+        else{
+            let alertController = UIAlertController(title: "Server error", message: nil, preferredStyle: .alert)
+            let serverErrorAction = UIAlertAction(title: "知道了", style: .default, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            })
+            alertController.addAction(serverErrorAction)
+            present(alertController, animated: true)
+        }
         
     }
-
     fileprivate func setUpResultScene() {
         //隱藏結算畫面物件
         resultBackground.isHidden = true
@@ -129,9 +136,9 @@ class QAViewController: UIViewController {
                 if let value = response.result.value{
                     let json = JSON(value)
                     self.data = json
-                    self.semaphore.signal()
                 }
             }
+            self.semaphore.signal()
         })
     }
     

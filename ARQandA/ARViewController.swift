@@ -46,7 +46,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Show statistics such as fps and timing information
         // sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
-        sceneView.debugOptions = [.showFeaturePoints]
         // Create a new scene
         // let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
@@ -69,12 +68,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Run the view's session
         sceneView.session.run(configuration)
-        //sceneView.debugOptions = [.showFeaturePoints]
+        sceneView.debugOptions = [.showFeaturePoints]
         
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Pause the view's session
+        sceneView.debugOptions = []
         sceneView.session.pause()
         request = nil
         
@@ -137,6 +137,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             (node,stop) in
             node.removeFromParentNode()
         }
+        sceneView.debugOptions = []
         sceneView.session.pause()
         toQAButton.isEnabled = false
         toQAButton.isHidden = true
@@ -465,7 +466,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 10.0)
                 let actionLoop = SCNAction.repeatForever(action)
                 starNodeArray[target].runAction(actionLoop)
-                labelNodeArray[target].runAction(actionLoop)
+                //labelNodeArray[target].runAction(actionLoop)
                 toQAButton.isHidden = false
                 toQAButton.isEnabled = true
             }
@@ -524,7 +525,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // BUBBLE PARENT NODE
         let bubbleNodeParent = SCNNode()
         bubbleNodeParent.addChildNode(bubbleNode)
-        //bubbleNodeParent.constraints = [billboardConstraint]
+        bubbleNodeParent.constraints = [billboardConstraint]
         
         return bubbleNodeParent
     }
