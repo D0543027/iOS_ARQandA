@@ -5,7 +5,93 @@ import Accelerate
 
 //let labels = ["raccoon"]
 //let difficultyOfLabels: [String:String] = ["raccoon": "Normal"]
+let labels = [
+    "butterfly",
+    "bicycle",
+    "book",
+    "bottle",
+    "bus",
+    "car",
+    "cat",
+    "cellphone",
+    "sparrow",
+    "dog",
+    "motorcycle",
+    "laptop",
+    "headphone",
+    "keyboard",
+    "screen",
+    "mouse",
+    "pen",
+    "glasses",
+    "light",
+    "tree",
+    "flower",
+    "duck",
+    "cicada",
+    "Sciuridae",
+    "Gorsachius melanolophus",
+    "turtle"
+]
 
+let difficultyOfLabels: [String:String] =  [
+    "butterfly": "Normal",
+    "bicycle": "Hard",
+    "book": "Normal",
+    "bottle": "Normal",
+    "bus": "Easy",
+    "car": "Hard",
+    "cat": "Hard",
+    "cellphone": "Normal",
+    "sparrow": "Normal",
+    "dog": "Hard",
+    "motorcycle": "Hard",
+    "laptop": "Hard",
+    "headphone": "Easy",
+    "keyboard": "Easy",
+    "screen": "Easy",
+    "mouse": "Easy",
+    "pen": "Normal",
+    "glasses": "Easy",
+    "light": "Easy",
+    "tree": "Easy",
+    "flower": "Easy",
+    "duck": "Hard",
+    "cicada": "Normal",
+    "Sciuridae": "Easy",
+    "Gorsachius melanolophus": "Normal",
+    "turtle": "Normal"
+]
+
+let labelTableMap = [
+    "butterfly": "animal",
+    "bicycle": "transportation",
+    "book": "daily",
+    "bottle": "daily",
+    "bus": "transportation",
+    "car": "transportation",
+    "cat": "animal",
+    "cellphone": "electronic",
+    "sparrow": "animal",
+    "dog": "animal",
+    "motorcycle": "transportation",
+    "laptop": "electronic",
+    "headphone": "electronic",
+    "keyboard": "electronic",
+    "screen": "electronic",
+    "mouse": "electronic",
+    "pen": "daily",
+    "glasses": "daily",
+    "light": "daily",
+    "tree": "plant",
+    "flower": "plant",
+    "duck": "animal",
+    "cicada": "animal",
+    "Sciuridae": "animal",
+    "Gorsachius melanolophus": "animal",
+    "turtle": "animal"
+]
+/*
 // The labels for the 80 classes.
 let labels = [
     "person",
@@ -87,8 +173,7 @@ let labels = [
     "scissors",
     "teddy bear",
     "hair drier",
-    "toothbrush",
-    "electric fans"
+    "toothbrush"
 ]
 
 let difficultyOfLabels: [String:String] =  [
@@ -173,7 +258,7 @@ let difficultyOfLabels: [String:String] =  [
     "hair drier": "Normal",
     "toothbrush": "Hard",
 ]
-
+*/
 // anchor boxes
 let anchors: [[Float]] = [[116,90,  156,198,  373,326], [30,61,  62,45,  59,119], [10,13,  16,30,  33,23]]
 

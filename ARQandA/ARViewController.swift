@@ -145,7 +145,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? QAViewController{
-            dest.label = self.tappedPredictionLabel
+            dest.tablename = labelTableMap[self.tappedPredictionLabel]
             dest.difficulty = self.difficulty
         }
     }
@@ -382,6 +382,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 rect.size.height *= scaleY
                 
                 // Show the bounding box.
+                print("Index = \(prediction.classIndex)")
                 let color = colors[prediction.classIndex]
                 let label = labels[prediction.classIndex]
                 let boundingBox = drawBoundingBox(frame: rect, color: color)

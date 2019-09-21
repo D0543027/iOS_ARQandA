@@ -1,3 +1,4 @@
 ARQandA/Yolov3.mlmodel filter=lfs diff=lfs merge=lfs -text
 ARQandA/MyYolov3_Pretrained.mlmodel filter=lfs diff=lfs merge=lfs -text
 ARQandA/MyYolov3_raccoon.mlmodel filter=lfs diff=lfs merge=lfs -text
+ARQandA/MyYolov3.mlmodel filter=lfs diff=lfs merge=lfs -text
