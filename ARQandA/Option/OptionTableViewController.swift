@@ -93,7 +93,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 break
             case 1: //分享給好友
-                let text = "TEST..."
+                let text = "108學年度逢甲資訊系專題展\n組別：AR應用"
                 let image = UIImage(named: "LOGO.png")
                 let sharedAll = [text,image!] as[ Any]
                 let activityController = UIActivityViewController(activityItems: sharedAll, applicationActivities: nil)

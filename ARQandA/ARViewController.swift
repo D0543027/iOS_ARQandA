@@ -180,6 +180,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if rotation.z <= -0.8 && rotation.z >= -2.5{
             //點擊預測按鈕後，先清除原本在螢幕中的物件
             clearShapeArray()
+            toQAButton.isHidden = true
+            toQAButton.isEnabled = false
             self.predictLabelArray.removeAll()
             self.sceneView.scene.rootNode.enumerateChildNodes{
                 (node,stop) in
