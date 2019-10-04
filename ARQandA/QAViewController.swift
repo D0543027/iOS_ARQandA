@@ -26,7 +26,6 @@ class QAViewController: UIViewController {
     
     let semaphore = DispatchSemaphore(value: 0)
     var timer: Timer?
-    var tablename: String?
     let secondsDict = ["Easy": 10, "Normal": 5, "Hard" : 3]
     
     override func viewDidLoad() {
@@ -42,7 +41,6 @@ class QAViewController: UIViewController {
         setUpValidChoice()
         setUpChoiceButton()
         setUpActivityIndicator()
-        print(tablename)
         getData()
     }
     
@@ -128,7 +126,7 @@ class QAViewController: UIViewController {
     func getData(){
         let queue = DispatchQueue(label: "queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .workItem)
         // parameters： 參數對應 query.php 的 _POST
-        let parameters = ["tablename": self.tablename!, "num": "5"]
+        let parameters = ["label": self.label]
         print("Selected label: \(label)")
         
         Alamofire.request("http:/172.20.10.7:8080/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
@@ -199,13 +197,13 @@ class QAViewController: UIViewController {
         }
         else {
             enableChoiceButton()
-            questionLabel.text = self.data![index]["Question"].string
+            questionLabel.text = self.data![index]["question"].string
             
-            RightAnswer = self.data![index]["Ans"].string
+            RightAnswer = self.data![index]["ans"].string
             print(RightAnswer)
             // 預設：第二個選項是解答
             firstChoice.setTitle(self.data![index]["choice1"].string, for: .normal)
-            secondChoice.setTitle(self.data![index]["Ans"].string, for: .normal)
+            secondChoice.setTitle(self.data![index]["ans"].string, for: .normal)
             thirdChoice.setTitle(self.data![index]["choice2"].string, for: .normal)
             fourthChoice.setTitle(self.data![index]["choice3"].string, for: .normal)
             

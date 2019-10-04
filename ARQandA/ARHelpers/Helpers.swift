@@ -63,6 +63,7 @@ let difficultyOfLabels: [String:String] =  [
     "turtle": "Normal"
 ]
 
+/*
 let labelTableMap = [
     "butterfly": "animal",
     "bicycle": "transportation",
@@ -91,6 +92,7 @@ let labelTableMap = [
     "Gorsachius melanolophus": "animal",
     "turtle": "animal"
 ]
+ */
 /*
 // The labels for the 80 classes.
 let labels = [

@@ -145,7 +145,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? QAViewController{
-            dest.tablename = labelTableMap[self.tappedPredictionLabel]
+            dest.label = self.tappedPredictionLabel
             dest.difficulty = self.difficulty
         }
     }
