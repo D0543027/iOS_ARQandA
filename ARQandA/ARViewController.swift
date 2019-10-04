@@ -21,10 +21,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var colors: [UIColor] = []
     var boundingBoxArray: [CAShapeLayer] = []
     var predictLabelArray: [String] = []
-    var labelNodeArray: [SCNNode] = []
-    var starNodeArray: [SCNNode] = []
     var tappedPredictionLabel: String = "..."
-    
+    var labelNodeOnScreen = SCNNode()
+    var starNodeOnScreen = SCNNode()
     var Diffucult_StarCount_Dict = ["Easy": 1, "Normal": 3, "Hard": 5]
     
     var difficulty: String! = ""
@@ -68,7 +67,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Run the view's session
         sceneView.session.run(configuration)
-        sceneView.debugOptions = [.showFeaturePoints]
+        sceneView.debugOptions.insert(SCNDebugOptions.showFeaturePoints)
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -183,10 +182,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             toQAButton.isHidden = true
             toQAButton.isEnabled = false
             self.predictLabelArray.removeAll()
-            self.sceneView.scene.rootNode.enumerateChildNodes{
-                (node,stop) in
-                node.removeFromParentNode()
-            }
+            labelNodeOnScreen.removeFromParentNode()
+            starNodeOnScreen.removeFromParentNode()
             //擷取當下畫面
             let currentbuffer = sceneView.session.currentFrame?.capturedImage
             //預測
@@ -309,7 +306,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let scaledImage = ciImage.transformed(by: scaleTransform)
         let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
         let rotateImage = scaledImage.oriented(orientation)
-        // debugImageView.image = UIImage(ciImage: rotateImage)
+        /*
+        DispatchQueue.main.async {
+            self.debugView.image = UIImage(ciImage: rotateImage)
+        }
+ */
         ciContext.render(rotateImage, to: resizedPixelBuffer)
         
         // This is an alternative way to resize the image (using vImage):
@@ -390,8 +391,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 let boundingBox = drawBoundingBox(frame: rect, color: color)
                 boundingBoxArray.append(boundingBox)
                 predictLabelArray.append(label)
-                labelNodeArray.append(SCNNode())
-                starNodeArray.append(SCNNode())
             }
         }
     }
@@ -415,10 +414,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var target = 0
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
         var satisfiedIndex: [Int] = []
-        if !labelNodeArray.isEmpty && !starNodeArray.isEmpty{
-            labelNodeArray[target].removeFromParentNode()
-            starNodeArray[target].removeFromParentNode()
-        }
+        labelNodeOnScreen.removeFromParentNode()
+        starNodeOnScreen.removeFromParentNode()
         touchPosition = gestureRecognize.location(in: sceneView)
         for i in 0..<boundingBoxArray.count{
             if boundingBoxArray[i].path!.contains(touchPosition){
@@ -455,21 +452,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 // Create 3D Text
                 let labelNode : SCNNode = createNewBubbleParentNode(tappedPredictionLabel)
                 labelNode.position = worldCoord
-                labelNodeArray[target].removeFromParentNode()
-                labelNodeArray[target] = labelNode
-                sceneView.scene.rootNode.addChildNode(labelNodeArray[target])
+                labelNodeOnScreen.removeFromParentNode()
+                labelNodeOnScreen = labelNode
+                sceneView.scene.rootNode.addChildNode(labelNodeOnScreen)
                 // Create star
                 let starNode: SCNNode = createStar()
                 starNode.position = SCNVector3Make(transform.columns.3.x + 0.01, transform.columns.3.y - 0.03, transform.columns.3.z)
-                starNodeArray[target].removeFromParentNode()
-                starNodeArray[target] = starNode
-                sceneView.scene.rootNode.addChildNode(starNodeArray[target])
+                starNodeOnScreen.removeFromParentNode()
+                starNodeOnScreen = starNode
+                sceneView.scene.rootNode.addChildNode(starNodeOnScreen)
                 
                 //旋轉
                 let action = SCNAction.rotate(by: .pi * 2, around: SCNVector3(0,1,0), duration: 10.0)
                 let actionLoop = SCNAction.repeatForever(action)
-                starNodeArray[target].runAction(actionLoop)
-                //labelNodeArray[target].runAction(actionLoop)
+                starNodeOnScreen.runAction(actionLoop)
                 toQAButton.isHidden = false
                 toQAButton.isEnabled = true
             }
