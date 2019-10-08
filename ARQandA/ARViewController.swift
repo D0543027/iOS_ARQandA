@@ -32,6 +32,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     let ciContext = CIContext()
     var resizedPixelBuffer: CVPixelBuffer?
+    var currentbuffer: CVPixelBuffer?
     
     let toQAButton = UIButton()
     
@@ -175,6 +176,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @objc func predictButtonTapped(_ sender: UIButton){
+        print("Button Tapped...")
         let rotation = sceneView.session.currentFrame!.camera.eulerAngles
         if rotation.z <= -0.8 && rotation.z >= -2.5{
             //點擊預測按鈕後，先清除原本在螢幕中的物件
@@ -184,11 +186,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             self.predictLabelArray.removeAll()
             labelNodeOnScreen.removeFromParentNode()
             starNodeOnScreen.removeFromParentNode()
-            //擷取當下畫面
-            let currentbuffer = sceneView.session.currentFrame?.capturedImage
-            //預測
-            visionQueue.async {
-                self.predict(pixelBuffer: currentbuffer!)
+            
+            if currentbuffer == nil{
+                //擷取當下畫面
+                currentbuffer = sceneView.session.currentFrame?.capturedImage
+                //預測
+                visionQueue.async {
+                    self.predict(pixelBuffer: self.currentbuffer!)
+                }
             }
         }
         else{
@@ -246,7 +251,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         new_MoveZ = currentTransform.columns.3.z
         
         
-       // print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
+        // print("movement: \(new_MoveX),\(new_MoveY),\(new_MoveZ)")
         
         let rotation = frame.camera.eulerAngles
         new_RotateY = rotation.y
@@ -307,10 +312,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
         let rotateImage = scaledImage.oriented(orientation)
         /*
-        DispatchQueue.main.async {
-            self.debugView.image = UIImage(ciImage: rotateImage)
-        }
- */
+         DispatchQueue.main.async {
+         self.debugView.image = UIImage(ciImage: rotateImage)
+         }
+         */
         ciContext.render(rotateImage, to: resizedPixelBuffer)
         
         // This is an alternative way to resize the image (using vImage):
@@ -362,6 +367,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func showOnMainThread(_ boundingBoxes: [YOLO.Prediction]) {
         DispatchQueue.main.async {
             self.getResult(predictions: boundingBoxes)
+            self.currentbuffer = nil
         }
     }
     
