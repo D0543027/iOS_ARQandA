@@ -51,9 +51,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Set the scene to the view
         //sceneView.scene = scene
+        
+        // 三個按鈕function，看哪個按鈕要加音效，直接打code在function裡
         setUpQAButton()
         setUpBackBtn()
         setUpPredictButton()
+        
         setUpBoundingBoxesColor()
         setUpVision()
         setUpCoreImage()

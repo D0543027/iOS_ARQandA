@@ -214,8 +214,11 @@ class QAViewController: UIViewController {
             // 打亂順序
             shuffleChoice()
             index = index + 1
+            
+            // 超過答題時間
             let timeLimit = secondsDict[difficulty]
             timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeLimit!), repeats: false) { (_) in
+                // 音效加在這
                 self.showAnswer()
                 self.disableChoiceButton()
                 self.victoryFailed_pic.image = UIImage(named: "timeout.png")
@@ -226,6 +229,8 @@ class QAViewController: UIViewController {
                 print(self.score)
                 print(self.point)
                 self.timer?.invalidate()
+                
+                //準備下一題
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) , execute: {
                     self.hideVictoryFailed()
                     self.hideValidSign()
