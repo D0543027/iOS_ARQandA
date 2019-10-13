@@ -28,6 +28,8 @@ class QAViewController: UIViewController {
     var timer: Timer?
     let secondsDict = ["Easy": 10, "Normal": 5, "Hard" : 3]
     
+    var alamoFireManager : SessionManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //讓文字換行，避免文字太常產生省略情形(abc...xyz這樣)
@@ -129,12 +131,20 @@ class QAViewController: UIViewController {
         let parameters = ["label": self.label]
         print("Selected label: \(label)")
         
-        Alamofire.request("http:/172.20.10.7:8080/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 5
+        configuration.timeoutIntervalForResource = 5
+        alamoFireManager = Alamofire.SessionManager(configuration: configuration)
+        
+        alamoFireManager!.request("http:/172.20.10.7:8080/query.php", method: .post, parameters: parameters).responseJSON(queue:queue, completionHandler:{ response in
             if response.result.isSuccess{
                 if let value = response.result.value{
                     let json = JSON(value)
                     self.data = json
                 }
+            }
+            else{
+                print("Failed...")
             }
             self.semaphore.signal()
         })

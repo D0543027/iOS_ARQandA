@@ -100,7 +100,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         backButton.layer.borderWidth = 2
         
         
-        backButton.addTarget(self, action: #selector(backToMenu), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backToMenu), for: .touchUpInside) //觸發動作
         view.addSubview(backButton)
     }
     
@@ -125,7 +125,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         toQAButton.titleLabel?.font = UIFont(name: "AthensClassic", size: CGFloat(buttonWidth / 2 + 10))
         toQAButton.contentHorizontalAlignment = .center
         toQAButton.contentVerticalAlignment = .center
-        toQAButton.addTarget(self, action: #selector(toQAButtonTapped), for: .touchUpInside)
+        toQAButton.addTarget(self, action: #selector(toQAButtonTapped), for: .touchUpInside) //觸發動作
         toQAButton.isEnabled = false
         view.addSubview(toQAButton)
         toQAButton.isHidden = true
@@ -146,12 +146,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         toQAButton.isHidden = true
         self.performSegue(withIdentifier: "switchToQA", sender: self)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? QAViewController{
             dest.label = self.tappedPredictionLabel
             dest.difficulty = self.difficulty
         }
     }
+    
     func setUpCoreImage() {
         let status = CVPixelBufferCreate(nil, YOLO.inputWidth, YOLO.inputHeight,
                                          kCVPixelFormatType_32BGRA, nil,
@@ -173,7 +175,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         predictButton.layer.borderColor = UIColor.blue.cgColor
         predictButton.layer.borderWidth = 2
         predictButton.backgroundColor = UIColor(white: 1, alpha: 1)
-        predictButton.addTarget(self, action: #selector(predictButtonTapped), for: .touchUpInside)
+        predictButton.addTarget(self, action: #selector(predictButtonTapped), for: .touchUpInside) //觸發動作
         predictButton.isEnabled = true
         view.addSubview(predictButton)
     }
