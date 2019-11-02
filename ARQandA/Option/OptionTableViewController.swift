@@ -13,15 +13,25 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var btnBackToMenu: UIButton!
     var nameTextField: UITextField?
 
-    let list = [["返回標題"],
+    let list = [["返回標題", "BGM"],
                 ["修改個人資料","清除資料"],
                 ["教學導覽","分享給好友"]]
     
+    var detailList = [["","ON"],
+                      ["",""],
+                      ["",""]]
     
+    var BGM_status = UserDefaults.standard.float(forKey: "BGM")
     override func viewDidLoad() {
         super.viewDidLoad()
         
         btnBackToMenu.bounds.size.width = 44
+        if BGM_status == 1.0{
+            detailList[0][1] = "ON"
+        }
+        else{
+            detailList[0][1] = "OFF"
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,9 +39,9 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         cell.textLabel?.text = list[indexPath.section][indexPath.row]
-        
+        cell.detailTextLabel?.text = detailList[indexPath.section][indexPath.row]
         return cell
     }
     
@@ -48,11 +58,31 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        switch indexPath.section{
-        case 0: //返回標題
-            performSegue(withIdentifier: "backToLaunch", sender: self)
-            break
-        case 1:
+        if indexPath.section == 0{
+            switch indexPath.row{
+            case 0:
+                performSegue(withIdentifier: "backToLaunch", sender: self)
+                break
+            case 1:
+                if BGM_status == 1.0{  // Switch BGM from on to off
+                    BGM_status = 0.0
+                    AudioManager.sharedInstance.switchBGM(volumn: BGM_status)
+                    UserDefaults.standard.set(BGM_status, forKey: "BGM")
+                    detailList[0][1] = "OFF"
+                }
+                else{ // Switch BGM from off to on
+                    BGM_status = 1.0
+                    UserDefaults.standard.set(BGM_status, forKey: "BGM")
+                    AudioManager.sharedInstance.switchBGM(volumn: BGM_status)
+                    detailList[0][1] = "ON"
+                }
+                tableView.reloadData()
+                break;
+            default:
+                break;
+            }
+        }
+        else if indexPath.section == 1{
             switch indexPath.row{
             case 0: //修改個人資料
                 let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
@@ -84,8 +114,8 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
             default:
                 break
             }
-            break
-        case 2:
+        }
+        else if indexPath.section == 2{
             switch indexPath.row{
             case 0: //教學導覽
                 if let tutorialController = storyboard?.instantiateViewController(withIdentifier: String(describing: TutorialViewController.self)) as? TutorialViewController{
@@ -103,8 +133,6 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
             default:
                 break
             }
-        default:
-            break
         }
     }
     

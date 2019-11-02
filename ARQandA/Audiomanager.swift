@@ -27,10 +27,12 @@ class AudioManager {
         } catch let err as NSError {
             print(err.debugDescription)
         }
-        
     }
     
     func stopMusic(){
         musicPlayer?.stop()
+    }
+    func switchBGM(volumn: Float){
+        musicPlayer?.setVolume(volumn, fadeDuration: 0.0)
     }
 }

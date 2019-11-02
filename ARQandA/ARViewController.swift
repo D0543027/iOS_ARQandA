@@ -424,23 +424,23 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var touchPosition: CGPoint!
     var target = 0
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
-        var satisfiedIndex: [Int] = []
+        var overlappedIndex: [Int] = []
         labelNodeOnScreen.removeFromParentNode()
         starNodeOnScreen.removeFromParentNode()
         touchPosition = gestureRecognize.location(in: sceneView)
         for i in 0..<boundingBoxArray.count{
             if boundingBoxArray[i].path!.contains(touchPosition){
                 target = i
-                satisfiedIndex.append(i)
+                overlappedIndex.append(i)
                 print(predictLabelArray[i])
             }
         }
-        if satisfiedIndex.count > 1{
-            target = getNear(satisfiedIndex: satisfiedIndex)
+        if overlappedIndex.count > 1{
+            target = getNear(overlappedIndex: overlappedIndex)
         }
         
         // 點擊框外
-        if satisfiedIndex.count == 0{
+        if overlappedIndex.count == 0{
             toQAButton.isHidden = true
             toQAButton.isEnabled = false
         }
@@ -489,7 +489,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
     }
     
-    func getNear(satisfiedIndex: [Int]) -> Int{
+    func getNear(overlappedIndex: [Int]) -> Int{
+        /*
         var nearestRange = sqrt(pow(touchPosition.x - boundingBoxArray[satisfiedIndex[0]].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[satisfiedIndex[0]].path!.boundingBox.minY, 2))
         var nearestIndex = satisfiedIndex[0]
         for i in 1..<satisfiedIndex.count{
@@ -498,6 +499,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             if nearestRange > range{
                 nearestRange = range
                 nearestIndex = satisfiedIndex[i]
+            }
+        }
+        */
+        var nearestRange: CGFloat = CGFloat(MAXFLOAT)
+        var nearestIndex = overlappedIndex[0]
+        for i in overlappedIndex{
+            let range = sqrt(pow(touchPosition.x - boundingBoxArray[i].path!.boundingBox.minX, 2) + pow(touchPosition.y - boundingBoxArray[i].path!.boundingBox.minY, 2))
+            if nearestRange > range{
+                nearestRange = range
+                nearestIndex = i
             }
         }
         return nearestIndex

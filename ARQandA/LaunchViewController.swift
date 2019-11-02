@@ -86,7 +86,7 @@ class LaunchViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         AudioManager.sharedInstance.startMusic()
-
+        AudioManager.sharedInstance.switchBGM(volumn: UserDefaults.standard.float(forKey: "BGM"))
         do{
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
             audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
@@ -145,6 +145,10 @@ class LaunchViewController: UIViewController {
         
         if UserDefaults.standard.object(forKey: "correctPercentage") == nil{
             UserDefaults.standard.set("0.00 %", forKey: "correctPercentage")
+        }
+        
+        if UserDefaults.standard.object(forKey: "BGM") == nil{
+            UserDefaults.standard.set(1.0, forKey: "BGM")
         }
     }
     
