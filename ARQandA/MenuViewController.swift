@@ -11,10 +11,10 @@ import AVFoundation
 
 class MenuViewController: UIViewController {
     var audioPlayerEnter = AVAudioPlayer()
-    
+    var audioPlayerBack = AVAudioPlayer()
     @IBOutlet var background: UIImageView!
     @IBAction func backToMenu(_ segue: UIStoryboardSegue){
-        
+        audioPlayerBack.play()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,11 +73,14 @@ class MenuViewController: UIViewController {
         
         do{
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
-            audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
-        }catch{
-            
+            try audioPlayerEnter =  AVAudioPlayer(contentsOf:ES)
+            let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
+            try audioPlayerBack =  AVAudioPlayer(contentsOf:BS)
+        }  catch let err as NSError {
+            print(err.debugDescription)
         }
         audioPlayerEnter.prepareToPlay()
+        audioPlayerBack.prepareToPlay()
     }
     
     @IBAction func single(_ sender: Any){

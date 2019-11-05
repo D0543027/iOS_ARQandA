@@ -391,9 +391,11 @@
                     <connections>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <segue destination="yIf-aG-0wL" kind="presentation" identifier="switchToQA" id="RAa-CB-wSx"/>
+                        <segue destination="rPY-Xc-NfX" kind="unwind" identifier="backToMenu" unwindAction="backToMenu:" id="oKi-Iv-iap"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <exit id="rPY-Xc-NfX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-307.24637681159425" y="-774.45652173913049"/>
         </scene>

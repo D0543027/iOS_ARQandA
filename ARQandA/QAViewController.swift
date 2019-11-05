@@ -20,8 +20,10 @@ class QAViewController: UIViewController {
     var difficulty = ""         // 難易度
     var point = 5.0             // 答對單題分數
     var data: JSON?
-    var audioPlayerF = AVAudioPlayer()
-    var audioPlayerV = AVAudioPlayer()
+    var audioPlayerF = AVAudioPlayer() // 答對音效
+    var audioPlayerV = AVAudioPlayer() // 答錯音效
+    var audioPlayerAC = AVAudioPlayer() // 超時音效
+    var audioPlayerFW = AVAudioPlayer() // 煙火音效(統計畫面)
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     let semaphore = DispatchSemaphore(value: 0)
@@ -54,18 +56,26 @@ class QAViewController: UIViewController {
         
         //抓完資料，轉圈停止
         if data != nil{
-        updateQuestion()
-        
-        do{
-            let VS = URL(fileURLWithPath: Bundle.main.path(forResource:"VictorySound", ofType:"mp3")!)
-            audioPlayerV = try AVAudioPlayer(contentsOf:VS)
-            let FS = URL(fileURLWithPath: Bundle.main.path(forResource:"FailedSound", ofType:"mp3")!)
-            audioPlayerF = try AVAudioPlayer(contentsOf:FS)
-        }catch{
+            do{
+                let VS = URL(fileURLWithPath: Bundle.main.path(forResource:"VictorySound", ofType:"mp3")!)
+                let FS = URL(fileURLWithPath: Bundle.main.path(forResource:"FailedSound", ofType:"mp3")!)
+                let ACS = URL(fileURLWithPath: Bundle.main.path(forResource:"AlarmClock", ofType:"mp3")!)
+                let FWS = URL(fileURLWithPath: Bundle.main.path(forResource: "Firework", ofType: "mp3")!)
+                try audioPlayerV =  AVAudioPlayer(contentsOf:VS)
+                try audioPlayerF =  AVAudioPlayer(contentsOf:FS)
+                try audioPlayerAC = AVAudioPlayer(contentsOf: ACS)
+                try audioPlayerFW = AVAudioPlayer(contentsOf: FWS)
+            }  catch let err as NSError {
+                print(err.debugDescription)
+            }
+            audioPlayerV.prepareToPlay()
+            audioPlayerF.prepareToPlay()
+            audioPlayerAC.prepareToPlay()
+            audioPlayerAC.volume = 10
+            audioPlayerFW.prepareToPlay()
+            audioPlayerFW.volume = 10
+            updateQuestion()
             
-        }
-        audioPlayerV.prepareToPlay()
-        audioPlayerF.prepareToPlay()
         }
         else{
             let alertController = UIAlertController(title: "Server error", message: nil, preferredStyle: .alert)
@@ -182,6 +192,7 @@ class QAViewController: UIViewController {
         // 答完題目
         if index == data!.count{
             // 答題結束畫面
+            audioPlayerFW.play()
             timer?.invalidate()
             
             questionLabel.text = ""
@@ -228,7 +239,7 @@ class QAViewController: UIViewController {
             // 超過答題時間
             let timeLimit = secondsDict[difficulty]
             timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeLimit!), repeats: false) { (_) in
-                // 音效加在這
+                self.audioPlayerAC.play()
                 self.showAnswer()
                 self.disableChoiceButton()
                 self.victoryFailed_pic.image = UIImage(named: "timeout.png")
@@ -308,7 +319,7 @@ class QAViewController: UIViewController {
             print("Right...")
             print(point)
             print(score)
-
+            
             singleRight = singleRight + 1
         } else {
             BtnFailed()
@@ -318,7 +329,7 @@ class QAViewController: UIViewController {
             print("Wrong...")
             print(point)
             print(score)
- 
+            
             singleWrong = singleWrong + 1
         }
         validSign[selectButton]?.isHidden = false
@@ -338,8 +349,8 @@ class QAViewController: UIViewController {
         checkSign[tag]?.image = UIImage(named: "checksign.jpg")
         checkSign[tag]?.isHidden = false
     }
-
-
+    
+    
     func BtnVictory() {
         audioPlayerV.play()
         victoryFailed_pic.image = UIImage(named: "Victory.png")

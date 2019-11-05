@@ -16,7 +16,7 @@ class LaunchViewController: UIViewController {
     
     @IBOutlet var background: UIImageView!
     @IBAction func backToLaunch(_ segue: UIStoryboardSegue){
-        
+        audioPlayerBack.play()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,11 +89,11 @@ class LaunchViewController: UIViewController {
         AudioManager.sharedInstance.switchBGM(volumn: UserDefaults.standard.float(forKey: "BGM"))
         do{
             let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
-            audioPlayerEnter = try AVAudioPlayer(contentsOf:ES)
             let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
-            audioPlayerBack = try AVAudioPlayer(contentsOf:BS)
-        }catch{
-            
+            try audioPlayerEnter =  AVAudioPlayer(contentsOf:ES)
+            try audioPlayerBack =  AVAudioPlayer(contentsOf:BS)
+        }  catch let err as NSError {
+            print(err.debugDescription)
         }
         audioPlayerEnter.prepareToPlay()
         audioPlayerBack.prepareToPlay()

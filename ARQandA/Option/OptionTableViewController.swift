@@ -22,16 +22,32 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
                       ["",""]]
     
     var BGM_status = UserDefaults.standard.float(forKey: "BGM")
+    var audioPlayerEnter = AVAudioPlayer()
+    var audioPlayerBack = AVAudioPlayer()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         btnBackToMenu.bounds.size.width = 44
+        
+        
         if BGM_status == 1.0{
             detailList[0][1] = "ON"
         }
         else{
             detailList[0][1] = "OFF"
         }
+        
+        do{
+            let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
+            let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"backSound", ofType:"mp3")!)
+            try audioPlayerEnter =  AVAudioPlayer(contentsOf:ES)
+            try audioPlayerBack =  AVAudioPlayer(contentsOf:BS)
+        }  catch let err as NSError {
+            print(err.debugDescription)
+        }
+        audioPlayerEnter.prepareToPlay()
+        audioPlayerBack.prepareToPlay()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,8 +78,15 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
             switch indexPath.row{
             case 0:
                 performSegue(withIdentifier: "backToLaunch", sender: self)
+                /*
+                audioPlayerBack.play()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    self.performSegue(withIdentifier: "backToLaunch", sender: self)
+                }
+ */
                 break
             case 1:
+                audioPlayerEnter.play()
                 if BGM_status == 1.0{  // Switch BGM from on to off
                     BGM_status = 0.0
                     AudioManager.sharedInstance.switchBGM(volumn: BGM_status)
@@ -85,6 +108,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         else if indexPath.section == 1{
             switch indexPath.row{
             case 0: //修改個人資料
+                audioPlayerEnter.play()
                 let alertController = UIAlertController(title: "請輸入姓名", message: nil, preferredStyle: .alert)
                 alertController.addTextField(configurationHandler: {
                     $0.placeholder = "Name"
@@ -102,6 +126,7 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
                 present(alertController, animated: true)
                 break
             case 1: //清除資料
+                audioPlayerEnter.play()
                 let alertController = UIAlertController(title: "確定要清除資料？", message: nil, preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: self.clearProfile)
@@ -118,11 +143,13 @@ class OptionTableViewController: UIViewController, UITableViewDelegate, UITableV
         else if indexPath.section == 2{
             switch indexPath.row{
             case 0: //教學導覽
+                audioPlayerEnter.play()
                 if let tutorialController = storyboard?.instantiateViewController(withIdentifier: String(describing: TutorialViewController.self)) as? TutorialViewController{
                     present(tutorialController, animated: true, completion: nil)
                 }
                 break
             case 1: //分享給好友
+                audioPlayerEnter.play()
                 let text = "108學年度逢甲資訊系專題展\n組別：AR應用"
                 let image = UIImage(named: "LOGO.png")
                 let sharedAll = [text,image!] as[ Any]

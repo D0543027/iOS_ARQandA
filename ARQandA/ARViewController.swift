@@ -35,6 +35,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var currentbuffer: CVPixelBuffer?
     
     let toQAButton = UIButton()
+    var audioPlayerEnter = AVAudioPlayer()
     
     override func viewDidLoad() {
         
@@ -61,6 +62,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         setUpVision()
         setUpCoreImage()
         addTapGesture()
+        
+        do{
+            let ES = URL(fileURLWithPath: Bundle.main.path(forResource:"enterSound", ofType:"mp3")!)
+            try audioPlayerEnter = AVAudioPlayer(contentsOf: ES)
+        } catch let err as NSError {
+            print(err.debugDescription)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +113,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @objc func backToMenu(sender: UIButton){
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "backToMenu", sender: self)
     }
     
     fileprivate func setUpQAButton(){
@@ -144,6 +152,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.pause()
         toQAButton.isEnabled = false
         toQAButton.isHidden = true
+        audioPlayerEnter.play()
         self.performSegue(withIdentifier: "switchToQA", sender: self)
     }
     
@@ -181,7 +190,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @objc func predictButtonTapped(_ sender: UIButton){
-        print("Button Tapped...")
         let rotation = sceneView.session.currentFrame!.camera.eulerAngles
         if rotation.z <= -0.8 && rotation.z >= -2.5{
             //點擊預測按鈕後，先清除原本在螢幕中的物件
@@ -193,6 +201,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             starNodeOnScreen.removeFromParentNode()
             
             if currentbuffer == nil{
+                audioPlayerEnter.play()
                 //擷取當下畫面
                 currentbuffer = sceneView.session.currentFrame?.capturedImage
                 //預測
@@ -451,6 +460,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             
             let arHitTestResults = sceneView.hitTest(touchPosition, types: .featurePoint) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
             if !arHitTestResults.isEmpty{
+                audioPlayerEnter.play()
                 let closestResult = arHitTestResults.first
                 
                 // Get Coordinates of HitTest
