@@ -9,7 +9,9 @@
 import UIKit
 import AVFoundation
 class OptionTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-   
+    @IBAction func backToOption(_ segue: UIStoryboardSegue){
+        audioPlayerBack.play()
+    }
     @IBOutlet weak var btnBackToMenu: UIButton!
     var nameTextField: UITextField?
 

@@ -217,8 +217,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="switchPage:" destination="ZUa-Ib-HTm" eventType="touchUpInside" id="QKO-2M-MXw"/>
-                                    <action selector="switchPage:" destination="HIq-Xw-OvW" eventType="touchUpInside" id="em0-Hi-MvY"/>
+                                    <action selector="ExitButtonTapped:" destination="HIq-Xw-OvW" eventType="touchUpInside" id="KZ8-0R-ZHl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -239,8 +238,9 @@
                         <viewLayoutGuide key="safeArea" id="fPd-ae-hRJ"/>
                     </view>
                     <connections>
-                        <outlet property="btnToNextPage" destination="kCT-rn-9Hf" id="2Ua-UB-KdU"/>
+                        <outlet property="exitButton" destination="kCT-rn-9Hf" id="2Ua-UB-KdU"/>
                         <outlet property="pageControl" destination="qV3-HV-Kx3" id="dtF-5Y-zvD"/>
+                        <segue destination="ZUa-Ib-HTm" kind="unwind" identifier="backToOption" unwindAction="backToOption:" id="8Wf-wm-fs6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1sh-j2-jvv" userLabel="First Responder" sceneMemberID="firstResponder"/>

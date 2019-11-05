@@ -7,22 +7,32 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TutorialViewController: UIViewController {
     
-    @IBOutlet weak var btnToNextPage: UIButton!
-    
-    @IBAction func switchPage(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @IBOutlet weak var exitButton: UIButton!
+    @IBAction func ExitButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "backToOption", sender: self)
     }
-    
     @IBOutlet weak var pageControl: UIPageControl!
+    
+    var audioPlayerSP = AVAudioPlayer() //switch page
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnToNextPage.layer.cornerRadius = btnToNextPage.frame.height / 2
-        btnToNextPage.isHidden = true
-        btnToNextPage.isEnabled = false
+        exitButton.layer.cornerRadius = exitButton.frame.height / 2
+        exitButton.isHidden = true
+        exitButton.isEnabled = false
         // Do any additional setup after loading the view.
+        do{
+            let BS = URL(fileURLWithPath: Bundle.main.path(forResource:"switchPage", ofType:"mp3")!)
+            try audioPlayerSP = AVAudioPlayer(contentsOf: BS)
+        } catch let err as NSError {
+            print(err.debugDescription)
+        }
+        audioPlayerSP.volume = 10
+        audioPlayerSP.prepareToPlay()
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,16 +67,17 @@ extension TutorialViewController: PageViewControllerDelegate {
     ///   - pageViewController: _
     ///   - pageIndex: _
     func pageViewController(_ pageViewController: TutorialPageViewController, didUpdatePageIndex pageIndex: Int) {
+        audioPlayerSP.play()
         self.pageControl.currentPage = pageIndex
 
         if pageIndex == self.pageControl.numberOfPages - 1{
-            btnToNextPage.setTitle("End", for: .normal)
-            btnToNextPage.isHidden = false
-            btnToNextPage.isEnabled = true
+            exitButton.setTitle("End", for: .normal)
+            exitButton.isHidden = false
+            exitButton.isEnabled = true
         }
         else{
-            btnToNextPage.isHidden = true
-            btnToNextPage.isEnabled = false
+            exitButton.isHidden = true
+            exitButton.isEnabled = false
         }
     
     }

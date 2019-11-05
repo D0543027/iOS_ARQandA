@@ -72,6 +72,7 @@
 		8AE5BA7E231ABFC8006AE52D /* timeout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE5BA7D231ABFC8006AE52D /* timeout.png */; };
 		8AEEBE292371495E00C20DB9 /* AlarmClock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8AEEBE282371495E00C20DB9 /* AlarmClock.mp3 */; };
 		8AEEBE2B23714B8A00C20DB9 /* Firework.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8AEEBE2A23714B8A00C20DB9 /* Firework.mp3 */; };
+		8AEEBE2D237154E100C20DB9 /* switchPage.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8AEEBE2C237154E100C20DB9 /* switchPage.mp3 */; };
 		ABBCCDBBC61184A3309C3031 /* Pods_ARQandAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2F780D349E073F4142C49B /* Pods_ARQandAUITests.framework */; };
 		D1B7EE3AB810BACF19397BE9 /* Pods_ARQandA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C361C047FA832C3B52E12C9 /* Pods_ARQandA.framework */; };
 		E91ED0A922D5C36200DBFF96 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E91ED0A822D5C36200DBFF96 /* bgm.mp3 */; };
@@ -212,6 +213,7 @@
 		8AE5BA7D231ABFC8006AE52D /* timeout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeout.png; sourceTree = "<group>"; };
 		8AEEBE282371495E00C20DB9 /* AlarmClock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AlarmClock.mp3; sourceTree = "<group>"; };
 		8AEEBE2A23714B8A00C20DB9 /* Firework.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Firework.mp3; sourceTree = "<group>"; };
+		8AEEBE2C237154E100C20DB9 /* switchPage.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = switchPage.mp3; sourceTree = "<group>"; };
 		8C6AB45C759D86C6B6BF3569 /* Pods-ARQandATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandATests.release.xcconfig"; path = "Target Support Files/Pods-ARQandATests/Pods-ARQandATests.release.xcconfig"; sourceTree = "<group>"; };
 		96DBB1F9024F0C4FDB53B512 /* Pods_ARQandATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQandATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22BEF884E80D76F3E756D70 /* Pods-ARQandA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQandA.debug.xcconfig"; path = "Target Support Files/Pods-ARQandA/Pods-ARQandA.debug.xcconfig"; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				8A0D1CB222DCA35F00BCF00D /* TutorialPicture */,
+				8AEEBE2C237154E100C20DB9 /* switchPage.mp3 */,
 				8A514CA022CF9974004F3774 /* TutorialViewController.swift */,
 				8A514CA222CF9982004F3774 /* TutorialFirstViewController.swift */,
 				8A514CA422CF998C004F3774 /* TutorialSecondViewController.swift */,
@@ -721,6 +724,7 @@
 				8A94FE72228A6112002E6F08 /* Assets.xcassets in Resources */,
 				8A0D1C8B22DCA30800BCF00D /* arrowBack.png in Resources */,
 				8A0D1CA422DCA31000BCF00D /* giphy.png in Resources */,
+				8AEEBE2D237154E100C20DB9 /* switchPage.mp3 in Resources */,
 				8A0D1CA022DCA31000BCF00D /* wrongsign.jpeg in Resources */,
 				8A0D1CAC22DCA31900BCF00D /* textBox01.png in Resources */,
 				8A0D1CA322DCA31000BCF00D /* back.png in Resources */,
