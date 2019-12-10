@@ -218,12 +218,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func setUpBoundingBoxesColor() {
-        for r: CGFloat in [0.2, 0.4, 0.6, 0.8, 1.0] {
-            for g: CGFloat in [0.3, 0.7, 0.6, 0.8] {
-                for b: CGFloat in [0.4, 0.8, 0.6, 1.0] {
-                    let color = UIColor(red: r, green: g, blue: b, alpha: 1)
+            for g: CGFloat in [0.3, 0.7] {
+                 for r: CGFloat in [0.2, 0.4, 0.6, 0.8, 1.0] {
+                    let color = UIColor(red: r, green: g, blue: 0.0, alpha: 1)
                     colors.append(color)
-                }
             }
         }
     }
@@ -278,16 +276,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func DeviceMoving() -> Bool{
-        if abs(self.pre_MoveX - self.new_MoveX) > 0.25{
+        if abs(self.pre_MoveX - self.new_MoveX) > 0.2{
             return true;
         }
-        if abs(self.pre_MoveY - self.new_MoveY) > 0.25{
+        if abs(self.pre_MoveY - self.new_MoveY) > 0.2{
             return true;
         }
-        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.25{
+        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.2{
             return true;
         }
-        if abs(self.pre_RotateY - self.new_RotateY) > 0.25{
+        if abs(self.pre_RotateY - self.new_RotateY) > 0.2{
             return true;
         }
         return false;

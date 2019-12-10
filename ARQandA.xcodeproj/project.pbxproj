@@ -42,6 +42,7 @@
 		8A29A22B22D237570086A33E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A29A22A22D237570086A33E /* ProfileViewController.swift */; };
 		8A315E8C22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A315E8B22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift */; };
 		8A315E8E22D5BC8500097535 /* UIAlertController+ValidName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A315E8D22D5BC8500097535 /* UIAlertController+ValidName.swift */; };
+		8A39C49A239908C000A781B7 /* MyYolov3_1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A39C499239908C000A781B7 /* MyYolov3_1.mlmodel */; };
 		8A48005B22CE2CA10063B35F /* AthensClassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A48005A22CE2B910063B35F /* AthensClassic.ttf */; };
 		8A4937B322B5CDCC008EA659 /* YOLO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B022B5CDCC008EA659 /* YOLO.swift */; };
 		8A4937B422B5CDCC008EA659 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4937B122B5CDCC008EA659 /* Helpers.swift */; };
@@ -53,7 +54,7 @@
 		8A55DC2A231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A55DC29231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel */; };
 		8A67012422B338A200C7A09E /* QAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67012322B338A200C7A09E /* QAViewController.swift */; };
 		8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A69796F22B9DD16000FD70F /* LaunchViewController.swift */; };
-		8A6B23642336777F00A9D697 /* MyYolov3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B23632336777F00A9D697 /* MyYolov3.mlmodel */; };
+		8A946007239FBE7700601103 /* MyYolov3_2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A946006239FBE7700601103 /* MyYolov3_2.mlmodel */; };
 		8A94FE69228A6111002E6F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE68228A6111002E6F08 /* AppDelegate.swift */; };
 		8A94FE6B228A6111002E6F08 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A94FE6A228A6111002E6F08 /* art.scnassets */; };
 		8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94FE6C228A6111002E6F08 /* ARViewController.swift */; };
@@ -177,6 +178,7 @@
 		8A29A22A22D237570086A33E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Profile/ProfileViewController.swift; sourceTree = "<group>"; };
 		8A315E8B22D5BBE400097535 /* DeviceOrientation+CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceOrientation+CGImagePropertyOrientation.swift"; sourceTree = "<group>"; };
 		8A315E8D22D5BC8500097535 /* UIAlertController+ValidName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ValidName.swift"; sourceTree = "<group>"; };
+		8A39C499239908C000A781B7 /* MyYolov3_1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyYolov3_1.mlmodel; sourceTree = "<group>"; };
 		8A48005A22CE2B910063B35F /* AthensClassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AthensClassic.ttf; sourceTree = "<group>"; };
 		8A4937B022B5CDCC008EA659 /* YOLO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLO.swift; sourceTree = "<group>"; };
 		8A4937B122B5CDCC008EA659 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -188,7 +190,7 @@
 		8A55DC29231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyYolov3_Pretrained.mlmodel; sourceTree = "<group>"; };
 		8A67012322B338A200C7A09E /* QAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAViewController.swift; sourceTree = "<group>"; };
 		8A69796F22B9DD16000FD70F /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
-		8A6B23632336777F00A9D697 /* MyYolov3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyYolov3.mlmodel; sourceTree = "<group>"; };
+		8A946006239FBE7700601103 /* MyYolov3_2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyYolov3_2.mlmodel; sourceTree = "<group>"; };
 		8A94FE65228A6111002E6F08 /* ARQandA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARQandA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A94FE68228A6111002E6F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A94FE6A228A6111002E6F08 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -471,9 +473,10 @@
 				8A94FE6A228A6111002E6F08 /* art.scnassets */,
 				8A94FE6E228A6111002E6F08 /* Main.storyboard */,
 				8A94FE71228A6112002E6F08 /* Assets.xcassets */,
+				8A946006239FBE7700601103 /* MyYolov3_2.mlmodel */,
+				8A39C499239908C000A781B7 /* MyYolov3_1.mlmodel */,
 				8A94FE73228A6112002E6F08 /* LaunchScreen.storyboard */,
 				8A94FE76228A6112002E6F08 /* Info.plist */,
-				8A6B23632336777F00A9D697 /* MyYolov3.mlmodel */,
 				8A55DC29231E5EA600B35DF4 /* MyYolov3_Pretrained.mlmodel */,
 			);
 			path = ARQandA;
@@ -875,9 +878,10 @@
 			files = (
 				8A514CA522CF998C004F3774 /* TutorialSecondViewController.swift in Sources */,
 				8A94FE6D228A6111002E6F08 /* ARViewController.swift in Sources */,
-				8A6B23642336777F00A9D697 /* MyYolov3.mlmodel in Sources */,
 				8A514CA922CF9A8C004F3774 /* TutorialPageViewController.swift in Sources */,
 				8A69797022B9DD16000FD70F /* LaunchViewController.swift in Sources */,
+				8A39C49A239908C000A781B7 /* MyYolov3_1.mlmodel in Sources */,
+				8A946007239FBE7700601103 /* MyYolov3_2.mlmodel in Sources */,
 				E91ED0CF22D634C600DBFF96 /* Audiomanager.swift in Sources */,
 				8A315E8E22D5BC8500097535 /* UIAlertController+ValidName.swift in Sources */,
 				8AA34E1223044067002FB2E2 /* UIImage+CVPixelBuffer.swift in Sources */,
