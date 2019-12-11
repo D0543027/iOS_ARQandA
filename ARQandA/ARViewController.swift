@@ -53,7 +53,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Set the scene to the view
         //sceneView.scene = scene
         
-        // 三個按鈕function，看哪個按鈕要加音效，直接打code在function裡
         setUpQAButton()
         setUpBackBtn()
         setUpPredictButton()
@@ -218,9 +217,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func setUpBoundingBoxesColor() {
-            for g: CGFloat in [0.3, 0.7] {
-                 for r: CGFloat in [0.2, 0.4, 0.6, 0.8, 1.0] {
-                    let color = UIColor(red: r, green: g, blue: 0.0, alpha: 1)
+            for r: CGFloat in [0.5, 0.6, 0.8, 0.9] {
+                 for g: CGFloat in [0.5, 0.6, 0.7] {
+                    let color = UIColor(red: r, green: g, blue: 0.3, alpha: 1)
                     colors.append(color)
             }
         }
@@ -389,8 +388,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 
                 // 修正預測框 (影像辨識模組輸入為 416 * 416)
                 let prediction = predictions[i]
-                let width = view.bounds.width
-                let height = view.bounds.height
+                let width = sceneView.bounds.width
+                let height = sceneView.bounds.height
                 let scaleX = width / CGFloat(YOLO.inputWidth)
                 let scaleY = height / CGFloat(YOLO.inputHeight)
                 // let top = (view.bounds.height - height) / 2
@@ -403,7 +402,30 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 rect.size.height *= scaleY
                 
                 // Show the bounding box.
-                print("Index = \(prediction.classIndex)")
+                //print("Index = \(prediction.classIndex)")
+                print("x: \(rect.origin.x)")
+                print("y: \(rect.origin.y)")
+                print("width: \(rect.size.width)")
+                print("height: \(rect.size.height)")
+                print("-------------------------------")
+                if(rect.origin.x < 0){
+                    rect.origin.x = 0
+                }
+                if(rect.origin.y < 0){
+                    rect.origin.y = 0
+                }
+                if(rect.origin.x + rect.size.width > width){
+                    rect.size.width = width - 2 * rect.origin.x
+                }
+                if(rect.origin.y + rect.size.height > height){
+                    rect.size.height = height - 2 * rect.origin.y
+                }
+                
+                print("x: \(rect.origin.x)")
+                print("y: \(rect.origin.y)")
+                print("width: \(rect.size.width)")
+                print("height: \(rect.size.height)")
+                
                 let color = colors[prediction.classIndex]
                 let label = labels[prediction.classIndex]
                 let boundingBox = drawBoundingBox(frame: rect, color: color)
@@ -416,7 +438,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func drawBoundingBox(frame: CGRect, color: UIColor) -> CAShapeLayer{
         let boundingBox = CAShapeLayer()
         boundingBox.fillColor = UIColor.clear.cgColor
-        boundingBox.lineWidth = 4
+        boundingBox.lineWidth = 7
         
         let path = UIBezierPath(rect: frame)
         boundingBox.path = path.cgPath
