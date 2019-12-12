@@ -17,11 +17,11 @@ let labels = [
     //   "sparrow",
     "dog",
     //   "motorcycle",
-    "headphone",
     "laptop",
+    "headphone",
     "keyboard",
-    "mouse",
-    "screen"
+    "screen",
+    "mouse"
     //   "pen",
     //   "glasses",
     //   "tree",
@@ -44,11 +44,11 @@ let difficultyOfLabels: [String:String] =  [
     //   "sparrow": "Normal",
     "dog": "Hard",
     //   "motorcycle": "Hard",
-    "headphone": "Hard",
-    "laptop": "Easy",
+    "laptop": "Hard",
+    "headphone": "Easy",
     "keyboard": "Easy",
-    "mouse": "Easy",
-    "screen": "Easy"
+    "screen": "Easy",
+    "mouse": "Easy"
     //   "pen": "Normal",
     //   "glasses": "Easy",
     //   "tree": "Easy",
@@ -258,8 +258,8 @@ let difficultyOfLabels: [String:String] =  [
  ]
  */
 // anchor boxes
-let anchors: [[Float]] = [[529,365,  778,627,  1601,1174], [178,183,  262,446,  337,247], [60,48,  61,164,  131,99]]
-
+//let anchors: [[Float]] = [[529,365,  778,627,  1601,1174], [178,183,  262,446,  337,247], [60,48,  61,164,  131,99]]
+let anchors: [[Float]] = [[116,90,  156,198,  373,326], [30,61,  62,45,  59,119], [10,13,  16,30,  33,23]]
 /**
  Removes bounding boxes that overlap too much with other boxes that have
  a higher score.

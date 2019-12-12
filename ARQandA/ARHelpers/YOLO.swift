@@ -173,7 +173,7 @@ class YOLO {
         let rect: CGRect
     }
     
-    let model = MyYolov3_2()
+    let model = MyYolov3()
     
     public init() { }
     

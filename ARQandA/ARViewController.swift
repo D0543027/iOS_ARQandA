@@ -275,16 +275,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func DeviceMoving() -> Bool{
-        if abs(self.pre_MoveX - self.new_MoveX) > 0.2{
+        if abs(self.pre_MoveX - self.new_MoveX) > 0.1{
             return true;
         }
-        if abs(self.pre_MoveY - self.new_MoveY) > 0.2{
+        if abs(self.pre_MoveY - self.new_MoveY) > 0.1{
             return true;
         }
-        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.2{
+        if abs(self.pre_MoveZ - self.new_MoveZ) > 0.1{
             return true;
         }
-        if abs(self.pre_RotateY - self.new_RotateY) > 0.2{
+        if abs(self.pre_RotateY - self.new_RotateY) > 0.1{
             return true;
         }
         return false;
